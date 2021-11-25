@@ -48,11 +48,6 @@
         }
     </style>
 
-        <!-- // document.getElementById('date').innerHTML='現在時間:'+date;
-        // document.getElementById('hisName').innerHTML='病歷號:'+name.value;
-        // document.getElementById('hisBirth').innerHTML='生日:'+birth.value;
-        // document.getElementById('hisHr').innerHTML='心跳:'+hr.value+'次/分鐘';
-        // document.getElementById('hisBp').innerHTML='血壓:'+bp.value+'mmHg'; -->
 
 </head>
 
@@ -141,6 +136,7 @@
         google.script.run.addData(rowData);
         
         document.getElementById('myForm').reset();
+        
         document.getElementById('hisName').innerHTML='病歷號 : '+rowData.name;
         document.getElementById('hisBirth').innerHTML='生日 : '+rowData.birth;
         document.getElementById('hisHr').innerHTML='心跳 : '+rowData.hr+' 次/分鐘';

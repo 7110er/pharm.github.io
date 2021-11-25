@@ -28,20 +28,14 @@
     <link rel="stylesheet"  href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <link rel="stylesheet"  href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
     
-    <!-- 連結Bootstrap -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script> -->
+
     <style>
         #dtable td, #dtable th{
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 5px;
+            
         }
-        
     </style>
-
-
     <!-- 程式碼開始 -->
     <script>
 
@@ -214,7 +208,9 @@
                 {"title":"詳閱" },
                 {"title":"中文名"},
                 {"title":"英文名"},
+                {"title":"處置代碼"},
                 {"title":"主成分"},            
+            
               ],
             });
           });
@@ -241,12 +237,7 @@
                     "<tr>" 
                     for (var i = 0; i < dataArray.length; i++) {
                         for (var j = 0; j < 1; j++) {
-                            if(dataArray[i][j]==''){
-                                result1+='';
-                            }
-                            else{
-                                result1 +="<th scope='col' style='width:90px' >中文名</th>"+"<td >" + dataArray[i][j] + "</td>";
-                            }
+                            result1 +="<th scope='col' style='width:90px' >主成分</th>"+"<td>" + dataArray[i][j] + "</td>";
                     }
                 }
                     result1+=
@@ -262,7 +253,7 @@
                     result1+=
                     "</tr>" + 
                     "<tr>" + 
-                    "<th scope='col'style='width:90px'>主成分</th>" 
+                    "<th scope='col'style='width:90px'>處置代碼</th>" 
                     for (var i = 0; i < dataArray.length; i++) {
                         for (var j = 2; j < 3; j++) {
                         result1 += "<td>" + dataArray[i][j] + "</td>";
@@ -277,7 +268,7 @@
                                 result1+='';
                             }
                             else{
-                                result1 +="<th scope='col' style='width:90px' >適應症</th>"+"<td >" +  dataArray[i][j] + "</td>";
+                                result1 +="<th scope='col' style='width:90px' >中文名</th>"+"<td >" +  dataArray[i][j] + "</td>";
                             }
                     }
                 }
@@ -290,6 +281,58 @@
                                 result1+='';
                             }
                             else{
+                                result1 +="<th scope='col' style='width:90px' >適應症</th>"+"<td >" + dataArray[i][j] + "</td>";
+                            }
+                    }
+                }
+                    result1+=
+                    "</tr>"+
+                    "<tr>"
+                    for (var i = 0; i < dataArray.length; i++) {
+                        for (var j = 5; j < 6; j++) {
+                            if(dataArray[i][j]==''){
+                                result1+='';
+                            }
+                            else{
+                                result1 +="<th scope='col' style='width:90px' >生理學</th>"+"<td >" + dataArray[i][j] + "</td>";
+                            }
+                    }
+                }
+                    result1+=
+                    "</tr>"+
+                    "<tr>"
+                    for (var i = 0; i < dataArray.length; i++) {
+                        for (var j = 6; j < 7; j++) {
+                            if(dataArray[i][j]==''){
+                                result1+='';
+                            }
+                            else{
+                                result1 +="<th scope='col' style='width:90px' >劑量學</th>"+"<td >" + dataArray[i][j] + "</td>";
+                            }
+                    }
+                }
+                    result1+=
+                    "</tr>"+
+                    "<tr>"
+                    for (var i = 0; i < dataArray.length; i++) {
+                        for (var j = 7; j < 8; j++) {
+                            if(dataArray[i][j]==''){
+                                result1+='';
+                            }
+                            else{
+                                result1 +="<th scope='col' style='width:90px' >副作用</th>"+"<td >" + dataArray[i][j] + "</td>";
+                            }
+                    }
+                }
+                    result1+=
+                    "</tr>"+
+                    "<tr>"
+                    for (var i = 0; i < dataArray.length; i++) {
+                        for (var j = 8; j < 9; j++) {
+                            if(dataArray[i][j]==''){
+                                result1+='';
+                            }
+                            else{
                                 result1 +="<th scope='col' style='width:90px' >警語</th>"+"<td >" + dataArray[i][j] + "</td>";
                             }
                     }
@@ -298,26 +341,26 @@
                     "</tr>"+
                     "<tr>"
                     for (var i = 0; i < dataArray.length; i++) {
-                        for (var j = 5 ;j < 6; j++) {
-                            if (isURL(dataArray[i][j])){
-                            result1 +="";
-                        }
-                        else{
-                            result1 +=  "<td colspan='2'  ><img src='https://7110er.github.io/pharm.github.io/searchDrug/pic/"+ dataArray[i][j] + ".jpg' style='width:100%'</td>";
-                        }
+                        for (var j = 9; j < 10; j++) {
+                            if(dataArray[i][j]==''){
+                                result1+='';
+                            }
+                            else{
+                                result1 +="<th scope='col' style='width:90px' >交互作用</th>"+"<td >" + dataArray[i][j] + "</td>";
+                            }
                     }
                 }
                     result1+=
                     "</tr>"+
-                    "<tr>"
+                    "<tr style='height:500px'>"
                     for (var i = 0; i < dataArray.length; i++) {
-                        for (var j = 6 ;j < 7; j++) {
-                            if (isURL(dataArray[i][j])){
-                            result1 += "<td colspan='2'  ><img src='"+ dataArray[i][j] + "'  style='width:100%'></td>"
-                        }
-                        else{
-                            result1 += "";
-                        }
+                        for (var j = 10; j < 11; j++) {
+                            if(dataArray[i][j]==''){
+                                result1+='';
+                            }
+                            else{
+                                result1 += " <th scope='col' style='width:90px' >仿單</th>"+"<td ><embed src='https://7110er.github.io/pharm.github.io/searchDrug/321/test_1.pdf' type='application/pdf' style='height:500px'></td>"
+                            }
                     }
                 }
                     result1+=
@@ -389,8 +432,9 @@
 
 <body>
     <!-- jq mobile 測試 -->
-    <div data-role="page" id="pageone">
+    <div data-role="page" id="pageone" data-theme="a" >
         <div data-role="header">
+            
         </div>
         <div data-role="main" >
                 <!--搜尋表單  -->
@@ -409,18 +453,18 @@
   
       
     </div> 
-    <div data-role="page" id="pagetwo">
+    <div data-role="page" id="pagetwo" data-theme="a">
         <div data-role="header">
             <div data-role="navbar">
                 <ul>
-                  <li><a href="#pageone" class="ui-btn ui-icon-arrow-l ui-btn-icon-left">上一頁</a></li>
-                  <li><a href="#myPopup" data-rel="popup" >聯絡我們</a></li>
-                  <li><a href="#">更多資訊</a></li>
+                  <li><a href="#pageone" class="ui-btn ui-icon-arrow-l ui-btn-icon-left" id="other-color">上一頁</a></li>
+                  <li><a href="#myPopup" data-rel="popup" id="other-color">聯絡我們</a></li>
+                  <li><a href="#" id="other-color">更多資訊</a></li>
                 </ul>
             </div>
         </div>
         <div data-role="main" >
-             <p id="result"></p>
+             <p id="result" style="overflow: auto;"></p>
                 <!-- 問題回報視窗 -->
                 <div data-role="popup" id="myPopup" class="ui-content" data-dismissible="false">
                     <a href="#" data-rel="back" onclick='formReset()'class="ui-btn ui-corner-all ui-shadow ui-btn ui-icon-delete ui-btn-icon-notext ui-btn-right">關閉</a>
