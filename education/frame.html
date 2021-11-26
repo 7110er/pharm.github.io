@@ -56,7 +56,7 @@
             display: none;
             position: absolute;
             left: 0;
-            background-color: rgb(30, 2, 66);
+            background-color: #024d3c;
             width: 100%;
             z-index: 1;
             }
@@ -214,35 +214,73 @@
     </head>
     <body>
         <div class="navbar">
-            <a href="#home">Home</a>
             <div class="subnav">
               <button class="subnavbtn">心血管內科 <i class="fa fa-caret-down"></i></button>
               <div class="subnav-content">
                 <a href="#" onclick="searchGoogleSheet(this)">高血壓</a>
                 <a href="#" onclick="searchGoogleSheet(this)">心衰竭</a>
                 <a href="#" onclick="searchGoogleSheet(this)">冠心症</a>
+                <a href="#" onclick="searchGoogleSheet(this)">心律不整</a>
+
+            </div>
+            </div> 
+            <div class="subnav">
+              <button class="subnavbtn">內分泌科 <i class="fa fa-caret-down"></i></button>
+              <div class="subnav-content">
+                <a href="#" onclick="searchGoogleSheet(this)">糖尿病</a>
+                <a href="#" onclick="searchGoogleSheet(this)">甲狀腺疾病</a>
+                <a href="#" onclick="searchGoogleSheet(this)">代謝症候群</a>
               </div>
             </div> 
             <div class="subnav">
-              <button class="subnavbtn">Services <i class="fa fa-caret-down"></i></button>
+              <button class="subnavbtn">神經科 <i class="fa fa-caret-down"></i></button>
               <div class="subnav-content">
-                <a href="#bring">Bring</a>
-                <a href="#deliver">Deliver</a>
-                <a href="#package">Package</a>
-                <a href="#express">Express</a>
-              </div>
-            </div> 
-            <div class="subnav">
-              <button class="subnavbtn">Partners <i class="fa fa-caret-down"></i></button>
-              <div class="subnav-content">
-                <a href="#link1">Link 1</a>
-                <a href="#link2">Link 2</a>
-                <a href="#link3">Link 3</a>
-                <a href="#link4">Link 4</a>
+                <a href="#" onclick="searchGoogleSheet(this)">中風</a>
+                <a href="#" onclick="searchGoogleSheet(this)">失智症</a>
+                <a href="#" onclick="searchGoogleSheet(this)">帕金森氏症</a>
               </div>
             </div>
-            <a href="#contact">Contact</a>
-          </div>        <br>
+            <div class="subnav">
+                <button class="subnavbtn">腎臟科 <i class="fa fa-caret-down"></i></button>
+                <div class="subnav-content">
+                  <a href="#" onclick="searchGoogleSheet(this)">慢性腎臟病</a>
+                  <a href="#" onclick="searchGoogleSheet(this)">貧血</a>
+                  <a href="#" onclick="searchGoogleSheet(this)">血液透析</a>
+                </div>
+              </div>
+              <div class="subnav">
+                <button class="subnavbtn">胸腔科 <i class="fa fa-caret-down"></i></button>
+                <div class="subnav-content">
+                  <a href="#" onclick="searchGoogleSheet(this)">氣喘</a>
+                  <a href="#" onclick="searchGoogleSheet(this)">慢性阻塞性肺病</a>
+                </div>
+              </div>
+              <div class="subnav">
+                <button class="subnavbtn">肝膽腸胃科 <i class="fa fa-caret-down"></i></button>
+                <div class="subnav-content">
+                  <a href="#" onclick="searchGoogleSheet(this)">慢性肝炎</a>
+                  <a href="#" onclick="searchGoogleSheet(this)">胃食道逆流</a>
+                  <a href="#" onclick="searchGoogleSheet(this)">消化性潰瘍</a>
+                </div>
+              </div>
+              <div class="subnav">
+                <button class="subnavbtn">風濕免疫科 <i class="fa fa-caret-down"></i></button>
+                <div class="subnav-content">
+                  <a href="#" onclick="searchGoogleSheet(this)">痛風</a>
+                  <a href="#" onclick="searchGoogleSheet(this)">類風溼關節炎</a>
+                  <a href="#" onclick="searchGoogleSheet(this)">紅斑性狼瘡</a>
+                </div>
+              </div>
+              <div class="subnav">
+                <button class="subnavbtn">感染科 <i class="fa fa-caret-down"></i></button>
+                <div class="subnav-content">
+                  <a href="#" onclick="searchGoogleSheet(this)">愛滋病</a>
+                  <a href="#" onclick="searchGoogleSheet(this)">肺結核</a>
+                  <a href="#" onclick="searchGoogleSheet(this)">疫苗相關</a>
+                </div>
+              </div>
+        </div>        
+        <br>
         <div id="result">
             
         </div>
