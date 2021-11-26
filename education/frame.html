@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="高順鴻">
+        <title>衛教專區</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!-- Rwd js -->
+        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+
+        <!-- Rwd css -->
+        <link rel="stylesheet"  href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+        <link rel="stylesheet"  href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+
+        <style>
+            .container {
+                padding: 10px 10px;
+                text-align: center;
+                color: white;
+                background-color: rgb(1, 21, 65);
+                width: 100%;
+            }
+            
+            .container h1 {
+                font-size: 20px;
+                text-align: center;
+            }
+            
+            .btn {
+                width: 100%;
+                font-size: 20px;
+                font-weight: bolder;
+                margin: 20px 0px 20px 0px;
+                background-color: rgb(200, 210, 255);
+                color: rgb(8, 37, 100);
+                border-radius: 20px;
+                transition: 1s;
+            }
+            
+            .btn:hover {
+                background-color: rgb(0, 0, 0);
+                color: rgb(255, 255, 255);
+            }
+            
+            ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+            }
+
+            li {
+            float: left;
+            }
+
+            li a {
+            display: block;
+            color: white;
+            background-color: #111;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            }
+
+            li a:hover:not(.active) {
+            background-color: #04AA6D;
+            }
+
+            .active {
+            background-color: #04AA6D;
+            }            
+        </style>
+    
+        <script >
+            function searchGoogleSheet(divElement){
+            var searchText = $(divElement).text();
+            google.script.run.withSuccessHandler(createTable).search(searchText);
+            console.log('123');
+        }
+            function createTable(dataArray) {
+            if (dataArray && dataArray !== undefined && dataArray.length != 0) {
+
+                var result1 = "<table class='table table-sm table-striped' id='dtable' style='font-size:16px'>" +
+                    "<thead style='white-space: normal'>" +
+
+                    "<tr>" 
+                    for (var i = 0; i < dataArray.length; i++) {
+                        for (var j = 0; j < 1; j++) {
+                            if(dataArray[i][j]==''){
+                                result1+='';
+                            }
+                            else{
+                                result1 +="<th scope='col' style='width:90px' >中文名</th>"+"<td >" + dataArray[i][j] + "</td>";
+                            }
+                    }
+                }
+                    result1+=
+                    "</tr>" + 
+                    "<tr>" + 
+                    "<th scope='col' style='width:90px '>英文名</th>" 
+                    for (var i = 0; i < dataArray.length; i++) {
+                        for (var j = 1; j < 2; j++) {
+                        result1 += "<td>" + dataArray[i][j] + "</td>";
+                    }
+                }
+                    result1+=
+                    "</tr>" + 
+                    "<tr>" + 
+                    "<th scope='col'style='width:90px'>主成分</th>" 
+                    for (var i = 0; i < dataArray.length; i++) {
+                        for (var j = 2; j < 3; j++) {
+                        result1 += "<td>" + dataArray[i][j] + "</td>";
+                    }
+                }
+                    result1+=
+                    "</tr>" + 
+                    "<tr>" 
+                    for (var i = 0; i < dataArray.length; i++) {
+                        for (var j = 3; j < 4; j++) {
+                            if(dataArray[i][j]==''){
+                                result1+='';
+                            }
+                            else{
+                                result1 +="<th scope='col' style='width:90px' >適應症</th>"+"<td >" +  dataArray[i][j] + "</td>";
+                            }
+                    }
+                }
+                    result1+=
+                    "</tr>" +
+                    "<tr>"
+                    for (var i = 0; i < dataArray.length; i++) {
+                        for (var j = 4; j < 5; j++) {
+                            if(dataArray[i][j]==''){
+                                result1+='';
+                            }
+                            else{
+                                result1 +="<th scope='col' style='width:90px' >警語</th>"+"<td >" + dataArray[i][j] + "</td>";
+                            }
+                    }
+                }
+                    result1+=
+                    "</tr>"+
+                    "<tr>"
+                    for (var i = 0; i < dataArray.length; i++) {
+                        for (var j = 5 ;j < 6; j++) {
+                            if (isURL(dataArray[i][j])){
+                            result1 +="";
+                        }
+                        else{
+                            result1 +=  "<td colspan='2'  ><img src='https://7110er.github.io/pharm.github.io/searchDrug/picture/"+ dataArray[i][j] + ".jpg' style='width:100%'</td>";
+                        }
+                    }
+                }
+                    result1+=
+                    "</tr>"+
+                    "<tr>"
+                    for (var i = 0; i < dataArray.length; i++) {
+                        for (var j = 6 ;j < 7; j++) {
+                            if (isURL(dataArray[i][j])){
+                            result1 += "<td colspan='2'  ><img src='"+ dataArray[i][j] + "'  style='width:100%'></td>"
+                        }
+                        else{
+                            result1 += "";
+                        }
+                    }
+                }
+                    result1+=
+                    "</tr>"+
+
+                    "</thead>"+
+                    "</table>";
+                
+                
+
+                var div = document.getElementById('result');
+                div.innerHTML = result1;
+                
+            } 
+
+            else {
+
+                var div = document.getElementById('result');
+                div.innerHTML = "沒有找到相關藥物，請重新輸入。";
+            }
+        }
+                // 判斷string 是否為網址
+            function isURL(string) {
+                let url;
+                
+                try {
+                    url = new URL(string);
+                } catch (_) {
+                    return false;  
+                }
+
+                return url.protocol === "http:" || url.protocol === "https:";
+            }
+
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>疾病查詢</h1>
+            
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" onclick="searchGoogleSheet(this)">高血壓</a></li>
+                <li><a href="#" onclick="searchGoogleSheet(this)">冠心症</a></li>
+                <li><a href="#" onclick="searchGoogleSheet(this)">心律不整</a></li>
+                <li><a href="#" onclick="searchGoogleSheet(this)">心衰竭</a></li>
+                <li><a href="#" onclick="searchGoogleSheet(this)">糖尿病</a></li>
+                <li><a href="#" onclick="searchGoogleSheet(this)">甲狀腺疾病</a></li>
+                <li><a href="#" onclick="searchGoogleSheet(this)">氣喘</a></li>
+                <li><a href="#" onclick="searchGoogleSheet(this)">慢性阻塞性肺病</a></li>
+                <li><a href="#" onclick="searchGoogleSheet(this)">中風</a></li>
+                <li><a href="#" onclick="searchGoogleSheet(this)">失智症</a></li>
+                <li><a href="#" onclick="searchGoogleSheet(this)">帕金森氏症</a></li>
+                <li><a href="#" onclick="searchGoogleSheet(this)">貧血</a></li>
+                <li><a href="#" onclick="searchGoogleSheet(this)">慢性腎臟病</a></li>
+                <li><a href="#" onclick="searchGoogleSheet(this)">肝炎</a></li>
+                <li><a href="#" onclick="searchGoogleSheet(this)">胃食道逆流</a></li>
+                <li><a href="#" onclick="searchGoogleSheet(this)">痛風</a></li>
+                <li><a href="#" onclick="searchGoogleSheet(this)">類風溼關節炎</a></li>
+
+            </ul>
+        </nav>
+        <br>
+        <div id="result">
+            
+        </div>
+    </body>
+</html>
