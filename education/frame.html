@@ -123,7 +123,15 @@
         </style>           
     
         <script >
-            function searchGoogleSheet(divElement){
+            function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }            
+        function searchGoogleSheet(divElement){
             var searchText = $(divElement).text();
             google.script.run.withSuccessHandler(createTable).search(searchText);
             console.log('123');
@@ -255,6 +263,8 @@
             
         </div>
             <div class="topnav" id="myTopnav">
+                <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+
                 <div class="dropdown">
                   <button class="dropbtn">心血管科 
                     <i class="fa fa-caret-down"></i>
@@ -274,7 +284,7 @@
                               <a href="#" onclick="searchGoogleSheet(this)">甲狀腺疾病</a>
                               <a href="#" onclick="searchGoogleSheet(this)">代謝症候群</a>
                           </div>
-                  </div> 
+                </div> 
                   <div class="dropdown">
                     <button class="dropbtn">神經科 
                       <i class="fa fa-caret-down"></i>
@@ -284,8 +294,8 @@
                               <a href="#" onclick="searchGoogleSheet(this)">失智症</a>
                               <a href="#" onclick="searchGoogleSheet(this)">帕金森氏症</a>
                           </div>
-                  </div> 
-                  </div>        
+                </div> 
+            </div>        
         <br>
         <div id="result">
             
