@@ -19,8 +19,8 @@
             body {margin:0;font-family:Arial}
 
             .navbar {
-            overflow: hidden;
-            background-color: rgb(12, 0, 63); 
+            overflow: auto;
+            background-color: #040357; 
             width: 80%;
             }
 
@@ -39,12 +39,12 @@
             }
 
             .subnav .subnavbtn {
-            font-size: 16px;  
+            font-size: 14px;  
             border: none;
             outline: none;
             color: white;
             padding: 14px 16px;
-            background-color: inherit;
+            background-color:#040357;
             font-family: inherit;
             margin: 0;
             font-weight: bolder;
@@ -67,7 +67,6 @@
             float: left;
             color: rgb(12, 0, 63);
             text-decoration: none;
-            font-weight: bolder;
 
             }
 
@@ -82,19 +81,15 @@
         </style>           
     
         <script >
-            function myFunction() {
-            var x = document.getElementById("myTopnav");
-            if (x.className === "topnav") {
-                x.className += " responsive";
-            } else {
-                x.className = "topnav";
+            function ref(){
+                parent.location.reload();
+                console.log('123');
             }
-        }            
-        function searchGoogleSheet(divElement){
-            var searchText = $(divElement).text();
-            google.script.run.withSuccessHandler(createTable).search(searchText);
-            console.log('123');
-        }
+            function searchGoogleSheet(divElement){
+                var searchText = $(divElement).text();
+                google.script.run.withSuccessHandler(createTable).search(searchText);
+                console.log('123');
+            }
             function createTable(dataArray) {
             if (dataArray && dataArray !== undefined && dataArray.length != 0) {
 
@@ -217,7 +212,7 @@
         </script>
     </head>
     <body>
-        <a href=""><img src="https://i.imgur.com/odckQBS.png" style="width: 20%; float: left;" ></a>
+        <a href="" onclick="ref()" ><img src="https://i.imgur.com/odckQBS.png" style="width: 20%; float: left;" ></a>
         <div class="navbar">
             <div class="subnav">
               <button class="subnavbtn">心血管內科 <i class="fa fa-caret-down"></i></button>
