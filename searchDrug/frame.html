@@ -356,7 +356,7 @@
         // 連結Google Script　並且顯示資料
 
         function searchGoogleSheet(divElement){
-            var searchText = $(divElement).parent().next().next().text();
+            var searchText = $(divElement).parent().next().next().next().text();
             google.script.run.withSuccessHandler(createTable).search(searchText);
         }
         // 問題回報
