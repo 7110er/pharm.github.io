@@ -243,66 +243,66 @@
             <div class="subnav">
               <button class="subnavbtn" onclick="change(this)">心血管內科 <i class="fa fa-caret-down"></i></button>
               <div class="subnav-content">
-                <a href="#" onclick="searchGoogleSheet(this)">高血壓</a>
-                <a href="#" onclick="searchGoogleSheet(this)">心衰竭</a>
-                <a href="#" onclick="searchGoogleSheet(this)">冠心症</a>
-                <a href="#" onclick="searchGoogleSheet(this)">心律不整</a>
+                <a href="#" onclick="searchMenu();">高血壓</a>
+                <a href="#" onclick="searchMenu();">心衰竭</a>
+                <a href="#" onclick="searchMenu();">冠心症</a>
+                <a href="#" onclick="searchMenu();">心律不整</a>
 
             </div>
             </div> 
             <div class="subnav">
               <button class="subnavbtn" onclick="change(this)">內分泌科 <i class="fa fa-caret-down"></i></button>
               <div class="subnav-content">
-                <a href="#" onclick="searchGoogleSheet(this)">糖尿病</a>
-                <a href="#" onclick="searchGoogleSheet(this)">甲狀腺疾病</a>
-                <a href="#" onclick="searchGoogleSheet(this)">代謝症候群</a>
+                <a href="#" onclick="searchMenu();">糖尿病</a>
+                <a href="#" onclick="searchMenu();">甲狀腺疾病</a>
+                <a href="#" onclick="searchMenu();">代謝症候群</a>
               </div>
             </div> 
             <div class="subnav">
               <button class="subnavbtn" onclick="change(this)">神經科 <i class="fa fa-caret-down"></i></button>
               <div class="subnav-content">
-                <a href="#" onclick="searchGoogleSheet(this)">中風</a>
-                <a href="#" onclick="searchGoogleSheet(this)">失智症</a>
-                <a href="#" onclick="searchGoogleSheet(this)">帕金森氏症</a>
+                <a href="#" onclick="searchMenu();">中風</a>
+                <a href="#" onclick="searchMenu();">失智症</a>
+                <a href="#" onclick="searchMenu();">帕金森氏症</a>
               </div>
             </div>
             <div class="subnav">
                 <button class="subnavbtn" onclick="change(this)">腎臟科 <i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
-                  <a href="#" onclick="searchGoogleSheet(this)">慢性腎臟病</a>
-                  <a href="#" onclick="searchGoogleSheet(this)">貧血</a>
-                  <a href="#" onclick="searchGoogleSheet(this)">血液透析</a>
+                  <a href="#" onclick="searchMenu();">慢性腎臟病</a>
+                  <a href="#" onclick="searchMenu();">貧血</a>
+                  <a href="#" onclick="searchMenu();">血液透析</a>
                 </div>
               </div>
               <div class="subnav">
                 <button class="subnavbtn" onclick="change(this)">胸腔科 <i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
-                  <a href="#" onclick="searchGoogleSheet(this)">氣喘</a>
-                  <a href="#" onclick="searchGoogleSheet(this)">慢性阻塞性肺病</a>
+                  <a href="#" onclick="searchMenu();">氣喘</a>
+                  <a href="#" onclick="searchMenu();">慢性阻塞性肺病</a>
                 </div>
               </div>
               <div class="subnav">
                 <button class="subnavbtn" onclick="change(this)">肝膽腸胃科 <i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
-                  <a href="#" onclick="searchGoogleSheet(this)">慢性肝炎</a>
-                  <a href="#" onclick="searchGoogleSheet(this)">胃食道逆流</a>
-                  <a href="#" onclick="searchGoogleSheet(this)">消化性潰瘍</a>
+                  <a href="#" onclick="searchMenu();">慢性肝炎</a>
+                  <a href="#" onclick="searchMenu();">胃食道逆流</a>
+                  <a href="#" onclick="searchMenu();">消化性潰瘍</a>
                 </div>
               </div>
               <div class="subnav">
                 <button class="subnavbtn" onclick="change(this)">風濕免疫科 <i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
-                  <a href="#" onclick="searchGoogleSheet(this)">痛風</a>
-                  <a href="#" onclick="searchGoogleSheet(this)">類風溼關節炎</a>
-                  <a href="#" onclick="searchGoogleSheet(this)">紅斑性狼瘡</a>
+                  <a href="#" onclick="searchMenu();">痛風</a>
+                  <a href="#" onclick="searchMenu();">類風溼關節炎</a>
+                  <a href="#" onclick="searchMenu();">紅斑性狼瘡</a>
                 </div>
               </div>
               <div class="subnav">
                 <button class="subnavbtn" onclick="change(this)">感染科 <i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
-                  <a href="#" onclick="searchGoogleSheet(this)">愛滋病</a>
-                  <a href="#" onclick="searchGoogleSheet(this)">肺結核</a>
-                  <a href="#" onclick="searchGoogleSheet(this)">疫苗相關</a>
+                  <a href="#" onclick="searchMenu();">愛滋病</a>
+                  <a href="#" onclick="searchMenu();">肺結核</a>
+                  <a href="#" onclick="searchMenu();">疫苗相關</a>
                 </div>
               </div>
         </div>
@@ -315,11 +315,17 @@
                 </ul>
             </div> -->
         
-            <div id="result" style="margin-left:20%;padding:5% 1px ;">
+            <div id="result" >
             </div>
         </div>
         
         <script>
+            function searchMenu(){
+                menu();
+                document.getElementById('navbar');
+
+                searchGoogleSheet();
+            }
             function menu() {
             var x = document.getElementById("navbar");
                 if (x.style.display === "block") {
@@ -327,7 +333,6 @@
                 } else {
                     x.style.display = "block";
                 }
-                console.log('789');
             }
 
             function change(element){
