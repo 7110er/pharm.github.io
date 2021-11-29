@@ -78,9 +78,12 @@
             background-color: #eee;
             color: black;
             }
-            .subnav:hover .subnav-content {
+            /* .subnav:hover .subnav-content {
             display: block;
-            }        
+            }        */
+            .change {
+            display: block;
+            } 
         </style>
         <script >
 
@@ -217,7 +220,7 @@
     <body >
         <div class="navbar" id="navbar">
             <div class="subnav">
-              <button class="subnavbtn">心血管內科 <i class="fa fa-caret-down"></i></button>
+              <button class="subnavbtn" onclick="change(this)">心血管內科 <i class="fa fa-caret-down"></i></button>
               <div class="subnav-content">
                 <a href="#" onclick="searchGoogleSheet(this)">高血壓</a>
                 <a href="#" onclick="searchGoogleSheet(this)">心衰竭</a>
@@ -227,7 +230,7 @@
             </div>
             </div> 
             <div class="subnav">
-              <button class="subnavbtn">內分泌科 <i class="fa fa-caret-down"></i></button>
+              <button class="subnavbtn" onclick="change(this)">內分泌科 <i class="fa fa-caret-down"></i></button>
               <div class="subnav-content">
                 <a href="#" onclick="searchGoogleSheet(this)">糖尿病</a>
                 <a href="#" onclick="searchGoogleSheet(this)">甲狀腺疾病</a>
@@ -235,7 +238,7 @@
               </div>
             </div> 
             <div class="subnav">
-              <button class="subnavbtn">神經科 <i class="fa fa-caret-down"></i></button>
+              <button class="subnavbtn" onclick="change(this)">神經科 <i class="fa fa-caret-down"></i></button>
               <div class="subnav-content">
                 <a href="#" onclick="searchGoogleSheet(this)">中風</a>
                 <a href="#" onclick="searchGoogleSheet(this)">失智症</a>
@@ -243,7 +246,7 @@
               </div>
             </div>
             <div class="subnav">
-                <button class="subnavbtn">腎臟科 <i class="fa fa-caret-down"></i></button>
+                <button class="subnavbtn" onclick="change(this)">腎臟科 <i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
                   <a href="#" onclick="searchGoogleSheet(this)">慢性腎臟病</a>
                   <a href="#" onclick="searchGoogleSheet(this)">貧血</a>
@@ -251,14 +254,14 @@
                 </div>
               </div>
               <div class="subnav">
-                <button class="subnavbtn">胸腔科 <i class="fa fa-caret-down"></i></button>
+                <button class="subnavbtn" onclick="change(this)">胸腔科 <i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
                   <a href="#" onclick="searchGoogleSheet(this)">氣喘</a>
                   <a href="#" onclick="searchGoogleSheet(this)">慢性阻塞性肺病</a>
                 </div>
               </div>
               <div class="subnav">
-                <button class="subnavbtn">肝膽腸胃科 <i class="fa fa-caret-down"></i></button>
+                <button class="subnavbtn" onclick="change(this)">肝膽腸胃科 <i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
                   <a href="#" onclick="searchGoogleSheet(this)">慢性肝炎</a>
                   <a href="#" onclick="searchGoogleSheet(this)">胃食道逆流</a>
@@ -266,7 +269,7 @@
                 </div>
               </div>
               <div class="subnav">
-                <button class="subnavbtn">風濕免疫科 <i class="fa fa-caret-down"></i></button>
+                <button class="subnavbtn" onclick="change(this)">風濕免疫科 <i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
                   <a href="#" onclick="searchGoogleSheet(this)">痛風</a>
                   <a href="#" onclick="searchGoogleSheet(this)">類風溼關節炎</a>
@@ -274,7 +277,7 @@
                 </div>
               </div>
               <div class="subnav">
-                <button class="subnavbtn">感染科 <i class="fa fa-caret-down"></i></button>
+                <button class="subnavbtn" onclick="change(this)">感染科 <i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
                   <a href="#" onclick="searchGoogleSheet(this)">愛滋病</a>
                   <a href="#" onclick="searchGoogleSheet(this)">肺結核</a>
@@ -288,8 +291,10 @@
         </div>
         
         <script>
+            function change(element){
+                element.nextElementSibling.classList.toggle('change');
+            }
             window.onscroll = function() {myFunction()};
-
             var navbar = document.getElementById("navbar");
             var sticky = navbar.offsetTop;
 
