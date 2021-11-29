@@ -18,10 +18,9 @@
             }
             .homeBar {
                 width: 100%;
-                height: 10%;
                 position: fixed;
-                color: rgb(255, 255, 255);
-                background-color: #000000;
+                color: white;
+                background-color: #012061;
                 float: left;
             }
             .homeBar a {
@@ -86,25 +85,25 @@
             .change {
             display: block;
             }
-            /* .sticky {
-            position: fixed;
-            top: 0;
-            margin-left: 20%;
-            width: 80%;
-            background-color: #ceddf0;
-            color: rgb(0, 0, 0);
-            } */
-            /* .sticky + .content {
-            padding-top: 60px;
-            margin-left: 20%;
-            } */
         </style>
         <script >
-
-            function ref(){
-                parent.location.reload();
-                console.log('123');
+            function searchMenu(divElement){
+                menu();
+                searchGoogleSheet(divElement);
             }
+            function menu() {
+            var x = document.getElementById("navbar");
+                if (x.style.display === "block") {
+                    x.style.display = "none";
+                } else {
+                    x.style.display = "block";
+                }
+            }
+
+            function change(element){
+                element.nextElementSibling.classList.toggle('change');
+            }
+
             function searchGoogleSheet(divElement){
                 var searchText = $(divElement).text();
                 google.script.run.withSuccessHandler(createTable).search(searchText);
@@ -243,114 +242,74 @@
             <div class="subnav">
               <button class="subnavbtn" onclick="change(this)">心血管內科 <i class="fa fa-caret-down"></i></button>
               <div class="subnav-content">
-                <a href="#" onclick="searchMenu();">高血壓</a>
-                <a href="#" onclick="searchMenu();">心衰竭</a>
-                <a href="#" onclick="searchMenu();">冠心症</a>
-                <a href="#" onclick="searchMenu();">心律不整</a>
+                <a href="#" onclick="searchMenu(this);">高血壓</a>
+                <a href="#" onclick="searchMenu(this);">心衰竭</a>
+                <a href="#" onclick="searchMenu(this);">冠心症</a>
+                <a href="#" onclick="searchMenu(this);">心律不整</a>
 
             </div>
             </div> 
             <div class="subnav">
               <button class="subnavbtn" onclick="change(this)">內分泌科 <i class="fa fa-caret-down"></i></button>
               <div class="subnav-content">
-                <a href="#" onclick="searchMenu();">糖尿病</a>
-                <a href="#" onclick="searchMenu();">甲狀腺疾病</a>
-                <a href="#" onclick="searchMenu();">代謝症候群</a>
+                <a href="#" onclick="searchMenu(this);">糖尿病</a>
+                <a href="#" onclick="searchMenu(this);">甲狀腺疾病</a>
+                <a href="#" onclick="searchMenu(this);">代謝症候群</a>
               </div>
             </div> 
             <div class="subnav">
               <button class="subnavbtn" onclick="change(this)">神經科 <i class="fa fa-caret-down"></i></button>
               <div class="subnav-content">
-                <a href="#" onclick="searchMenu();">中風</a>
-                <a href="#" onclick="searchMenu();">失智症</a>
-                <a href="#" onclick="searchMenu();">帕金森氏症</a>
+                <a href="#" onclick="searchMenu(this);">中風</a>
+                <a href="#" onclick="searchMenu(this);">失智症</a>
+                <a href="#" onclick="searchMenu(this);">帕金森氏症</a>
               </div>
             </div>
             <div class="subnav">
                 <button class="subnavbtn" onclick="change(this)">腎臟科 <i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
-                  <a href="#" onclick="searchMenu();">慢性腎臟病</a>
-                  <a href="#" onclick="searchMenu();">貧血</a>
-                  <a href="#" onclick="searchMenu();">血液透析</a>
+                  <a href="#" onclick="searchMenu(this);">慢性腎臟病</a>
+                  <a href="#" onclick="searchMenu(this);">貧血</a>
+                  <a href="#" onclick="searchMenu(this);">血液透析</a>
                 </div>
               </div>
               <div class="subnav">
                 <button class="subnavbtn" onclick="change(this)">胸腔科 <i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
-                  <a href="#" onclick="searchMenu();">氣喘</a>
-                  <a href="#" onclick="searchMenu();">慢性阻塞性肺病</a>
+                  <a href="#" onclick="searchMenu(this);">氣喘</a>
+                  <a href="#" onclick="searchMenu(this);">慢性阻塞性肺病</a>
                 </div>
               </div>
               <div class="subnav">
                 <button class="subnavbtn" onclick="change(this)">肝膽腸胃科 <i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
-                  <a href="#" onclick="searchMenu();">慢性肝炎</a>
-                  <a href="#" onclick="searchMenu();">胃食道逆流</a>
-                  <a href="#" onclick="searchMenu();">消化性潰瘍</a>
+                  <a href="#" onclick="searchMenu(this);">慢性肝炎</a>
+                  <a href="#" onclick="searchMenu(this);">胃食道逆流</a>
+                  <a href="#" onclick="searchMenu(this);">消化性潰瘍</a>
                 </div>
               </div>
               <div class="subnav">
                 <button class="subnavbtn" onclick="change(this)">風濕免疫科 <i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
-                  <a href="#" onclick="searchMenu();">痛風</a>
-                  <a href="#" onclick="searchMenu();">類風溼關節炎</a>
-                  <a href="#" onclick="searchMenu();">紅斑性狼瘡</a>
+                  <a href="#" onclick="searchMenu(this);">痛風</a>
+                  <a href="#" onclick="searchMenu(this);">類風溼關節炎</a>
+                  <a href="#" onclick="searchMenu(this);">紅斑性狼瘡</a>
                 </div>
               </div>
               <div class="subnav">
                 <button class="subnavbtn" onclick="change(this)">感染科 <i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
-                  <a href="#" onclick="searchMenu();">愛滋病</a>
-                  <a href="#" onclick="searchMenu();">肺結核</a>
-                  <a href="#" onclick="searchMenu();">疫苗相關</a>
+                  <a href="#" onclick="searchMenu(this);">愛滋病</a>
+                  <a href="#" onclick="searchMenu(this);">肺結核</a>
+                  <a href="#" onclick="searchMenu(this);">疫苗相關</a>
                 </div>
               </div>
         </div>
         <div>
-            <!-- <div id="upNav" class="sticky">
-                <ul class="nav navbar-nav" >
-                <li><a href="#section1" >Section 1</a></li>
-                <li><a href="#section2">Section 2</a></li>
-                <li><a href="#section3">Section 3</a></li>
-                </ul>
-            </div> -->
         
-            <div id="result" >
+            <div id="result"  style="padding-top:5% ;">
             </div>
         </div>
         
-        <script>
-            function searchMenu(){
-                menu();
-                document.getElementById('navbar');
-
-                searchGoogleSheet();
-            }
-            function menu() {
-            var x = document.getElementById("navbar");
-                if (x.style.display === "block") {
-                    x.style.display = "none";
-                } else {
-                    x.style.display = "block";
-                }
-            }
-
-            function change(element){
-                element.nextElementSibling.classList.toggle('change');
-            }
-
-            // window.onscroll = function() {myFunction()};
-            // var navbar = document.getElementById("upNav");
-            // var sticky = navbar.offsetTop;
-            // console.log('321');
-
-            // function myFunction() {
-            //     if (window.pageYOffset >= sticky) {
-            //         navbar.classList.add("sticky")
-            //     } else {
-            //         navbar.classList.remove("sticky");
-            //     }
-            // }
-        </script>    
     </body>
 </html>
