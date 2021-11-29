@@ -8,12 +8,12 @@
         <title>衛教專區</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <!-- Rwd js -->
-        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+        <!-- <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script> -->
 
         <!-- Rwd css -->
-        <link rel="stylesheet"  href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-        <link rel="stylesheet"  href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+        <!-- <link rel="stylesheet"  href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+        <link rel="stylesheet"  href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css"> -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">       
         <style>
             body {margin:0;font-family:Arial}
@@ -21,7 +21,7 @@
             .navbar {
             overflow: auto;
             background-color: #040357; 
-            width: 80%;
+            width: 100%;
             }
 
             .navbar a {
@@ -31,11 +31,14 @@
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
+            overflow: auto;
+
             }
 
             .subnav {
             float: left;
-            overflow: hidden;
+            overflow: auto;
+            max-width: 80%;
             }
 
             .subnav .subnavbtn {
@@ -48,6 +51,7 @@
             font-family: inherit;
             margin: 0;
             font-weight: bolder;
+            overflow: auto;
             }
 
             .navbar a:hover, .subnav:hover .subnavbtn {
@@ -59,7 +63,7 @@
             position: absolute;
             right: 0;
             background-color: #b5c7f7;
-            width: 80%;
+            width: 100%;
             z-index: 1;
             }
 
@@ -143,11 +147,11 @@
                     "<tr>"
                     for (var i = 0; i < dataArray.length; i++) {
                         for (var j = 4; j < 5; j++) {
-                            if(dataArray[i][j]==''){
-                                result1+='';
+                            if (isURL(dataArray[i][j])){
+                                result1 += "<td colspan='2'  ><img src='"+ dataArray[i][j] + "'  style='width:100%'></td>"
                             }
                             else{
-                                result1 +="<th scope='col' style='width:90px' >警語</th>"+"<td >" + dataArray[i][j] + "</td>";
+                                result1 += "";
                             }
                     }
                 }
@@ -157,10 +161,10 @@
                     for (var i = 0; i < dataArray.length; i++) {
                         for (var j = 5 ;j < 6; j++) {
                             if (isURL(dataArray[i][j])){
-                            result1 +="";
+                            result1 += "<td colspan='2'  ><img src='"+ dataArray[i][j] + "'  style='width:100%'></td>"
                         }
                         else{
-                            result1 +=  "<td colspan='2'  ><img src='https://7110er.github.io/pharm.github.io/searchDrug/picture/"+ dataArray[i][j] + ".jpg' style='width:100%'</td>";
+                            result1 += "";
                         }
                     }
                 }
