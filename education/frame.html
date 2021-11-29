@@ -6,37 +6,44 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="高順鴻">
         <title>衛教專區</title>
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
-        <!-- Rwd js -->
-        <!-- <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script> -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-        <!-- Rwd css -->
-        <!-- <link rel="stylesheet"  href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-        <link rel="stylesheet"  href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css"> -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">       
         <style>
             body {
-            font-family: Arial, Helvetica, sans-serif;
-            margin: 0;
+                font-family: Arial, Helvetica, sans-serif;
+                margin: 0;
             }
-
+            .home {
+                width: 20%;
+                height: 10%;
+                position: fixed;
+                color: rgb(230, 84, 84);
+                background-color: #012061;
+            }
+            .homeBtn{
+                font-size: large;
+                color: white;
+                text-align: center;
+                
+                
+            }
             .navbar {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            width: 20%;
-            background-color: #0e0131;
-            position: fixed;
-            height: 100%;
-            overflow: auto;
+                list-style-type: none;
+                margin: 5% 0;
+                padding: 0;
+                width: 20%;
+                background-color: #052449;
+                position: fixed;
+                height: 100%;
+                overflow: auto;
             }
 
             .navbar a {
             display : block;
-            font-size: 10px;
+            font-size: 14px;
             color: white;
             text-align: left;
             padding: 14px 5px;
@@ -46,7 +53,6 @@
             .subnav {
             overflow: hidden;
             }
-
             .subnav .subnavbtn {
             font-size: 12px;  
             border: none;
@@ -57,7 +63,6 @@
             font-family: inherit;
             margin: 0;
             }
-
             .subnav-content {
             display: none;
             position: relative;
@@ -65,25 +70,30 @@
             background-color: rgb(192, 211, 252);
             z-index: 1;
             }
-
             .subnav-content a {
-
             display: block;
             color: rgb(0, 0, 0);
             text-decoration: none;
             }
-
-
             .subnav-content a:hover {
             background-color: #eee;
             color: black;
             }
-            /* .subnav:hover .subnav-content {
-            display: block;
-            }        */
             .change {
             display: block;
-            } 
+            }
+            .sticky {
+            position: fixed;
+            top: 0;
+            margin-left: 20%;
+            width: 80%;
+            background-color: #ceddf0;
+            color: rgb(0, 0, 0);
+            }
+            /* .sticky + .content {
+            padding-top: 60px;
+            margin-left: 20%;
+            } */
         </style>
         <script >
 
@@ -218,6 +228,9 @@
         </script>
     </head>
     <body >
+        <div class="home">
+            <a class="homeBtn" href="#">桃醫藥師門診</a>
+        </div>
         <div class="navbar" id="navbar">
             <div class="subnav">
               <button class="subnavbtn" onclick="change(this)">心血管內科 <i class="fa fa-caret-down"></i></button>
@@ -284,19 +297,46 @@
                   <a href="#" onclick="searchGoogleSheet(this)">疫苗相關</a>
                 </div>
               </div>
-        </div>        
+        </div>
+        <div>
+            <div id="upNav" class="sticky">
+                <ul class="nav navbar-nav" >
+                <li><a href="#section1" >Section 1</a></li>
+                <li><a href="#section2">Section 2</a></li>
+                <li><a href="#section3">Section 3</a></li>
+                </ul>
+            </div>
         
-        <div id="result" style="margin-left:20%;padding:1px 16px;">
-            
+            <div id="result" style="margin-left:20%;padding:5% 1px ;">
+                <div id="section1" class="container-fluid">
+                    <h1>Section 1</h1>
+                    <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+                    <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+                </div>
+                <div id="section2" class="container-fluid">
+                    <h1>Section 2</h1>
+                    <p><img src="https://i.imgur.com/UX64sfI.jpg"></p>
+                    <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+                    <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+                </div>
+                <div id="section3" class="container-fluid">
+                    <h1>Section 3</h1>
+                    <p><img src="https://i.imgur.com/UX64sfI.jpg"></p>
+                    <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+                    <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+                </div>        
+            </div>
         </div>
         
         <script>
             function change(element){
                 element.nextElementSibling.classList.toggle('change');
             }
+
             window.onscroll = function() {myFunction()};
-            var navbar = document.getElementById("navbar");
+            var navbar = document.getElementById("upNav");
             var sticky = navbar.offsetTop;
+            console.log('321');
 
             function myFunction() {
                 if (window.pageYOffset >= sticky) {
