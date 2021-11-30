@@ -23,79 +23,108 @@
                 color: white;
                 background-color: #012061;
                 float: left;
+                overflow: auto;
+                display: block;
+
             }
             .homeBar a {
                 color: white;
-                font-size: x-large;
-
+                font-size: 35px;
+                float: left;
+                display: block;
+                padding: 10px   ;
+            }
+            .homeBar a:hover{
+                background-color: #000;
             }
             .center {
                 display: block;
                 margin-left: auto;
                 margin-right: auto;
                 width: 100%;
-                }
-            .navbar {
-                list-style-type: none;
-                margin: 5% 0;
-                padding: 0;
-                width: 20%;
-                background-color: #052449;
-                position: fixed;
-                height: 100%;
-                overflow: auto;
-                display: none;
             }
-
+            .navbar {
+                height: 100%;
+                width: 0;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                right: 0;
+                background-color: #111;
+                overflow-x: hidden;
+                transition: 0.5s;
+                padding-top: 60px;
+            }
+            .navbar .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
             .navbar a {
-            display : block;
-            font-size: 14px;
-            color: white;
-            text-align: left;
-            padding: 14px 5px;
-            text-decoration: none;
+                display : block;
+                font-size: 30px;
+                color: white;
+                text-align: center;
+                padding: 14px 5px;
+                text-decoration: none;
             }
 
             .subnav {
-            overflow: hidden;
+                overflow: hidden;
             }
             .subnav .subnavbtn {
-            font-size: 12px;  
-            border: none;
-            outline: none;
-            color: white;
-            padding: 14px 5px;
-            background-color: inherit;
-            font-family: inherit;
-            margin: 0;
+                font-size: 30px;  
+                border: none;
+                outline: none;
+                color: white;
+                padding: 14px 5px;
+                background-color: inherit;
+                font-family: inherit;
+                text-align: center;
+
             }
             .subnav-content {
-            display: none;
-            position: relative;
-            left: 0;
-            background-color: rgb(192, 211, 252);
-            z-index: 1;
+                display: none;
+                position: relative;
+                background-color: rgb(192, 211, 252);
+                z-index: 1;
+                text-align: center;
             }
             .subnav-content a {
-            display: block;
-            color: rgb(0, 0, 0);
-            text-decoration: none;
+                display: block;
+                color: rgb(0, 0, 0);
+                text-decoration: none;
             }
             .subnav-content a:hover {
-            background-color: #eee;
-            color: black;
+                background-color: #eee;
+                color: black;
             }
             .change {
-            display: block;
+                display: block;
             }
         </style>
         <script >
+            function openNav() {
+                document.getElementById("navbar").style.width = "250px";
+                document.getElementById("homeBar").style.marginRight = "250px";
+                document.getElementById("result").style.marginRight = "250px";
+                console.log('231');
+            }
+
+            function closeNav() {
+                document.getElementById("navbar").style.width = "0";
+                document.getElementById("homeBar").style.marginRight = "0";
+                document.getElementById("result").style.marginRight = "0";
+            }            
             function searchMenu(divElement){
                 menu();
+                closeNav();
                 searchGoogleSheet(divElement);
             }
             function menu() {
-            var x = document.getElementById("navbar");
+                var x = document.getElementById("navbar");
                 if (x.style.display === "block") {
                     x.style.display = "none";
                 } else {
@@ -236,13 +265,13 @@
 
     <body >
 
-        <div class="homeBar">
-            <a href="#"><i class="bi bi-house-door-fill"></i></a>
-            <a href="#">回首頁</a>
-            <a href="javascript:void(0);" >疾病專區</a>
-            <a href="javascript:void(0);" class="icon" onclick="menu()"><i class="fa fa-bars"></i></a>
+        <div class="homeBar" id="homeBar">
+            <a href="#"><i class="fa fa-home"> 回首頁</i></a>
+            <a href="#"><i class="fa fa-envelope"> 聯絡我們</i></a>            
+            <a href="javascript:void(0);" class="icon" onclick="openNav()" ><i class="fa fa-bars"> 疾病專區</i></a>
         </div>
         <div class="navbar" id="navbar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <div class="subnav">
               <button class="subnavbtn" onclick="change(this)">心血管內科 <i class="fa fa-caret-down"></i></button>
               <div class="subnav-content">
@@ -311,9 +340,9 @@
         </div>
         <div>
         
-            <div id="result"  style="padding-top:5% ;">
+            <div id="result"  style="padding-top:10% ;">
             <a  href="#" ><img class="center" src="https://i.imgur.com/02LIyeR.jpeg" ></a>
-        </div>
+            </div>
         </div>
         
     </body>
