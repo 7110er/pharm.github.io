@@ -48,21 +48,25 @@
                 width: 0;
                 position: fixed;
                 z-index: 1;
+                opacity: 0.85;
                 top: 0;
                 right: 0;
                 background-color: #012061;
                 overflow-x: hidden;
                 transition: 0.5s;
-                padding-top: 60px;
+                padding-top: 50px;
                 
             }
             .navbar .closebtn {
                 position: absolute;
                 top: 0;
-                right: 25px;
+                right: 30px;
+                padding: 0;
                 font-size: 36px;
                 margin-left: 50px;
+                margin-top: 0px;
                 border-style: none;
+                color:white;
             }
             .navbar a {
                 padding: 10px 8px ;
@@ -285,7 +289,7 @@
             <a href="javascript:void(0);" class="icon" onclick="openNav()" ><i class="fa fa-bars"> 疾病專區</i></a>
         </div>
         <div class="navbar" id="navbar">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" >&times;</a>
             <div class="subnav">
               <button class="subnavbtn" onclick="change(this)">心血管內科<br><i class="fa fa-caret-down"></i></button>
               <div class="subnav-content">
