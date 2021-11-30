@@ -118,12 +118,29 @@
             .change {
                 display: block;
             }
+            #report {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+                padding-top: 60px;
+                }            
             /* @media screen and (max-height: 450px) {
                 .sidenav {padding-top: 15px;}
                 .sidenav a {font-size: 18px;}
             }         */
         </style>
         <script >
+            function report(){
+           document.getElementById('report').style.display='block';
+           document.getElementById('report').style.width = "100%";
+            }
             // function reLoad() {
             //     google.script.run
             //     .withSuccessHandler(function(url){
@@ -143,6 +160,7 @@
                 document.getElementById("homeBar").style.marginRight = "0";
                 document.getElementById("result").style.marginRight = "0";
             }            
+
             function searchMenu(divElement){
                 closeNav();
                 searchGoogleSheet(divElement);
@@ -155,8 +173,8 @@
             function searchGoogleSheet(divElement){
                 var searchText = $(divElement).text();
                 google.script.run.withSuccessHandler(createTable).search(searchText);
-                console.log('123');
             }
+
             function createTable(dataArray) {
             if (dataArray && dataArray !== undefined && dataArray.length != 0) {
 
@@ -283,7 +301,7 @@
 
         <div class="homeBar" id="homeBar">
             <a href="#" ><i class="fa fa-home"> 首頁</i></a>
-            <a href="#"><i class="fa fa-envelope"> 聯絡我們</i></a>            
+            <a href="#"><i class="fa fa-envelope" onclick="report()"> 聯絡我們</i></a>            
             <a href="javascript:void(0);" class="icon" onclick="openNav()" ><i class="fa fa-bars"> 疾病專區</i></a>
         </div>
         <div class="navbar" id="navbar">
@@ -354,12 +372,17 @@
                 </div>
               </div>
         </div>
-        <div>
-        
-            <div id="result"  style="padding-top:15% ;">
+        <div id="result"  style="padding-top:15% ;">
             <a  href="#" ><img class="center" src="https://i.imgur.com/02LIyeR.jpeg" ></a>
-            </div>
         </div>
-        
-    </body>
+        <form id="report">
+            <label for="comments">意見與回饋</label>
+            <textarea class="form-control" id="comments"  rows="5"></textarea>
+            <label for="text">請輸入您的姓名 : </label>
+            <input type="text" id="text" placeholder="ex:王先生">
+            <label for="phone">您的聯絡方式 : </label>
+            <input type="number" id="phone" placeholder="ex:0912345678">
+            <button type="submit" onclick='getValue()' class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-right ui-corner-all ui-shadow ui-alt-icon">送出</button>
+        </form>
+</body>
 </html>
