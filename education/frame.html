@@ -137,9 +137,12 @@
             }         */
         </style>
         <script >
-            function report(){
-           document.getElementById('report').style.display='block';
-           document.getElementById('report').style.width = "100%";
+            function openReport(){
+                document.getElementById('report').style.display='block';
+                document.getElementById('report').style.width = "100%";
+            }
+            function closeReport(){
+                document.getElementById('report').style.display='none';
             }
             // function reLoad() {
             //     google.script.run
@@ -301,7 +304,7 @@
 
         <div class="homeBar" id="homeBar">
             <a href="#" ><i class="fa fa-home"> 首頁</i></a>
-            <a href="#"><i class="fa fa-envelope" onclick="report()"> 聯絡我們</i></a>            
+            <a href="#"><i class="fa fa-envelope" onclick="openReport()"> 聯絡我們</i></a>            
             <a href="javascript:void(0);" class="icon" onclick="openNav()" ><i class="fa fa-bars"> 疾病專區</i></a>
         </div>
         <div class="navbar" id="navbar">
@@ -376,6 +379,8 @@
             <a  href="#" ><img class="center" src="https://i.imgur.com/02LIyeR.jpeg" ></a>
         </div>
         <form id="report">
+            <br>
+            <button onclick="closeReport()">點我關閉</button>
             <label for="comments">意見與回饋</label>
             <textarea class="form-control" id="comments"  rows="5"></textarea>
             <label for="text">請輸入您的姓名 : </label>
@@ -384,5 +389,16 @@
             <input type="number" id="phone" placeholder="ex:0912345678">
             <button type="submit" onclick='getValue()' class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-right ui-corner-all ui-shadow ui-alt-icon">送出</button>
         </form>
-</body>
+        <script>
+            // Get the modal
+            var modal = document.getElementById('report');
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
+    </body>
 </html>
