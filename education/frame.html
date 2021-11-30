@@ -110,6 +110,14 @@
             }         */
         </style>
         <script >
+            function reLoad() {
+                google.script.run
+                .withSuccessHandler(function(url){
+                    window.open(url,'_top');
+                })
+                .getScriptURL();
+                console.log("reload");
+            }            
             function openNav() {
                 document.getElementById("navbar").style.width = "25%";
                 document.getElementById("homeBar").style.marginRight = "25%";
@@ -261,7 +269,7 @@
     <body >
 
         <div class="homeBar" id="homeBar">
-            <a href="#"><i class="fa fa-home"> 首頁</i></a>
+            <a href="#"><i class="fa fa-home" onclick="reLoad()"> 首頁</i></a>
             <a href="#"><i class="fa fa-envelope"> 聯絡我們</i></a>            
             <a href="javascript:void(0);" class="icon" onclick="openNav()" ><i class="fa fa-bars"> 疾病專區</i></a>
         </div>
