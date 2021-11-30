@@ -29,7 +29,7 @@
             }
             .homeBar a {
                 color: white;
-                font-size: 35px;
+                font-size: 25px;
                 float: left;
                 display: block;
                 padding: 10px   ;
@@ -64,7 +64,7 @@
             }
             .navbar a {
                 display : block;
-                font-size: 30px;
+                font-size: 20px;
                 color: white;
                 text-align: center;
                 padding: 14px 5px;
@@ -75,7 +75,7 @@
                 overflow: hidden;
             }
             .subnav .subnavbtn {
-                font-size: 30px;  
+                font-size: 20px;  
                 border: none;
                 outline: none;
                 color: white;
@@ -104,12 +104,16 @@
             .change {
                 display: block;
             }
+            @media screen and (max-height: 450px) {
+                .sidenav {padding-top: 15px;}
+                .sidenav a {font-size: 18px;}
+            }        
         </style>
         <script >
             function openNav() {
-                document.getElementById("navbar").style.width = "250px";
-                document.getElementById("homeBar").style.marginRight = "250px";
-                document.getElementById("result").style.marginRight = "250px";
+                document.getElementById("navbar").style.width = "25%";
+                document.getElementById("homeBar").style.marginRight = "25%";
+                document.getElementById("result").style.marginRight = "25%";
                 console.log('231');
             }
 
