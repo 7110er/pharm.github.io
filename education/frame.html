@@ -173,15 +173,24 @@
                     scrollTop: 0,
                     }, 700)
                 });
-                $('nav').on('click','a', function (e) {
-                    e.preventDefault();
-                    const anchor = $(this).attr('href');
-                    const linkScroll = $(anchor).offset().top;
-                    $('html,body').stop().animate({ 
-                    scrollTop: linkScroll -43
-                    },700)
-                });
+                // $('.tableBtn').on('click', function (e) {
+                //     e.preventDefault();
+                //     var anchor = $(this).parent().parent().next().next().next();
+                //     console.log(anchor);
+                //     var linkScroll = $(anchor).offset().top;
+                //     $(anchor).stop().animate({ 
+                //     scrollTop: linkScroll -43
+                //     },700)
+                // });
             })
+            function scrollContent(element){
+                var z = $(element).parent().parent().next().next().next();
+                var offset = $(z).offset(); // Contains .top and .left
+                offset.top -= 0;
+                $('html, body').animate({
+                    scrollTop: offset.top,
+                });
+            }
             function openReport(){
                 document.getElementById('report').style.display='block';
                 document.getElementById('report').style.width = "100%";
@@ -231,13 +240,6 @@
             // function contentScroll(element){
             //     $(element).parent().parent().next().next().next().
             // }
-            function scrollContent(element){
-                var z = $(element).parent().parent().next().next().next();
-                $(element).animate(
-                    {scrollTop:$(z).offset().top}
-                )
-                console.log('123123123');
-            }
             function searchGoogleSheet(divElement){
                 var searchText = $(divElement).text();
                 google.script.run.withSuccessHandler(createTable).search(searchText);
@@ -299,7 +301,7 @@
 
         <div class="homeBar" id="homeBar">
             <a href="https://7110er.github.io/pharm.github.io/education/index" ><i class="fa fa-home" > 首頁</i></a>
-            <a href="#" ><i class="fa fa-search" onclick="searchDrug()"> 藥品</i></a>
+            <a href="javascript:void(0);" ><i class="fa fa-search" onclick="searchDrug()"> 藥品</i></a>
             <a href="javascript:void(0);" class="icon" onclick="openNav()" ><i class="fa fa-bars"> 衛教</i></a>
         </div>
         <div class="navbar" id="navbar">
