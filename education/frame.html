@@ -296,7 +296,8 @@
                 return url.protocol === "http:" || url.protocol === "https:";
             }
             function reLoad(){
-                window.location.reload();
+                console.log(parent)
+                parent.location.reload();
                 console.log('2311');
             }
         </script>
@@ -305,7 +306,7 @@
     <body >
 
         <div class="homeBar" id="homeBar">
-            <a href="https://7110er.github.io/pharm.github.io/education/index"><i class="fa fa-home" > 首頁</i></a>
+            <a href="#" onclick="reLoad()"><i class="fa fa-home" > 首頁</i></a>
             <a href="javascript:void(0);" ><i class="fa fa-search" onclick="searchDrug()"> 藥品</i></a>
             <a href="javascript:void(0);" onclick="openNav()" ><i class="fa fa-bars"> 衛教</i></a>
         </div>
