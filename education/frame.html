@@ -41,10 +41,10 @@
                 font-size: 20px;
                 float: left;
                 display: block;
-                padding: 10px   ;
+                padding: 10px ;
             }
             .homeBar a:hover{
-                background-color: #000;
+                background-color:  #215394;
             }
             .center {
                 display: block;
@@ -57,7 +57,7 @@
                 width: 0;
                 position: fixed;
                 z-index: 1;
-                opacity: 0.85;
+                opacity: 0.95;
                 top: 0;
                 right: 0;
                 background-color: #012061;
@@ -76,6 +76,7 @@
                 margin-top: 0px;
                 border-style: none;
                 color:white;
+                
             }
             .navbar a {
                 padding: 10px 8px ;
@@ -133,16 +134,21 @@
                 font-size: 14px;
                 font-weight: bolder;
                 background-color:  #c4d6ee;
+                color: #2e557e;
                 border-style: solid;
                 border-width: 1px;
                 border-color: #2e557e;
                 text-align: center;
             }
+            .tableBtn:hover{
+                background-color: #eee;
+                color: black;
+            }            
             .tableContent {
                 width: 100%;
             }
             .toTop {
-                background: rgba(18, 112, 32, 0.7);
+                background: rgba(18, 43, 112, 0.7);
                 padding: 10px;
                 color: #fff;
                 text-decoration: none;
@@ -150,6 +156,9 @@
                 bottom: 10px;
                 right: 10px;
                 font-size: 26px;
+            }
+            .toTop:hover {
+                background-color:  #c4d6ee;
             }
             .result {
                 padding-top: 50px;
@@ -238,9 +247,9 @@
             function createTable(dataArray) {
             if (dataArray && dataArray !== undefined && dataArray.length != 0) {
                 
-                var dataResult = "<table class='table table-sm table-striped' id='dtable' >" +
+                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; id='dtable' >" +
                     "<thead >" +
-                    "<tr style='position:fixed'>"
+                    "<tr style='position:sticky; top:50px'>"
                     for (var i = 0; i < dataArray.length; i++) {
                         for (var j = 1; j < 5; j++) {
                         dataResult += "<td class='tableBtn' style='width:25%'>" + dataArray[i][j] + "</td>";
@@ -293,7 +302,7 @@
         <div class="homeBar" id="homeBar">
             <a href="https://7110er.github.io/pharm.github.io/education/index" ><i class="fa fa-home" > 首頁</i></a>
             <a href="javascript:void(0);" ><i class="fa fa-search" onclick="searchDrug()"> 藥品</i></a>
-            <a href="javascript:void(0);" class="icon" onclick="openNav()" ><i class="fa fa-bars"> 衛教</i></a>
+            <a href="javascript:void(0);" onclick="openNav()" ><i class="fa fa-bars"> 衛教</i></a>
         </div>
         <div class="navbar" id="navbar">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" >&times;</a>
