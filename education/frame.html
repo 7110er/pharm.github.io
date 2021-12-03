@@ -174,8 +174,32 @@
                     }, 700)
                 });
             })
-            function scrollContent(element){
-                var z = $(element).parent().parent().next().next().next();
+            function scrollContent_A(element){
+                var z = $(element).parent().parent().next();
+                var offset = $(z).offset(); // Contains .top and .left
+                offset.top -= 100;
+                $('html, body').animate({
+                    scrollTop: offset.top,
+                });
+            }
+            function scrollContent_B(element){
+                var z = $(element).parent().parent().next().next().next().next();
+                var offset = $(z).offset(); // Contains .top and .left
+                offset.top -= 100;
+                $('html, body').animate({
+                    scrollTop: offset.top,
+                });
+            }
+            function scrollContent_C(element){
+                var z = $(element).parent().parent().next().next().next().next().next().next().next();
+                var offset = $(z).offset(); // Contains .top and .left
+                offset.top -= 100;
+                $('html, body').animate({
+                    scrollTop: offset.top,
+                });
+            }
+            function scrollContent_D(element){
+                var z = $(element).parent().parent().next().next().next().next().next().next().next().next().next();
                 var offset = $(z).offset(); // Contains .top and .left
                 offset.top -= 100;
                 $('html, body').animate({
@@ -226,8 +250,7 @@
                 google.script.run.withSuccessHandler(createTable).search(searchText);
             }
             function createTable(dataArray) {
-            if (dataArray && dataArray !== undefined && dataArray.length != 0) {
-                
+            if ( dataArray !== undefined && dataArray.length != 0) {
                 var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; id='dtable' >" +
                     "<thead >" +
                     "<tr style='position:sticky; top:50px'>"
@@ -238,13 +261,16 @@
                     }
                     dataResult+=
                     "</tr>"
+                    console.log(dataArray);
                     for (var i = 0; i < dataArray.length; i++) {
-                        for (var j = 5 ;j < 12; j++) {
-                            if (isURL(dataArray[i][j])){
-                                dataResult += "<tr class='tableContent'>"+"<td colspan='4'><img src='"+ dataArray[i][j] + "'  style='width:100%'></td>"+"</tr>"
-                            }
-                            else {
-                                dataResult += "<tr class='tableContent'>"+"<td colspan='4'>"+ dataArray[i][j] + "</td>"+"</tr>"
+                        for (var j = 5 ;j < 17; j++) {
+                            if (dataArray[i][j]!=undefined && dataArray[i][j]!=""){
+                                if (isURL(dataArray[i][j])){
+                                    dataResult += "<tr class='tableContent'>"+"<td colspan='4'><img src='"+ dataArray[i][j] + "'  style='width:100%'></td>"+"</tr>"
+                                }
+                                else {
+                                    dataResult += "<tr class='tableContent'>"+"<td colspan='4'>"+ dataArray[i][j] + "</td>"+"</tr>"
+                                }
                             }
                         }
                     }
@@ -253,28 +279,24 @@
                     "</table>";
                 var div = document.getElementById('result');
                 div.innerHTML = dataResult;
-                
             } 
-
             else {
-
                 var div = document.getElementById('result');
-                div.innerHTML = "沒有找到相關藥物，請重新輸入。";
+                div.innerHTML = "目前無資料!";
             }
         }
                 // 判斷string 是否為網址
             function isURL(string) {
                 let url;
-                
                 try {
                     url = new URL(string);
                 } catch (_) {
                     return false;  
                 }
-
                 return url.protocol === "http:" || url.protocol === "https:";
             }
             function reLoad(){
+                window.location.reload();
                 console.log('2311');
             }
         </script>
@@ -283,7 +305,7 @@
     <body >
 
         <div class="homeBar" id="homeBar">
-            <a href="javascript:void(0);" onclick="reLoad()" ><i class="fa fa-home" > 首頁</i></a>
+            <a href="https://7110er.github.io/pharm.github.io/education/index;"><i class="fa fa-home" > 首頁</i></a>
             <a href="javascript:void(0);" ><i class="fa fa-search" onclick="searchDrug()"> 藥品</i></a>
             <a href="javascript:void(0);" onclick="openNav()" ><i class="fa fa-bars"> 衛教</i></a>
         </div>
