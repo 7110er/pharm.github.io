@@ -20,11 +20,10 @@
                 font-family: Arial, Helvetica, sans-serif;
                 margin: 0;
             }
-            #iframe {
+            #iframe , #iframe_Med {
                 display: none;
                 width: 100%;
                 height: 650px;
-                padding-top: 50px;
             }
             .homeBar {
                 width: 100%;
@@ -35,16 +34,38 @@
                 float: left;
                 overflow: auto;
                 display: block;
+                
             }
-            .homeBar a {
+            .homeBar a{
                 color: white;
                 font-size: 20px;
                 float: left;
                 display: block;
                 padding: 10px ;
+                
             }
             .homeBar a:hover{
                 background-color:  #215394;
+                color: white;
+
+            }
+            .subDrug {
+                padding-top: 50px;
+                display: none;
+            }
+            .subDrugBtn{
+                font-size: 20px;
+                font-weight: bold;
+                text-align: center;
+                color: rgb(29, 51, 87);
+                padding: 10px;
+                width: 50%;
+                background-color:  #c4d6ee;
+                float: left;
+            }
+            .subDrugBtn:hover{
+                background-color: #eee;
+                color: black;
             }
             .center {
                 display: block;
@@ -118,7 +139,7 @@
             }
             .subnav-content a {
                 display: block;
-                color: #2e557e;
+                color: rgb(29, 51, 87);
                 text-decoration: none;
             }
             .subnav-content a:hover {
@@ -128,7 +149,6 @@
             .change {
                 display: block !important;
             }
-
             .tableBtn{
                 color: #012061;
                 font-size: 14px;
@@ -164,11 +184,11 @@
                 padding-top: 50px;
                 width: 100%;
             }
-            .qa {
+            .menuQA {
                 display: none;
                 padding-top: 50px;
             }
-            .qa a {
+            .menuQA a {
                 background-color:  #dfedff;
                 display: block;
                 border: black;
@@ -182,7 +202,7 @@
                 text-decoration: none;                
 
             }
-            .qa a:hover {
+            .menuQA a:hover {
                 background-color: rgb(255, 247, 240);
                 color: black;
             }
@@ -190,7 +210,7 @@
                 width: 100%;
                 display: none;
                 padding: 5px;
-            }
+            }           
         </style>
         <script >
             $(document).ready(function () {
@@ -242,27 +262,38 @@
             function searchMenu(divElement){
                 closeNav();
                 searchGoogleSheet(divElement);
+                document.getElementById('subDrug').style.display = "none";
                 document.getElementById("iframe").style.display = "none";
-                document.getElementById("qa").style.display = "none";
+                document.getElementById("menuQA").style.display = "none";
                 document.getElementById('result').style.display = "block";
             }
             function searchDrug(){
                 closeNav();
+                document.getElementById('subDrug').style.display = "block";
+                document.getElementById('iframe').style.display = "block";
                 document.getElementById('result').style.display = "none";
-                document.getElementById("qa").style.display = "none";
-                document.getElementById("iframe").style.display = "block";
+                document.getElementById("menuQA").style.display = "none";
             }
+            function drugToggle_Pt(){
+                document.getElementById('iframe').style.display = "block";
+                document.getElementById('iframe_Med').style.display = "none";
+            }
+            function drugToggle_Med(){
+                document.getElementById('iframe').style.display = "none";
+                document.getElementById('iframe_Med').style.display = "block";
+            } 
             function searchQA(element){
                 change(element);
                 var icon = element.firstElementChild;
                 icon.classList.toggle('fa-plus-circle');
                 icon.classList.toggle('fa-minus-circle');
             }
-            function qA(){
+            function menuQA(){
                 closeNav();
+                document.getElementById('subDrug').style.display = "none";
                 document.getElementById('result').style.display = "none";
                 document.getElementById("iframe").style.display = "none";
-                document.getElementById("qa").style.display = "block";
+                document.getElementById("menuQA").style.display = "block";
             }
             function change(element){
                 element.nextElementSibling.classList.toggle('change');
@@ -322,10 +353,10 @@
     <body >
 
         <div class="homeBar" id="homeBar">
-            <a href="https://7110er.github.io/pharm.github.io/education/index"><i class="fa fa-home" > 首頁</i></a>
-            <a href="javascript:void(0);" ><i class="fa fa-search" onclick="searchDrug()"> 藥品</i></a>
-            <a href="javascript:void(0);" ><i class='fa fa-question-circle' onclick="qA()"> 常見問題</i></a>
-            <a href="javascript:void(0);" onclick="openNav()" ><i class="fa fa-bars"> 衛教</i></a>
+            <a href="https://7110er.github.io/pharm.github.io/education/index" ><i class="fa fa-home" >&nbsp首頁</i></a>
+            <a href="javascript:void(0);" onclick="searchDrug()"><i class="fa fa-search" >&nbsp藥品</i></a>
+            <a href="javascript:void(0);"  onclick="menuQA()"><i class='fa fa-question-circle'>&nbsp常見問題</i></a>
+            <a href="javascript:void(0);"  onclick="openNav()" ><i class="fa fa-bars">&nbsp衛教</i></a>
         </div>
         <div class="navbar" id="navbar">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" >&times;</a>
@@ -339,7 +370,7 @@
                 </div>
             </div> 
             <div class="subnav">
-                <button class="subnavbtn" onclick="change(this)">內分泌科<br> <i class="fa fa-caret-down"></i></button>
+                <button class="subnavbtn" onclick="change(this)">內分泌科<br><i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
                     <a href="#" onclick="searchMenu(this);">糖尿病</a>
                     <a href="#" onclick="searchMenu(this);">甲狀腺疾病</a>
@@ -347,7 +378,7 @@
                 </div>
             </div> 
             <div class="subnav">
-                <button class="subnavbtn" onclick="change(this)">神經科<br> <i class="fa fa-caret-down"></i></button>
+                <button class="subnavbtn" onclick="change(this)">神經科<br><i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
                     <a href="#" onclick="searchMenu(this);">中風</a>
                     <a href="#" onclick="searchMenu(this);">失智症</a>
@@ -355,7 +386,7 @@
                 </div>
             </div>
             <div class="subnav">
-                <button class="subnavbtn" onclick="change(this)">腎臟科<br> <i class="fa fa-caret-down"></i></button>
+                <button class="subnavbtn" onclick="change(this)">腎臟科<br><i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
                     <a href="#" onclick="searchMenu(this);">慢性腎臟病</a>
                     <a href="#" onclick="searchMenu(this);">貧血</a>
@@ -363,14 +394,14 @@
                 </div>
             </div>
             <div class="subnav">
-                <button class="subnavbtn" onclick="change(this)">胸腔科<br> <i class="fa fa-caret-down"></i></button>
+                <button class="subnavbtn" onclick="change(this)">胸腔科<br><i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
                     <a href="#" onclick="searchMenu(this);">氣喘</a>
                     <a href="#" onclick="searchMenu(this);">慢性阻塞性肺病</a>
                 </div>
             </div>
             <div class="subnav">
-                <button class="subnavbtn" onclick="change(this)">肝膽腸胃科<br> <i class="fa fa-caret-down"></i></button>
+                <button class="subnavbtn" onclick="change(this)">肝膽腸胃科<br><i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
                     <a href="#" onclick="searchMenu(this);">慢性肝炎</a>
                     <a href="#" onclick="searchMenu(this);">胃食道逆流</a>
@@ -378,7 +409,7 @@
                 </div>
             </div>
             <div class="subnav">
-                <button class="subnavbtn" onclick="change(this)">風濕免疫科<br> <i class="fa fa-caret-down"></i></button>
+                <button class="subnavbtn" onclick="change(this)">風濕免疫科<br><i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
                     <a href="#" onclick="searchMenu(this);">痛風</a>
                     <a href="#" onclick="searchMenu(this);">類風溼關節炎</a>
@@ -386,7 +417,7 @@
                 </div>
             </div>
             <div class="subnav">
-                <button class="subnavbtn" onclick="change(this)">感染科<br> <i class="fa fa-caret-down"></i></button>
+                <button class="subnavbtn" onclick="change(this)">感染科<br><i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
                     <a href="#" onclick="searchMenu(this);">愛滋病</a>
                     <a href="#" onclick="searchMenu(this);">肺結核</a>
@@ -397,9 +428,14 @@
         <div id="result"  class='result' >
             <a  href="#" ><img class="center" src="https://i.imgur.com/02LIyeR.jpeg" ></a>
         </div>
-        <iframe  id="iframe" class="iframe" src="https://script.google.com/macros/s/AKfycbz2s9EJ6KmgqfSWvAvU3Xjo5haz8ydZDO36a7zaIQqY-KR9wy074vC9HHOCA9tKPZ1ojQ/exec" ></iframe>
+        <div id='subDrug' class="subDrug">
+            <button class="subDrugBtn"onclick="drugToggle_Pt()">民眾版</button>
+            <button class="subDrugBtn"onclick="drugToggle_Med()">專業版</button>
+            <iframe  id="iframe" class="iframe" src="https://script.google.com/macros/s/AKfycbz2s9EJ6KmgqfSWvAvU3Xjo5haz8ydZDO36a7zaIQqY-KR9wy074vC9HHOCA9tKPZ1ojQ/exec" ></iframe>
+            <iframe  id="iframe_Med" class="iframe" src="https://7110er.github.io/pharm.github.io/searchDrug/index_Med" ></iframe>
+        </div>
         <a href="#" class="toTop"> ↑ </a>
-        <div id="qa" class="qa">
+        <div id="menuQA" class="menuQA">
             <a href="javascript:void(0);" onclick="searchQA(this)">忘記吃藥怎麼辦&nbsp<i class="fa fa-plus-circle"></i></a>
             <img class="qaImg" src="https://i.imgur.com/AUuglnr.jpeg" >
             <a href="javascript:void(0);" onclick="searchQA(this)">服藥後身體不適怎麼辦&nbsp<i class="fa fa-plus-circle"></i></a>
