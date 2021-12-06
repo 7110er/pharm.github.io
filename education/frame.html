@@ -165,16 +165,16 @@
                 width: 100%;
             }
             .qa {
-                background-color:  #dfedff;
                 display: none;
                 padding-top: 50px;
             }
             .qa a {
+                background-color:  #dfedff;
                 display: block;
                 border: black;
                 border-style: solid;
                 border-width: 1px;
-                padding: 5px 0;
+                padding: 15px 0;
                 padding-left: 5px;
                 font-size: 25px;
                 font-weight: bold;
@@ -188,6 +188,7 @@
             .qaImg {
                 width: 100%;
                 display: none;
+                padding: 5px;
             }
         </style>
         <script >
@@ -231,25 +232,11 @@
                     scrollTop: offset.top,
                 });
             }
-            // function reLoad() {
-            //     google.script.run
-            //     .withSuccessHandler(function(url){
-            //         window.open(url,'_top');
-            //     })
-            //     .getScriptURL();
-            //     console.log("reload");
-            // }            
             function openNav() {
                 document.getElementById("navbar").style.width = "35%";
-                document.getElementById("homeBar").style.marginRight = "35%";
-                document.getElementById("result").style.marginRight = "35%";
-                document.getElementById("iframe").style.marginRight = "35%";
             }
             function closeNav() {
                 document.getElementById("navbar").style.width = "0";
-                document.getElementById("homeBar").style.marginRight = "0";
-                document.getElementById("result").style.marginRight = "0";
-                document.getElementById("iframe").style.marginRight = "0";
             }            
             function searchMenu(divElement){
                 closeNav();
@@ -328,11 +315,6 @@
                 }
                 return url.protocol === "http:" || url.protocol === "https:";
             }
-            // function reLoad(){
-            //     console.log(parent)
-            //     parent.location.reload();
-            //     console.log('2311');
-            // }
         </script>
     </head>      
 
@@ -425,7 +407,7 @@
             <img class="qaImg" src="https://i.imgur.com/xB29e7C.jpeg" >
             <a href="javascript:void(0);" onclick="searchQA(this)">藥品可以剝半/磨粉嗎&nbsp<i class="fa fa-arrow-circle-right"></i></a>
             <img class="qaImg" src="https://i.imgur.com/phLsiwv.jpeg" >
-            <a href="javascript:void(0);" onclick="searchQA(this)">吃藥一定要配胃藥&nbsp<i class="fa fa-arrow-circle-right"></i></a>
+            <a href="javascript:void(0);" onclick="searchQA(this)">吃藥一定要配胃藥嗎&nbsp<i class="fa fa-arrow-circle-right"></i></a>
             <img class="qaImg" src="https://i.imgur.com/nIluf7r.jpeg" >
             <a href="javascript:void(0);" onclick="searchQA(this)">藥品保存方式&nbsp<i class="fa fa-arrow-circle-right"></i></a>
             <img class="qaImg" src="https://i.imgur.com/jzTPEWE.jpeg" >
