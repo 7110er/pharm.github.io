@@ -63,8 +63,12 @@
                 background-color:  #c4d6ee;
                 float: left;
             }
-            .subDrugBtn:hover{
+            /* .subDrugBtn:hover{
                 background-color: #eee;
+                color: black;
+            } */
+            .active {
+                background-color: #eee; 
                 color: black;
             }
             .center {
@@ -221,6 +225,16 @@
                     }, 700)
                 });
             })
+            // $('.subDrugBtn').on('click', function(){
+            //     $('.subDrugBtn').removeClass('active'); // remove any active class
+            //     $(this).addClass('active'); // and then add active class for clicked element.
+            //     console.log("564");
+            // })
+            // function drugToggle(element){
+            //     $('button.subDrugBtn').removeClass('active'); // remove any active class
+            //     $(this).addClass('active'); // and then add active class for clicked element.
+            //     console.log("564");
+            // }
             function scrollContent_A(element){
                 var z = $(element).parent().parent().next();
                 var offset = $(z).offset(); // Contains .top and .left
@@ -274,13 +288,17 @@
                 document.getElementById('result').style.display = "none";
                 document.getElementById("menuQA").style.display = "none";
             }
-            function drugToggle_Pt(){
+            function drugToggle_Pt(element){
                 document.getElementById('iframe').style.display = "block";
                 document.getElementById('iframe_Med').style.display = "none";
+                element.nextElementSibling.classList.remove('active');
+                element.classList.add('active');
             }
-            function drugToggle_Med(){
+            function drugToggle_Med(element){
                 document.getElementById('iframe').style.display = "none";
                 document.getElementById('iframe_Med').style.display = "block";
+                element.previousElementSibling.classList.remove('active');
+                element.classList.add('active');
             } 
             function searchQA(element){
                 change(element);
@@ -429,8 +447,8 @@
             <a  href="#" ><img class="center" src="https://i.imgur.com/02LIyeR.jpeg" ></a>
         </div>
         <div id='subDrug' class="subDrug">
-            <button class="subDrugBtn"onclick="drugToggle_Pt()">民眾版</button>
-            <button class="subDrugBtn"onclick="drugToggle_Med()">專業版</button>
+            <button class="subDrugBtn active" onclick="drugToggle_Pt(this)">民眾版</button>
+            <button class="subDrugBtn" onclick="drugToggle_Med(this)">專業版</button>
             <iframe  id="iframe" class="iframe" src="https://script.google.com/macros/s/AKfycbz2s9EJ6KmgqfSWvAvU3Xjo5haz8ydZDO36a7zaIQqY-KR9wy074vC9HHOCA9tKPZ1ojQ/exec" ></iframe>
             <iframe  id="iframe_Med" class="iframe" src="https://7110er.github.io/pharm.github.io/searchDrug/index_Med" ></iframe>
         </div>
