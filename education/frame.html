@@ -32,17 +32,18 @@
                 color: white;
                 background-color: #012061;
                 float: left;
-                overflow: auto;
+                overflow: hidden;
                 display: block;
                 
             }
             .homeBar a{
                 color: white;
-                font-size: 20px;
+                font-size: 25px;
                 float: left;
                 display: block;
                 padding: 10px ;
-                
+                text-decoration: none;
+
             }
             .homeBar a:hover{
                 background-color:  #215394;
@@ -371,10 +372,10 @@
     <body >
 
         <div class="homeBar" id="homeBar">
-            <a href="https://7110er.github.io/pharm.github.io/education/index" ><i class="fa fa-home" >&nbsp首頁</i></a>
-            <a href="javascript:void(0);" onclick="searchDrug()"><i class="fa fa-search" >&nbsp藥品</i></a>
-            <a href="javascript:void(0);"  onclick="menuQA()"><i class='fa fa-question-circle'>&nbsp常見問題</i></a>
-            <a href="javascript:void(0);"  onclick="openNav()" ><i class="fa fa-bars">&nbsp衛教</i></a>
+            <a href="https://7110er.github.io/pharm.github.io/education/index" ><i class="fa fa-home" ></i>&nbsp首頁</a>
+            <a href="javascript:void(0);" onclick="searchDrug()"><i class="fa fa-search" ></i>&nbsp藥品</a>
+            <a href="javascript:void(0);"  onclick="menuQA()"><i class='fa fa-question-circle'></i>&nbsp常見問題</a>
+            <a href="javascript:void(0);"  onclick="openNav()" ><i class="fa fa-bars"></i>&nbsp衛教</a>
         </div>
         <div class="navbar" id="navbar">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" >&times;</a>
@@ -449,7 +450,7 @@
         <div id='subDrug' class="subDrug">
             <button class="subDrugBtn active" onclick="drugToggle_Pt(this)">民眾版</button>
             <button class="subDrugBtn" onclick="drugToggle_Med(this)">專業版</button>
-            <iframe  id="iframe" class="iframe" src="https://script.google.com/macros/s/AKfycbz2s9EJ6KmgqfSWvAvU3Xjo5haz8ydZDO36a7zaIQqY-KR9wy074vC9HHOCA9tKPZ1ojQ/exec" ></iframe>
+            <iframe  id="iframe" class="iframe" src="https://7110er.github.io/pharm.github.io/searchDrug/index" ></iframe>
             <iframe  id="iframe_Med" class="iframe" src="https://7110er.github.io/pharm.github.io/searchDrug/index_Med" ></iframe>
         </div>
         <a href="#" class="toTop"> ↑ </a>
