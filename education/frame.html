@@ -7,10 +7,8 @@
         <meta name="author" content="高順鴻">
         <title>衛教專區</title>
         
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">       
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
@@ -146,6 +144,7 @@
                 display: block;
                 color: rgb(29, 51, 87);
                 text-decoration: none;
+                font-weight: bolder;
             }
             .subnav-content a:hover {
                 background-color: #eee;
@@ -226,16 +225,6 @@
                     }, 700)
                 });
             })
-            // $('.subDrugBtn').on('click', function(){
-            //     $('.subDrugBtn').removeClass('active'); // remove any active class
-            //     $(this).addClass('active'); // and then add active class for clicked element.
-            //     console.log("564");
-            // })
-            // function drugToggle(element){
-            //     $('button.subDrugBtn').removeClass('active'); // remove any active class
-            //     $(this).addClass('active'); // and then add active class for clicked element.
-            //     console.log("564");
-            // }
             function scrollContent_A(element){
                 var z = $(element).parent().parent().next();
                 var offset = $(z).offset(); // Contains .top and .left
