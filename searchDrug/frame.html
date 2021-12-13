@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="高順鴻">
     <title>藥品查詢</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">       
     <!-- 連結jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- 連結jquery moblie -->
@@ -36,9 +39,18 @@
     <style>
         #dtable td, #dtable th{
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 5px;
+            
         }
-        
+        .ui-mobile label, div.ui-controlgroup-label {
+            font-size: 20px;
+        }
+        .dataTables_wrapper .dataTables_filter {
+            float: none;
+            text-align: center;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
     </style>
 
 
@@ -64,7 +76,7 @@
                     "info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
                     "infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
                     "infoFiltered": "(從 _MAX_ 項結果中過濾)",
-                    "search": "請輸入藥品關鍵字:",
+                    "search": "<i class='fa fa-search'></i>&nbsp;藥品關鍵字&nbsp;:&nbsp;",
                     "paginate": {
                         "first": "第一頁",
                         "previous": "上一頁",
@@ -384,7 +396,7 @@
             document.getElementById('report').hidden=false;
             document.getElementById('response').hidden=true;
         }
-</script>
+    </script>
 </head>
 
 <body>
@@ -404,7 +416,7 @@
                 </div>
         </div>
         <div data-role="footer">
-            <h1 ><b>藥品查詢系統</b></h1>
+            <h1 ><b>藥品查詢系統_民眾版</b></h1>
         </div>
   
       
