@@ -247,7 +247,7 @@
         // 顯示表格內容
 
         function createTable(dataArray) {
-            if (dataArray && dataArray !== undefined && dataArray.length != 0) {
+            if (dataArray !== undefined && dataArray.length != 0) {
 
                 var result1 = "<table class='table table-sm table-striped' id='dtable' style='font-size:16px'>" +
                     "<thead style='white-space: normal'>" +
@@ -282,11 +282,11 @@
                     "<tr>"
                 for (var i = 0; i < dataArray.length; i++) {
                     for (var j = 3; j < 4; j++) {
-                        if (dataArray[i][j] == '') {
-                            result1 += '';
+                        if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
+                            result1 += "<th scope='col' style='width:90px' >中文名</th>" + "<td >" + dataArray[i][j] + "</td>";
                         }
                         else {
-                            result1 += "<th scope='col' style='width:90px' >中文名</th>" + "<td >" + dataArray[i][j] + "</td>";
+                            result1 += "";
                         }
                     }
                 }
@@ -295,11 +295,11 @@
                     "<tr>"
                 for (var i = 0; i < dataArray.length; i++) {
                     for (var j = 4; j < 5; j++) {
-                        if (dataArray[i][j] == '') {
-                            result1 += '';
+                        if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
+                            result1 += "<th scope='col' style='width:90px' >適應症</th>" + "<td >" + dataArray[i][j] + "</td>";
                         }
                         else {
-                            result1 += "<th scope='col' style='width:90px' >適應症</th>" + "<td >" + dataArray[i][j] + "</td>";
+                            result1 += "";
                         }
                     }
                 }
@@ -321,11 +321,11 @@
                     "<tr>"
                 for (var i = 0; i < dataArray.length; i++) {
                     for (var j = 6; j < 7; j++) {
-                        if (dataArray[i][j] == '') {
-                            result1 += '';
+                        if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
+                            result1 += "<th scope='col' style='width:90px' >生理學</th>" + "<td >" + dataArray[i][j] + "</td>";
                         }
                         else {
-                            result1 += "<th scope='col' style='width:90px' >生理學</th>" + "<td >" + dataArray[i][j] + "</td>";
+                            result1 += "";
                         }
                     }
                 }
@@ -334,11 +334,11 @@
                     "<tr>"
                 for (var i = 0; i < dataArray.length; i++) {
                     for (var j = 7; j < 8; j++) {
-                        if (dataArray[i][j] == '') {
-                            result1 += '';
+                        if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
+                            result1 += "<th scope='col' style='width:90px' >劑量學</th>" + "<td >" + dataArray[i][j] + "</td>";
                         }
                         else {
-                            result1 += "<th scope='col' style='width:90px' >劑量學</th>" + "<td >" + dataArray[i][j] + "</td>";
+                            result1 += "";
                         }
                     }
                 }
@@ -347,11 +347,11 @@
                     "<tr>"
                 for (var i = 0; i < dataArray.length; i++) {
                     for (var j = 8; j < 9; j++) {
-                        if (dataArray[i][j] == '') {
-                            result1 += '';
+                        if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
+                            result1 += "<th scope='col' style='width:90px' >副作用</th>" + "<td >" + dataArray[i][j] + "</td>";
                         }
                         else {
-                            result1 += "<th scope='col' style='width:90px' >副作用</th>" + "<td >" + dataArray[i][j] + "</td>";
+                            result1 += "";
                         }
                     }
                 }
@@ -360,35 +360,18 @@
                     "<tr>"
                 for (var i = 0; i < dataArray.length; i++) {
                     for (var j = 9; j < 10; j++) {
-                        if (dataArray[i][j] == '') {
-                            result1 += '';
-                        }
-                        else {
+                        if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
                             result1 += "<th scope='col' style='width:90px' >警語</th>" + "<td >" + dataArray[i][j] + "</td>";
                         }
-                    }
-                }
-                result1 +=
-                    "</tr>" +
-                    "<tr style='height:500px'>"
-                for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 10; j < 11; j++) {
-                        if (dataArray[i][j] == '') {
-                            result1 += '';
-                        }
                         else {
-                            result1 += " <th scope='col' style='width:90px' >仿單</th>" + "<td ><embed src='https://7110er.github.io/pharm.github.io/searchDrug/info/123.pdf' type='application/pdf' style='height:500px'></td>"
+                            result1 += "";
                         }
                     }
                 }
                 result1 +=
                     "</tr>" +
-
                     "</thead>" +
                     "</table>";
-
-
-
                 var div = document.getElementById('result');
                 div.innerHTML = result1;
 
