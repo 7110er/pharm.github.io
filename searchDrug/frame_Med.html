@@ -34,6 +34,9 @@
 
 
     <style>
+        #dtable {
+            font-size: 100%;
+        }
         #dtable td,
         #dtable th {
             border: 1px solid #ddd;
@@ -54,9 +57,7 @@
     </style>
     <!-- 程式碼開始 -->
     <script>
-
         google.script.run.withSuccessHandler(showData).getData();
-
         function showData(dataArray) {
             $(document).ready(function () {
                 $('#data-table').DataTable({
@@ -244,9 +245,7 @@
 
         }
         window.addEventListener("load", preventFormSubmit, true);
-        
         // 顯示表格內容
-        
         function searchGoogleSheet(e) { // 查詢按鈕
             google.script.run.withSuccessHandler(createTitle).searchTitle();
             var searchText = $(e).parent().next().next().next().next().text();
@@ -254,10 +253,10 @@
         }
         function createTitle(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
-                var dataResult = "<table class='table table-sm table-striped' id='dtable' style='font-size:16px'>" +
+                var dataResult = "<table class='table table-sm table-striped' id='dtable'>" +
                     "<thead style='white-space: normal'>"
                 for (i = 0; i < dataArray.length; i++) {
-                    for (j = 0; j < 10; j++) {
+                    for (j = 0; j < 14; j++) {
                         dataResult += "<tr id='tr_"+j+"'>" + "<td>" + dataArray[i][j] + "</td>" + "<td id='td_" + j + "'>" + "</td>" + "</tr>"
                     }
                 }
@@ -268,7 +267,7 @@
         function createContent(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
                 for (i = 0; i < dataArray.length; i++) {
-                    for (j = 0; j < 10; j++) {
+                    for (j = 0; j < 14; j++) {
                         if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
                             if (j === 5) {
                                 document.getElementById("td_" + j).innerHTML =
@@ -288,13 +287,11 @@
         // 判斷string 是否為網址
         function isURL(string) {
             let url;
-
             try {
                 url = new URL(string);
             } catch (_) {
                 return false;
             }
-
             return url.protocol === "http:" || url.protocol === "https:";
         }
         // 問題回報
@@ -316,7 +313,6 @@
             document.getElementById('response').hidden = false;
 
         };
-
         function formReset() {
             document.getElementById('report').reset();
             document.getElementById('report').hidden = false;
@@ -324,7 +320,6 @@
         }
     </script>
 </head>
-
 <body>
     <!-- jq mobile 測試 -->
     <div data-role="page" id="pageone" data-theme="a">
@@ -389,7 +384,5 @@
 
 
     </div>
-
 </body>
-
 </html>
