@@ -34,9 +34,14 @@
 
 
     <style>
+        #data-table td {
+            padding: 2px;
+        }
+
         #dtable {
             font-size: 100%;
         }
+
         #dtable td,
         #dtable th {
             border: 1px solid #ddd;
@@ -53,6 +58,14 @@
             float: none;
             text-align: center;
             margin-bottom: 10px;
+        }
+
+        .text-wrap {
+            white-space: normal;
+        }
+
+        .width-200 {
+            width: 200px;
         }
     </style>
     <!-- 程式碼開始 -->
@@ -225,12 +238,20 @@
                         { "title": "詳閱" },
                         { "title": "中文名" },
                         { "title": "英文名" },
-                        { "title": "處置代碼" },
                         { "title": "主成分" },
+                        { "title": "處置代碼" },
                         { "title": "藥理分類" },
                         { "title": "ATC code" },
                         { "title": "適應症" },
                     ],
+                    columnDefs: [
+                        {
+                            render: function (data, type, full, meta) {
+                                return "<div class='text-wrap width-200'>" + data + "</div>";
+                            },
+                            targets: [1,2,3,4]
+                        }
+                    ]
                 });
             });
         }
@@ -257,7 +278,7 @@
                     "<thead style='white-space: normal'>"
                 for (i = 0; i < dataArray.length; i++) {
                     for (j = 0; j < 14; j++) {
-                        dataResult += "<tr id='tr_"+j+"'>" + "<td>" + dataArray[i][j] + "</td>" + "<td id='td_" + j + "'>" + "</td>" + "</tr>"
+                        dataResult += "<tr id='tr_" + j + "'>" + "<td>" + dataArray[i][j] + "</td>" + "<td id='td_" + j + "'>" + "</td>" + "</tr>"
                     }
                 }
                 dataResult += "</thead>" + "</table>"
@@ -278,7 +299,7 @@
                             }
                         }
                         else {
-                            document.getElementById("tr_"+j).style.display='none';
+                            document.getElementById("tr_" + j).style.display = 'none';
                         }
                     }
                 }
@@ -320,6 +341,7 @@
         }
     </script>
 </head>
+
 <body>
     <!-- jq mobile 測試 -->
     <div data-role="page" id="pageone" data-theme="a">
@@ -385,4 +407,5 @@
 
     </div>
 </body>
+
 </html>
