@@ -42,6 +42,13 @@
             text-align: center;
             margin-bottom: 10px;
         }
+        .text-wrap {
+            white-space: normal;
+        }
+
+        .width-200 {
+            width: 200px;
+        }
     </style>
     <!-- 程式碼開始 -->
     <script>
@@ -215,158 +222,59 @@
                         { "title": "詳閱" },
                         { "title": "中文名" },
                         { "title": "英文名" },
-                        { "title": "處置代碼" },
                         { "title": "主成分" },
+                        { "title": "處置代碼" },
                         { "title": "藥理分類" },
                         { "title": "ATC code" },
                         { "title": "適應症" },
                     ],
+                    columnDefs: [
+                        {
+                            render: function (data, type, full, meta) {
+                                return "<div class='text-wrap width-200'>" + data + "</div>";
+                            },
+                            targets: [1,2,3,4]
+                        }
+                    ]
                 });
             });
         }
-        function createTable(dataArray) {
-            if (dataArray && dataArray !== undefined && dataArray.length != 0) {
-                var result1 = "<table class='table table-sm table-striped' id='dtable' style='font-size:16px'>" +
-                    "<thead style='white-space: normal'>" +
-                    "<tr>"
-                for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 0; j < 1; j++) {
-                        result1 += "<th scope='col' style='width:90px' >主成分</th>" + "<td>" + dataArray[i][j] + "</td>";
+        function searchGoogleSheet(e) { // 查詢按鈕
+            google.script.run.withSuccessHandler(createTitle).searchTitle();
+            var searchText = $(e).parent().next().next().next().next().text();
+            google.script.run.withSuccessHandler(createContent).search(searchText);
+        }
+        function createTitle(dataArray) {
+            if (dataArray !== undefined && dataArray.length != 0) {
+                var dataResult = "<table class='table table-sm table-striped' id='dtable'>" +
+                    "<thead style='white-space: normal'>"
+                for (i = 0; i < dataArray.length; i++) {
+                    for (j = 0; j < 14; j++) {
+                        dataResult += "<tr id='tr_" + j + "'>" + "<td>" + dataArray[i][j] + "</td>" + "<td id='td_" + j + "'>" + "</td>" + "</tr>"
                     }
                 }
-                result1 +=
-                    "</tr>" +
-                    "<tr>" +
-                    "<th scope='col' style='width:90px '>英文名</th>"
-                for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 1; j < 2; j++) {
-                        result1 += "<td>" + dataArray[i][j] + "</td>";
-                    }
-                }
-                result1 +=
-                    "</tr>" +
-                    "<tr>" +
-                    "<th scope='col'style='width:90px'>處置代碼</th>"
-                for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 2; j < 3; j++) {
-                        result1 += "<td>" + dataArray[i][j] + "</td>";
-                    }
-                }
-                result1 +=
-                    "</tr>" +
-                    "<tr>"
-                for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 3; j < 4; j++) {
-                        if (dataArray[i][j] == '') {
-                            result1 += '';
-                        }
-                        else {
-                            result1 += "<th scope='col' style='width:90px' >中文名</th>" + "<td >" + dataArray[i][j] + "</td>";
-                        }
-                    }
-                }
-                result1 +=
-                    "</tr>" +
-                    "<tr>"
-                for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 4; j < 5; j++) {
-                        if (dataArray[i][j] == '') {
-                            result1 += '';
-                        }
-                        else {
-                            result1 += "<th scope='col' style='width:90px' >適應症</th>" + "<td >" + dataArray[i][j] + "</td>";
-                        }
-                    }
-                }
-                result1 +=
-                    "</tr>" +
-                    "<tr>"
-                for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 5; j < 6; j++) {
-                        if (dataArray[i][j] == '') {
-                            result1 += '';
-                        }
-                        else {
-                            result1 += "<th scope='col' style='width:90px' >生理學</th>" + "<td >" + dataArray[i][j] + "</td>";
-                        }
-                    }
-                }
-                result1 +=
-                    "</tr>" +
-                    "<tr>"
-                for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 6; j < 7; j++) {
-                        if (dataArray[i][j] == '') {
-                            result1 += '';
-                        }
-                        else {
-                            result1 += "<th scope='col' style='width:90px' >劑量學</th>" + "<td >" + dataArray[i][j] + "</td>";
-                        }
-                    }
-                }
-                result1 +=
-                    "</tr>" +
-                    "<tr>"
-                for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 7; j < 8; j++) {
-                        if (dataArray[i][j] == '') {
-                            result1 += '';
-                        }
-                        else {
-                            result1 += "<th scope='col' style='width:90px' >副作用</th>" + "<td >" + dataArray[i][j] + "</td>";
-                        }
-                    }
-                }
-                result1 +=
-                    "</tr>" +
-                    "<tr>"
-                for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 8; j < 9; j++) {
-                        if (dataArray[i][j] == '') {
-                            result1 += '';
-                        }
-                        else {
-                            result1 += "<th scope='col' style='width:90px' >警語</th>" + "<td >" + dataArray[i][j] + "</td>";
-                        }
-                    }
-                }
-                result1 +=
-                    "</tr>" +
-                    "<tr>"
-                for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 9; j < 10; j++) {
-                        if (dataArray[i][j] == '') {
-                            result1 += '';
-                        }
-                        else {
-                            result1 += "<th scope='col' style='width:90px' >交互作用</th>" + "<td >" + dataArray[i][j] + "</td>";
-                        }
-                    }
-                }
-                result1 +=
-                    "</tr>" +
-                    "<tr style='height:500px'>"
-                for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 10; j < 11; j++) {
-                        if (dataArray[i][j] == '') {
-                            result1 += '';
-                        }
-                        else {
-                            result1 += " <th scope='col' style='width:90px' >仿單</th>" + "<td ><embed src='https://7110er.github.io/pharm.github.io/searchDrug/info/123.pdf' type='application/pdf' style='height:500px'></td>"
-                        }
-                    }
-                }
-                result1 +=
-                    "</tr>" +
-
-                    "</thead>" +
-                    "</table>";
-                var div = document.getElementById('result');
-                div.innerHTML = result1;
+                dataResult += "</thead>" + "</table>"
+                document.getElementById('result').innerHTML = dataResult;
             }
-            else {
-                var div = document.getElementById('result');
-                div.innerHTML = "沒有找到相關藥物，請重新輸入。";
+        }
+        function createContent(dataArray) {
+            if (dataArray !== undefined && dataArray.length != 0) {
+                for (i = 0; i < dataArray.length; i++) {
+                    for (j = 0; j < 14; j++) {
+                        if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
+                            if (j === 5) {
+                                document.getElementById("td_" + j).innerHTML =
+                                    "<img src='https://7110er.github.io/pharm.github.io/searchDrug/picture/" + dataArray[i][j] + ".jpg' style='max-width:100%'>";
+                            }
+                            else {
+                                document.getElementById("td_" + j).innerHTML = dataArray[i][j];
+                            }
+                        }
+                        else {
+                            document.getElementById("tr_" + j).style.display = 'none';
+                        }
+                    }
+                }
             }
         }
         // 判斷string 是否為網址
@@ -382,10 +290,6 @@
             return url.protocol === "http:" || url.protocol === "https:";
         }
         // 連結Google Script　並且顯示資料
-        function searchGoogleSheet(divElement) {
-            var searchText = $(divElement).parent().next().next().next().next().text();
-            google.script.run.withSuccessHandler(createTable).search(searchText);
-        }
         // 問題回報
         function getValue() {
             var name = document.getElementById('text');
