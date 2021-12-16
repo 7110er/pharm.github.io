@@ -60,13 +60,13 @@
             margin-bottom: 10px;
         }
 
-        .text-wrap {
+        /* .text-wrap {
             white-space: normal;
         }
 
         .width-200 {
             width: 200px;
-        }
+        } */
     </style>
     <!-- 程式碼開始 -->
     <script>
@@ -244,14 +244,14 @@
                         { "title": "ATC code" },
                         { "title": "適應症" },
                     ],
-                    columnDefs: [
-                        {
-                            render: function (data, type, full, meta) {
-                                return "<div class='text-wrap width-200'>" + data + "</div>";
-                            },
-                            targets: [1,2,3,4]
-                        }
-                    ]
+                    // columnDefs: [
+                    //     {
+                    //         render: function (data, type, full, meta) {
+                    //             return "<div class='text-wrap width-200'>" + data + "</div>";
+                    //         },
+                    //         targets: [1,2,3,4]
+                    //     }
+                    // ]
                 });
             });
         }
