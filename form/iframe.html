@@ -21,16 +21,18 @@
             font-family: Arial, Helvetica, sans-serif;
             margin: 0;
         }
-        .subDrugBtn{
-                font-size: 20px;
-                font-weight: bold;
-                text-align: center;
-                color: rgb(29, 51, 87);
-                padding: 10px;
-                width: 50%;
-                background-color:  #c4d6ee;
-                float: left;
-            }
+
+        .subDrugBtn {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            color: rgb(29, 51, 87);
+            padding: 10px;
+            width: 50%;
+            background-color: #c4d6ee;
+            float: left;
+        }
+
         .active {
             background-color: #eee;
             color: black;
@@ -65,6 +67,10 @@
         #form_4 {
             display: none;
         }
+
+        #searchData {
+            display: none;
+        }
     </style>
     <script>
         function searchGoogleSheet_1() {
@@ -74,7 +80,7 @@
             google.script.run.withSuccessHandler(createTable_2).search_2(e);
             function createTable_2(dataArray) {
                 if (dataArray !== undefined && dataArray.length != 0) {
-                    var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; id='dtable' >" +
+                    var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate';  >" +
                         "<thead >"
                     for (var i = 0; i < dataArray.length; i++) {
                         for (var j = 1; j < 4; j++)
@@ -97,7 +103,7 @@
         }
         function createTable_1(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
-                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; id='dtable' >" +
+                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate';  >" +
                     "<thead >"
                 for (var i = 0; i < dataArray.length; i++) {
                     dataResult += "<tr>" + "<td class='quizTd1'>" + dataArray[i] + "</td>" + "<td class='radioTd1'>" +
@@ -116,7 +122,7 @@
         }
         function createTable_3(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
-                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; id='dtable' >" +
+                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate';  >" +
                     "<thead >"
                 for (var i = 0; i < 5; i++) {
                     for (var j = 0; j < dataArray.length; j++) {
@@ -252,19 +258,54 @@
             }
             google.script.run.addData(rowData);
             document.getElementById('basic').reset();
-        }   
+        }
+        function openSearch() {
+            document.getElementById('createData').style.display = 'none';
+            document.getElementById('searchData').style.display = 'block';
+
+        }
+        function search() {
+            var x = document.getElementById('searchId').value
+            google.script.run.withSuccessHandler(createData).searchData(x);
+        }
+        function createData(dataArray) {
+            if (dataArray !== undefined && dataArray.length != 0) {
+                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; >" +
+                    "<thead >"
+                for (var i = 0; i < dataArray.length; i++) {
+                    for (var j = 0 ; j < dataArray[i].length ;j++)
+                    dataResult += "<tr>" + "<td >" + dataArray[i][j] + "</td>" + "</tr>";
+                    console.log(dataArray[i].length);
+                }
+                dataResult +=
+                    "</thead>" +
+                    "</table>";
+                 document.getElementById('dataResult').innerHTML=dataResult
+            }
+        }
+        // 避免表單空白
+        function preventFormSubmit() {
+            var forms = document.querySelectorAll('form');
+            for (var i = 0; i < forms.length; i++) {
+                forms[i].addEventListener('submit', function (event) {
+                    event.preventDefault();
+                });
+            }
+
+        }
+        window.addEventListener("load", preventFormSubmit, true);
     </script>
 </head>
 
 <body>
     <button class="subDrugBtn active">建檔</button>
-    <a href="/search.html">查詢</a>
-    <form id="basic">
-        <label for="id">病歷號 : </label><input id="id" type="number" placeholder="輸入病歷號">
-        <label for="name">姓名 : </label><input id="name" type="text" placeholder="ex:王*明">
-        <label for="age">年齡 : </label><input id="age" type="number" placeholder="年齡">
-    </form>
-    <div>
+    <button class="subDrugBtn " onclick="openSearch()">查詢</button>
+    <div id="createData">
+        <form id="basic">
+            <label for="id">病歷號 : </label><input id="id" type="number" placeholder="輸入病歷號">
+            <label for="name">姓名 : </label><input id="name" type="text" placeholder="ex:王*明">
+            <label for="age">年齡 : </label><input id="age" type="number" placeholder="年齡">
+        </form>
         <form id="form_1">
             <table class="table table-bordered table-hover table-condensed">
                 <tr>
@@ -585,6 +626,15 @@
             <p id="sum"></p>
             <button type="button" onclick="submitForm_4()">配合度送出</button>
         </form>
+    </div>
+    <div id="searchData">
+        <form onsubmit="search()">
+            <label for="searchId">病歷號 : </label><input id="searchId" type="text" placeholder="輸入病歷號">
+            <input type="submit" value="送出">
+        </form>
+        <div id="dataResult">
+
+        </div>
     </div>
 </body>
 

@@ -272,8 +272,8 @@
             if (dataArray !== undefined && dataArray.length != 0) {
                 var dataResult = "<table class='table table-sm table-striped' id='dtable'>" +
                     "<thead style='white-space: normal'>"
-                for (i = 0; i < dataArray.length; i++) {
-                    for (j = 0; j < 14; j++) {
+                for (var i = 0; i < dataArray.length; i++) {
+                    for (var j = 0; j < dataArray[i].length; j++) {
                         dataResult += "<tr id='tr_" + j + "'>" + "<td>" + dataArray[i][j] + "</td>" + "<td id='td_" + j + "'>" + "</td>" + "</tr>"
                     }
                 }
@@ -283,10 +283,13 @@
         }
         function createContent(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
-                for (i = 0; i < dataArray.length; i++) {
-                    for (j = 0; j < 14; j++) {
+                for (var i = 0; i < dataArray.length; i++) {
+                    for (var j = 0; j < dataArray[i].length; j++) {
                         if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
-                            if (j === 5) {
+                            if (isURL(dataArray[i][j])){
+                                document.getElementById("td_" + j).innerHTML = "<a href='"+dataArray[i][j]+"'>"+dataArray[i][j]+"</a>";
+                            }
+                            else if (j === 5) {
                                 document.getElementById("td_" + j).innerHTML =
                                     "<img src='https://7110er.github.io/pharm.github.io/searchDrug/picture/" + dataArray[i][j] + ".jpg' style='max-width:100%'>";
                             }
