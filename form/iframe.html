@@ -51,11 +51,13 @@
             background-color: #eee;
             color: black;
         }
-
-        .container input {
+        .option {
+            padding: 5px;
+        }
+        /* .option input {
             padding: 10px;
         }
-
+ */
         .radioTd1,
         .radioTd2 {
             width: 20%;
@@ -99,8 +101,8 @@
                     for (var i = 0; i < dataArray.length; i++) {
                         for (var j = 1; j < dataArray[i].length; j++)
                             dataResult += "<tr>" + "<td class='quizTd2'>" + dataArray[i][j] + "</td>" + "<td class='radioTd2'>" +
-                                "<label class='container'>" + "是" + "<input class='radioInput' type='radio'  value='是' name='radio" + index + [j] + "'>" + "</label>" +
-                                "<label class='container'>" + "否" + "<input class='radioInput'  type='radio' value='否' name='radio" + index + [j] + "'>" + "</label>" +
+                                "<label class='option'>" + "是" + "<input class='radioInput' type='radio'  value='是' name='radio" + index + [j] + "'>" + "</label>" +
+                                "<label class='option'>" + "否" + "<input class='radioInput'  type='radio' value='否' name='radio" + index + [j] + "'>" + "</label>" +
                                 "</td>" + "</tr>";
                     }
 
@@ -122,10 +124,10 @@
                 for (var i = 0; i < dataArray.length; i++) {
                     for (var j = 0; j < dataArray[i].length; j++) {
                         dataResult += "<tr>" + "<td class='quizTd1'>" + dataArray[i][j] + "</td>" + "<td class='radioTd1'>" +
-                            "<label class='container'>" + "1" + "<input type='radio'  value='1' name='radio" + [j] + "'>" + "</label>" +
-                            "<label class='container'>" + "2" + "<input type='radio'  value='2' name='radio" + [j] + "'>" + "</label>" +
-                            "<label class='container'>" + "3" + "<input type='radio'  value='3' name='radio" + [j] + "'>" + "</label>" +
-                            "<label class='container'>" + "4" + "<input type='radio'  value='4' name='radio" + [j] + "'>" + "</label>" +
+                            "<label class='option'>" + "1" + "<input type='radio'  value='1' name='radio" + [j] + "'>" + "</label>" +
+                            "<label class='option'>" + "2" + "<input type='radio'  value='2' name='radio" + [j] + "'>" + "</label>" +
+                            "<label class='option'>" + "3" + "<input type='radio'  value='3' name='radio" + [j] + "'>" + "</label>" +
+                            "<label class='option'>" + "4" + "<input type='radio'  value='4' name='radio" + [j] + "'>" + "</label>" +
                             "</td>" + "</tr>";
                     }
                 }
@@ -146,7 +148,7 @@
                             dataResult += "<tr>" + "<td colspan='2' class='eq5D_title'>" + dataArray[j][i] + "</td>" + "</tr>"
                         } else {
                             dataResult += "<tr>" + "<td class='eq5D_text'>" + dataArray[j][i] + "</td>" +
-                                "<td>" + "<label class='container'>" + [j] + "&nbsp" + "<input type='radio'  value=" + [j] + " name='radio" + [i] + "'>" + "</label>" + "</td>" + "</tr>"
+                                "<td>" + "<label class='option'>" + [j] + "&nbsp" + "<input type='radio'  value=" + [j] + " name='radio" + [i] + "'>" + "</label>" + "</td>" + "</tr>"
                         }
                     }
                 }
@@ -625,11 +627,11 @@
             <button type="button" class="btn" onclick="submitForm_1()">症狀送出</button>
         </form>
         <div id="checkbox">
-            <label class='container' for="htn">高血壓<input id="htn" type='checkbox' value="高血壓"></label>
-            <label class='container' for="hf">心衰竭<input id="hf" type='checkbox' value="心衰竭"></label>
-            <label class='container' for="cad">冠心症<input id="cad" type='checkbox' value="冠心症"></label>
-            <label class='container' for="af">心律不整<input id="af" type='checkbox' value="心律不整"></label>
-            <label class='container' for="dm">糖尿病<input id="dm" type='checkbox' value="糖尿病"></label>
+            <label class='option' for="htn">高血壓<input id="htn" type='checkbox' value="高血壓"></label>
+            <label class='option' for="hf">心衰竭<input id="hf" type='checkbox' value="心衰竭"></label>
+            <label class='option' for="cad">冠心症<input id="cad" type='checkbox' value="冠心症"></label>
+            <label class='option' for="af">心律不整<input id="af" type='checkbox' value="心律不整"></label>
+            <label class='option' for="dm">糖尿病<input id="dm" type='checkbox' value="糖尿病"></label>
             <button type="button" class="btn" onclick="getForm_2()">產生疾病表單</button>
 
         </div>
