@@ -23,7 +23,7 @@
             padding: 1%;
         }
 
-        .subDrugBtn {
+        .bar {
             font-size: 20px;
             font-weight: bold;
             text-align: center;
@@ -31,6 +31,19 @@
             padding: 10px;
             width: 50%;
             background-color: #c4d6ee;
+            float: left;
+        }
+        .btn {
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center;
+            color: rgb(29, 51, 87);
+            padding: 10px;
+            background-color: #e0edff;
+            border-radius: 10px;
+            border-style: solid;
+            border-width: 1px;
+            border-color: rgb(1, 26, 93);
             float: left;
         }
 
@@ -261,6 +274,7 @@
             }
             google.script.run.addData(rowData);
             document.getElementById('basic').reset();
+            document.getElementById('form_4').reset();
         }
         function openSearch() {
             document.getElementById('createData').style.display = 'none';
@@ -301,14 +315,15 @@
 </head>
 
 <body>
-    <button class="subDrugBtn active">建檔</button>
-    <button class="subDrugBtn " onclick="openSearch()">查詢</button>
+    <button class="bar active">建檔</button>
+    <button class="bar " onclick="openSearch()">查詢</button>
     <div id="createData">
         <form id="basic">
             <label for="id">病歷號 : </label><input id="id" type="number" placeholder="輸入病歷號">
             <label for="name">姓名 : </label><input id="name" type="text" placeholder="ex:王*明">
             <label for="age">年齡 : </label><input id="age" type="number" placeholder="年齡">
         </form>
+        <br>
         <form id="form_1">
             <table class="table table-bordered table-hover table-condensed">
                 <tr>
@@ -607,7 +622,7 @@
                     <td>虛弱無力</td>
                 </tr>
             </table>
-            <button type="button" onclick="submitForm_1()">症狀送出</button>
+            <button type="button" class="btn" onclick="submitForm_1()">症狀送出</button>
         </form>
         <div id="checkbox">
             <label class='container' for="htn">高血壓<input id="htn" type='checkbox' value="高血壓"></label>
@@ -615,19 +630,19 @@
             <label class='container' for="cad">冠心症<input id="cad" type='checkbox' value="冠心症"></label>
             <label class='container' for="af">心律不整<input id="af" type='checkbox' value="心律不整"></label>
             <label class='container' for="dm">糖尿病<input id="dm" type='checkbox' value="糖尿病"></label>
-            <button type="button" onclick="getForm_2()">產生疾病表單</button>
+            <button type="button" class="btn" onclick="getForm_2()">產生疾病表單</button>
 
         </div>
         <form id="form_2">
-            <button type="button" onclick="submitForm_2()">疾病送出</button>
+            <button type="button" class="btn" onclick="submitForm_2()">疾病送出</button>
         </form>
         <form id="form_3">
-            <button type="button" onclick="submitForm_3()">EQ-5D送出</button>
+            <button type="button" class="btn" onclick="submitForm_3()">EQ-5D送出</button>
         </form>
         <form id="form_4">
-            <button type="button" onclick="getSum()">總分</button>
+            <button type="button" class="btn" onclick="getSum()">總分</button>
             <p id="sum"></p>
-            <button type="button" onclick="submitForm_4()">配合度送出</button>
+            <button type="button" class="btn" onclick="submitForm_4()">配合度送出</button>
         </form>
     </div>
     <div id="searchData">
