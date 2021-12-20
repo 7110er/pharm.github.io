@@ -20,6 +20,7 @@
         body {
             font-family: Arial, Helvetica, sans-serif;
             margin: 0;
+            padding: 1%;
         }
 
         .subDrugBtn {
@@ -83,7 +84,7 @@
                     var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate';  >" +
                         "<thead >"
                     for (var i = 0; i < dataArray.length; i++) {
-                        for (var j = 1; j < 4; j++)
+                        for (var j = 1; j < dataArray[i].length; j++)
                             dataResult += "<tr>" + "<td class='quizTd2'>" + dataArray[i][j] + "</td>" + "<td class='radioTd2'>" +
                                 "<label class='container'>" + "是" + "<input class='radioInput' type='radio'  value='是' name='radio" + index + [j] + "'>" + "</label>" +
                                 "<label class='container'>" + "否" + "<input class='radioInput'  type='radio' value='否' name='radio" + index + [j] + "'>" + "</label>" +
@@ -106,12 +107,14 @@
                 var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate';  >" +
                     "<thead >"
                 for (var i = 0; i < dataArray.length; i++) {
-                    dataResult += "<tr>" + "<td class='quizTd1'>" + dataArray[i] + "</td>" + "<td class='radioTd1'>" +
-                        "<label class='container'>" + "1" + "<input type='radio'  value='1' name='radio" + [i] + "'>" + "</label>" +
-                        "<label class='container'>" + "2" + "<input type='radio'  value='2' name='radio" + [i] + "'>" + "</label>" +
-                        "<label class='container'>" + "3" + "<input type='radio'  value='3' name='radio" + [i] + "'>" + "</label>" +
-                        "<label class='container'>" + "4" + "<input type='radio'  value='4' name='radio" + [i] + "'>" + "</label>" +
-                        "</td>" + "</tr>";
+                    for (var j = 0; j < dataArray[i].length; j++) {
+                        dataResult += "<tr>" + "<td class='quizTd1'>" + dataArray[i][j] + "</td>" + "<td class='radioTd1'>" +
+                            "<label class='container'>" + "1" + "<input type='radio'  value='1' name='radio" + [j] + "'>" + "</label>" +
+                            "<label class='container'>" + "2" + "<input type='radio'  value='2' name='radio" + [j] + "'>" + "</label>" +
+                            "<label class='container'>" + "3" + "<input type='radio'  value='3' name='radio" + [j] + "'>" + "</label>" +
+                            "<label class='container'>" + "4" + "<input type='radio'  value='4' name='radio" + [j] + "'>" + "</label>" +
+                            "</td>" + "</tr>";
+                    }
                 }
                 dataResult +=
                     "</thead>" +
@@ -273,14 +276,14 @@
                 var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; >" +
                     "<thead >"
                 for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 0 ; j < dataArray[i].length ;j++)
-                    dataResult += "<tr>" + "<td >" + dataArray[i][j] + "</td>" + "</tr>";
+                    for (var j = 0; j < dataArray[i].length; j++)
+                        dataResult += "<tr>" + "<td >" + dataArray[i][j] + "</td>" + "</tr>";
                     console.log(dataArray[i].length);
                 }
                 dataResult +=
                     "</thead>" +
                     "</table>";
-                 document.getElementById('dataResult').innerHTML=dataResult
+                document.getElementById('dataResult').innerHTML = dataResult
             }
         }
         // 避免表單空白
