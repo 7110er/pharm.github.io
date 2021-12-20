@@ -56,13 +56,13 @@
             margin-bottom: 10px;
         }
 
-        /* .text-wrap {
+        .text-wrap {
             white-space: normal;
         }
 
         .width-200 {
             width: 200px;
-        } */
+        }
     </style>
     <!-- 程式碼開始 -->
     <script>
@@ -237,14 +237,14 @@
                         { "title": "主成分" },
                         { "title": "處置代碼" },
                     ],
-                    // columnDefs: [
-                    //     {
-                    //         render: function (data, type, full, meta) {
-                    //             return "<div class='text-wrap width-200'>" + data + "</div>";
-                    //         },
-                    //         targets: [1,2,3,4]
-                    //     }
-                    // ]
+                    columnDefs: [
+                        {
+                            render: function (data, type, full, meta) {
+                                return "<div class='text-wrap width-200'>" + data + "</div>";
+                            },
+                            targets: [3,4]
+                        }
+                    ]
                 });
             });
         }
@@ -349,7 +349,7 @@
             <div class="container">
                 <br>
                 <div class="row">
-                    <table id="data-table" class="display compact table-hover table-striped  responsive ">
+                    <table id="data-table" class="display compact table-hover table-striped  ">
                         <!-- TABLE DATA IS ADDED BY THE showData() JAVASCRIPT FUNCTION ABOVE -->
                     </table>
                 </div>
