@@ -19,19 +19,21 @@
     <script src="https://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
     <!-- 連結Data table -->
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-
+    <link rel="https://cdn.datatables.net/fixedcolumns/4.0.1/css/fixedColumns.dataTables.min.css">
     <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-    <!-- Rwd js -->
+    <script src="https://cdn.datatables.net/fixedcolumns/4.0.1/js/dataTables.fixedColumns.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    <!-- Rwd js
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 
-    <!-- Rwd css -->
+    Rwd css
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
-
+ -->
 
     <style>
         #dtable {
@@ -63,6 +65,14 @@
         .width-200 {
             width: 200px;
         }
+
+        .width-120 {
+            width: 120px;
+        }
+
+        table.dataTable thead .sorting_asc {
+            background-color: rgb(235, 235, 235);
+        }
     </style>
     <!-- 程式碼開始 -->
     <script>
@@ -74,7 +84,6 @@
                     scrollX: true,
                     scrollCollapse: true,
                     paging: false,
-
                     "language": {
                         // 表格翻譯成中文
                         "processing": "處理中...",
@@ -229,7 +238,9 @@
                         }
                     },
                     data: dataArray,
-
+                    fixedColumns: {
+                        left: 1
+                    },
                     columns: [
                         { "title": "詳閱" },
                         { "title": "中文名" },
@@ -239,10 +250,16 @@
                     ],
                     columnDefs: [
                         {
+                            className: "class_0", 
+                            targets: 0
+                        }
+                    ],
+                    columnDefs: [
+                        {
                             render: function (data, type, full, meta) {
                                 return "<div class='text-wrap width-200'>" + data + "</div>";
                             },
-                            targets: [3,4]
+                            targets: 3
                         }
                     ]
                 });
@@ -283,8 +300,8 @@
                 for (var i = 0; i < dataArray.length; i++) {
                     for (var j = 0; j < dataArray[i].length; j++) {
                         if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
-                            if (isURL(dataArray[i][j])){
-                                document.getElementById("td_" + j).innerHTML = "<a href='"+dataArray[i][j]+"'>"+dataArray[i][j]+"</a>";
+                            if (isURL(dataArray[i][j])) {
+                                document.getElementById("td_" + j).innerHTML = "<a href='" + dataArray[i][j] + "'>" + dataArray[i][j] + "</a>";
                             }
                             else if (j === 5) {
                                 document.getElementById("td_" + j).innerHTML =
