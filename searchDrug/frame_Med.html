@@ -46,7 +46,6 @@
             padding: 5px;
 
         }
-
         .ui-mobile label,
         div.ui-controlgroup-label {
             font-size: 20px;
@@ -66,13 +65,13 @@
             width: 200px;
         }
 
-        .width-120 {
+        /* .width-120 {
             width: 120px;
-        }
+        } */
 
-        table.dataTable thead .sorting_asc {
+        /* table.dataTable thead .sorting_asc {
             background-color: rgb(235, 235, 235);
-        }
+        } */
     </style>
     <!-- 程式碼開始 -->
     <script>
@@ -238,9 +237,9 @@
                         }
                     },
                     data: dataArray,
-                    fixedColumns: {
-                        left: 1
-                    },
+                    // fixedColumns: {
+                    //     left: 1
+                    // },
                     columns: [
                         { "title": "詳閱" },
                         { "title": "中文名" },
@@ -248,12 +247,10 @@
                         { "title": "主成分" },
                         { "title": "處置代碼" },
                     ],
-                    columnDefs: [
-                        {
-                            className: "class_0", 
-                            targets: 0
-                        }
-                    ],
+                    // columnDefs: [
+                    //     { "width": "200px", "targets": 3 },
+                    //     { "width": "100px", "targets": [0, 1, 2, 4] }
+                    // ],
                     columnDefs: [
                         {
                             render: function (data, type, full, meta) {
@@ -261,8 +258,9 @@
                             },
                             targets: 3
                         }
-                    ]
+                    ],
                 });
+                $('#data-table').DataTable().columns.adjust().draw();
             });
         }
         //  避免表單有空白的錯誤
@@ -366,7 +364,7 @@
             <div class="container">
                 <br>
                 <div class="row">
-                    <table id="data-table" class="display compact table-hover table-striped  ">
+                    <table id="data-table" class="display compact table-hover table-striped  " style="width: 100%; overflow: auto;">
                         <!-- TABLE DATA IS ADDED BY THE showData() JAVASCRIPT FUNCTION ABOVE -->
                     </table>
                 </div>
