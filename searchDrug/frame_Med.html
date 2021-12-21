@@ -27,52 +27,41 @@
     <script src="https://cdn.datatables.net/fixedcolumns/4.0.1/js/dataTables.fixedColumns.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
-    <!-- Rwd js
-    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-
-    Rwd css
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
- -->
 
     <style>
         #dtable {
             font-size: 100%;
         }
-
         #dtable td,
         #dtable th {
             border: 1px solid #ddd;
             padding: 5px;
-
         }
         .ui-mobile label,
         div.ui-controlgroup-label {
             font-size: 20px;
         }
-
         .dataTables_wrapper .dataTables_filter {
             float: none;
             text-align: center;
             margin-bottom: 10px;
         }
-
         .text-wrap {
             white-space: normal;
             word-wrap: break-word;
         }
-
         .width-200 {
             width: 200px;
         }
-
-        /* .width-120 {
-            width: 120px;
-        } */
-
-        /* table.dataTable thead .sorting_asc {
-            background-color: rgb(235, 235, 235);
-        } */
+        .odd .dtfc-fixed-left {
+            background-color: #f1f1f1;
+        }
+        .even .dtfc-fixed-left {
+            background-color: #fafafa;
+        }
+        th.dtfc-fixed-left {
+            background-color: #fafafa;
+        }
     </style>
     <script>
         google.script.run.withSuccessHandler(showData).getData();
@@ -237,9 +226,9 @@
                         }
                     },
                     data: dataArray,
-                    // fixedColumns: {
-                    //     left: 1
-                    // },
+                    fixedColumns: {
+                        left: 1
+                    },
                     columns: [
                         { "title": "詳閱" },
                         { "title": "中文名" },
@@ -247,10 +236,6 @@
                         { "title": "主成分" },
                         { "title": "處置代碼" },
                     ],
-                    // columnDefs: [
-                    //     { "width": "200px", "targets": 3 },
-                    //     { "width": "100px", "targets": [0, 1, 2, 4] }
-                    // ],
                     columnDefs: [
                         {
                             render: function (data, type, full, meta) {

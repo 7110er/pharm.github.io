@@ -27,13 +27,6 @@
     <script src="https://cdn.datatables.net/fixedcolumns/4.0.1/js/dataTables.fixedColumns.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
-    <!-- Rwd js
-    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-
-    Rwd css
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
- -->
 
     <style>
         #dtable {
@@ -44,7 +37,6 @@
         #dtable th {
             border: 1px solid #ddd;
             padding: 5px;
-
         }
 
         .ui-mobile label,
@@ -66,6 +58,18 @@
         .width-200 {
             width: 200px;
         }
+
+        .odd .dtfc-fixed-left {
+            background-color: #f1f1f1;
+        }
+
+        .even .dtfc-fixed-left {
+            background-color: #fafafa;
+        }
+
+        th.dtfc-fixed-left {
+            background-color: #fafafa;
+        }
     </style>
 
 
@@ -73,7 +77,6 @@
     <script>
 
         google.script.run.withSuccessHandler(showData).getData();
-
         function showData(dataArray) {
             $(document).ready(function () {
                 $('#data-table').DataTable({
@@ -81,7 +84,6 @@
                     scrollX: true,
                     scrollCollapse: true,
                     paging: false,
-
                     "language": {
                         // 表格翻譯成中文
                         "processing": "處理中...",
@@ -236,7 +238,9 @@
                         }
                     },
                     data: dataArray,
-
+                    fixedColumns: {
+                        left: 1
+                    },
                     columns: [
                         { "title": "詳閱" },
                         { "title": "中文名" },
@@ -271,7 +275,7 @@
         function createTable(dataArray) {
             if (dataArray && dataArray !== undefined && dataArray.length != 0) {
 
-                var result1 = "<table class='table table-sm table-striped' id='dtable' style='font-size:16px'>" +
+                var result1 = "<table class='table table-sm table-striped' id='dtable' >" +
                     "<thead style='white-space: normal'>" +
 
                     "<tr>"
@@ -288,7 +292,7 @@
                 result1 +=
                     "</tr>" +
                     "<tr>" +
-                    "<th scope='col' style='width:90px '>英文名</th>"
+                    "<th scope='col'  >英文名</th>"
                 for (var i = 0; i < dataArray.length; i++) {
                     for (var j = 1; j < 2; j++) {
                         result1 += "<td>" + dataArray[i][j] + "</td>";
@@ -298,7 +302,7 @@
                 result1 +=
                     "</tr>" +
                     "<tr>" +
-                    "<th scope='col'style='width:90px'>主成分</th>"
+                    "<th scope='col'>主成分</th>"
                 for (var i = 0; i < dataArray.length; i++) {
                     for (var j = 2; j < 3; j++) {
                         result1 += "<td>" + dataArray[i][j] + "</td>";
@@ -326,7 +330,7 @@
                             result1 += '';
                         }
                         else {
-                            result1 += "<th scope='col' style='width:90px' >警語</th>" + "<td >" + dataArray[i][j] + "</td>";
+                            result1 += "<th scope='col' >警語</th>" + "<td >" + dataArray[i][j] + "</td>";
                         }
                     }
                 }
@@ -339,7 +343,7 @@
                             result1 += "";
                         }
                         else {
-                            result1 += "<td colspan='2'  ><img src='https://7110er.github.io/pharm.github.io/searchDrug/picture/" + dataArray[i][j] + ".jpg' style='width:100%'></td>";
+                            result1 += "<td colspan='2'  ><img src='https://7110er.github.io/pharm.github.io/searchDrug/picture/" + dataArray[i][j] + ".jpg' style='max-width:100%'></td>";
                         }
                     }
                 }
@@ -358,25 +362,17 @@
                 }
                 result1 +=
                     "</tr>" +
-
                     "</thead>" +
                     "</table>";
-
-
-
                 var div = document.getElementById('result');
                 div.innerHTML = result1;
-
             }
-
             else {
 
                 var div = document.getElementById('result');
                 div.innerHTML = "沒有找到相關藥物，請重新輸入。";
             }
         }
-
-
         // 判斷string 是否為網址
         function isURL(string) {
             let url;
