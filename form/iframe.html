@@ -195,10 +195,12 @@
             var id = document.getElementById('id');
             var name = document.getElementById('name');
             var age = document.getElementById('age');
+            var comment = document.getElementById('comment');
             var rowData = {
                 id: id.value,
                 name: name.value,
                 age: age.value,
+                comment : comment.value,
                 dataResult: array
             }
             google.script.run.addData(rowData);
@@ -210,6 +212,7 @@
             var id = document.getElementById('id');
             var name = document.getElementById('name');
             var age = document.getElementById('age');
+            var comment = document.getElementById('comment');
             var x = document.getElementsByClassName('quizTd2');
             var z = [];
             for (var i = 0; i < x.length; i++) {
@@ -228,6 +231,7 @@
                 id: id.value,
                 name: name.value,
                 age: age.value,
+                comment : comment.value,
                 dataResult: w,
             }
             google.script.run.addData(rowData);
@@ -237,13 +241,14 @@
             var list = document.getElementById("forRemove2");
             while (list.hasChildNodes()) {
                 list.removeChild(list.firstChild);
-            } 
+            }
             searchGoogleSheet_3();
         }
         function submitForm_3() {
             var id = document.getElementById('id');
             var name = document.getElementById('name');
             var age = document.getElementById('age');
+            var comment = document.getElementById('comment');
             var formResult = [];
             var x = [];
             for (var i = 0; i < 5; i++) {
@@ -259,6 +264,7 @@
                 id: id.value,
                 name: name.value,
                 age: age.value,
+                comment : comment.value,
                 dataResult: formResult
             }
             google.script.run.addData_3(rowData);
@@ -268,7 +274,7 @@
             var list = document.getElementById("forRemove3");
             while (list.hasChildNodes()) {
                 list.removeChild(list.firstChild);
-            } 
+            }
             searchGoogleSheet_1();
 
         }
@@ -276,6 +282,7 @@
             var id = document.getElementById('id');
             var name = document.getElementById('name');
             var age = document.getElementById('age');
+            var comment = document.getElementById('comment');
             dataLength = document.querySelectorAll(".radioTd1").length;
             var formResult = [];
             for (var i = 0; i < dataLength; i++) {
@@ -289,6 +296,7 @@
                 id: id.value,
                 name: name.value,
                 age: age.value,
+                comment : comment.value,
                 dataResult: formResult
             }
             google.script.run.addData(rowData);
@@ -299,7 +307,7 @@
             var list = document.getElementById("forRemove4");
             while (list.hasChildNodes()) {
                 list.removeChild(list.firstChild);
-            } 
+            }
         }
         function openSearch() {
             document.getElementById('createData').style.display = 'none';
@@ -349,8 +357,8 @@
         <form id="basic">
             <label for="id">病歷號 :&nbsp;</label><input id="id" type="number" style="width: auto;" placeholder="輸入病歷號">
             <label for="name">姓名 :&nbsp;</label><input id="name" type="text" style="width: 20%;" placeholder="ex:王*明">
-            <label for="age">年齡 :&nbsp;</label><input id="age" type="number" style="width: 15%;" placeholder="年齡"
-                width="10px">
+            <label for="age">年齡 :&nbsp;</label><input id="age" type="number" style="width: 15%;" placeholder="年齡">
+            <label for="comment">備註欄 :&nbsp;</label><input id="comment" type="text" style="width: 15%;">
         </form>
         <br>
         <form id="form_1">
@@ -663,9 +671,7 @@
 
         </form>
         <form id="form_2">
-            <div id="forRemove2">
-
-            </div>
+            <div id="forRemove2"></div>
             <button type="button" class="btn" onclick="submitForm_2()">疾病送出</button>
         </form>
         <form id="form_3">
