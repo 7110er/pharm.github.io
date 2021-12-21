@@ -117,7 +117,7 @@
                     dataResult +=
                         "</thead>" +
                         "</table>";
-                    var div = document.getElementById('form_2');
+                    var div = document.getElementById('forRemove2');
                     div.innerHTML += dataResult;
                 }
             }
@@ -142,7 +142,7 @@
                 dataResult +=
                     "</thead>" +
                     "</table>";
-                var div = document.getElementById('form_4');
+                var div = document.getElementById('forRemove4');
                 div.innerHTML = dataResult + div.innerHTML;
             }
         }
@@ -161,7 +161,7 @@
                     }
                 }
                 dataResult += "</thead>" + "</table>";
-                var div = document.getElementById('form_3');
+                var div = document.getElementById('forRemove3');
                 div.innerHTML = dataResult + div.innerHTML;
             }
         }
@@ -183,6 +183,7 @@
             }
             array.forEach(searchGoogleSheet_2);
             document.getElementById('checkbox').style.display = 'none';
+            document.getElementById('checkbox').reset();
             document.getElementById('form_2').style.display = 'block';
         }
         function submitForm_1() {
@@ -233,6 +234,10 @@
             document.getElementById('form_2').reset();
             document.getElementById('form_2').style.display = 'none';
             document.getElementById('form_3').style.display = 'block';
+            var list = document.getElementById("forRemove2");
+            while (list.hasChildNodes()) {
+                list.removeChild(list.firstChild);
+            } 
             searchGoogleSheet_3();
         }
         function submitForm_3() {
@@ -260,6 +265,10 @@
             document.getElementById('form_3').reset();
             document.getElementById('form_3').style.display = 'none';
             document.getElementById('form_4').style.display = 'block';
+            var list = document.getElementById("forRemove3");
+            while (list.hasChildNodes()) {
+                list.removeChild(list.firstChild);
+            } 
             searchGoogleSheet_1();
 
         }
@@ -287,6 +296,10 @@
             document.getElementById('form_4').reset();
             document.getElementById('form_4').style.display = 'none';
             document.getElementById('form_1').style.display = 'block';
+            var list = document.getElementById("forRemove4");
+            while (list.hasChildNodes()) {
+                list.removeChild(list.firstChild);
+            } 
         }
         function openSearch() {
             document.getElementById('createData').style.display = 'none';
@@ -335,8 +348,9 @@
     <div id="createData" style="margin-top: 50px;">
         <form id="basic">
             <label for="id">病歷號 :&nbsp;</label><input id="id" type="number" style="width: auto;" placeholder="輸入病歷號">
-            <label for="name">姓名 :&nbsp;</label><input id="name" type="text" style="width: 20%;"placeholder="ex:王*明">
-            <label for="age">年齡 :&nbsp;</label><input id="age" type="number" style="width: 15%;"placeholder="年齡" width="10px">
+            <label for="name">姓名 :&nbsp;</label><input id="name" type="text" style="width: 20%;" placeholder="ex:王*明">
+            <label for="age">年齡 :&nbsp;</label><input id="age" type="number" style="width: 15%;" placeholder="年齡"
+                width="10px">
         </form>
         <br>
         <form id="form_1">
@@ -639,7 +653,7 @@
             </table>
             <button type="button" class="btn" onclick="submitForm_1()">症狀送出</button>
         </form>
-        <div id="checkbox">
+        <form id="checkbox">
             <label class='option' for="htn">高血壓<input id="htn" type='checkbox' value="高血壓"></label>
             <label class='option' for="hf">心衰竭<input id="hf" type='checkbox' value="心衰竭"></label>
             <label class='option' for="cad">冠心症<input id="cad" type='checkbox' value="冠心症"></label>
@@ -647,14 +661,19 @@
             <label class='option' for="dm">糖尿病<input id="dm" type='checkbox' value="糖尿病"></label>
             <button type="button" class="btn" onclick="getForm_2()">產生疾病表單</button>
 
-        </div>
+        </form>
         <form id="form_2">
+            <div id="forRemove2">
+
+            </div>
             <button type="button" class="btn" onclick="submitForm_2()">疾病送出</button>
         </form>
         <form id="form_3">
+            <div id="forRemove3"></div>
             <button type="button" class="btn" onclick="submitForm_3()">EQ-5D送出</button>
         </form>
         <form id="form_4">
+            <div id="forRemove4"></div>
             <p id="sum"></p>
             <button type="button" class="btn" onclick="getSum()">總分</button>
             <button type="button" class="btn" onclick="submitForm_4()">配合度送出</button>
