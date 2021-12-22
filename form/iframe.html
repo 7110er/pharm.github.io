@@ -203,7 +203,7 @@
                 comment : comment.value,
                 dataResult: array
             }
-            google.script.run.addData(rowData);
+            google.script.run.addData_symptom(rowData);
             document.getElementById('form_1').reset();
             document.getElementById('form_1').style.display = 'none';
             document.getElementById('checkbox').style.display = 'block';
@@ -234,7 +234,7 @@
                 comment : comment.value,
                 dataResult: w,
             }
-            google.script.run.addData(rowData);
+            google.script.run.addData_quiz(rowData);
             document.getElementById('form_2').reset();
             document.getElementById('form_2').style.display = 'none';
             document.getElementById('form_3').style.display = 'block';
