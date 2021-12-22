@@ -40,12 +40,14 @@
             text-align: center;
             color: rgb(29, 51, 87);
             padding: 10px;
+            margin: 0px 5px;
             background-color: #e0edff;
             border-radius: 10px;
             border-style: solid;
             border-width: 1px;
             border-color: rgb(1, 26, 93);
             float: left;
+
         }
 
         .btn:hover {
@@ -200,7 +202,7 @@
                 id: id.value,
                 name: name.value,
                 age: age.value,
-                comment : comment.value,
+                comment: comment.value,
                 dataResult: array
             }
             google.script.run.addData_symptom(rowData);
@@ -227,11 +229,15 @@
                 w.push(z[i]);
                 w.push(y[i]);
             }
+            var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+            for (var i = 0; i < checkboxes.length; i++) {
+                w.push(checkboxes[i].value)
+            }
             var rowData = {
                 id: id.value,
                 name: name.value,
                 age: age.value,
-                comment : comment.value,
+                comment: comment.value,
                 dataResult: w,
             }
             google.script.run.addData_quiz(rowData);
@@ -260,11 +266,15 @@
                     formResult[i] = '沒資料';
                 }
             };
+            var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+            for (var i = 0; i < checkboxes.length; i++) {
+                formResult.push(checkboxes[i].value)
+            }
             var rowData = {
                 id: id.value,
                 name: name.value,
                 age: age.value,
-                comment : comment.value,
+                comment: comment.value,
                 dataResult: formResult
             }
             google.script.run.addData_3(rowData);
@@ -288,15 +298,22 @@
             for (var i = 0; i < dataLength; i++) {
                 if ($("input[name='radio" + [i] + "']").is(':checked')) {
                     formResult[i] = document.querySelector("input[name='radio" + [i] + "']" + ":checked").value;
+                    console.log(typeof formResult[i])
                 } else {
                     formResult[i] = '沒資料';
                 }
             };
+            console.log(formResult);
+            console.log(typeof formResult);
+            var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+            for (var i = 0; i < checkboxes.length; i++) {
+                formResult.push(checkboxes[i].value)
+            }
             var rowData = {
                 id: id.value,
                 name: name.value,
                 age: age.value,
-                comment : comment.value,
+                comment: comment.value,
                 dataResult: formResult
             }
             google.script.run.addData(rowData);
@@ -316,21 +333,34 @@
         }
         function search() {
             var x = document.getElementById('searchId').value
-            google.script.run.withSuccessHandler(createData).searchData(x);
+            google.script.run.withSuccessHandler(createData_cooperate_content).searchData_cooperate_content(x);
+            google.script.run.withSuccessHandler(createData_cooperate_title).searchData_cooperate_title();
+
         }
-        function createData(dataArray) {
+        function createData_cooperate_content(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
                 var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; >" +
                     "<thead >"
                 for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 0; j < dataArray[i].length; j++)
-                        dataResult += "<tr>" + "<td >" + dataArray[i][j] + "</td>" + "</tr>";
-                    console.log(dataArray[i].length);
+                    dataResult += "<tr>"+"<td id='td_cooperate_"+i+"'>"+"</td>"
+                    for (var j = 0; j < dataArray[i].length; j++) {
+                        dataResult += "<td>" + dataArray[i][j] + "</td>" 
+                    }
+                    dataResult += "</tr>"
                 }
                 dataResult +=
                     "</thead>" +
                     "</table>";
-                document.getElementById('dataResult').innerHTML = dataResult
+                document.getElementById('dataResult_cooperate').innerHTML = dataResult;
+            }
+        }
+        function createData_cooperate_title(dataArray) {
+            if (dataArray !== undefined && dataArray.length != 0) {
+                for (var i = 0; i < dataArray.length; i++) {
+                    for (var j = 0; j < dataArray[i].length; j++) {
+                            document.getElementById("td_cooperate_" + j).innerHTML = dataArray[i][j];
+                    }
+                }
             }
         }
         // 避免表單空白
@@ -660,6 +690,7 @@
                 </tr>
             </table>
             <button type="button" class="btn" onclick="submitForm_1()">症狀送出</button>
+            <label class='btn'>放棄填寫&nbsp;<input type='checkbox' value="放棄填寫"></label>
         </form>
         <form id="checkbox">
             <label class='option' for="htn">高血壓<input id="htn" type='checkbox' value="高血壓"></label>
@@ -678,26 +709,36 @@
         <form id="form_2">
             <div id="forRemove2"></div>
             <button type="button" class="btn" onclick="submitForm_2()">疾病送出</button>
+            <label class='btn'>放棄填寫&nbsp;<input type='checkbox' value="放棄填寫"></label>
         </form>
         <form id="form_3">
             <div id="forRemove3"></div>
             <button type="button" class="btn" onclick="submitForm_3()">EQ-5D送出</button>
+            <label class='btn'>放棄填寫&nbsp;<input type='checkbox' value="放棄填寫"></label>
         </form>
         <form id="form_4">
             <div id="forRemove4"></div>
             <p id="sum"></p>
             <button type="button" class="btn" onclick="getSum()">總分</button>
             <button type="button" class="btn" onclick="submitForm_4()">配合度送出</button>
+            <label class='btn'>放棄填寫&nbsp;<input type='checkbox' value="放棄填寫"></label>
         </form>
     </div>
     <div id="searchData">
         <form onsubmit="search()">
-            <label for="searchId">病歷號 : </label><input id="searchId" type="text" placeholder="輸入病歷號">
+            <label for="searchId">病歷號 : </label><input id="searchId" type="text" onfocus="this.value=''"
+                placeholder="輸入病歷號">
             <input type="submit" value="送出">
         </form>
-        <div id="dataResult">
+        <button class='qwe' type="button">症狀</button>
+        <button class='qwe' type="button">前後測</button>
+        <button class='qwe' type="button">EQ-5D</button>
+        <button class='qwe' type="button">配合度</button>
+        <div id="dataResult_symptom"></div>
+        <div id="dataResult_quiz"></div>
+        <div id="dataResult_eq-5d"></div>
+        <div id="dataResult_cooperate"></div>
 
-        </div>
     </div>
 </body>
 
