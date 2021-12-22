@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="高順鴻">
-        <title>衛教專區</title>
+        <title>桃醫藥師門診</title>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
@@ -324,7 +324,7 @@
                     dataResult+=
                     "</tr>"
                     for (var i = 0; i < dataArray.length; i++) {
-                        for (var j = 5 ;j < 17; j++) {
+                        for (var j = 5 ;j < dataArray[i].length; j++) {
                             if (dataArray[i][j]!=undefined && dataArray[i][j]!=""){
                                 if (isURL(dataArray[i][j])){
                                     dataResult += "<tr class='tableContent'>"+"<td colspan='4'><img src='"+ dataArray[i][j] + "'  style='width:100%'></td>"+"</tr>"
@@ -462,14 +462,6 @@
             <img class="qaImg" src="https://i.imgur.com/wvdnEWu.jpeg" >
             <a href="javascript:void(0);" onclick="searchQA(this)">幼兒服藥注意事項&nbsp<i class="fa fa-plus-circle"></i></a>
             <img class="qaImg" src="https://i.imgur.com/08YOb07.jpeg" >
-
-
-
-
-
-
-
-
         </div>
         </body>
 </html>
