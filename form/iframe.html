@@ -34,7 +34,7 @@
             float: left;
         }
 
-        .btn {
+        .btn, .btn2{
             font-size: 15px;
             font-weight: bold;
             text-align: center;
@@ -94,8 +94,27 @@
             display: none;
         }
 
-        #searchData {
+
+        .td {
+            border-right-style: solid;
+            border-right-width: 1px;
+            border-right-color: #ddd;
+        }
+
+        .dataResult {
+            width: 100%;
+            float: left;
             display: none;
+            margin: 0px;
+            padding: 0px;
+            list-style-type: none;
+        }
+
+        dl {
+            display: inline-block;
+        }
+        .result {
+            display: inline;
         }
     </style>
     <script>
@@ -329,22 +348,25 @@
         function openSearch() {
             document.getElementById('createData').style.display = 'none';
             document.getElementById('searchData').style.display = 'block';
-
+        }
+        function closeSearch() {
+            document.getElementById('createData').style.display = 'block';
+            document.getElementById('searchData').style.display = 'none';
         }
         function search() {
             var x = document.getElementById('searchId').value
-            google.script.run.withSuccessHandler(createData_cooperate_content).searchData_cooperate_content(x);
-            google.script.run.withSuccessHandler(createData_cooperate_title).searchData_cooperate_title();
-
+            google.script.run.withSuccessHandler(createData_cooperate).searchData_cooperate(x);
+            google.script.run.withSuccessHandler(createData_symptom).searchData_symptom(x);
+            document.getElementById('search').reset();
         }
-        function createData_cooperate_content(dataArray) {
+        function createData_cooperate(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
                 var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; >" +
                     "<thead >"
-                for (var i = 0; i < dataArray.length; i++) {
-                    dataResult += "<tr>"+"<td id='td_cooperate_"+i+"'>"+"</td>"
+                for (var i = 1; i < dataArray.length; i++) {
+                    dataResult += "<tr>" + "<td id='td_cooperate_" + i + "' class='td'>" + "</td>"
                     for (var j = 0; j < dataArray[i].length; j++) {
-                        dataResult += "<td>" + dataArray[i][j] + "</td>" 
+                        dataResult += "<td>" + dataArray[i][j] + "</td>"
                     }
                     dataResult += "</tr>"
                 }
@@ -352,17 +374,51 @@
                     "</thead>" +
                     "</table>";
                 document.getElementById('dataResult_cooperate').innerHTML = dataResult;
-            }
-        }
-        function createData_cooperate_title(dataArray) {
-            if (dataArray !== undefined && dataArray.length != 0) {
-                for (var i = 0; i < dataArray.length; i++) {
+                for (var i = 0; i < 1; i++) {
                     for (var j = 0; j < dataArray[i].length; j++) {
-                            document.getElementById("td_cooperate_" + j).innerHTML = dataArray[i][j];
+                        var k = j + 1
+                        document.getElementById("td_cooperate_" + k).innerHTML = dataArray[i][j];
                     }
                 }
             }
         }
+        function createData_symptom(dataArray) {
+            if (dataArray !== undefined && dataArray.length != 0) {
+                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; >" +
+                    "<thead >"
+                for (var i = 1; i < dataArray.length; i++) {
+                    dataResult += "<tr>" + "<td id='td_symptom_" + i + "' class='td'>" + "</td>"
+                    for (var j = 0; j < dataArray[i].length; j++) {
+                        dataResult += "<td>" + dataArray[i][j] + "</td>"
+                    }
+                    dataResult += "</tr>"
+                }
+                dataResult +=
+                    "</thead>" +
+                    "</table>";
+                document.getElementById('dataResult_symptom').innerHTML = dataResult;
+                for (var i = 0; i < 1; i++) {
+                    for (var j = 0; j < dataArray[i].length; j++) {
+                        var k = j + 1
+                        document.getElementById("td_symptom_" + k).innerHTML = dataArray[i][j];
+                    }
+                }
+            }
+        }
+        $(document).ready(function () {
+            $('.bar').click(function () {
+                $('.page').toggle();
+                $(this).toggleClass('active');
+                $(this).siblings().toggleClass('active');
+            });
+            $('.btn2').click(function () {
+                $(this).toggleClass('active');
+                $('.result button').not(this).removeClass('active');
+                var then = $(this).parent().parent().siblings(".dataResult");
+                $(then).toggle();
+                $(".dataResult:visible").not(then).hide();
+            });
+        });   
         // 避免表單空白
         function preventFormSubmit() {
             var forms = document.querySelectorAll('form');
@@ -379,11 +435,11 @@
 
 <body>
     <div>
-        <button class="bar active">建檔</button>
-        <button class="bar " onclick="openSearch()">查詢</button>
+        <button class="bar active" >建檔</button>
+        <button class="bar " >查詢</button>
     </div>
     <br>
-    <div id="createData" style="margin-top: 50px;">
+    <div id="createData" style="margin-top: 50px; display: block;" class="page" >
         <form id="basic">
             <label for="id">病歷號 :&nbsp;</label><input id="id" type="number" style="width: auto;" placeholder="輸入病歷號">
             <label for="name">姓名 :&nbsp;</label><input id="name" type="text" style="width: 20%;" placeholder="ex:王*明">
@@ -718,26 +774,54 @@
         </form>
         <form id="form_4">
             <div id="forRemove4"></div>
-            <p id="sum"></p>
+            <ul id="sum"></ul>
             <button type="button" class="btn" onclick="getSum()">總分</button>
             <button type="button" class="btn" onclick="submitForm_4()">配合度送出</button>
             <label class='btn'>放棄填寫&nbsp;<input type='checkbox' value="放棄填寫"></label>
         </form>
     </div>
-    <div id="searchData">
-        <form onsubmit="search()">
-            <label for="searchId">病歷號 : </label><input id="searchId" type="text" onfocus="this.value=''"
+    <div id="searchData" style="margin-top: 50px; display: none;" class="page">
+        <form onsubmit="search()" id="search">
+            <label for="searchId">病歷號 :&nbsp;</label><input id="searchId" type="text" onfocus="this.value=''"
                 placeholder="輸入病歷號">
             <input type="submit" value="送出">
         </form>
-        <button class='qwe' type="button">症狀</button>
-        <button class='qwe' type="button">前後測</button>
-        <button class='qwe' type="button">EQ-5D</button>
-        <button class='qwe' type="button">配合度</button>
-        <div id="dataResult_symptom"></div>
-        <div id="dataResult_quiz"></div>
-        <div id="dataResult_eq-5d"></div>
-        <div id="dataResult_cooperate"></div>
+        <br>
+        <div class="result">
+            <dl>
+                <dt>
+                    <button class='btn2 active' type="button">症狀回報</button>
+                </dt>
+            </dl>
+            <ul id="dataResult_symptom" class="dataResult" style="display: inline;"></ul>
+        </div>
+        <div class="result">
+            <dl>
+                <dt>
+                    <button class='btn2' type="button">前後測結果</button>
+                </dt>
+            </dl>
+            <ul id="dataResult_quiz" class="dataResult"></ul>
+
+        </div>
+        <div class="result">
+            <dl>
+                <dt>
+                    <button class='btn2' type="button">eq-5d量表</button>
+                </dt>
+            </dl>
+            <ul id="dataResult_eq-5d" class="dataResult">eq</ul>
+
+        </div>
+        <div class="result">
+            <dl>
+                <dt>
+                    <button class='btn2' type="button">配合度結果</button>
+                </dt>
+            </dl>
+            <ul id="dataResult_cooperate" class="dataResult"></ul>
+
+        </div>
 
     </div>
 </body>
