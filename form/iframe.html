@@ -34,7 +34,8 @@
             float: left;
         }
 
-        .btn, .btn2{
+        .btn,
+        .btn2 {
             font-size: 15px;
             font-weight: bold;
             text-align: center;
@@ -113,6 +114,7 @@
         dl {
             display: inline-block;
         }
+
         .result {
             display: inline;
         }
@@ -357,7 +359,6 @@
             var x = document.getElementById('searchId').value
             google.script.run.withSuccessHandler(createData_cooperate).searchData_cooperate(x);
             google.script.run.withSuccessHandler(createData_symptom).searchData_symptom(x);
-            document.getElementById('search').reset();
         }
         function createData_cooperate(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
@@ -407,18 +408,24 @@
         }
         $(document).ready(function () {
             $('.bar').click(function () {
-                $('.page').toggle();
-                $(this).toggleClass('active');
-                $(this).siblings().toggleClass('active');
+                var check = $(this).hasClass('active');
+                if (!check) {
+                    $(this).toggleClass('active');
+                    $('div .bar').not(this).removeClass('active');
+                    $('.page').toggle();
+                }
             });
             $('.btn2').click(function () {
-                $(this).toggleClass('active');
-                $('.result button').not(this).removeClass('active');
+                var check = $(this).hasClass('active');
                 var then = $(this).parent().parent().siblings(".dataResult");
-                $(then).toggle();
-                $(".dataResult:visible").not(then).hide();
+                if (!check) {
+                    $(this).toggleClass('active');
+                    $('.result button').not(this).removeClass('active');
+                    $(then).toggle();
+                    $(".dataResult:visible").not(then).hide();
+                }
             });
-        });   
+        });
         // 避免表單空白
         function preventFormSubmit() {
             var forms = document.querySelectorAll('form');
@@ -435,11 +442,11 @@
 
 <body>
     <div>
-        <button class="bar active" >建檔</button>
-        <button class="bar " >查詢</button>
+        <button class="bar active">建檔</button>
+        <button class="bar ">查詢</button>
     </div>
     <br>
-    <div id="createData" style="margin-top: 50px; display: block;" class="page" >
+    <div id="createData" style="margin-top: 50px; display: block;" class="page">
         <form id="basic">
             <label for="id">病歷號 :&nbsp;</label><input id="id" type="number" style="width: auto;" placeholder="輸入病歷號">
             <label for="name">姓名 :&nbsp;</label><input id="name" type="text" style="width: 20%;" placeholder="ex:王*明">
