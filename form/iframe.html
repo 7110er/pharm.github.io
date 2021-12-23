@@ -378,7 +378,12 @@
                 for (var i = 0; i < 1; i++) {
                     for (var j = 0; j < dataArray[i].length; j++) {
                         var k = j + 1
-                        document.getElementById("td_cooperate_" + k).innerHTML = dataArray[i][j];
+                        if(dataArray[i][j] != undefined && dataArray[i][j] != ""){
+                            document.getElementById("td_cooperate_" + k).innerHTML = dataArray[i][j];
+                        }
+                        else{
+                            document.getElementById("td_cooperate_" + k).classList.remove('td');
+                        }
                     }
                 }
             }
@@ -401,7 +406,12 @@
                 for (var i = 0; i < 1; i++) {
                     for (var j = 0; j < dataArray[i].length; j++) {
                         var k = j + 1
-                        document.getElementById("td_symptom_" + k).innerHTML = dataArray[i][j];
+                        if(dataArray[i][j] != undefined && dataArray[i][j] != ""){
+                            document.getElementById("td_symptom_" + k).innerHTML = dataArray[i][j];
+                        }
+                        else{
+                            document.getElementById("td_symptom_" + k).classList.remove('td');
+                        }
                     }
                 }
             }
