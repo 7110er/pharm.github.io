@@ -354,12 +354,12 @@
         }
         function search() {
             var x = document.getElementById('searchId').value;
-            
+
             google.script.run.withSuccessHandler(createData_cooperate).searchData_cooperate(x);
             google.script.run.withSuccessHandler(createData_symptom).searchData_symptom(x);
+            google.script.run.withSuccessHandler(createData_quiz).searchData_quiz(x);
         }
         function createData_cooperate(dataArray) {
-
             if (dataArray !== undefined && dataArray.length != 0) {
                 var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; >" +
                     "<thead >"
@@ -377,17 +377,45 @@
                 for (var i = 0; i < 1; i++) {
                     for (var j = 0; j < dataArray[i].length; j++) {
                         var k = j + 1
-                        if(dataArray[i][j] != undefined && dataArray[i][j] != ""){
+                        if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
                             document.getElementById("td_cooperate_" + k).innerHTML = dataArray[i][j];
                         }
-                        else{
+                        else {
                             document.getElementById("td_cooperate_" + k).classList.remove('td');
                         }
                     }
                 }
             }
         }
-        
+        function createData_quiz(dataArray) {
+            if (dataArray !== undefined && dataArray.length != 0) {
+                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; >" +
+                    "<thead >"
+                for (var i = 1; i < dataArray.length; i++) {
+                    dataResult += "<tr>" + "<td id='td_quiz_" + i + "' class='td'>" + "</td>"
+                    for (var j = 0; j < dataArray[i].length; j++) {
+                        dataResult += "<td>" + dataArray[i][j] + "</td>"
+                    }
+                    dataResult += "</tr>"
+                }
+                dataResult +=
+                    "</thead>" +
+                    "</table>";
+                document.getElementById('dataResult_quiz').innerHTML = dataResult;
+                for (var i = 0; i < 1; i++) {
+                    for (var j = 0; j < dataArray[i].length; j++) {
+                        var k = j + 1
+                        if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
+                            document.getElementById("td_quiz_" + k).innerHTML = dataArray[i][j];
+                        }
+                        else {
+                            document.getElementById("td_quiz_" + k).classList.remove('td');
+                        }
+                    }
+                }
+            }
+        }
+
         function createData_symptom(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
                 var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; >" +
@@ -406,10 +434,10 @@
                 for (var i = 0; i < 1; i++) {
                     for (var j = 0; j < dataArray[i].length; j++) {
                         var k = j + 1
-                        if(dataArray[i][j] != undefined && dataArray[i][j] != ""){
+                        if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
                             document.getElementById("td_symptom_" + k).innerHTML = dataArray[i][j];
                         }
-                        else{
+                        else {
                             document.getElementById("td_symptom_" + k).classList.remove('td');
                         }
                     }
