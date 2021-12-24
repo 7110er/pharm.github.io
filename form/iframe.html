@@ -319,13 +319,10 @@
             for (var i = 0; i < dataLength; i++) {
                 if ($("input[name='radio" + [i] + "']").is(':checked')) {
                     formResult[i] = document.querySelector("input[name='radio" + [i] + "']" + ":checked").value;
-                    console.log(typeof formResult[i])
                 } else {
                     formResult[i] = '沒資料';
                 }
             };
-            console.log(formResult);
-            console.log(typeof formResult);
             var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
             for (var i = 0; i < checkboxes.length; i++) {
                 formResult.push(checkboxes[i].value)
@@ -356,11 +353,13 @@
             document.getElementById('searchData').style.display = 'none';
         }
         function search() {
-            var x = document.getElementById('searchId').value
+            var x = document.getElementById('searchId').value;
+            
             google.script.run.withSuccessHandler(createData_cooperate).searchData_cooperate(x);
             google.script.run.withSuccessHandler(createData_symptom).searchData_symptom(x);
         }
         function createData_cooperate(dataArray) {
+
             if (dataArray !== undefined && dataArray.length != 0) {
                 var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; >" +
                     "<thead >"
@@ -388,6 +387,7 @@
                 }
             }
         }
+        
         function createData_symptom(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
                 var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; >" +
