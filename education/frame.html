@@ -62,10 +62,6 @@
                 background-color:  #c4d6ee;
                 float: left;
             }
-            /* .subDrugBtn:hover{
-                background-color: #eee;
-                color: black;
-            } */
             .active {
                 background-color: #eee; 
                 color: black;
@@ -151,12 +147,13 @@
             }
             .tableBtn{
                 color: #012061;
-                font-size: 14px;
+                font-size: 20px;
                 font-weight: bolder;
                 background-color:  #d7e9ff;
                 color: #143a6b;
                 border: solid 1px #2e557e;
                 text-align: center;
+                padding: 5px !important;
             }
             .tableBtn:hover{
                 background-color: #eee;
@@ -218,33 +215,29 @@
                     }, 700)
                 });
             })
-            function scrollContent_A(element){
-                var z = $(element).parent().parent().next();
-                var offset = $(z).offset(); // Contains .top and .left
+            function scrollContent_A(){
+                var offset = $('.information').offset(); // Contains .top and .left
                 offset.top -= 100;
                 $('html, body').animate({
                     scrollTop: offset.top,
                 });
             }
-            function scrollContent_B(element){
-                var z = $(element).parent().parent().next().next().next().next();
-                var offset = $(z).offset(); // Contains .top and .left
+            function scrollContent_B(){
+                var offset = $('.therapy').offset(); // Contains .top and .left
                 offset.top -= 100;
                 $('html, body').animate({
                     scrollTop: offset.top,
                 });
             }
-            function scrollContent_C(element){
-                var z = $(element).parent().parent().next().next().next().next().next().next().next();
-                var offset = $(z).offset(); // Contains .top and .left
+            function scrollContent_C(){
+                var offset = $('.selfCare').offset(); // Contains .top and .left
                 offset.top -= 100;
                 $('html, body').animate({
                     scrollTop: offset.top,
                 });
             }
-            function scrollContent_D(element){
-                var z = $(element).parent().parent().next().next().next().next().next().next().next().next().next();
-                var offset = $(z).offset(); // Contains .top and .left
+            function scrollContent_D(){
+                var offset = $('.others').offset(); // Contains .top and .left
                 offset.top -= 100;
                 $('html, body').animate({
                     scrollTop: offset.top,
@@ -322,7 +315,7 @@
                                     dataResult += "<tr class='tableContent'>"+"<td colspan='4'><img src='"+ dataArray[i][j] + "'  style='width:100%'></td>"+"</tr>"
                                 }
                                 else {
-                                    dataResult += "<tr class='tableContent'>"+"<td colspan='4'>"+ dataArray[i][j] + "</td>"+"</tr>"
+                                    dataResult += "<tr class='tableContent'>"+"<td colspan='4' style='font-size:20px'>"+ dataArray[i][j] + "</td>"+"</tr>"
                                 }
                             }
                         }
