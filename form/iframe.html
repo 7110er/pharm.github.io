@@ -22,7 +22,11 @@
             margin: 0;
             padding: 1%;
         }
-
+        #searchData {
+            border-bottom-color: #ddd;
+            border-bottom-width: 1px ;
+            border-bottom-style: solid;
+        }
         .bar {
             font-size: 20px;
             font-weight: bold;
@@ -32,6 +36,7 @@
             width: 50%;
             background-color: #c4d6ee;
             float: left;
+            border-radius: 5px;
         }
 
         .btn,
@@ -65,10 +70,6 @@
             padding: 5px;
         }
 
-        /* .option input {
-            padding: 10px;
-        }
- */
         .radioTd1,
         .radioTd2 {
             width: 20%;
@@ -76,7 +77,7 @@
 
         .quizTd1,
         .quizTd2 {
-            width: 80%;
+            width: 70%;
         }
 
         form {
@@ -117,6 +118,10 @@
 
         .result {
             display: inline;
+        }
+        .table>thead>tr>td {
+            padding: 5px;
+            vertical-align: inherit;
         }
     </style>
     <script>
@@ -829,7 +834,7 @@
         <form onsubmit="search()" id="search">
             <label for="searchId">病歷號 :&nbsp;</label><input id="searchId" type="text" onfocus="this.value=''"
                 placeholder="輸入病歷號">
-            <input type="submit" value="送出">
+            <input type="submit"  value="送出">
         </form>
         <br>
         <div class="result">
@@ -867,7 +872,6 @@
             <ul id="dataResult_cooperate" class="dataResult"></ul>
 
         </div>
-
     </div>
 </body>
 
