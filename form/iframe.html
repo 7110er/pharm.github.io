@@ -22,9 +22,11 @@
             margin: 0;
             padding: 1%;
         }
+
         #searchData {
             border-bottom: #ddd solid 1px;
         }
+
         .bar {
             font-size: 20px;
             font-weight: bold;
@@ -54,7 +56,8 @@
 
         }
 
-        .btn:hover ,.active{
+        .btn:hover,
+        .active {
             background-color: #eee;
             color: black;
         }
@@ -111,18 +114,22 @@
         .result {
             display: inline;
         }
-        .table>thead>tr>td ,.table>tbody>tr>td{
+
+        .table>thead>tr>td,
+        .table>tbody>tr>td {
             padding: 2px;
             vertical-align: inherit;
         }
+
         .table>tbody>tr>td {
             text-align: center;
-        } 
+        }
 
         .rowspan {
             background-color: #f2f8ff;
             color: #012061;
             font-weight: bold;
+            font-size: 14px;
         }
     </style>
     <script>
@@ -799,18 +806,49 @@
             <button type="button" class="btn" onclick="submitForm_1()">症狀送出</button>
             <label class='btn'>放棄填寫&nbsp;<input type='checkbox' value="放棄填寫"></label>
         </form>
-        <form id="checkbox">
-            <label class='option' for="htn">高血壓<input id="htn" type='checkbox' value="高血壓"></label>
-            <label class='option' for="hf">心衰竭<input id="hf" type='checkbox' value="心衰竭"></label>
-            <label class='option' for="cad">冠心症<input id="cad" type='checkbox' value="冠心症"></label>
-            <label class='option' for="af">心律不整<input id="af" type='checkbox' value="心律不整"></label>
-            <label class='option' for="dm">糖尿病<input id="dm" type='checkbox' value="糖尿病"></label>
-            <label class='option' for="copd">慢性阻塞性肺病<input id="copd" type='checkbox' value="慢性阻塞性肺病"></label>
-            <label class='option' for="lipid">血脂異常<input id="lipid" type='checkbox' value="血脂異常"></label>
-            <label class='option' for="ckd">慢性腎臟病<input id="ckd" type='checkbox' value="慢性腎臟病"></label>
-            <label class='option' for="stroke">中風<input id="stroke" type='checkbox' value="中風"></label>
-            <label class='option' for="gout">痛風<input id="gout" type='checkbox' value="痛風"></label>
-            <label class='option' for="anemia">貧血<input id="anemia" type='checkbox' value="貧血"></label>
+        <form id="checkbox" style="font-size: 15px;">
+            <table class="table table-bordered table-hover table-condensed">
+                <tr>
+                    <td class='rowspan'>心血管</td class='rowspan'>
+                    <td>
+                        <label class='option' for="htn">高血壓<input id="htn" type='checkbox' value="高血壓"></label>
+                        <label class='option' for="cad">冠心症<input id="cad" type='checkbox' value="冠心症"></label>
+                        <label class='option' for="hf">心衰竭<input id="hf" type='checkbox' value="心衰竭"></label>
+                        <label class='option' for="af">心律不整<input id="af" type='checkbox' value="心律不整"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class='rowspan'>內分泌</td class='rowspan'>
+                    <td>
+                        <label class='option' for="dm">糖尿病<input id="dm" type='checkbox' value="糖尿病"></label>
+                        <label class='option' for="gout">痛風<input id="gout" type='checkbox' value="痛風"></label>
+                        <label class='option' for="lipid">血脂異常<input id="lipid" type='checkbox' value="血脂異常"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class='rowspan'>神經科</td class='rowspan'>
+                    <td>
+                        <label class='option' for="stroke">中風<input id="stroke" type='checkbox' value="中風"></label>
+                        <label class='option' for="parkinson">帕金森氏症<input id="parkinson" type='checkbox'
+                                value="帕金森氏症"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class='rowspan'>胸腔科</td class='rowspan'>
+                    <td>
+                        <label class='option' for="asthma">氣喘<input id="asthma" type='checkbox' value="氣喘"></label>
+                        <label class='option' for="copd">慢性阻塞性肺病<input id="copd" type='checkbox'
+                                value="慢性阻塞性肺病"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class='rowspan'>腎臟科</td class='rowspan'>
+                    <td>
+                        <label class='option' for="ckd">慢性腎臟病<input id="ckd" type='checkbox' value="慢性腎臟病"></label>
+                        <label class='option' for="anemia">貧血<input id="anemia" type='checkbox' value="貧血"></label>
+                    </td>
+                </tr>
+            </table>
             <button type="button" class="btn" onclick="getForm_2()">產生疾病表單</button>
 
         </form>
@@ -836,7 +874,7 @@
         <form onsubmit="search()" id="search">
             <label for="searchId">病歷號 :&nbsp;</label><input id="searchId" type="text" onfocus="this.value=''"
                 placeholder="輸入病歷號">
-            <input type="submit"  value="送出">
+            <input type="submit" value="送出">
         </form>
         <br>
         <div class="result">
