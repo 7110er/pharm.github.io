@@ -18,7 +18,7 @@
         src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
     <style>
         body {
-            font-size: 8px;
+            font-size: 12px;
             margin: 0;
             padding: 1%;
         }
@@ -114,6 +114,15 @@
         .table>thead>tr>td ,.table>tbody>tr>td{
             padding: 2px;
             vertical-align: inherit;
+        }
+        .table>tbody>tr>td {
+            text-align: center;
+        } 
+
+        .rowspan {
+            background-color: #f2f8ff;
+            color: #012061;
+            font-weight: bold;
         }
     </style>
     <script>
@@ -492,10 +501,10 @@
         <form id="form_1">
             <table class="table table-bordered table-hover table-condensed">
                 <tr>
-                    <td rowspan="6">一般系統</td>
+                    <td class='rowspan' rowspan="6">一般系統</td>
                     <td><input type="checkbox" value="口乾"></td>
                     <td>口乾</td>
-                    <td rowspan="5">生殖系統</td>
+                    <td class='rowspan' rowspan="5">生殖系統</td>
                     <td><input type="checkbox" value="經痛/月經異常/不正常出血"></td>
                     <td>經痛/月經異常/不正常出血</td>
                 </tr>
@@ -535,12 +544,12 @@
 
                     <td><input type="checkbox" value="入睡困難/睡不飽"></td>
                     <td>入睡困難/睡不飽</td>
-                    <td rowspan="5">腎臟/泌尿</td>
+                    <td class='rowspan' rowspan="5">腎臟/泌尿</td>
                     <td><input type="checkbox" value="夜間頻尿"></td>
                     <td>夜間頻尿</td>
                 </tr>
                 <tr>
-                    <td rowspan="6">眼耳鼻喉</td>
+                    <td class='rowspan' rowspan="6">眼耳鼻喉</td>
                     <td><input type="checkbox" value="視力改變"></td>
                     <td>視力改變</td>
 
@@ -575,7 +584,7 @@
 
                     <td><input type="checkbox" value="過敏性鼻炎"></td>
                     <td>過敏性鼻炎</td>
-                    <td rowspan="3">造血系統</td>
+                    <td class='rowspan' rowspan="3">造血系統</td>
                     <td><input type="checkbox" value="皮膚碰撞容易瘀青"></td>
                     <td>皮膚碰撞容易瘀青</td>
                 </tr>
@@ -588,7 +597,7 @@
                     <td>黑糞便，排便帶血</td>
                 </tr>
                 <tr>
-                    <td rowspan="6">心血管</td>
+                    <td class='rowspan' rowspan="6">心血管</td>
                     <td><input type="checkbox" value="常感胸悶及胸口疼痛"></td>
                     <td>常感胸悶及胸口疼痛</td>
 
@@ -599,7 +608,7 @@
 
                     <td><input type="checkbox" value="突發性非貧血性暈眩"></td>
                     <td>突發性非貧血性暈眩</td>
-                    <td rowspan="5">骨骼肌/關節</td>
+                    <td class='rowspan' rowspan="5">骨骼肌/關節</td>
                     <td><input type="checkbox" value="關節腫脹/變形"></td>
                     <td>關節腫脹/變形</td>
                 </tr>
@@ -636,10 +645,10 @@
                     <td>腳/腿一觸就痛或有潰瘍</td>
                 </tr>
                 <tr>
-                    <td rowspan="4">肺臟</td>
+                    <td class='rowspan' rowspan="4">肺臟</td>
                     <td><input type="checkbox" value="喘鳴聲/胸緊悶"></td>
                     <td>喘鳴聲/胸緊悶</td>
-                    <td rowspan="10">神經精神方面</td>
+                    <td class='rowspan' rowspan="10">神經精神方面</td>
                     <td><input type="checkbox" value="麻木/ 四肢末端麻木"></td>
                     <td>麻木/ 四肢末端麻木</td>
                 </tr>
@@ -668,7 +677,7 @@
                     <td>沮喪/憂鬱</td>
                 </tr>
                 <tr>
-                    <td rowspan="6">胃腸道</td>
+                    <td class='rowspan' rowspan="6">胃腸道</td>
                     <td><input type="checkbox" value="食慾改變/味覺改變"></td>
                     <td>食慾改變/味覺改變</td>
 
@@ -716,10 +725,10 @@
                     <td>失憶/記憶力減退</td>
                 </tr>
                 <tr>
-                    <td rowspan="3">皮膚</td>
+                    <td class='rowspan' rowspan="3">皮膚</td>
                     <td><input type="checkbox" value="乾癬"></td>
                     <td>乾癬</td>
-                    <td rowspan="5">感染性疾病</td>
+                    <td class='rowspan' rowspan="5">感染性疾病</td>
                     <td><input type="checkbox" value="喉嚨痛"></td>
                     <td>喉嚨痛</td>
                 </tr>
@@ -740,7 +749,7 @@
                     <td>發炎/紅腫感染:部位                </td>
                 </tr>
                 <tr>
-                    <td rowspan="3">內分泌系統</td>
+                    <td class='rowspan' rowspan="3">內分泌系統</td>
                     <td><input type="checkbox" value="乳房腫塊"></td>
                     <td>乳房腫塊</td>
 
@@ -758,12 +767,12 @@
                 <tr>
                     <td><input type="checkbox" value="更年期症候/潮紅"></td>
                     <td>更年期症候/潮紅</td>
-                    <td rowspan="4">營養/體液/電解質</td>
+                    <td class='rowspan' rowspan="4">營養/體液/電解質</td>
                     <td><input type="checkbox" value="脫水"></td>
                     <td>脫水</td>
                 </tr>
                 <tr>
-                    <td rowspan="3">肝臟</td>
+                    <td class='rowspan' rowspan="3">肝臟</td>
                     <td><input type="checkbox" value="肝指數持續增高"></td>
                     <td>肝指數持續增高</td>
 
