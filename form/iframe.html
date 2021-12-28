@@ -18,7 +18,7 @@
         src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
     <style>
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-size: 8px;
             margin: 0;
             padding: 1%;
         }
@@ -54,15 +54,11 @@
 
         }
 
-        .btn:hover {
+        .btn:hover ,.active{
             background-color: #eee;
             color: black;
         }
 
-        .active {
-            background-color: #eee;
-            color: black;
-        }
 
         .option {
             padding: 5px;
@@ -115,8 +111,8 @@
         .result {
             display: inline;
         }
-        .table>thead>tr>td {
-            padding: 5px;
+        .table>thead>tr>td ,.table>tbody>tr>td{
+            padding: 2px;
             vertical-align: inherit;
         }
     </style>
@@ -805,6 +801,7 @@
             <label class='option' for="ckd">慢性腎臟病<input id="ckd" type='checkbox' value="慢性腎臟病"></label>
             <label class='option' for="stroke">中風<input id="stroke" type='checkbox' value="中風"></label>
             <label class='option' for="gout">痛風<input id="gout" type='checkbox' value="痛風"></label>
+            <label class='option' for="anemia">貧血<input id="anemia" type='checkbox' value="貧血"></label>
             <button type="button" class="btn" onclick="getForm_2()">產生疾病表單</button>
 
         </form>
