@@ -129,12 +129,12 @@
         }
     </style>
     <script>
-        function searchGoogleSheet_1() {
-            google.script.run.withSuccessHandler(createTable_1).search_1();
+        function cooperate() {
+            google.script.run.withSuccessHandler(get_cooperate).search_cooperate();
         }
-        function searchGoogleSheet_2(e, index) {
-            google.script.run.withSuccessHandler(createTable_2).search_2(e);
-            function createTable_2(dataArray) {
+        function quiz(e, index) {
+            google.script.run.withSuccessHandler(get_quiz).search_quiz(e);
+            function get_quiz(dataArray) {
                 if (dataArray !== undefined && dataArray.length != 0) {
                     var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate';  >" +
                         "<thead >"
@@ -154,10 +154,10 @@
                 }
             }
         }
-        function searchGoogleSheet_3() {
-            google.script.run.withSuccessHandler(createTable_3).search_3();
+        function eq5d() {
+            google.script.run.withSuccessHandler(get_eq5d).search_eq5d();
         }
-        function createTable_1(dataArray) {
+        function get_cooperate(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
                 var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate';  >" +
                     "<thead >"
@@ -178,7 +178,7 @@
                 div.innerHTML = dataResult + div.innerHTML;
             }
         }
-        function createTable_3(dataArray) {
+        function get_eq5d(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
                 var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate';  >" +
                     "<thead >"
@@ -207,13 +207,13 @@
             };
             document.getElementById('sum').innerHTML = '總分 : ' + sum + ' 分';
         }
-        function getForm_2() {
+        function get_quiz() {
             var array = []
             var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
             for (var i = 0; i < checkboxes.length; i++) {
                 array.push(checkboxes[i].value)
             }
-            array.forEach(searchGoogleSheet_2);
+            array.forEach(quiz);
             document.getElementById('checkbox').style.display = 'none';
             document.getElementById('checkbox').reset();
             document.getElementById('form_2').style.display = 'block';
@@ -278,7 +278,7 @@
             while (list.hasChildNodes()) {
                 list.removeChild(list.firstChild);
             }
-            searchGoogleSheet_3();
+            eq5d();
         }
         function submitForm_eq5d() {
             var id = document.getElementById('id');
@@ -315,7 +315,7 @@
             while (list.hasChildNodes()) {
                 list.removeChild(list.firstChild);
             }
-            searchGoogleSheet_1();
+            cooperate();
 
         }
         function submitForm_cooperate() {
@@ -353,15 +353,7 @@
                 list.removeChild(list.firstChild);
             }
         }
-        function openSearch() {
-            document.getElementById('createData').style.display = 'none';
-            document.getElementById('searchData').style.display = 'block';
-        }
-        function closeSearch() {
-            document.getElementById('createData').style.display = 'block';
-            document.getElementById('searchData').style.display = 'none';
-        }
-        function search() {
+        function searchData() {
             var x = document.getElementById('searchId').value;
 
             google.script.run.withSuccessHandler(createData_cooperate).searchData_cooperate(x);
@@ -845,7 +837,7 @@
                     </td>
                 </tr>
             </table>
-            <button type="button" class="btn" onclick="getForm_2()">產生疾病表單</button>
+            <button type="button" class="btn" onclick="get_quiz()">產生疾病表單</button>
 
         </form>
         <form id="form_2">
@@ -867,7 +859,7 @@
         </form>
     </div>
     <div id="searchData" style="margin-top: 50px; display: none;" class="page">
-        <form onsubmit="search()" id="search">
+        <form onsubmit="searchData()" id="search">
             <label for="searchId">病歷號 :&nbsp;</label><input id="searchId" type="text" onfocus="this.value=''"
                 placeholder="輸入病歷號">
             <input type="submit" value="送出">
