@@ -23,10 +23,9 @@
             padding: 1%;
         }
 
-        #searchData {
-            border-bottom: #ddd solid 1px;
+        #searchData td  {
+            border: 1px solid #ddd;
         }
-
         .bar {
             font-size: 20px;
             font-weight: bold;
@@ -94,9 +93,6 @@
         }
 
 
-        .td {
-            border-right: 1px solid #ddd;
-        }
 
         .dataResult {
             width: 100%;
@@ -222,19 +218,19 @@
             document.getElementById('checkbox').reset();
             document.getElementById('form_2').style.display = 'block';
         }
-        function submitForm_1() {
+        function submitForm_symptom() {
             var array = []
             var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
             for (var i = 0; i < checkboxes.length; i++) {
                 array.push(checkboxes[i].value)
             }
             var id = document.getElementById('id');
-            var name = document.getElementById('name');
+            var hisName = document.getElementById('hisName');
             var age = document.getElementById('age');
             var comment = document.getElementById('comment');
             var rowData = {
                 id: id.value,
-                name: name.value,
+                name: hisName.value,
                 age: age.value,
                 comment: comment.value,
                 dataResult: array
@@ -244,9 +240,9 @@
             document.getElementById('form_1').style.display = 'none';
             document.getElementById('checkbox').style.display = 'block';
         }
-        function submitForm_2() {
+        function submitForm_quiz() {
             var id = document.getElementById('id');
-            var name = document.getElementById('name');
+            var hisName = document.getElementById('hisName');
             var age = document.getElementById('age');
             var comment = document.getElementById('comment');
             var x = document.getElementsByClassName('quizTd2');
@@ -269,7 +265,7 @@
             }
             var rowData = {
                 id: id.value,
-                name: name.value,
+                name: hisName.value,
                 age: age.value,
                 comment: comment.value,
                 dataResult: w,
@@ -284,9 +280,9 @@
             }
             searchGoogleSheet_3();
         }
-        function submitForm_3() {
+        function submitForm_eq5d() {
             var id = document.getElementById('id');
-            var name = document.getElementById('name');
+            var hisName = document.getElementById('hisName');
             var age = document.getElementById('age');
             var comment = document.getElementById('comment');
             var formResult = [];
@@ -306,12 +302,12 @@
             }
             var rowData = {
                 id: id.value,
-                name: name.value,
+                name: hisName.value,
                 age: age.value,
                 comment: comment.value,
                 dataResult: formResult
             }
-            google.script.run.addData_3(rowData);
+            google.script.run.addData_eq5D(rowData);
             document.getElementById('form_3').reset();
             document.getElementById('form_3').style.display = 'none';
             document.getElementById('form_4').style.display = 'block';
@@ -322,9 +318,9 @@
             searchGoogleSheet_1();
 
         }
-        function submitForm_4() {
+        function submitForm_cooperate() {
             var id = document.getElementById('id');
-            var name = document.getElementById('name');
+            var hisName = document.getElementById('hisName');
             var age = document.getElementById('age');
             var comment = document.getElementById('comment');
             dataLength = document.querySelectorAll(".radioTd1").length;
@@ -342,12 +338,12 @@
             }
             var rowData = {
                 id: id.value,
-                name: name.value,
+                name: hisName.value,
                 age: age.value,
                 comment: comment.value,
                 dataResult: formResult
             }
-            google.script.run.addData(rowData);
+            google.script.run.addData_cooperate(rowData);
             document.getElementById('basic').reset();
             document.getElementById('form_4').reset();
             document.getElementById('form_4').style.display = 'none';
@@ -500,7 +496,7 @@
     <div id="createData" style="margin-top: 50px; display: block;" class="page">
         <form id="basic">
             <label for="id">病歷號 :&nbsp;</label><input id="id" type="number" style="width: auto;" placeholder="輸入病歷號">
-            <label for="name">姓名 :&nbsp;</label><input id="name" type="text" style="width: 20%;" placeholder="ex:王*明">
+            <label for="hisName">姓名 :&nbsp;</label><input id="hisName" type="text" style="width: 20%;" placeholder="ex:王*明">
             <label for="age">年齡 :&nbsp;</label><input id="age" type="number" style="width: 15%;" placeholder="年齡">
             <label for="comment">備註欄 :&nbsp;</label><input id="comment" type="text" style="width: 15%;">
         </form>
@@ -803,7 +799,7 @@
                     <td>虛弱無力</td>
                 </tr>
             </table>
-            <button type="button" class="btn" onclick="submitForm_1()">症狀送出</button>
+            <button type="button" class="btn" onclick="submitForm_symptom()">症狀送出</button>
             <label class='btn'>放棄填寫&nbsp;<input type='checkbox' value="放棄填寫"></label>
         </form>
         <form id="checkbox" style="font-size: 15px;">
@@ -854,19 +850,19 @@
         </form>
         <form id="form_2">
             <div id="forRemove2"></div>
-            <button type="button" class="btn" onclick="submitForm_2()">疾病送出</button>
+            <button type="button" class="btn" onclick="submitForm_quiz()">疾病送出</button>
             <label class='btn'>放棄填寫&nbsp;<input type='checkbox' value="放棄填寫"></label>
         </form>
         <form id="form_3">
             <div id="forRemove3"></div>
-            <button type="button" class="btn" onclick="submitForm_3()">EQ-5D送出</button>
+            <button type="button" class="btn" onclick="submitForm_eq5d()">EQ-5D送出</button>
             <label class='btn'>放棄填寫&nbsp;<input type='checkbox' value="放棄填寫"></label>
         </form>
         <form id="form_4">
             <div id="forRemove4"></div>
             <ul id="sum"></ul>
             <button type="button" class="btn" onclick="getSum()">總分</button>
-            <button type="button" class="btn" onclick="submitForm_4()">配合度送出</button>
+            <button type="button" class="btn" onclick="submitForm_cooperate()">配合度送出</button>
             <label class='btn'>放棄填寫&nbsp;<input type='checkbox' value="放棄填寫"></label>
         </form>
     </div>
