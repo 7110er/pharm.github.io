@@ -146,10 +146,6 @@
             font-weight: bolder;
         }
 
-        .change {
-            display: block !important;
-        }
-
         .tableBtn {
             color: #012061;
             font-size: 18px;
@@ -245,11 +241,11 @@
             });
             // 打開疾病次選單
             $('.subnavBtn').click(function () {
-                change(this);
+                $(this).next().toggle();
             })
             // 常見問題
             $('#menuQA a').click(function () {
-                change(this);  // 讓圖片從 display:none 變成 block，圖片預設為none
+                $(this).next().toggle(); // 讓圖片從 display:none 變成 block，圖片預設為none
                 var icon = $(this).children() // 選定<a>裡面的<i>
                 icon.toggleClass('fa-plus-circle'); // 點下去之後切換+-圖案
                 icon.toggleClass('fa-minus-circle'); // 點下去之後切換+-圖案
@@ -323,10 +319,6 @@
         // 關閉右側導覽列
         function closeNav() {
             document.getElementById("navbar").style.width = "0";
-        }
-        // 讓下一個element賦予class= change
-        function change(e) {
-            e.nextElementSibling.classList.toggle('change');
         }
         // 判斷string 是否為網址
         function isURL(string) {
