@@ -206,7 +206,9 @@
         }
     </style>
     <script>
+        // 此為jquery的寫法，較精簡
         $(document).ready(function () {
+            // 回到最上層的按鈕
             $('.toTop').on('click', function (e) {
                 e.preventDefault();
                 $('html,body').animate({ // 有些瀏覽器只支援html，有些只支援body 所以兩個都寫進去
@@ -235,76 +237,70 @@
                 }
             });
         })
+        // 試算表上B~E欄的四個捲動按鈕
         function scrollContent_A() {
-            var offset = $('.information').offset(); // Contains .top and .left
+            var offset = $('.information').offset();
             offset.top -= 100;
             $('html, body').animate({
                 scrollTop: offset.top,
             });
         }
         function scrollContent_B() {
-            var offset = $('.therapy').offset(); // Contains .top and .left
+            var offset = $('.therapy').offset();
             offset.top -= 100;
             $('html, body').animate({
                 scrollTop: offset.top,
             });
         }
         function scrollContent_C() {
-            var offset = $('.selfCare').offset(); // Contains .top and .left
+            var offset = $('.selfCare').offset();
             offset.top -= 100;
             $('html, body').animate({
                 scrollTop: offset.top,
             });
         }
         function scrollContent_D() {
-            var offset = $('.others').offset(); // Contains .top and .left
+            var offset = $('.others').offset();
             offset.top -= 100;
             $('html, body').animate({
                 scrollTop: offset.top,
             });
         }
+        // 打開右側導覽列
         function openNav() {
             document.getElementById("navbar").style.width = "35%";
         }
+        // 關閉右側導覽列
         function closeNav() {
             document.getElementById("navbar").style.width = "0";
         }
-        function searchMenu(divElement) {
+        // 搜尋疾病衛教內容
+        function searchGoogleSheets(e) {
             closeNav();
-            searchGoogleSheet(divElement);
+            var searchText = $(e).text();
+            // 讓google script跑 search()，回傳的資料再丟進createTable()
+            google.script.run.withSuccessHandler(createTable).search(searchText);
             document.getElementById('subDrug').style.display = "none";
             document.getElementById("menuQA").style.display = "none";
             document.getElementById('result').style.display = "block";
         }
-        function toggleQA(element) {
-            change(element);
-            var icon = element.firstElementChild;
-            icon.classList.toggle('fa-plus-circle');
-            icon.classList.toggle('fa-minus-circle');
-        }
-        function change(element) {
-            element.nextElementSibling.classList.toggle('change');
-        }
-        function searchGoogleSheet(divElement) {
-            var searchText = $(divElement).text();
-            google.script.run.withSuccessHandler(createTable).search(searchText);
-        }
+        // 創建圖文內容，內容資料(dataArray)來自於google script上 search()的回傳值
         function createTable(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
                 var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; id='dtable' >" +
                     "<thead >" +
                     "<tr style='position:sticky; top:50px'>"
                 for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 1; j < 5; j++) {
+                    for (var j = 1; j < 5; j++) {  // 試算表上的四個按鈕
                         dataResult += "<td class='tableBtn' style='width:25%'>" + dataArray[i][j] + "</td>";
                     }
                 }
                 dataResult +=
                     "</tr>"
                 for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 5; j < dataArray[i].length; j++) {
+                    for (var j = 5; j < dataArray[i].length; j++) {   // 後續的圖文內容
                         if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
-                            if (isURL(dataArray[i][j])) {
+                            if (isURL(dataArray[i][j])) {   // 確認該筆資料是不是網址
                                 dataResult += "<tr class='tableContent'>" + "<td colspan='4'><img src='" + dataArray[i][j] + "'  style='width:100%'></td>" + "</tr>"
                             }
                             else {
@@ -313,16 +309,23 @@
                         }
                     }
                 }
-                dataResult +=
-                    "</thead>" +
-                    "</table>";
-                var div = document.getElementById('result');
-                div.innerHTML = dataResult;
+                dataResult += "</thead>" + "</table>";
+                document.getElementById('result').innerHTML = dataResult;
             }
             else {
-                var div = document.getElementById('result');
-                div.innerHTML = "目前無資料!";
+                document.getElementById('result').innerHTML = "目前無資料!";
             }
+        }
+        // 常見問題
+        function toggleQA(element) {
+            change(element);  // 讓圖片從 display:none 變成 block，圖片預設為none
+            var icon = element.firstElementChild; // 選定<a>裡面的<i>
+            icon.classList.toggle('fa-plus-circle'); // 點下去之後切換+-圖案
+            icon.classList.toggle('fa-minus-circle'); // 點下去之後切換+-圖案
+        }
+        // 讓下一個element賦予class= change
+        function change(element) {
+            element.nextElementSibling.classList.toggle('change');
         }
         // 判斷string 是否為網址
         function isURL(string) {
@@ -338,87 +341,91 @@
 </head>
 
 <body>
-
+    <!-- 上方導覽列 -->
     <div class="homeBar" id="homeBar">
         <a href='#' id="drugBtn"><i class="fa fa-search"></i>&nbsp藥品</a>
         <a href='#' id="menuBtn"><i class='fa fa-question-circle'></i>&nbsp常見問題</a>
         <a href='#' id="navBtn" onclick="openNav()"><i class="fa fa-bars"></i>&nbsp衛教</a>
     </div>
+    <!-- 右側導覽列 -->
     <div class="navbar" id="navbar">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="subnav">
             <button class="subnavbtn" onclick="change(this)">心血管內科<br><i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-                <a href="#" onclick="searchMenu(this);">高血壓</a>
-                <a href="#" onclick="searchMenu(this);">心衰竭</a>
-                <a href="#" onclick="searchMenu(this);">冠心症</a>
-                <a href="#" onclick="searchMenu(this);">心律不整</a>
+                <a href="#" onclick="searchGoogleSheets(this);">高血壓</a>
+                <a href="#" onclick="searchGoogleSheets(this);">心衰竭</a>
+                <a href="#" onclick="searchGoogleSheets(this);">冠心症</a>
+                <a href="#" onclick="searchGoogleSheets(this);">心律不整</a>
             </div>
         </div>
         <div class="subnav">
             <button class="subnavbtn" onclick="change(this)">內分泌科<br><i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-                <a href="#" onclick="searchMenu(this);">糖尿病</a>
-                <a href="#" onclick="searchMenu(this);">甲狀腺疾病</a>
-                <a href="#" onclick="searchMenu(this);">代謝症候群</a>
+                <a href="#" onclick="searchGoogleSheets(this);">糖尿病</a>
+                <a href="#" onclick="searchGoogleSheets(this);">甲狀腺疾病</a>
+                <a href="#" onclick="searchGoogleSheets(this);">代謝症候群</a>
             </div>
         </div>
         <div class="subnav">
             <button class="subnavbtn" onclick="change(this)">神經科<br><i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-                <a href="#" onclick="searchMenu(this);">中風</a>
-                <a href="#" onclick="searchMenu(this);">失智症</a>
-                <a href="#" onclick="searchMenu(this);">帕金森氏症</a>
+                <a href="#" onclick="searchGoogleSheets(this);">中風</a>
+                <a href="#" onclick="searchGoogleSheets(this);">失智症</a>
+                <a href="#" onclick="searchGoogleSheets(this);">帕金森氏症</a>
             </div>
         </div>
         <div class="subnav">
             <button class="subnavbtn" onclick="change(this)">腎臟科<br><i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-                <a href="#" onclick="searchMenu(this);">慢性腎臟病</a>
-                <a href="#" onclick="searchMenu(this);">貧血</a>
-                <a href="#" onclick="searchMenu(this);">血液透析</a>
+                <a href="#" onclick="searchGoogleSheets(this);">慢性腎臟病</a>
+                <a href="#" onclick="searchGoogleSheets(this);">貧血</a>
+                <a href="#" onclick="searchGoogleSheets(this);">血液透析</a>
             </div>
         </div>
         <div class="subnav">
             <button class="subnavbtn" onclick="change(this)">胸腔科<br><i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-                <a href="#" onclick="searchMenu(this);">氣喘</a>
-                <a href="#" onclick="searchMenu(this);">慢性阻塞性肺病</a>
+                <a href="#" onclick="searchGoogleSheets(this);">氣喘</a>
+                <a href="#" onclick="searchGoogleSheets(this);">慢性阻塞性肺病</a>
             </div>
         </div>
         <div class="subnav">
             <button class="subnavbtn" onclick="change(this)">肝膽腸胃科<br><i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-                <a href="#" onclick="searchMenu(this);">慢性肝炎</a>
-                <a href="#" onclick="searchMenu(this);">胃食道逆流</a>
-                <a href="#" onclick="searchMenu(this);">消化性潰瘍</a>
+                <a href="#" onclick="searchGoogleSheets(this);">慢性肝炎</a>
+                <a href="#" onclick="searchGoogleSheets(this);">胃食道逆流</a>
+                <a href="#" onclick="searchGoogleSheets(this);">消化性潰瘍</a>
             </div>
         </div>
         <div class="subnav">
             <button class="subnavbtn" onclick="change(this)">風濕免疫科<br><i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-                <a href="#" onclick="searchMenu(this);">痛風</a>
-                <a href="#" onclick="searchMenu(this);">類風溼關節炎</a>
-                <a href="#" onclick="searchMenu(this);">紅斑性狼瘡</a>
+                <a href="#" onclick="searchGoogleSheets(this);">痛風</a>
+                <a href="#" onclick="searchGoogleSheets(this);">類風溼關節炎</a>
+                <a href="#" onclick="searchGoogleSheets(this);">紅斑性狼瘡</a>
             </div>
         </div>
         <div class="subnav">
             <button class="subnavbtn" onclick="change(this)">感染科<br><i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-                <a href="#" onclick="searchMenu(this);">愛滋病</a>
-                <a href="#" onclick="searchMenu(this);">肺結核</a>
-                <a href="#" onclick="searchMenu(this);">疫苗相關</a>
+                <a href="#" onclick="searchGoogleSheets(this);">愛滋病</a>
+                <a href="#" onclick="searchGoogleSheets(this);">肺結核</a>
+                <a href="#" onclick="searchGoogleSheets(this);">疫苗相關</a>
             </div>
         </div>
     </div>
+    <!-- 藥品查詢 -->
     <div id='subDrug' class="page" style="display: block;">
         <button class="subDrugBtn active">民眾版</button>
         <button class="subDrugBtn">專業版</button>
+        <!-- 嵌入藥品查詢民眾版 -->
         <iframe id="iframe" class="iframe" src="https://7110er.github.io/pharm.github.io/searchDrug/index"></iframe>
+        <!-- 嵌入藥品查詢專業版 -->
         <iframe id="iframe_Med" class="iframe" style="display: none;"
             src="https://7110er.github.io/pharm.github.io/searchDrug/index_Med"></iframe>
     </div>
-    <a href="#" class="toTop"> ↑ </a>
+    <!-- 常見問題 -->
     <div id="menuQA" class="page">
         <a href='#' onclick="toggleQA(this)" class='qaBtn'>忘記吃藥怎麼辦&nbsp<i class="fa fa-plus-circle"></i></a>
         <img class="qaImg" src="https://i.imgur.com/AUuglnr.jpeg">
@@ -439,8 +446,11 @@
         <a href='#' onclick="toggleQA(this)" class='qaBtn'>幼兒服藥注意事項&nbsp<i class="fa fa-plus-circle"></i></a>
         <img class="qaImg" src="https://i.imgur.com/08YOb07.jpeg">
     </div>
+    <!-- 圖文內容會顯示的地方 -->
     <div id="result" class='page'>
     </div>
+    <!-- 回到最上層 -->
+    <a href="#" class="toTop"> ↑ </a>
 </body>
 
 </html>

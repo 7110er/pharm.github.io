@@ -1,6 +1,0 @@
-1. windows搜尋Git Bash
-2. cd Desktop/pharm.github.io
-3. 將照片拖曳到桌面上的pharm.github.io的資料夾裡
-4. git add -A
-5. git commit -m "你想記錄的文字"
-6. git push
