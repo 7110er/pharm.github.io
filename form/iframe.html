@@ -23,9 +23,10 @@
             padding: 1%;
         }
 
-        #searchData td  {
+        #searchData td {
             border: 1px solid #ddd;
         }
+
         .bar {
             font-size: 20px;
             font-weight: bold;
@@ -367,7 +368,12 @@
                 for (var i = 1; i < dataArray.length; i++) {
                     dataResult += "<tr>" + "<td id='td_cooperate_" + i + "' class='td'>" + "</td>"
                     for (var j = 0; j < dataArray[i].length; j++) {
-                        dataResult += "<td>" + dataArray[i][j] + "</td>"
+                        if (dataArray[i][j] === '放棄填寫') {
+                            dataResult += "<td style='color:red'>" + dataArray[i][j] + "</td>"
+                        }
+                        else {
+                            dataResult += "<td>" + dataArray[i][j] + "</td>"
+                        }
                     }
                     dataResult += "</tr>"
                 }
@@ -395,7 +401,12 @@
                 for (var i = 1; i < dataArray.length; i++) {
                     dataResult += "<tr>" + "<td id='td_quiz_" + i + "' class='td'>" + "</td>"
                     for (var j = 0; j < dataArray[i].length; j++) {
-                        dataResult += "<td>" + dataArray[i][j] + "</td>"
+                        if (dataArray[i][j] === '放棄填寫') {
+                            dataResult += "<td style='color:red'>" + dataArray[i][j] + "</td>"
+                        }
+                        else {
+                            dataResult += "<td>" + dataArray[i][j] + "</td>"
+                        }
                     }
                     dataResult += "</tr>"
                 }
@@ -424,7 +435,12 @@
                 for (var i = 1; i < dataArray.length; i++) {
                     dataResult += "<tr>" + "<td id='td_symptom_" + i + "' class='td'>" + "</td>"
                     for (var j = 0; j < dataArray[i].length; j++) {
-                        dataResult += "<td>" + dataArray[i][j] + "</td>"
+                        if (dataArray[i][j] === '放棄填寫') {
+                            dataResult += "<td style='color:red'>" + dataArray[i][j] + "</td>"
+                        }
+                        else {
+                            dataResult += "<td>" + dataArray[i][j] + "</td>"
+                        }
                     }
                     dataResult += "</tr>"
                 }
@@ -488,7 +504,8 @@
     <div id="createData" style="margin-top: 50px; display: block;" class="page">
         <form id="basic">
             <label for="id">病歷號 :&nbsp;</label><input id="id" type="number" style="width: auto;" placeholder="輸入病歷號">
-            <label for="hisName">姓名 :&nbsp;</label><input id="hisName" type="text" style="width: 20%;" placeholder="ex:王*明">
+            <label for="hisName">姓名 :&nbsp;</label><input id="hisName" type="text" style="width: 20%;"
+                placeholder="ex:王*明">
             <label for="age">年齡 :&nbsp;</label><input id="age" type="number" style="width: 15%;" placeholder="年齡">
             <label for="comment">備註欄 :&nbsp;</label><input id="comment" type="text" style="width: 15%;">
         </form>
