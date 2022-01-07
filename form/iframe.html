@@ -81,7 +81,7 @@
             width: 100%;
         }
 
-        .eq5D_title {
+        .ICOPE_title {
             font-weight: bolder;
             color: blue;
         }
@@ -155,8 +155,8 @@
                 }
             }
         }
-        function eq5d() {
-            google.script.run.withSuccessHandler(get_eq5d).search_eq5d();
+        function ICOPE() {
+            google.script.run.withSuccessHandler(get_ICOPE).search_ICOPE();
         }
         function get_cooperate(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
@@ -179,18 +179,30 @@
                 div.innerHTML = dataResult + div.innerHTML;
             }
         }
-        function get_eq5d(dataArray) {
+        function get_ICOPE(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
                 var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate';  >" +
                     "<thead >"
-                for (var i = 0; i < 5; i++) {
-                    for (var j = 0; j < dataArray.length; j++) {
-                        if (j === 0) {
-                            dataResult += "<tr>" + "<td colspan='2' class='eq5D_title'>" + dataArray[j][i] + "</td>" + "</tr>"
-                        } else {
-                            dataResult += "<tr>" + "<td class='eq5D_text'>" + dataArray[j][i] + "</td>" +
-                                "<td>" + "<label class='option'>" + [j] + "&nbsp" + "<input type='radio'  value=" + [j] + " name='radio" + [i] + "'>" + "</label>" + "</td>" + "</tr>"
-                        }
+                for (var i = 0; i < dataArray.length; i++) {
+                    for (var j = 0; j < 13; j++) {
+                        dataResult += "<tr>" + "<td class='ICOPE_text'>" + dataArray[i][j] + "</td>" + "<td class='radioTd3'>" +
+                            "<label class='option'>" + "是" + "<input class='radioInput' type='radio'  value='是' name='radio" + [j] + "'>" + "</label>" +
+                            "<label class='option'>" + "否" + "<input class='radioInput'  type='radio' value='否' name='radio" + [j] + "'>" + "</label>" +
+                            "</td>" + "</tr>"
+
+                    }
+                    for (var j = 13; j < 14; j++) {
+                        dataResult += "<tr>" + "<td class='ICOPE_text'>" + dataArray[i][j] + "</td>" + "<td class='radioTd3'>" +
+                            "<input class='radioText' type='text'   name='radio" + [j] + "'>" +
+                            "</td>" + "</tr>"
+                    }
+                    for (var j = 14; j < 15; j++) {
+                        dataResult += "<tr>" + "<td class='ICOPE_text'>" + dataArray[i][j] + "</td>" + "<td class='radioTd3'>" +
+                            "<label class='option'>" + "小學" + "<input class='radioInput' type='radio'  value='小學' name='radio" + [j] + "'>" + "</label>" +
+                            "<label class='option'>" + "國中" + "<input class='radioInput'  type='radio' value='國中' name='radio" + [j] + "'>" + "</label>" +
+                            "<label class='option'>" + "高中" + "<input class='radioInput'  type='radio' value='高中' name='radio" + [j] + "'>" + "</label>" +
+                            "<label class='option'>" + "大學以上" + "<input class='radioInput'  type='radio' value='大學以上' name='radio" + [j] + "'>" + "</label>" +
+                            "</td>" + "</tr>"
                     }
                 }
                 dataResult += "</thead>" + "</table>";
@@ -198,6 +210,26 @@
                 div.innerHTML = dataResult + div.innerHTML;
             }
         }
+
+        // function get_EQ5D(dataArray) {
+        //     if (dataArray !== undefined && dataArray.length != 0) {
+        //         var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate';  >" +
+        //             "<thead >"
+        //         for (var i = 0; i < 5; i++) {
+        //             for (var j = 0; j < dataArray.length; j++) {
+        //                 if (j === 0) {
+        //                     dataResult += "<tr>" + "<td colspan='2' class='ICOPE_title'>" + dataArray[j][i] + "</td>" + "</tr>"
+        //                 } else {
+        //                     dataResult += "<tr>" + "<td class='ICOPE_text'>" + dataArray[j][i] + "</td>" +
+        //                         "<td>" + "<label class='option'>" + [j] + "&nbsp" + "<input type='radio'  value=" + [j] + " name='radio" + [i] + "'>" + "</label>" + "</td>" + "</tr>"
+        //                 }
+        //             }
+        //         }
+        //         dataResult += "</thead>" + "</table>";
+        //         var div = document.getElementById('forRemove3');
+        //         div.innerHTML = dataResult + div.innerHTML;
+        //     }
+        // }
         function getSum() {
             dataLength = document.querySelectorAll(".radioTd1").length;
             var formResult = [];
@@ -279,24 +311,29 @@
             while (list.hasChildNodes()) {
                 list.removeChild(list.firstChild);
             }
-            eq5d();
+            ICOPE();
         }
-        function submitForm_eq5d() {
+        function submitForm_ICOPE() {
+            console.log('123')
             var id = document.getElementById('id');
             var hisName = document.getElementById('hisName');
             var age = document.getElementById('age');
             var comment = document.getElementById('comment');
             var formResult = [];
-            var x = [];
-            for (var i = 0; i < 5; i++) {
+            dataLength = document.querySelectorAll(".radioTd3").length;
+            for (var i = 0; i < dataLength; i++) {
                 if ($("input[name='radio" + [i] + "']").is(':checked')) {
-                    // 如果要選擇文字
-                    x[i] = document.querySelector("input[name='radio" + [i] + "']" + ":checked").parentNode.parentNode.previousElementSibling.innerHTML;
                     formResult[i] = document.querySelector("input[name='radio" + [i] + "']" + ":checked").value;
-                } else {
+                }
+                else if ($('.radioText').val() != ""){
+                    formResult[i] = $('.radioText').val();
+                    console.log(formResult[i])
+                }
+                else {
                     formResult[i] = '沒資料';
                 }
             };
+
             var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
             for (var i = 0; i < checkboxes.length; i++) {
                 formResult.push(checkboxes[i].value)
@@ -308,7 +345,7 @@
                 comment: comment.value,
                 dataResult: formResult
             }
-            google.script.run.addData_eq5D(rowData);
+            google.script.run.addData_ICOPE(rowData);
             document.getElementById('form_3').reset();
             document.getElementById('form_3').style.display = 'none';
             document.getElementById('form_4').style.display = 'block';
@@ -319,6 +356,7 @@
             cooperate();
 
         }
+
         function submitForm_cooperate() {
             var id = document.getElementById('id');
             var hisName = document.getElementById('hisName');
@@ -354,9 +392,10 @@
                 list.removeChild(list.firstChild);
             }
         }
+
         function searchData() {
             var x = document.getElementById('searchId').value;
-
+            google.script.run.withSuccessHandler(createData_ICOPE).searchData_ICOPE(x);
             google.script.run.withSuccessHandler(createData_cooperate).searchData_cooperate(x);
             google.script.run.withSuccessHandler(createData_symptom).searchData_symptom(x);
             google.script.run.withSuccessHandler(createData_quiz).searchData_quiz(x);
@@ -394,6 +433,41 @@
                 }
             }
         }
+        function createData_ICOPE(dataArray) {
+            if (dataArray !== undefined && dataArray.length != 0) {
+                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; >" +
+                    "<thead >"
+                for (var i = 1; i < dataArray.length; i++) {
+                    dataResult += "<tr>" + "<td id='td_ICOPE_" + i + "' class='td'>" + "</td>"
+                    for (var j = 0; j < dataArray[i].length; j++) {
+                        if (dataArray[i][j] === '放棄填寫') {
+                            dataResult += "<td style='color:red'>" + dataArray[i][j] + "</td>"
+                        }
+                        else {
+                            dataResult += "<td>" + dataArray[i][j] + "</td>"
+                        }
+                    }
+                    dataResult += "</tr>"
+                }
+                dataResult +=
+                    "</thead>" +
+                    "</table>";
+                document.getElementById('dataResult_ICOPE').innerHTML = dataResult;
+                for (var i = 0; i < 1; i++) {
+                    for (var j = 0; j < dataArray[i].length; j++) {
+                        var k = j + 1
+                        if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
+                            document.getElementById("td_ICOPE_" + k).innerHTML = dataArray[i][j];
+                        }
+                        else {
+                            document.getElementById("td_ICOPE_" + k).classList.remove('td');
+                        }
+                    }
+                }
+            }
+        }
+
+
         function createData_quiz(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
                 var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; >" +
@@ -503,7 +577,7 @@
     <br>
     <div id="createData" style="margin-top: 50px; display: block;" class="page">
         <form id="basic">
-            <label for="id">病歷號 :&nbsp;</label><input id="id" type="number" style="width: auto;" placeholder="輸入病歷號" >
+            <label for="id">病歷號 :&nbsp;</label><input id="id" type="number" style="width: auto;" placeholder="輸入病歷號">
             <label for="hisName">姓名 :&nbsp;</label><input id="hisName" type="text" style="width: 20%;"
                 placeholder="ex:王*明">
             <label for="age">年齡 :&nbsp;</label><input id="age" type="number" style="width: 15%;" placeholder="年齡">
@@ -864,7 +938,7 @@
         </form>
         <form id="form_3">
             <div id="forRemove3"></div>
-            <button type="button" class="btn" onclick="submitForm_eq5d()">EQ-5D送出</button>
+            <button type="button" class="btn" onclick="submitForm_ICOPE()">ICOPE送出</button>
             <label class='btn'>放棄填寫&nbsp;<input type='checkbox' value="放棄填寫"></label>
         </form>
         <form id="form_4">
@@ -902,10 +976,10 @@
         <div class="result">
             <dl>
                 <dt>
-                    <button class='btn2' type="button">eq-5d量表</button>
+                    <button class='btn2' type="button">ICOPE量表</button>
                 </dt>
             </dl>
-            <ul id="dataResult_eq-5d" class="dataResult">eq</ul>
+            <ul id="dataResult_ICOPE" class="dataResult"></ul>
 
         </div>
         <div class="result">
