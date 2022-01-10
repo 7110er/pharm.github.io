@@ -198,20 +198,22 @@
             display: none;
             padding: 5px;
         }
-        @media (max-width:414px){
+
+        @media (max-width:414px) {
             .tableBtn {
                 font-size: 16px;
             }
         }
-        @media (max-width:375px){
+
+        @media (max-width:375px) {
             .tableBtn {
                 font-size: 14px;
             }
+
             .homeBar a {
                 font-size: 22px;
             }
         }
-
     </style>
     <script>
         // 此為jquery的寫法，較精簡
@@ -261,8 +263,24 @@
             $('#menuQA a').click(function () {
                 $(this).next().toggle(); // 讓圖片從 display:none 變成 block，圖片預設為none
                 var icon = $(this).children() // 選定<a>裡面的<i>
-                icon.toggleClass('fa-plus-circle'); // 點下去之後切換+-圖案
-                icon.toggleClass('fa-minus-circle'); // 點下去之後切換+-圖案
+                icon.toggleClass('fa-plus-circle, fa-minus-circle'); // 點下去之後切換+-圖案
+                var img = $(this).siblings('.qaImg');
+                $(img).not($(this).next()).hide();
+
+                if($(".qaImg").is(':hidden') &&  $("#menuQA i").not(icon).hasClass('fa-minus-circle') ){
+                    $("#menuQA i").not(icon).addClass('fa-plus-circle');
+                    $("#menuQA i").not(icon).removeClass('fa-minus-circle');
+
+                }
+
+                if ($(icon).hasClass('fa-minus-circle')) {
+                    var offset = $(this).offset();
+                    offset.top -= 100;
+                    $('html, body').animate({
+                        scrollTop: offset.top,
+                    });
+                }
+
             })
         })
         // 創建圖文內容，內容資料(dataArray)來自於google script上 search()的回傳值
@@ -350,78 +368,77 @@
 <body>
     <!-- 上方導覽列 -->
     <div class="homeBar" id="homeBar">
-        <a href='#' id="drugBtn"><i class="fa fa-search"></i>&nbsp藥品</a>
-        <a href='#' id="menuBtn" ><i class='fa fa-question-circle'></i>&nbsp常見問題</a>
-        <a href='#' id="navBtn" onclick="openNav()"><i class="fa fa-bars"></i>&nbsp衛教</a>
+        <a href="javascript:void(0)" id="drugBtn"><i class="fa fa-search"></i>&nbsp藥品</a>
+        <a href="javascript:void(0)" id="menuBtn"><i class='fa fa-question-circle'></i>&nbsp常見問題</a>
+        <a href="javascript:void(0)" id="navBtn" onclick="openNav()"><i class="fa fa-bars"></i>&nbsp衛教</a>
     </div>
     <!-- 右側導覽列 -->
     <div class="navbar" id="navbar">
-        <a href="#" class="closeBtn" onclick="closeNav()">&times;</a>
+        <a href="javascript:void(0)" class="closeBtn" onclick="closeNav()">&times;</a>
         <div class="subnav">
             <button class="subnavBtn">心血管內科<br><i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-                <a href="#">高血壓</a>
-                <a href="#">心衰竭</a>
-                <a href="#">冠心症</a>
-                <a href="#">心律不整</a>
+                <a href="javascript:void(0)">高血壓</a>
+                <a href="javascript:void(0)">心衰竭</a>
+                <a href="javascript:void(0)">冠心症</a>
+                <a href="javascript:void(0)">心律不整</a>
             </div>
         </div>
         <div class="subnav">
             <button class="subnavBtn">內分泌科<br><i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-                <a href="#">糖尿病</a>
-                <a href="#">甲狀腺疾病</a>
-                <a href="#">代謝症候群</a>
+                <a href="javascript:void(0)">糖尿病</a>
+                <a href="javascript:void(0)">甲狀腺疾病</a>
+                <a href="javascript:void(0)">代謝症候群</a>
             </div>
         </div>
         <div class="subnav">
             <button class="subnavBtn">神經科<br><i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-                <a href="#">中風</a>
-                <a href="#">失智症</a>
-                <a href="#">帕金森氏症</a>
+                <a href="javascript:void(0)">中風</a>
+                <a href="javascript:void(0)">失智症</a>
+                <a href="javascript:void(0)">帕金森氏症</a>
             </div>
         </div>
         <div class="subnav">
             <button class="subnavBtn">腎臟科<br><i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-                <a href="#">慢性腎臟病</a>
-                <a href="#">貧血</a>
-                <a href="#">血液透析</a>
+                <a href="javascript:void(0)">慢性腎臟病</a>
+                <a href="javascript:void(0)">貧血</a>
+                <a href="javascript:void(0)">血液透析</a>
             </div>
         </div>
         <div class="subnav">
             <button class="subnavBtn">胸腔科<br><i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-                <a href="#">氣喘</a>
-                <a href="#">慢性阻塞性肺病</a>
+                <a href="javascript:void(0)">氣喘</a>
+                <a href="javascript:void(0)">慢性阻塞性肺病</a>
             </div>
         </div>
         <div class="subnav">
             <button class="subnavBtn">肝膽腸胃科<br><i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-                <a href="#">慢性肝炎</a>
-                <a href="#">胃食道逆流</a>
-                <a href="#">消化性潰瘍</a>
+                <a href="javascript:void(0)">慢性肝炎</a>
+                <a href="javascript:void(0)">胃食道逆流</a>
+                <a href="javascript:void(0)">消化性潰瘍</a>
             </div>
         </div>
         <div class="subnav">
             <button class="subnavBtn">風濕免疫科<br><i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-                <a href="#">痛風</a>
-                <a href="#">類風溼關節炎</a>
-                <a href="#">紅斑性狼瘡</a>
+                <a href="javascript:void(0)">痛風</a>
+                <a href="javascript:void(0)">類風溼關節炎</a>
+                <a href="javascript:void(0)">紅斑性狼瘡</a>
             </div>
         </div>
         <div class="subnav">
             <button class="subnavBtn">感染科<br><i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-                <a href="#">愛滋病</a>
-                <a href="#">肺結核</a>
-                <a href="#">疫苗相關</a>
+                <a href="javascript:void(0)">愛滋病</a>
+                <a href="javascript:void(0)">肺結核</a>
+                <a href="javascript:void(0)">疫苗相關</a>
             </div>
         </div>
-        <button>123</button>
     </div>
     <!-- 藥品查詢 -->
     <div id='subDrug' class="page" style="display: block;">
@@ -435,30 +452,30 @@
     </div>
     <!-- 常見問題 -->
     <div id="menuQA" class="page">
-        <a href='#' class='qaBtn'>忘記吃藥怎麼辦&nbsp<i class="fa fa-plus-circle"></i></a>
+        <a href="javascript:void(0)" class='qaBtn'>忘記吃藥怎麼辦&nbsp<i class="fa fa-plus-circle"></i></a>
         <img class="qaImg" src="https://i.imgur.com/AUuglnr.jpeg">
-        <a href='#' class='qaBtn'>服藥後身體不適怎麼辦&nbsp<i class="fa fa-plus-circle"></i></a>
+        <a href="javascript:void(0)" class='qaBtn'>服藥後身體不適怎麼辦&nbsp<i class="fa fa-plus-circle"></i></a>
         <img class="qaImg" src="https://i.imgur.com/d2hu8i8.jpeg">
-        <a href='#' class='qaBtn'>藥品換廠牌了怎麼辦&nbsp<i class="fa fa-plus-circle"></i></a>
+        <a href="javascript:void(0)" class='qaBtn'>藥品換廠牌了怎麼辦&nbsp<i class="fa fa-plus-circle"></i></a>
         <img class="qaImg" src="https://i.imgur.com/xB29e7C.jpeg">
-        <a href='#' class='qaBtn'>藥品可以剝半/磨粉嗎&nbsp<i class="fa fa-plus-circle"></i></a>
+        <a href="javascript:void(0)" class='qaBtn'>藥品可以剝半/磨粉嗎&nbsp<i class="fa fa-plus-circle"></i></a>
         <img class="qaImg" src="https://i.imgur.com/phLsiwv.jpeg">
-        <a href='#' class='qaBtn'>吃藥一定要配胃藥嗎&nbsp<i class="fa fa-plus-circle"></i></a>
+        <a href="javascript:void(0)" class='qaBtn'>吃藥一定要配胃藥嗎&nbsp<i class="fa fa-plus-circle"></i></a>
         <img class="qaImg" src="https://i.imgur.com/nIluf7r.jpeg">
-        <a href='#' class='qaBtn'>藥品保存方式&nbsp<i class="fa fa-plus-circle"></i></a>
+        <a href="javascript:void(0)" class='qaBtn'>藥品保存方式&nbsp<i class="fa fa-plus-circle"></i></a>
         <img class="qaImg" src="https://i.imgur.com/jzTPEWE.jpeg">
-        <a href='#' class='qaBtn'>過期藥品處理方式&nbsp<i class="fa fa-plus-circle"></i></a>
+        <a href="javascript:void(0)" class='qaBtn'>過期藥品處理方式&nbsp<i class="fa fa-plus-circle"></i></a>
         <img class="qaImg" src="https://i.imgur.com/cVac1et.jpeg">
-        <a href='#' class='qaBtn'>慢性處方箋注意事項&nbsp<i class="fa fa-plus-circle"></i></a>
+        <a href="javascript:void(0)" class='qaBtn'>慢性處方箋注意事項&nbsp<i class="fa fa-plus-circle"></i></a>
         <img class="qaImg" src="https://i.imgur.com/wvdnEWu.jpeg">
-        <a href='#' class='qaBtn'>幼兒服藥注意事項&nbsp<i class="fa fa-plus-circle"></i></a>
+        <a href="javascript:void(0)" class='qaBtn'>幼兒服藥注意事項&nbsp<i class="fa fa-plus-circle"></i></a>
         <img class="qaImg" src="https://i.imgur.com/08YOb07.jpeg">
     </div>
     <!-- 圖文內容會顯示的地方 -->
     <div id="result" class='page'>
     </div>
     <!-- 回到最上層 -->
-    <a href="#" class="toTop"> ↑ </a>
+    <a href="javascript:void(0)" class="toTop"> ↑ </a>
 </body>
 
 </html>
