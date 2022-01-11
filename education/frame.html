@@ -264,14 +264,14 @@
                 $(this).next().toggle(); // 讓圖片從 display:none 變成 block，圖片預設為none
                 var icon = $(this).children() // 選定<a>裡面的<i>
                 icon.toggleClass('fa-plus-circle, fa-minus-circle'); // 點下去之後切換+-圖案
-                var img = $(this).siblings('.qaImg');
-                $(img).not($(this).next()).hide();
+                // var img = $(this).siblings('.qaImg');
+                // $(img).not($(this).next()).hide();
 
-                if($(".qaImg").is(':hidden') &&  $("#menuQA i").not(icon).hasClass('fa-minus-circle') ){
-                    $("#menuQA i").not(icon).addClass('fa-plus-circle');
-                    $("#menuQA i").not(icon).removeClass('fa-minus-circle');
+                // if($(".qaImg").is(':hidden') &&  $("#menuQA i").not(icon).hasClass('fa-minus-circle') ){
+                //     $("#menuQA i").not(icon).addClass('fa-plus-circle');
+                //     $("#menuQA i").not(icon).removeClass('fa-minus-circle');
 
-                }
+                // }
 
                 if ($(icon).hasClass('fa-minus-circle')) {
                     var offset = $(this).offset();
