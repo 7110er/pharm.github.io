@@ -279,6 +279,7 @@
             var age = document.getElementById('age');
             var comment = document.getElementById('comment');
             var x = document.getElementsByClassName('quizTd2');
+
             var z = [];
             for (var i = 0; i < x.length; i++) {
                 z.push(x[i].textContent);
@@ -287,6 +288,13 @@
             $(':radio:checked').each(function () {
                 y.push($(this).val());
             })
+            // $(".radioTd2 input[type=radio]").each(function () {
+            //     if($(this).is(':checked')){
+            //         y.push($(this).val());
+            //     }else{
+            //         y.push('沒資料');
+            //     }
+            // })
             var w = [];
             for (var i = 0; i < y.length; i++) {
                 w.push(z[i]);
@@ -314,7 +322,6 @@
             ICOPE();
         }
         function submitForm_ICOPE() {
-            console.log('123')
             var id = document.getElementById('id');
             var hisName = document.getElementById('hisName');
             var age = document.getElementById('age');
@@ -327,7 +334,6 @@
                 }
                 else if ($('.radioText').val() != ""){
                     formResult[i] = $('.radioText').val();
-                    console.log(formResult[i])
                 }
                 else {
                     formResult[i] = '沒資料';
