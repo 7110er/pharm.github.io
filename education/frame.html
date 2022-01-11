@@ -17,7 +17,7 @@
         src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
     <style>
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            /* font-family: Arial, Helvetica, sans-serif; */
             margin: 0;
         }
 
@@ -300,10 +300,10 @@
                     for (var j = 5; j < dataArray[i].length; j++) {   // 後續的圖文內容
                         if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
                             if (isURL(dataArray[i][j])) {   // 確認該筆資料是不是網址
-                                dataResult += "<tr class='tableContent'>" + "<td colspan='4'><img src='" + dataArray[i][j] + "'  style='width:100%'></td>" + "</tr>"
+                                dataResult += "<tr class='tableContent'>" + "<td colspan='4'><img src='" + dataArray[i][j] + "'  style='max-width:100%'></td>" + "</tr>"
                             }
                             else {
-                                dataResult += "<tr class='tableContent'>" + "<td colspan='4' style='font-size:20px'>" + dataArray[i][j] + "</td>" + "</tr>"
+                                dataResult += "<tr class='tableContent'>" + "<td colspan='4' >" + dataArray[i][j] + "</td>" + "</tr>"
                             }
                         }
                     }
