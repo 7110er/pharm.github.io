@@ -156,12 +156,13 @@
             padding: 5px !important;
         }
 
-        .tableContent td{
+        .tableContent td {
             line-height: 1.6 !important;
             text-align: justify;
             font-weight: bold;
         }
-        .tableContent h4{
+
+        .tableContent h4 {
             color: #2e557e;
         }
 
@@ -218,6 +219,12 @@
                 font-size: 22px;
             }
         }
+        @media print {
+            @page {
+                size: A4 portrait;
+            }
+        }
+
     </style>
     <script>
         // 此為jquery的寫法，較精簡

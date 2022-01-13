@@ -42,6 +42,7 @@
             text-align: center;
             margin-bottom: 10px;
         }
+
         .text-wrap {
             white-space: normal;
         }
@@ -49,20 +50,44 @@
         .width-200 {
             width: 200px;
         }
+        .closeBtn{
+            float: right;
+            top: 0;
+            padding: 0;
+            font-size: 10px;
+            
+        }
+        @media print {
+            @page {
+                size: A4 portrait;
+            }
+        }
+
     </style>
     <!-- 程式碼開始 -->
     <script>
-
+        $(document).ready(function () {
+            $('table').on('click', 'input[type="button"]', function (e) {
+                $(this).closest('tr').remove()
+            })
+            $('#toPage2').click(function(){
+                $('#page1').hide();
+                $('#page2').show();
+            })
+            $('#toPage1').click(function(){
+                $('#page1').show();
+                $('#page2').hide();
+                
+            })
+        })
         google.script.run.withSuccessHandler(showData).getData();
-
         function showData(dataArray) {
             $(document).ready(function () {
                 $('#data-table').DataTable({
-                    scrollY: 500,
+                    scrollY: 300,
                     scrollX: true,
                     scrollCollapse: true,
                     paging: false,
-
                     "language": {
                         // 表格翻譯成中文
                         "processing": "處理中...",
@@ -217,124 +242,112 @@
                         }
                     },
                     data: dataArray,
-
+                    fixedColumns: {
+                        left: 1
+                    },
                     columns: [
                         { "title": "詳閱" },
                         { "title": "中文名" },
                         { "title": "英文名" },
                         { "title": "主成分" },
                         { "title": "處置代碼" },
-                        { "title": "藥理分類" },
-                        { "title": "ATC code" },
-                        { "title": "適應症" },
                     ],
                     columnDefs: [
                         {
                             render: function (data, type, full, meta) {
                                 return "<div class='text-wrap width-200'>" + data + "</div>";
                             },
-                            targets: [1,2,3,4]
+                            targets: 3
                         }
-                    ]
+                    ],
                 });
+                $('#data-table').DataTable().columns.adjust().draw();
             });
         }
+        //  避免表單有空白的錯誤
+        function preventFormSubmit() {
+            var forms = document.querySelectorAll('form');
+            for (var i = 0; i < forms.length; i++) {
+                forms[i].addEventListener('submit', function (event) {
+                    event.preventDefault();
+                });
+            }
+
+        }
+        window.addEventListener("load", preventFormSubmit, true);
+        // 顯示表格內容
         function searchGoogleSheet(e) { // 查詢按鈕
-            google.script.run.withSuccessHandler(createTitle).searchTitle();
             var searchText = $(e).parent().next().next().next().next().text();
             google.script.run.withSuccessHandler(createContent).search(searchText);
         }
-        function createTitle(dataArray) {
-            if (dataArray !== undefined && dataArray.length != 0) {
-                var dataResult = "<table class='table table-sm table-striped' id='dtable'>" +
-                    "<thead style='white-space: normal'>"
-                for (i = 0; i < dataArray.length; i++) {
-                    for (j = 0; j < 14; j++) {
-                        dataResult += "<tr id='tr_" + j + "'>" + "<td>" + dataArray[i][j] + "</td>" + "<td id='td_" + j + "'>" + "</td>" + "</tr>"
-                    }
-                }
-                dataResult += "</thead>" + "</table>"
-                document.getElementById('result').innerHTML = dataResult;
-            }
-        }
         function createContent(dataArray) {
+            var table = document.getElementById("dTable");
+            var row = table.insertRow(1);
             if (dataArray !== undefined && dataArray.length != 0) {
-                for (i = 0; i < dataArray.length; i++) {
-                    for (j = 0; j < 14; j++) {
-                        if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
-                            if (j === 5) {
-                                document.getElementById("td_" + j).innerHTML =
-                                    "<img src='https://7110er.github.io/pharm.github.io/searchDrug/picture/" + dataArray[i][j] + ".jpg' style='max-width:100%'>";
-                            }
-                            else {
-                                document.getElementById("td_" + j).innerHTML = dataArray[i][j];
-                            }
-                        }
-                        else {
-                            document.getElementById("tr_" + j).style.display = 'none';
-                        }
+                for (var i = 0; i < dataArray.length; i++) {
+                    if (i === 0) {
+                        row.insertCell().innerHTML = "<img src='https://7110er.github.io/pharm.github.io/searchDrug/picture/" + dataArray[i] + ".jpg' style='width:100px'>";
+                    } else {
+                        row.insertCell().innerHTML = dataArray[i]
                     }
                 }
             }
+            row.insertCell().innerHTML = "<input type='text' size='1'>"
+            row.insertCell().innerHTML = "<form onsubmit=dose(this)>"+"<input type='text' size='1'>"+"</form>"  + "<p>" + "</p>"+"<input type='button' class='closeBtn'value='&times;'>"
         }
+        function dose(e) {
+            event.preventDefault();
+
+            var searchText = $(e).children().val();
+            google.script.run.withSuccessHandler(createDose).searchDose(searchText)
+            function createDose(dataArray) {
+                $(e).next().html(dataArray);
+                $(e).next().next().remove();
+                $(e).remove();
+            }
+        }
+
         // 判斷string 是否為網址
         function isURL(string) {
             let url;
-
             try {
                 url = new URL(string);
             } catch (_) {
                 return false;
             }
-
             return url.protocol === "http:" || url.protocol === "https:";
         }
-        // 連結Google Script　並且顯示資料
-        // 問題回報
-        function getValue() {
-            var name = document.getElementById('text');
-            var phone = document.getElementById('phone');
-            var comments = document.getElementById('comments');
-            var drugName = document.getElementById('drugName').innerText;
-            var rowData = {
-                name: name.value,
-                phone: phone.value,
-                comments: comments.value,
-                drugName: drugName
-            }
 
-            google.script.run.addData(rowData);
-
-            document.getElementById('report').hidden = true;
-            document.getElementById('response').hidden = false;
-
-        };
-
-        function formReset() {
-            document.getElementById('report').reset();
-            document.getElementById('report').hidden = false;
-            document.getElementById('response').hidden = true;
-        }
     </script>
 </head>
 
 <body>
     <!-- jq mobile 測試 -->
-    <div id="pageone">
-        <div>
-            <h1><b>藥品查詢系統_專業版</b></h1>
-        </div>
+    <div id="page1">
         <!--搜尋表單  -->
-            <br>
-                <table id="data-table" class="display compact table-hover table-striped  responsive ">
-                    <!-- TABLE DATA IS ADDED BY THE showData() JAVASCRIPT FUNCTION ABOVE -->
-                </table>
-
-
+        <br>
+        <table id="data-table" class="display compact table-hover table-striped  responsive ">
+            <!-- TABLE DATA IS ADDED BY THE showData() JAVASCRIPT FUNCTION ABOVE -->
+        </table>
+        <button id="toPage2">結果</button>
     </div>
-    <div id="pagetwo">
-        <h1><b>藥品查詢結果</b></h1>
-        <p id="result" ></p>
+    <div id="page2" style="display: none;">
+        
+        <p id="result"></p>
+        <table id="dTable" class='table table-sm table-striped'>
+
+            <tr>
+                <td style="width: 100px;"><i id="toPage1" class="bi bi-box-arrow-left"></i>&nbsp;圖片</td>
+                <td style="width: 100px;">藥名</td>
+                <td style="width: 100px;">藥名</td>
+                <td style="width: 150px;">成分</td>
+                <td style="width: 150px;">適應症</td>
+                <td style="width: 100px;">用量</td>
+                <td style="width: 100px;">用法</td>
+
+            </tr>
+
+        </table>
     </div>
 
 
