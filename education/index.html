@@ -32,6 +32,16 @@
             overflow-y: auto;
             overflow-x: hidden;
         }
+        
+        @media print {
+            @page {
+                size: A4 portrait;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact;
+            }
+        }
     </style>
     <script>
     </script>

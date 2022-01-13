@@ -219,12 +219,16 @@
                 font-size: 22px;
             }
         }
+
         @media print {
             @page {
                 size: A4 portrait;
             }
-        }
 
+            body {
+                -webkit-print-color-adjust: exact;
+            }
+        }
     </style>
     <script>
         // 此為jquery的寫法，較精簡
