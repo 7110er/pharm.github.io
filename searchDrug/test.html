@@ -29,6 +29,9 @@
 
 
     <style>
+        body{
+            width: 100%;
+        }
         #dtable td,
         #dtable th {
             border: 1px solid #ddd;
@@ -59,7 +62,10 @@
         }
         @media print {
             @page {
-                size: A4 portrait;
+                size: A4 portrait !important;
+            }
+            body {
+                width: 100%;
             }
         }
 
@@ -337,13 +343,13 @@
         <table id="dTable" class='table table-sm table-striped'>
 
             <tr>
-                <td style="width: 100px;"><i id="toPage1" class="bi bi-box-arrow-left"></i>&nbsp;圖片</td>
-                <td style="width: 100px;">藥名</td>
-                <td style="width: 100px;">藥名</td>
-                <td style="width: 150px;">成分</td>
-                <td style="width: 150px;">適應症</td>
-                <td style="width: 100px;">用量</td>
-                <td style="width: 100px;">用法</td>
+                <td ><i id="toPage1" class="bi bi-box-arrow-left"></i>&nbsp;圖片</td>
+                <td >藥名</td>
+                <td >藥名</td>
+                <td >成分</td>
+                <td >適應症</td>
+                <td >用量</td>
+                <td >用法</td>
 
             </tr>
 
