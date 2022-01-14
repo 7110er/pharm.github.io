@@ -17,21 +17,20 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
 
-    <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js">
+    </script>
     <!-- Rwd js -->
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 
     <!-- Rwd css -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
 
 
     <style>
-        body{
+        body {
             width: 100%;
         }
+
         #dtable td,
         #dtable th {
             border: 1px solid #ddd;
@@ -46,46 +45,85 @@
             margin-bottom: 10px;
         }
 
-        .text-wrap {
-            white-space: normal;
+        .closeBtn {
+            float: right;
         }
 
-        .width-200 {
-            width: 200px;
-        }
-        .closeBtn{
-            float: right;
-            top: 0;
-            padding: 0;
-            font-size: 10px;
-            
-        }
+
         @media print {
             @page {
                 size: A4 portrait !important;
             }
+
             body {
                 width: 100%;
+                padding: 0;
+            }
+
+            .closeBtn,
+            #toPage1 {
+                display: none;
+            }
+
+            input {
+                border: none;
+            }
+
+            #page2 div {
+                background-color: aliceblue !important;
+                border: 1px solid black;
+            }
+
+            /* #page2{
+                border: solid 1px black;
+            } */
+            #title th,
+            #page2 label {
+                color: #001541 !important;
+            }
+
+            #basic {
+                font-size: 6px;
+            }
+
+            #dTable th {
+                background-color: rgb(247, 247, 247) !important;
+                border-bottom: 1px black solid;
+
+            }
+
+            #dTable td {
+                border-bottom: 1px black solid;
+            }
+
+            #dTable {
+                border: 1px solid black;
             }
         }
-
     </style>
     <!-- 程式碼開始 -->
     <script>
+        var date = new Date().toLocaleDateString('zh-TW', { timeZone: 'Asia/Taipei' })
         $(document).ready(function () {
             $('table').on('click', 'input[type="button"]', function (e) {
                 $(this).closest('tr').remove()
             })
-            $('#toPage2').click(function(){
+            $('#toPage2').click(function () {
                 $('#page1').hide();
                 $('#page2').show();
             })
-            $('#toPage1').click(function(){
+            $('#toPage1').click(function () {
                 $('#page1').show();
                 $('#page2').hide();
-                
+
             })
+            $('#basic input').blur(function () {
+                $(this).css({ 'border': 'none' })
+            })
+
+            document.getElementById("date").defaultValue = date;
         })
+
         google.script.run.withSuccessHandler(showData).getData();
         function showData(dataArray) {
             $(document).ready(function () {
@@ -258,16 +296,7 @@
                         { "title": "主成分" },
                         { "title": "處置代碼" },
                     ],
-                    columnDefs: [
-                        {
-                            render: function (data, type, full, meta) {
-                                return "<div class='text-wrap width-200'>" + data + "</div>";
-                            },
-                            targets: 3
-                        }
-                    ],
                 });
-                $('#data-table').DataTable().columns.adjust().draw();
             });
         }
         //  避免表單有空白的錯誤
@@ -285,6 +314,8 @@
         function searchGoogleSheet(e) { // 查詢按鈕
             var searchText = $(e).parent().next().next().next().next().text();
             google.script.run.withSuccessHandler(createContent).search(searchText);
+            var x = document.getElementById("text")
+            x.innerHTML += "<p>" + $(e).parent().next().text() + "&nbsp;" + "&nbsp;" + $(e).parent().next().next().text() + "</p>"
         }
         function createContent(dataArray) {
             var table = document.getElementById("dTable");
@@ -292,14 +323,21 @@
             if (dataArray !== undefined && dataArray.length != 0) {
                 for (var i = 0; i < dataArray.length; i++) {
                     if (i === 0) {
-                        row.insertCell().innerHTML = "<img src='https://7110er.github.io/pharm.github.io/searchDrug/picture/" + dataArray[i] + ".jpg' style='width:100px'>";
-                    } else {
+                        row.insertCell().innerHTML = "<img src='https://7110er.github.io/pharm.github.io/searchDrug/picture/" + dataArray[i] + ".jpg'>";
+                    } else if (i === 2) {
+                        var x = row.insertCell();
+                        x.innerHTML = dataArray[i];
+                        x.setAttribute('contenteditable', true);
+                    }
+                    else {
                         row.insertCell().innerHTML = dataArray[i]
                     }
                 }
             }
-            row.insertCell().innerHTML = "<input type='text' size='1'>"
-            row.insertCell().innerHTML = "<form onsubmit=dose(this)>"+"<input type='text' size='1'>"+"</form>"  + "<p>" + "</p>"+"<input type='button' class='closeBtn'value='&times;'>"
+
+            row.insertCell().innerHTML = "<input type='text' size='4'>"
+            row.insertCell().innerHTML = "<form onsubmit=dose(this)>" + "<input type='text'>" + "</form>" + "<input type='button' class='closeBtn'value='&times;' size='2'>" + "<p>" + "</p>"
+
         }
         function dose(e) {
             event.preventDefault();
@@ -307,8 +345,8 @@
             var searchText = $(e).children().val();
             google.script.run.withSuccessHandler(createDose).searchDose(searchText)
             function createDose(dataArray) {
-                $(e).next().html(dataArray);
-                $(e).next().next().remove();
+                $(e).next().next().html(dataArray);
+                $(e).next().next().attr('contenteditable', true);
                 $(e).remove();
             }
         }
@@ -328,28 +366,46 @@
 </head>
 
 <body>
-    <!-- jq mobile 測試 -->
     <div id="page1">
-        <!--搜尋表單  -->
         <br>
-        <table id="data-table" class="display compact table-hover table-striped  responsive ">
-            <!-- TABLE DATA IS ADDED BY THE showData() JAVASCRIPT FUNCTION ABOVE -->
+        <table id="data-table" class="display compact table-hover table-striped  ">
         </table>
-        <button id="toPage2">結果</button>
+        <br>
+        <div>
+            <button id="toPage2">結果</button>
+        </div>
+        <br>
+        <div id="text"></div>
     </div>
     <div id="page2" style="display: none;">
-        
-        <p id="result"></p>
+        <div style="padding: 10px;">
+            <table id="title" style="width: 100%;">
+                <thead>
+                    <tr style="font-size: 20px;">
+                        <th style="text-align: center;">衛生福利部桃園醫院</th>
+                        <th style="text-align: center;">處方藥物清單</th>
+                        <th style="text-align: right; font-size: 10px;"><label for="date">日期 :&nbsp;</label><input
+                                id="date" type="text" style=" border: none;" size="12"> 
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+            <form id="basic" style="padding: 10px;">
+                <label for="hisName">姓名 :&nbsp;</label><input id="hisName" type="text" size='12' placeholder="姓名">
+                <label for="id">病歷號 :&nbsp;</label><input id="id" type="text" size='12' placeholder="病歷號">
+                <label for="age">科別 :&nbsp;</label><input id="age" type="text" size='12' placeholder="科別">
+                <label for="doctor">處方醫師 :&nbsp;</label><input id="doctor" type="text" size='12' placeholder="處方醫師">
+
+            </form>
+        </div>
         <table id="dTable" class='table table-sm table-striped'>
 
             <tr>
-                <td ><i id="toPage1" class="bi bi-box-arrow-left"></i>&nbsp;圖片</td>
-                <td >藥名</td>
-                <td >藥名</td>
-                <td >成分</td>
-                <td >適應症</td>
-                <td >用量</td>
-                <td >用法</td>
+                <th style="width: 20%;"><button id="toPage1"><i class="bi bi-box-arrow-left"></i></button>&nbsp;圖片</th>
+                <th style="width: 15%;">藥名</th>
+                <th>適應症</th>
+                <th style="width: 10%;">用量</th>
+                <th style="width: 15%;">用法</th>
 
             </tr>
 
