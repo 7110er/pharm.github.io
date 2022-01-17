@@ -144,7 +144,7 @@
                 if (!check) {
                     $(this).toggleClass('active');
                     $('.result button').not(this).removeClass('active');
-                    $(then).not("#form_quiz").toggle();
+                    $(then).toggle();
                     $(".dataResult:visible").not(then).hide();
                 }
             });
@@ -155,14 +155,6 @@
             cooperate();
             quiz(); 
         });
-        // $("#htn").click(function(){
-        //     console.log('123')
-        //     if ($('#forRemove_quiz tr').hasClass($(this).val()) ){
-        //         console.log($(this).val())
-        //         $(this).hide()
-        //     }
-
-        // })
         // 避免表單空白
         function preventFormSubmit() {
             var forms = document.querySelectorAll('form');
@@ -205,14 +197,16 @@
                     var dataResult = "<div>"
                     for (var i = 0; i < dataArray.length; i++) {
 
-                        dataResult +="<table >"
+                        dataResult +="<table style='display:none'>"
                         for (var j = 0; j < dataArray[i].length; j++) {
                             if (j === 0) {
                                 dataResult += "<tr class='" + dataArray[i][j] + "'>" + "<td>" + dataArray[i][j] + "</td>" + "</tr>"
                             } else {
                                 dataResult += "<tr >" + "<td class='quizTd2'>" + dataArray[i][j] + "</td>" + "<td class='radioTd2'>" +
-                                    "<label class='option'>" + "是" + "<input class='radioInput' type='radio'  value='是' name='radio" + [j] + "'>" + "</label>" +
-                                    "<label class='option'>" + "否" + "<input class='radioInput'  type='radio' value='否' name='radio" + [j] + "'>" + "</label>" +
+                                    "<label class='option'>" + "是" + "<input class='radioInput' type='radio'  value='是' name='radio" + [i] + [j] + "'>" + "</label>" +
+                                    "<label class='option'>" + "否" + "<input class='radioInput'  type='radio' value='否' name='radio" + [i] +[j] + "'>" + "</label>" +
+                                    "<label class='option'>" + "沒資料" + "<input class='radioInput'  type='radio' value='沒資料' checked name='radio" + [i] +[j] + "'>" + "</label>" +
+
                                     "</td>" + "</tr>";
                             }
                         }
@@ -269,16 +263,6 @@
             };
             document.getElementById('sum').innerHTML = '總分 : ' + sum + ' 分';
         }
-        // function get_quiz() {
-        //     var array = []
-        //     var checkboxes = document.querySelectorAll('#checkbox input[type=checkbox]:checked')
-        //     for (var i = 0; i < checkboxes.length; i++) {
-        //         array.push(checkboxes[i].value)
-        //     }
-        //     array.forEach(quiz);
-        //     document.getElementById('checkbox').reset();
-
-        // }
         function submitForm_symptom() {
             var array = []
             var checkboxes = document.querySelectorAll('#form_symptom input[type=checkbox]:checked')
@@ -304,14 +288,14 @@
             var hisName = document.getElementById('hisName');
             var age = document.getElementById('age');
             var comment = document.getElementById('comment');
-            var x = document.getElementsByClassName('quizTd2');
+            var x = document.querySelectorAll('.qwe');
 
             var z = [];
             for (var i = 0; i < x.length; i++) {
                 z.push(x[i].textContent);
             }
             var y = [];
-            $(':radio:checked').each(function () {
+            $("input[class='radioInput asd']:checked").each(function () {
                 y.push($(this).val());
             })
             var w = [];
@@ -327,10 +311,7 @@
                 dataResult: w,
             }
             google.script.run.addData_quiz(rowData);
-            var list = document.getElementById("forRemove_quiz");
-            while (list.hasChildNodes()) {
-                list.removeChild(list.firstChild);
-            }
+            $(' #form_quiz').trigger('reset')
         }
         function submitForm_ICOPE() {
             var id = document.getElementById('id');
@@ -511,14 +492,18 @@
             }
         }
         function displayQuiz(e){
-            console.log(e.value)
-            var x = document.querySelectorAll( $('tr').hasClass(e.value))
-            console.log(x)
+            var x = document.querySelectorAll( "tr"+"."+e.value)
             if($(e).is(':checked')){
 
                 $(x).closest('table').show()
+                $(x).siblings('tr').children('.quizTd2').addClass('qwe')
+                $(x).siblings('tr').children('.radioTd2').children('.option').children('.radioInput').addClass('asd')
+
             }else{
                 $(x).closest('table').hide()
+                $(x).siblings('tr').children('.quizTd2').removeClass('qwe')
+                $(x).siblings('tr').children('.radioTd2').children('.option').children('.radioInput').removeClass('asd')
+
             }
         }
     </script>
@@ -854,50 +839,52 @@
                 <button class='btn2' type="button">前後測表單</button>
             </dl>
             <form id="checkbox" class="dataResult" style="font-size: 15px;">
+                <label class='option' for="quizBtn1">前測</label><input type="radio" value="前測" id="quizBtn1" class="quizBtn" name="quizBtn" checked>
+                <label class='option' for="quizBtn2">後測</label><input type="radio" value="後測" id="quizBtn2" class="quizBtn" name="quizBtn">
+                
                 <table class="table table-bordered table-hover table-condensed">
                     <tr>
                         <td class='rowspan'>心血管</td class='rowspan'>
                         <td>
                             <label class='option' for="htn">高血壓<input id="htn" onchange="displayQuiz(this)" type='checkbox' value="高血壓"></label>
-                            <label class='option' for="cad">冠心症<input id="cad" type='checkbox' value="冠心症"></label>
-                            <label class='option' for="hf">心衰竭<input id="hf" type='checkbox' value="心衰竭"></label>
-                            <label class='option' for="af">心律不整<input id="af" type='checkbox' value="心律不整"></label>
+                            <label class='option' for="cad">冠心症<input id="cad" onchange="displayQuiz(this)" type='checkbox' value="冠心症"></label>
+                            <label class='option' for="hf">心衰竭<input id="hf" onchange="displayQuiz(this)" type='checkbox' value="心衰竭"></label>
+                            <label class='option' for="af">心律不整<input id="af" onchange="displayQuiz(this)" type='checkbox' value="心律不整"></label>
                         </td>
                     </tr>
                     <tr>
                         <td class='rowspan'>內分泌</td class='rowspan'>
                         <td>
-                            <label class='option' for="dm">糖尿病<input id="dm" type='checkbox' value="糖尿病"></label>
-                            <label class='option' for="gout">痛風<input id="gout" type='checkbox' value="痛風"></label>
-                            <label class='option' for="lipid">血脂異常<input id="lipid" type='checkbox'
+                            <label class='option' for="dm">糖尿病<input id="dm" onchange="displayQuiz(this)" type='checkbox' value="糖尿病"></label>
+                            <label class='option' for="gout">痛風<input id="gout" onchange="displayQuiz(this)" type='checkbox' value="痛風"></label>
+                            <label class='option' for="lipid">血脂異常<input id="lipid" onchange="displayQuiz(this)" type='checkbox'
                                     value="血脂異常"></label>
                         </td>
                     </tr>
                     <tr>
                         <td class='rowspan'>神經科</td class='rowspan'>
                         <td>
-                            <label class='option' for="stroke">中風<input id="stroke" type='checkbox' value="中風"></label>
-                            <label class='option' for="parkinson">帕金森氏症<input id="parkinson" type='checkbox'
+                            <label class='option' for="stroke">中風<input id="stroke" onchange="displayQuiz(this)" type='checkbox' value="中風"></label>
+                            <label class='option' for="parkinson">帕金森氏症<input id="parkinson" onchange="displayQuiz(this)" type='checkbox'
                                     value="帕金森氏症"></label>
                         </td>
                     </tr>
                     <tr>
                         <td class='rowspan'>胸腔科</td class='rowspan'>
                         <td>
-                            <label class='option' for="asthma">氣喘<input id="asthma" type='checkbox' value="氣喘"></label>
-                            <label class='option' for="copd">慢性阻塞性肺病<input id="copd" type='checkbox'
+                            <label class='option' for="asthma">氣喘<input id="asthma" onchange="displayQuiz(this)" type='checkbox' value="氣喘"></label>
+                            <label class='option' for="copd">慢性阻塞性肺病<input id="copd" onchange="displayQuiz(this)" type='checkbox'
                                     value="慢性阻塞性肺病"></label>
                         </td>
                     </tr>
                     <tr>
                         <td class='rowspan'>腎臟科</td class='rowspan'>
                         <td>
-                            <label class='option' for="ckd">慢性腎臟病<input id="ckd" type='checkbox' value="慢性腎臟病"></label>
-                            <label class='option' for="anemia">貧血<input id="anemia" type='checkbox' value="貧血"></label>
+                            <label class='option' for="ckd">慢性腎臟病<input id="ckd" onchange="displayQuiz(this)" type='checkbox' value="慢性腎臟病"></label>
+                            <label class='option' for="anemia">貧血<input id="anemia" onchange="displayQuiz(this)" type='checkbox' value="貧血"></label>
                         </td>
                     </tr>
                 </table>
-                <button type="button" class="btn">產生疾病表單</button>
 
             </form>
             <form id="form_quiz" class="dataResult">
