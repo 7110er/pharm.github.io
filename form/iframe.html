@@ -85,9 +85,9 @@
         }
 
         #checkbox,
-        #form_2,
-        #form_3,
-        #form_4 {
+        #form_quiz,
+        #form_ICOPE,
+        #form_cooperate {
             display: none;
         }
 
@@ -149,7 +149,7 @@
                     dataResult +=
                         "</thead>" +
                         "</table>";
-                    var div = document.getElementById('forRemove2');
+                    var div = document.getElementById('forRemove_quiz');
                     div.innerHTML += dataResult;
                 }
             }
@@ -174,7 +174,7 @@
                 dataResult +=
                     "</thead>" +
                     "</table>";
-                var div = document.getElementById('forRemove4');
+                var div = document.getElementById('forRemove_cooperate');
                 div.innerHTML = dataResult + div.innerHTML;
             }
         }
@@ -205,7 +205,7 @@
                     }
                 }
                 dataResult += "</thead>" + "</table>";
-                var div = document.getElementById('forRemove3');
+                var div = document.getElementById('forRemove_ICOPE');
                 div.innerHTML = dataResult + div.innerHTML;
             }
         }
@@ -225,7 +225,7 @@
         //             }
         //         }
         //         dataResult += "</thead>" + "</table>";
-        //         var div = document.getElementById('forRemove3');
+        //         var div = document.getElementById('forRemove_ICOPE');
         //         div.innerHTML = dataResult + div.innerHTML;
         //     }
         // }
@@ -248,7 +248,7 @@
             array.forEach(quiz);
             document.getElementById('checkbox').style.display = 'none';
             document.getElementById('checkbox').reset();
-            document.getElementById('form_2').style.display = 'block';
+            document.getElementById('form_quiz').style.display = 'block';
 
         }
         function submitForm_symptom() {
@@ -305,10 +305,10 @@
                 dataResult: w,
             }
             google.script.run.addData_quiz(rowData);
-            document.getElementById('form_2').reset();
-            document.getElementById('form_2').style.display = 'none';
-            document.getElementById('form_3').style.display = 'block';
-            var list = document.getElementById("forRemove2");
+            document.getElementById('form_quiz').reset();
+            document.getElementById('form_quiz').style.display = 'none';
+            document.getElementById('form_ICOPE').style.display = 'block';
+            var list = document.getElementById("forRemove_quiz");
             while (list.hasChildNodes()) {
                 list.removeChild(list.firstChild);
             }
@@ -357,10 +357,10 @@
                 dataResult: formResult
             }
             google.script.run.addData_ICOPE(rowData);
-            document.getElementById('form_3').reset();
-            document.getElementById('form_3').style.display = 'none';
-            document.getElementById('form_4').style.display = 'block';
-            var list = document.getElementById("forRemove3");
+            document.getElementById('form_ICOPE').reset();
+            document.getElementById('form_ICOPE').style.display = 'none';
+            document.getElementById('form_cooperate').style.display = 'block';
+            var list = document.getElementById("forRemove_ICOPE");
             while (list.hasChildNodes()) {
                 list.removeChild(list.firstChild);
             }
@@ -395,10 +395,10 @@
             }
             google.script.run.addData_cooperate(rowData);
             document.getElementById('basic').reset();
-            document.getElementById('form_4').reset();
-            document.getElementById('form_4').style.display = 'none';
+            document.getElementById('form_cooperate').reset();
+            document.getElementById('form_cooperate').style.display = 'none';
             document.getElementById('form_1').style.display = 'block';
-            var list = document.getElementById("forRemove4");
+            var list = document.getElementById("forRemove_cooperate");
             while (list.hasChildNodes()) {
                 list.removeChild(list.firstChild);
             }
@@ -588,12 +588,46 @@
     <br>
     <div id="createData" style="margin-top: 50px; display: block;" class="page">
         <form id="basic">
-            <label for="id">病歷號 :&nbsp;</label><input id="id" type="number" style="width: auto;" placeholder="輸入病歷號">
+            <label for="id">病歷號 :&nbsp;</label><input id="id" type="number" style="width: auto;" placeholder="輸入病歷號" onfocus="this.value=''">
             <label for="hisName">姓名 :&nbsp;</label><input id="hisName" type="text" style="width: 20%;"
-                placeholder="ex:王*明">
-            <label for="age">年齡 :&nbsp;</label><input id="age" type="number" style="width: 15%;" placeholder="年齡">
-            <label for="comment">備註欄 :&nbsp;</label><input id="comment" type="text" style="width: 15%;">
+                placeholder="ex:王*明" onfocus="this.value=''">
+            <label for="age">年齡 :&nbsp;</label><input id="age" type="number" style="width: 15%;" placeholder="年齡" onfocus="this.value=''">
+            <label for="comment">備註欄 :&nbsp;</label><input id="comment" type="text" style="width: 15%;" onfocus="this.value=''">
         </form>
+        <br>
+        <div class="result">
+            <dl>
+                <dt>
+                    <button class='btn2 active' type="button">症狀回報</button>
+                </dt>
+            </dl>
+            <ul id="dataResult_symptom" class="dataResult" style="display: inline;"></ul>
+        </div>
+        <div class="result">
+            <dl>
+                <dt>
+                    <button class='btn2' type="button">前後測結果</button>
+                </dt>
+            </dl>
+            <ul id="dataResult_quiz" class="dataResult"></ul>
+        </div>
+        <div class="result">
+            <dl>
+                <dt>
+                    <button class='btn2' type="button">ICOPE量表</button>
+                </dt>
+            </dl>
+            <ul id="dataResult_ICOPE" class="dataResult"></ul>
+
+        </div>
+        <div class="result">
+            <dl>
+                <dt>
+                    <button class='btn2' type="button">配合度結果</button>
+                </dt>
+            </dl>
+            <ul id="dataResult_cooperate" class="dataResult"></ul>
+        </div>
         <br>
         <form id="form_1">
             <table class="table table-bordered table-hover table-condensed">
@@ -942,18 +976,18 @@
             <button type="button" class="btn" onclick="get_quiz()">產生疾病表單</button>
 
         </form>
-        <form id="form_2">
-            <div id="forRemove2"></div>
+        <form id="form_quiz">
+            <div id="forRemove_quiz"></div>
             <button type="button" class="btn" onclick="submitForm_quiz()">疾病送出</button>
             <label class='btn'>放棄填寫&nbsp;<input type='checkbox' value="放棄填寫"></label>
         </form>
-        <form id="form_3">
-            <div id="forRemove3"></div>
+        <form id="form_ICOPE">
+            <div id="forRemove_ICOPE"></div>
             <button type="button" class="btn" onclick="submitForm_ICOPE()">ICOPE送出</button>
             <label class='btn'>放棄填寫&nbsp;<input type='checkbox' value="放棄填寫"></label>
         </form>
-        <form id="form_4">
-            <div id="forRemove4"></div>
+        <form id="form_cooperate">
+            <div id="forRemove_cooperate"></div>
             <ul id="sum"></ul>
             <button type="button" class="btn" onclick="getSum()">總分</button>
             <button type="button" class="btn" onclick="submitForm_cooperate()">配合度送出</button>

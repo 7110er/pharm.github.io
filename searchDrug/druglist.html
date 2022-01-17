@@ -29,6 +29,7 @@
     <style>
         body {
             width: 100%;
+            padding: 0;
         }
 
         #dtable td,
@@ -49,16 +50,48 @@
             float: right;
         }
 
+        #page2 div {
+            background-color: aliceblue !important;
+            border: 1px solid black;
+        }
+
+        #title th,
+        #page2 label {
+            color: #001541 !important;
+        }
+
+        #basic {
+            font-size: 13px;
+            text-align: center;
+        }
+
+        #dTable th {
+            background-color: rgb(247, 247, 247) !important;
+            border-bottom: 1px black solid;
+
+        }
+
+        #dTable td {
+            border-bottom: 1px black solid;
+        }
+
+        #dTable {
+            border: 1px solid black;
+        }
+        img   {
+            max-width: 100%;
+        } 
+        #toPage1 {
+            float: left;
+        } 
+
 
         @media print {
             @page {
                 size: A4 portrait !important;
             }
 
-            body {
-                width: 100%;
-                padding: 0;
-            }
+
 
             .closeBtn,
             #toPage1 {
@@ -69,36 +102,8 @@
                 border: none;
             }
 
-            #page2 div {
-                background-color: aliceblue !important;
-                border: 1px solid black;
-            }
 
-            /* #page2{
-                border: solid 1px black;
-            } */
-            #title th,
-            #page2 label {
-                color: #001541 !important;
-            }
 
-            #basic {
-                font-size: 6px;
-            }
-
-            #dTable th {
-                background-color: rgb(247, 247, 247) !important;
-                border-bottom: 1px black solid;
-
-            }
-
-            #dTable td {
-                border-bottom: 1px black solid;
-            }
-
-            #dTable {
-                border: 1px solid black;
-            }
         }
     </style>
     <!-- 程式碼開始 -->
@@ -378,14 +383,14 @@
         <div id="text"></div>
     </div>
     <div id="page2" style="display: none;">
-        <div style="padding: 10px;">
+        <div style="padding: 15px;">
             <table id="title" style="width: 100%;">
                 <thead>
                     <tr style="font-size: 20px;">
-                        <th style="text-align: center;">衛生福利部桃園醫院</th>
+                        <th style="text-align: center;"><button id="toPage1"><i class="bi bi-box-arrow-left"></i></button>衛生福利部桃園醫院</th>
                         <th style="text-align: center;">處方藥物清單</th>
                         <th style="text-align: right; font-size: 10px;"><label for="date">日期 :&nbsp;</label><input
-                                id="date" type="text" style=" border: none;" size="12"> 
+                                id="date" type="text" style=" border: none;" size="12">
                         </th>
                     </tr>
                 </thead>
@@ -401,7 +406,7 @@
         <table id="dTable" class='table table-sm table-striped'>
 
             <tr>
-                <th style="width: 20%;"><button id="toPage1"><i class="bi bi-box-arrow-left"></i></button>&nbsp;圖片</th>
+                <th style="width: 20%;">圖片</th>
                 <th style="width: 15%;">藥名</th>
                 <th>適應症</th>
                 <th style="width: 10%;">用量</th>
