@@ -153,7 +153,7 @@
             })
             ICOPE();
             cooperate();
-            quiz(); 
+            quiz();
         });
         // 避免表單空白
         function preventFormSubmit() {
@@ -197,20 +197,20 @@
                     var dataResult = "<div>"
                     for (var i = 0; i < dataArray.length; i++) {
 
-                        dataResult +="<table style='display:none'>"
+                        dataResult += "<table style='display:none'>"
                         for (var j = 0; j < dataArray[i].length; j++) {
                             if (j === 0) {
                                 dataResult += "<tr class='" + dataArray[i][j] + "'>" + "<td>" + dataArray[i][j] + "</td>" + "</tr>"
                             } else {
                                 dataResult += "<tr >" + "<td class='quizTd2'>" + dataArray[i][j] + "</td>" + "<td class='radioTd2'>" +
                                     "<label class='option'>" + "是" + "<input class='radioInput' type='radio'  value='是' name='radio" + [i] + [j] + "'>" + "</label>" +
-                                    "<label class='option'>" + "否" + "<input class='radioInput'  type='radio' value='否' name='radio" + [i] +[j] + "'>" + "</label>" +
-                                    "<label class='option'>" + "沒資料" + "<input class='radioInput'  type='radio' value='沒資料' checked name='radio" + [i] +[j] + "'>" + "</label>" +
+                                    "<label class='option'>" + "否" + "<input class='radioInput'  type='radio' value='否' name='radio" + [i] + [j] + "'>" + "</label>" +
+                                    "<label class='option'>" + "沒資料" + "<input class='radioInput'  type='radio' value='沒資料' checked name='radio" + [i] + [j] + "'>" + "</label>" +
 
                                     "</td>" + "</tr>";
                             }
                         }
-                        dataResult +="</table>";
+                        dataResult += "</table>";
                     }
                     dataResult += "</div>"
                     var div = document.getElementById('forRemove_quiz');
@@ -230,7 +230,6 @@
                                 "<label class='option'>" + "是" + "<input class='radioInput' type='radio'  value='是' name='radio" + [j] + "'>" + "</label>" +
                                 "<label class='option'>" + "否" + "<input class='radioInput'  type='radio' value='否' name='radio" + [j] + "'>" + "</label>" +
                                 "</td>" + "</tr>"
-
                         }
                         for (var j = 13; j < 14; j++) {
                             dataResult += "<tr>" + "<td class='ICOPE_text'>" + dataArray[i][j] + "</td>" + "<td class='radioTd3'>" +
@@ -245,6 +244,13 @@
                                 "<label class='option'>" + "大學以上" + "<input class='radioInput'  type='radio' value='大學以上' name='radio" + [j] + "'>" + "</label>" +
                                 "</td>" + "</tr>"
                         }
+                        for (var j = 15; j < 18; j++) {
+                            dataResult += "<tr>" + "<td class='ICOPE_text'>" + dataArray[i][j] + "</td>" + "<td class='radioTd3'>" +
+                                "<label class='option'>" + "是" + "<input class='radioInput' type='radio'  value='是' name='radio" + [j] + "'>" + "</label>" +
+                                "<label class='option'>" + "否" + "<input class='radioInput'  type='radio' value='否' name='radio" + [j] + "'>" + "</label>" +
+                                "</td>" + "</tr>"
+                        }
+
                     }
                     dataResult += "</thead>" + "</table>";
                     var div = document.getElementById('result_ICOPE');
@@ -263,6 +269,22 @@
             };
             document.getElementById('sum').innerHTML = '總分 : ' + sum + ' 分';
         }
+        function displayQuiz(e) {
+            var x = document.querySelectorAll("tr" + "." + e.value)
+            if ($(e).is(':checked')) {
+
+                $(x).closest('table').show()
+                $(x).siblings('tr').children('.quizTd2').addClass('qwe')
+                $(x).siblings('tr').children('.radioTd2').children('.option').children('.radioInput').addClass('asd')
+
+            } else {
+                $(x).closest('table').hide()
+                $(x).siblings('tr').children('.quizTd2').removeClass('qwe')
+                $(x).siblings('tr').children('.radioTd2').children('.option').children('.radioInput').removeClass('asd')
+
+            }
+        }
+
         function submitForm_symptom() {
             var array = []
             var checkboxes = document.querySelectorAll('#form_symptom input[type=checkbox]:checked')
@@ -282,6 +304,7 @@
             }
             google.script.run.addData_symptom(rowData);
             document.getElementById('form_symptom').reset();
+            alert('表單已送出')
         }
         function submitForm_quiz() {
             var id = document.getElementById('id');
@@ -299,6 +322,7 @@
                 y.push($(this).val());
             })
             var w = [];
+            w.push($("input[name='quizBtn']:checked").val())
             for (var i = 0; i < y.length; i++) {
                 w.push(z[i]);
                 w.push(y[i]);
@@ -311,7 +335,9 @@
                 dataResult: w,
             }
             google.script.run.addData_quiz(rowData);
-            $(' #form_quiz').trigger('reset')
+            $(' #form_quiz').trigger('reset');
+            alert('表單已送出');
+
         }
         function submitForm_ICOPE() {
             var id = document.getElementById('id');
@@ -320,7 +346,7 @@
             var comment = document.getElementById('comment');
             var formResult = [];
             dataLength = document.querySelectorAll(".radioTd3").length;
-            for (var i = 0; i < 15; i++) {
+            for (var i = 0; i < 18; i++) {
                 if (i === 13) {
                     if ($(".radioText").val() != "") {
                         formResult[i] = $(".radioText").val();
@@ -346,6 +372,8 @@
 
             google.script.run.addData_ICOPE(rowData);
             document.getElementById('form_ICOPE').reset();
+            alert('表單已送出')
+
         }
         function submitForm_cooperate() {
             var id = document.getElementById('id');
@@ -361,6 +389,7 @@
                     formResult[i] = '沒資料';
                 }
             };
+            formResult.push($("input[name='cooperateBtn']:checked").val())
             var rowData = {
                 id: id.value,
                 name: hisName.value,
@@ -370,6 +399,8 @@
             }
             google.script.run.addData_cooperate(rowData);
             document.getElementById('form_cooperate').reset();
+            alert('表單已送出')
+
         }
         //查詢病人資料
         function searchData() {
@@ -491,21 +522,6 @@
                 }
             }
         }
-        function displayQuiz(e){
-            var x = document.querySelectorAll( "tr"+"."+e.value)
-            if($(e).is(':checked')){
-
-                $(x).closest('table').show()
-                $(x).siblings('tr').children('.quizTd2').addClass('qwe')
-                $(x).siblings('tr').children('.radioTd2').children('.option').children('.radioInput').addClass('asd')
-
-            }else{
-                $(x).closest('table').hide()
-                $(x).siblings('tr').children('.quizTd2').removeClass('qwe')
-                $(x).siblings('tr').children('.radioTd2').children('.option').children('.radioInput').removeClass('asd')
-
-            }
-        }
     </script>
 </head>
 
@@ -518,7 +534,7 @@
     <div id="createData" style="margin-top: 50px; display: block;" class="page">
         <form id="basic">
             <label for="id">病歷號 :&nbsp;</label><input id="id" type="number" style="width: auto;" placeholder="輸入病歷號"
-                onfocus="this.value=''">
+                onfocus="this.value=''" required>
             <label for="hisName">姓名 :&nbsp;</label><input id="hisName" type="text" style="width: 20%;"
                 placeholder="ex:王*明" onfocus="this.value=''">
             <label for="age">年齡 :&nbsp;</label><input id="age" type="number" style="width: 15%;" placeholder="年齡"
@@ -839,49 +855,61 @@
                 <button class='btn2' type="button">前後測表單</button>
             </dl>
             <form id="checkbox" class="dataResult" style="font-size: 15px;">
-                <label class='option' for="quizBtn1">前測</label><input type="radio" value="前測" id="quizBtn1" class="quizBtn" name="quizBtn" checked>
-                <label class='option' for="quizBtn2">後測</label><input type="radio" value="後測" id="quizBtn2" class="quizBtn" name="quizBtn">
-                
+                <label class='option' for="quizBtn1">前測</label><input type="radio" value="前測" id="quizBtn1"
+                    class="quizBtn" name="quizBtn" checked>
+                <label class='option' for="quizBtn2">後測</label><input type="radio" value="後測" id="quizBtn2"
+                    class="quizBtn" name="quizBtn">
+
                 <table class="table table-bordered table-hover table-condensed">
                     <tr>
                         <td class='rowspan'>心血管</td class='rowspan'>
                         <td>
-                            <label class='option' for="htn">高血壓<input id="htn" onchange="displayQuiz(this)" type='checkbox' value="高血壓"></label>
-                            <label class='option' for="cad">冠心症<input id="cad" onchange="displayQuiz(this)" type='checkbox' value="冠心症"></label>
-                            <label class='option' for="hf">心衰竭<input id="hf" onchange="displayQuiz(this)" type='checkbox' value="心衰竭"></label>
-                            <label class='option' for="af">心律不整<input id="af" onchange="displayQuiz(this)" type='checkbox' value="心律不整"></label>
+                            <label class='option' for="htn">高血壓<input id="htn" onchange="displayQuiz(this)"
+                                    type='checkbox' value="高血壓"></label>
+                            <label class='option' for="cad">冠心症<input id="cad" onchange="displayQuiz(this)"
+                                    type='checkbox' value="冠心症"></label>
+                            <label class='option' for="hf">心衰竭<input id="hf" onchange="displayQuiz(this)"
+                                    type='checkbox' value="心衰竭"></label>
+                            <label class='option' for="af">心律不整<input id="af" onchange="displayQuiz(this)"
+                                    type='checkbox' value="心律不整"></label>
                         </td>
                     </tr>
                     <tr>
                         <td class='rowspan'>內分泌</td class='rowspan'>
                         <td>
-                            <label class='option' for="dm">糖尿病<input id="dm" onchange="displayQuiz(this)" type='checkbox' value="糖尿病"></label>
-                            <label class='option' for="gout">痛風<input id="gout" onchange="displayQuiz(this)" type='checkbox' value="痛風"></label>
-                            <label class='option' for="lipid">血脂異常<input id="lipid" onchange="displayQuiz(this)" type='checkbox'
-                                    value="血脂異常"></label>
+                            <label class='option' for="dm">糖尿病<input id="dm" onchange="displayQuiz(this)"
+                                    type='checkbox' value="糖尿病"></label>
+                            <label class='option' for="gout">痛風<input id="gout" onchange="displayQuiz(this)"
+                                    type='checkbox' value="痛風"></label>
+                            <label class='option' for="lipid">血脂異常<input id="lipid" onchange="displayQuiz(this)"
+                                    type='checkbox' value="血脂異常"></label>
                         </td>
                     </tr>
                     <tr>
                         <td class='rowspan'>神經科</td class='rowspan'>
                         <td>
-                            <label class='option' for="stroke">中風<input id="stroke" onchange="displayQuiz(this)" type='checkbox' value="中風"></label>
-                            <label class='option' for="parkinson">帕金森氏症<input id="parkinson" onchange="displayQuiz(this)" type='checkbox'
-                                    value="帕金森氏症"></label>
+                            <label class='option' for="stroke">中風<input id="stroke" onchange="displayQuiz(this)"
+                                    type='checkbox' value="中風"></label>
+                            <label class='option' for="parkinson">帕金森氏症<input id="parkinson"
+                                    onchange="displayQuiz(this)" type='checkbox' value="帕金森氏症"></label>
                         </td>
                     </tr>
                     <tr>
                         <td class='rowspan'>胸腔科</td class='rowspan'>
                         <td>
-                            <label class='option' for="asthma">氣喘<input id="asthma" onchange="displayQuiz(this)" type='checkbox' value="氣喘"></label>
-                            <label class='option' for="copd">慢性阻塞性肺病<input id="copd" onchange="displayQuiz(this)" type='checkbox'
-                                    value="慢性阻塞性肺病"></label>
+                            <label class='option' for="asthma">氣喘<input id="asthma" onchange="displayQuiz(this)"
+                                    type='checkbox' value="氣喘"></label>
+                            <label class='option' for="copd">慢性阻塞性肺病<input id="copd" onchange="displayQuiz(this)"
+                                    type='checkbox' value="慢性阻塞性肺病"></label>
                         </td>
                     </tr>
                     <tr>
                         <td class='rowspan'>腎臟科</td class='rowspan'>
                         <td>
-                            <label class='option' for="ckd">慢性腎臟病<input id="ckd" onchange="displayQuiz(this)" type='checkbox' value="慢性腎臟病"></label>
-                            <label class='option' for="anemia">貧血<input id="anemia" onchange="displayQuiz(this)" type='checkbox' value="貧血"></label>
+                            <label class='option' for="ckd">慢性腎臟病<input id="ckd" onchange="displayQuiz(this)"
+                                    type='checkbox' value="慢性腎臟病"></label>
+                            <label class='option' for="anemia">貧血<input id="anemia" onchange="displayQuiz(this)"
+                                    type='checkbox' value="貧血"></label>
                         </td>
                     </tr>
                 </table>
@@ -911,11 +939,15 @@
                 <button class='btn2' type="button">配合度結果</button>
             </dl>
             <form id="form_cooperate" class="dataResult">
+
                 <div id="result_cooperate"></div>
                 <ul id="sum"></ul>
                 <button type="button" class="btn" onclick="getSum()">總分</button>
                 <button type="button" class="btn" onclick="submitForm_cooperate()">配合度送出</button>
                 <button type="button" class="reset">重置</button>
+                <label class='btn' for="cooperateBtn">機構&nbsp;<input id="cooperateBtn" name="cooperateBtn"
+                    type='checkbox' value="機構"></label>
+
             </form>
         </div>
 
