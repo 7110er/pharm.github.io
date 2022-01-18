@@ -70,8 +70,13 @@
         .radioTd2 {
             width: 20%;
         }
-
-        .quizTd1,
+        .quizTd1{
+            color: rgb(29, 51, 87);
+            font-weight: bolder;
+            font-size: 16px;
+            background-color: aliceblue;
+            padding: 10px 0;
+        }
         .quizTd2 {
             width: 70%;
         }
@@ -173,7 +178,7 @@
                         "<thead >"
                     for (var i = 0; i < dataArray.length; i++) {
                         for (var j = 0; j < dataArray[i].length; j++) {
-                            dataResult += "<tr>" + "<td class='quizTd1'>" + dataArray[i][j] + "</td>" + "<td class='radioTd1'>" +
+                            dataResult += "<tr>" + "<td >" + dataArray[i][j] + "</td>" + "<td class='radioTd1'>" +
                                 "<label class='option'>" + "1" + "<input type='radio'  value='1' name='radio" + [j] + "'>" + "</label>" +
                                 "<label class='option'>" + "2" + "<input type='radio'  value='2' name='radio" + [j] + "'>" + "</label>" +
                                 "<label class='option'>" + "3" + "<input type='radio'  value='3' name='radio" + [j] + "'>" + "</label>" +
@@ -200,7 +205,7 @@
                         dataResult += "<table style='display:none'>"
                         for (var j = 0; j < dataArray[i].length; j++) {
                             if (j === 0) {
-                                dataResult += "<tr class='" + dataArray[i][j] + "'>" + "<td>" + dataArray[i][j] + "</td>" + "</tr>"
+                                dataResult += "<tr class='" + dataArray[i][j] + "' sty>" + "<td colspan='2' class='quizTd1'>" + dataArray[i][j] + "</td>" + "</tr>"
                             } else {
                                 dataResult += "<tr >" + "<td class='quizTd2'>" + dataArray[i][j] + "</td>" + "<td class='radioTd2'>" +
                                     "<label class='option'>" + "是" + "<input class='radioInput' type='radio'  value='是' name='radio" + [i] + [j] + "'>" + "</label>" +
@@ -260,7 +265,7 @@
 
         }
         function getSum() {
-            dataLength = document.querySelectorAll(".radioTd1").length;
+            var dataLength = document.querySelectorAll(".radioTd1").length;
             var formResult = [];
             let sum = 0;
             for (var i = 0; i < dataLength; i++) {
@@ -946,7 +951,7 @@
                 <button type="button" class="btn" onclick="submitForm_cooperate()">配合度送出</button>
                 <button type="button" class="reset">重置</button>
                 <label class='btn' for="cooperateBtn">機構&nbsp;<input id="cooperateBtn" name="cooperateBtn"
-                    type='checkbox' value="機構"></label>
+                        type='checkbox' value="機構"></label>
 
             </form>
         </div>
