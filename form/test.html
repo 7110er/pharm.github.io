@@ -70,13 +70,15 @@
         .radioTd2 {
             width: 20%;
         }
-        .quizTd1{
+
+        .quizTd1 {
             color: rgb(29, 51, 87);
             font-weight: bolder;
             font-size: 16px;
             background-color: aliceblue;
             padding: 10px 0;
         }
+
         .quizTd2 {
             width: 70%;
         }
@@ -265,11 +267,11 @@
 
         }
         function getSum() {
-            var dataLength = document.querySelectorAll(".radioTd1").length;
+            dataLength = document.querySelectorAll(".radioTd1").length;
             var formResult = [];
             let sum = 0;
             for (var i = 0; i < dataLength; i++) {
-                formResult[i] = document.querySelector("input[name='radio" + [i] + "']" + ":checked").value;
+                formResult[i] = document.querySelector("#form_cooperate input[name='radio" + [i] + "']" + ":checked").value;
                 sum += +(formResult[i])
             };
             document.getElementById('sum').innerHTML = '總分 : ' + sum + ' 分';
@@ -943,6 +945,21 @@
             <dl>
                 <button class='btn2' type="button">配合度結果</button>
             </dl>
+            <div class="dataResult" style="background-color: aliceblue;color: rgb(29, 51, 87);font-weight: bold;">
+                <ul style="padding-inline: 20px;">
+                    <li>建議以病人本次住院前一個月使用藥品之依順性評估。</li>
+                    <li> 評估量表勾選: (請依建議發生頻率估算)◦
+                        <ol>
+                            <li>從未如此: 從未發生。</li>
+                            <li>有時如此: 約每週發生1-2天。</li>
+                            <li>經常如此: 約每週發生3-4天。</li>
+                            <li>總是如此: 約每週發生大於5天。</li>
+                        </ol>
+
+                    <li>本量表第12題為反向題，統計時需反轉後計算。</li>
+                </ul>
+
+            </div>
             <form id="form_cooperate" class="dataResult">
 
                 <div id="result_cooperate"></div>
