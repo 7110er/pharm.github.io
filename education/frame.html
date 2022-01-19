@@ -160,9 +160,11 @@
             line-height: 1.6 !important;
             text-align: justify;
         }
-        .tableContent ul{
+
+        .tableContent ul {
             padding-inline: 20px;
         }
+
         .tableContent h4 {
             color: #2e557e;
         }
@@ -313,12 +315,13 @@
                 for (var i = 0; i < dataArray.length; i++) {
                     for (var j = 5; j < dataArray[i].length; j++) {   // 後續的圖文內容
                         if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
-                            if (isURL(dataArray[i][j])) {   // 確認該筆資料是不是網址
-                                dataResult += "<tr class='tableContent'>" + "<td colspan='4'><img src='" + dataArray[i][j] + "'  style='max-width:100%'></td>" + "</tr>"
-                            }
-                            else {
-                                dataResult += "<tr class='tableContent'>" + "<td colspan='4' >" + dataArray[i][j] + "</td>" + "</tr>"
-                            }
+                            dataResult += "<tr class='tableContent'>" + "<td colspan='4' >" + dataArray[i][j] + "</td>" + "</tr>"
+                            // if (isURL(dataArray[i][j])) {   // 確認該筆資料是不是網址
+                            //     dataResult += "<tr class='tableContent'>" + "<td colspan='4'><img src='" + dataArray[i][j] + "'  style='max-width:100%'></td>" + "</tr>"
+                            // }
+                            // else {
+                            //     dataResult += "<tr class='tableContent'>" + "<td colspan='4' >" + dataArray[i][j] + "</td>" + "</tr>"
+                            // }
                         }
                     }
                 }
