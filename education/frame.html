@@ -200,9 +200,11 @@
             border-radius: 5px;
 
         }
-
+        #dTable img{
+            max-width: 100%;
+        }
         .qaImg {
-            width: 100%;
+            max-width: 100%;
             display: none;
             padding: 5px;
         }
@@ -316,12 +318,6 @@
                     for (var j = 5; j < dataArray[i].length; j++) {   // 後續的圖文內容
                         if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
                             dataResult += "<tr class='tableContent'>" + "<td colspan='4' >" + dataArray[i][j] + "</td>" + "</tr>"
-                            // if (isURL(dataArray[i][j])) {   // 確認該筆資料是不是網址
-                            //     dataResult += "<tr class='tableContent'>" + "<td colspan='4'><img src='" + dataArray[i][j] + "'  style='max-width:100%'></td>" + "</tr>"
-                            // }
-                            // else {
-                            //     dataResult += "<tr class='tableContent'>" + "<td colspan='4' >" + dataArray[i][j] + "</td>" + "</tr>"
-                            // }
                         }
                     }
                 }
