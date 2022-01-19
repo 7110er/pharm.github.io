@@ -74,7 +74,6 @@
         .quizTd1 {
             color: rgb(29, 51, 87);
             font-weight: bolder;
-            font-size: 16px;
             background-color: aliceblue;
             padding: 10px 0;
         }
@@ -118,14 +117,20 @@
             display: inline;
         }
 
+        #forRemove_quiz table,
         .table>thead>tr>td,
         .table>tbody>tr>td {
             padding: 2px;
             vertical-align: inherit;
+            font-size: 15px;
         }
 
         .table>tbody>tr>td {
             text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f8f8;
         }
 
         .rowspan {
@@ -420,7 +425,7 @@
         }
         function createData_cooperate(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
-                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; >" +
+                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate ; width:auto' ; >" +
                     "<thead >"
                 for (var i = 1; i < dataArray.length; i++) {
                     dataResult += "<tr>" + "<td id='td_cooperate_" + i + "' class='td'>" + "</td>"
@@ -448,7 +453,7 @@
         }
         function createData_ICOPE(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
-                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; >" +
+                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate; width:auto'; >" +
                     "<thead >"
                 for (var i = 1; i < dataArray.length; i++) {
                     dataResult += "<tr>" + "<td id='td_ICOPE_" + i + "' class='td'>" + "</td>"
@@ -476,7 +481,7 @@
         }
         function createData_quiz(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
-                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; >" +
+                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate; width:auto'; >" +
                     "<thead >"
                 for (var i = 1; i < dataArray.length; i++) {
                     dataResult += "<tr>" + "<td id='td_quiz_" + i + "' class='td'>" + "</td>"
@@ -504,7 +509,7 @@
         }
         function createData_symptom(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
-                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; >" +
+                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate; width:auto'; >" +
                     "<thead >"
                 for (var i = 1; i < dataArray.length; i++) {
                     dataResult += "<tr>" + "<td id='td_symptom_" + i + "' class='td'>" + "</td>"
