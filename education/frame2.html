@@ -201,16 +201,15 @@
 
         }
 
-        #dTable img {
-            max-width: 100%;
-        }
 
         .qaImg {
             max-width: 100%;
             display: none;
             padding: 5px;
         }
-
+        #page2,#page3,#page4 {
+            display: none;
+        }
         @media (max-width:414px) {
             .tableBtn {
                 font-size: 16px;
@@ -262,9 +261,20 @@
                 closeNav();
                 var searchText = $(this).text();
                 // 讓google script跑 search()，回傳的資料再丟進createTable()
-                google.script.run.withSuccessHandler(createTable).search(searchText);
+                google.script.run.withSuccessHandler(createPage1).searchPage1(searchText);
+                google.script.run.withSuccessHandler(createPage2).searchPage2(searchText);
+                google.script.run.withSuccessHandler(createPage3).searchPage3(searchText);
+                google.script.run.withSuccessHandler(createPage4).searchPage4(searchText);
                 $('#subDrug, #menuQA').hide();
                 $('#result, .toTop').show()
+                page1();
+            })
+            $('#pageTable td').click(function(){
+                var check = $(this).hasClass('active');
+                if (!check) {
+                    $(this).toggleClass('active');
+                    $('#pageTable td').not(this).removeClass('active');
+                }
             })
             // 藥品查詢 : 切換民眾版，專業版
             $('.subDrugBtn').click(function () {
@@ -304,61 +314,63 @@
             })
         })
         // 創建圖文內容，內容資料(dataArray)來自於google script上 search()的回傳值
-        function createTable(dataArray) {
+        function createPage1(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
-                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate'; id='dtable' >" +
-                    "<thead >" +
-                    "<tr style='position:sticky; top:50px'>"
+                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate';  >" + "<thead >" 
                 for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 1; j < 5; j++) {  // 試算表上的四個按鈕
-                        dataResult += "<td class='tableBtn' style='width:25%'>" + dataArray[i][j] + "</td>";
-                    }
-                }
-                dataResult +=
-                    "</tr>"
-                for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 5; j < dataArray[i].length; j++) {   // 後續的圖文內容
+                    for (var j = 1; j < dataArray[i].length; j++) {  
                         if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
                             dataResult += "<tr class='tableContent'>" + "<td colspan='4' >" + dataArray[i][j] + "</td>" + "</tr>"
                         }
                     }
                 }
                 dataResult += "</thead>" + "</table>";
-                document.getElementById('result').innerHTML = dataResult;
-            }
-            else {
-                document.getElementById('result').innerHTML = "目前無資料!";
+                document.getElementById('page1').innerHTML = dataResult;
             }
         }
-        // 試算表上B~E欄的四個捲動按鈕
-        function scrollContent_A() {
-            var offset = $('.information').offset();
-            offset.top -= 100;
-            $('html, body').animate({
-                scrollTop: offset.top,
-            });
+        function createPage2(dataArray) {
+            if (dataArray !== undefined && dataArray.length != 0) {
+                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate';  >" + "<thead >" 
+                for (var i = 0; i < dataArray.length; i++) {
+                    for (var j = 1; j < dataArray[i].length; j++) {  
+                        if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
+                            dataResult += "<tr class='tableContent'>" + "<td colspan='4' >" + dataArray[i][j] + "</td>" + "</tr>"
+                        }
+                    }
+                }
+                dataResult += "</thead>" + "</table>";
+                document.getElementById('page2').innerHTML = dataResult;
+            }
         }
-        function scrollContent_B() {
-            var offset = $('.therapy').offset();
-            offset.top -= 100;
-            $('html, body').animate({
-                scrollTop: offset.top,
-            });
+        function createPage3(dataArray) {
+            if (dataArray !== undefined && dataArray.length != 0) {
+                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate';  >" + "<thead >" 
+                for (var i = 0; i < dataArray.length; i++) {
+                    for (var j = 1; j < dataArray[i].length; j++) {  
+                        if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
+                            dataResult += "<tr class='tableContent'>" + "<td colspan='4' >" + dataArray[i][j] + "</td>" + "</tr>"
+                        }
+                    }
+                }
+                dataResult += "</thead>" + "</table>";
+                document.getElementById('page3').innerHTML = dataResult;
+            }
         }
-        function scrollContent_C() {
-            var offset = $('.selfCare').offset();
-            offset.top -= 100;
-            $('html, body').animate({
-                scrollTop: offset.top,
-            });
+        function createPage4(dataArray) {
+            if (dataArray !== undefined && dataArray.length != 0) {
+                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate';  >" + "<thead >" 
+                for (var i = 0; i < dataArray.length; i++) {
+                    for (var j = 1; j < dataArray[i].length; j++) {  
+                        if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
+                            dataResult += "<tr class='tableContent'>" + "<td colspan='4' >" + dataArray[i][j] + "</td>" + "</tr>"
+                        }
+                    }
+                }
+                dataResult += "</thead>" + "</table>";
+                document.getElementById('page4').innerHTML = dataResult;
+            }
         }
-        function scrollContent_D() {
-            var offset = $('.others').offset();
-            offset.top -= 100;
-            $('html, body').animate({
-                scrollTop: offset.top,
-            });
-        }
+
         // 打開右側導覽列
         function openNav() {
             document.getElementById("navbar").style.width = "35%";
@@ -377,7 +389,24 @@
             }
             return url.protocol === "http:" || url.protocol === "https:";
         }
-    </script>
+        function page1(){
+            $('#page1').show();
+            $('#result>.subPage').not('#page1').hide();
+        }
+        function page2(){
+            $('#page2').show();
+            $('#result>.subPage').not('#page2').hide();
+        }
+        function page3(){
+            $('#page3').show();
+            $('#result>.subPage').not('#page3').hide();
+        }
+        function page4(){
+            $('#page4').show();
+            $('#result>.subPage').not('#page4').hide();
+        }
+
+</script>
 </head>
 
 <body>
@@ -489,7 +518,24 @@
         <img class="qaImg" src="https://7110er.github.io/pharm.github.io/image/commonQA_img/9.jpg">
     </div>
     <!-- 圖文內容會顯示的地方 -->
-    <div id="result" class='page'>
+    <div id="result" class='page' >
+        <table class="table table-sm table-striped" style="position: fixed; margin: 0; border-collapse: separate  ;"  id="pageTable" >
+            <thead>
+
+                <tr style=" top: 50px;">
+                    <td class="tableBtn active " style="width: 25%;"><p style="margin: auto;" onclick="page1()">認識疾病</p></td>
+                    <td class="tableBtn " style="width: 25%;"><p style="margin: auto;" onclick="page2()">整體治療</p></td>
+                    <td class="tableBtn " style="width: 25%;"><p style="margin: auto;" onclick="page3()">自我照護</p></td>
+                    <td class="tableBtn " style="width: 25%;"><p style="margin: auto;" onclick="page4()">其他資訊</p></td>
+    
+                </tr>
+            </thead>
+        </table>
+        <div id="page1" class="subPage"  style="margin-top: 40px; display: block;"></div>
+        <div id="page2" class="subPage"  style="margin-top: 40px; display: none;"></div>
+        <div id="page3" class="subPage"  style="margin-top: 40px; display: none;"></div>
+        <div id="page4" class="subPage"  style="margin-top: 40px; display: none;"></div>
+
     </div>
     <!-- 回到最上層 -->
     <a href="javascript:void(0)" class="toTop"> ↑ </a>
