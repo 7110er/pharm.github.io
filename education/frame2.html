@@ -275,6 +275,10 @@
                     $(this).toggleClass('active');
                     $('#pageTable td').not(this).removeClass('active');
                 }
+                $('html,body').animate({ 
+                    scrollTop: 0,
+                }, 700)
+
             })
             // 藥品查詢 : 切換民眾版，專業版
             $('.subDrugBtn').click(function () {
