@@ -73,6 +73,7 @@
         }
     </style>
     <script>
+        // 開始搜尋藥品列表
         google.script.run.withSuccessHandler(showData).getData();
         function showData(dataArray) {
             $(document).ready(function () {
@@ -274,6 +275,7 @@
             var searchText = $(e).parent().next().next().next().next().text();
             google.script.run.withSuccessHandler(createContent).search(searchText);
         }
+        // 查詢按鈕點下去後，抓google試算表第一行標題
         function createTitle(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
                 var dataResult = "<table class='table table-sm table-striped' id='dtable'>" +
@@ -287,15 +289,16 @@
                 document.getElementById('result').innerHTML = dataResult;
             }
         }
+        // 將相對應資料丟到標題右邊
         function createContent(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
                 for (var i = 0; i < dataArray.length; i++) {
                     for (var j = 0; j < dataArray[i].length; j++) {
                         if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
-                            if (isURL(dataArray[i][j])) {
+                            if (isURL(dataArray[i][j])) {   // 適用於仿單或其他連結
                                 document.getElementById("td_" + j).innerHTML = "<a href='" + dataArray[i][j] + "'>" + dataArray[i][j] + "</a>";
                             }
-                            else if (j === 5) {
+                            else if (j === 5) {   // 藥品圖片
                                 document.getElementById("td_" + j).innerHTML =
                                     "<img src='https://7110er.github.io/pharm.github.io/searchDrug/picture/" + dataArray[i][j] + ".jpg' style='max-width:100%'>";
                             }
@@ -303,7 +306,7 @@
                                 document.getElementById("td_" + j).innerHTML = dataArray[i][j];
                             }
                         }
-                        else {
+                        else { // 例如該藥物沒有警語，則警語那欄不顯示
                             document.getElementById("tr_" + j).style.display = 'none';
                         }
                     }

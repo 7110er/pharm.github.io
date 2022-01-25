@@ -178,6 +178,7 @@
             }
         }
         window.addEventListener("load", preventFormSubmit, true);
+        // 創建表單
         function cooperate() {
             google.script.run.withSuccessHandler(get_cooperate).search_cooperate();
             function get_cooperate(dataArray) {
@@ -272,16 +273,6 @@
             }
 
         }
-        function getSum() {
-            dataLength = document.querySelectorAll(".radioTd1").length;
-            var formResult = [];
-            let sum = 0;
-            for (var i = 0; i < dataLength; i++) {
-                formResult[i] = document.querySelector("#form_cooperate input[name='radio" + [i] + "']" + ":checked").value;
-                sum += +(formResult[i])
-            };
-            document.getElementById('sum').innerHTML = '總分 : ' + sum + ' 分';
-        }
         function displayQuiz(e) {
             var x = document.querySelectorAll("tr" + "." + e.value)
             if ($(e).is(':checked')) {
@@ -297,7 +288,18 @@
 
             }
         }
+        function getSum() {
+            dataLength = document.querySelectorAll(".radioTd1").length;
+            var formResult = [];
+            let sum = 0;
+            for (var i = 0; i < dataLength; i++) {
+                formResult[i] = document.querySelector("#form_cooperate input[name='radio" + [i] + "']" + ":checked").value;
+                sum += +(formResult[i])
+            };
+            document.getElementById('sum').innerHTML = '總分 : ' + sum + ' 分';
+        }
 
+        // 送出表單
         function submitForm_symptom() {
             var array = []
             var checkboxes = document.querySelectorAll('#form_symptom input[type=checkbox]:checked')
@@ -388,7 +390,7 @@
             alert('表單已送出')
 
         }
-        function submitForm_cooperate() {
+        function submitForm_cooperate(){
             var id = document.getElementById('id');
             var hisName = document.getElementById('hisName');
             var age = document.getElementById('age');

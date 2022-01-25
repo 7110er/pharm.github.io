@@ -108,11 +108,14 @@
     </style>
     <!-- 程式碼開始 -->
     <script>
-        var date = new Date().toLocaleDateString('zh-TW', { timeZone: 'Asia/Taipei' })
-        $(document).ready(function () {
+       
+        var date = new Date().toLocaleDateString('zh-TW', { timeZone: 'Asia/Taipei' }) // 設定最新日期
+        $(document).ready(function () {// 網頁載入後立刻執行的功能
+            // 刪除藥物按紐
             $('table').on('click', 'input[type="button"]', function (e) {
                 $(this).closest('tr').remove()
             })
+            // 切換頁面
             $('#toPage2').click(function () {
                 $('#page1').hide();
                 $('#page2').show();
@@ -122,10 +125,11 @@
                 $('#page2').hide();
 
             })
+            
             $('#basic input').blur(function () {
                 $(this).css({ 'border': 'none' })
             })
-
+            // 右上角預設值為最新日期
             document.getElementById("date").defaultValue = date;
         })
 
@@ -319,9 +323,11 @@
         function searchGoogleSheet(e) { // 查詢按鈕
             var searchText = $(e).parent().next().next().next().next().text();
             google.script.run.withSuccessHandler(createContent).search(searchText);
+            // 將以點選的藥品顯示在下方空白處
             var x = document.getElementById("text")
             x.innerHTML += "<p>" + $(e).parent().next().text() + "&nbsp;" + "&nbsp;" + $(e).parent().next().next().text() + "</p>"
         }
+        // 創建清單內容
         function createContent(dataArray) {
             var table = document.getElementById("dTable");
             var row = table.insertRow(1);
@@ -332,7 +338,7 @@
                     } else if (i === 2) {
                         var x = row.insertCell();
                         x.innerHTML = dataArray[i];
-                        x.setAttribute('contenteditable', true);
+                        x.setAttribute('contenteditable', true); // 設定為可編輯
                     }
                     else {
                         row.insertCell().innerHTML = dataArray[i]
@@ -344,9 +350,9 @@
             row.insertCell().innerHTML = "<form onsubmit=dose(this)>" + "<input type='text'>" + "</form>" + "<input type='button' class='closeBtn'value='&times;' size='2'>" + "<p>" + "</p>"
 
         }
+        // 連結服藥頻次
         function dose(e) {
             event.preventDefault();
-
             var searchText = $(e).children().val();
             google.script.run.withSuccessHandler(createDose).searchDose(searchText)
             function createDose(dataArray) {
