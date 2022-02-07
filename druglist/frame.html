@@ -125,7 +125,7 @@
                 $('#page2').hide();
 
             })
-            
+            // 讓邊界自動消失
             $('#basic input').blur(function () {
                 $(this).css({ 'border': 'none' })
             })
@@ -133,6 +133,7 @@
             document.getElementById("date").defaultValue = date;
         })
 
+        // 網頁載入後，執行google script上的getData()，把資料(dataArray)傳回下方showData()當參數 
         google.script.run.withSuccessHandler(showData).getData();
         function showData(dataArray) {
             $(document).ready(function () {
@@ -308,6 +309,8 @@
                 });
             });
         }
+        
+        
         //  避免表單有空白的錯誤
         function preventFormSubmit() {
             var forms = document.querySelectorAll('form');
@@ -330,7 +333,7 @@
         // 創建清單內容
         function createContent(dataArray) {
             var table = document.getElementById("dTable");
-            var row = table.insertRow(1);
+            var row = table.insertRow(1);// 點選藥物時新增一列            
             if (dataArray !== undefined && dataArray.length != 0) {
                 for (var i = 0; i < dataArray.length; i++) {
                     if (i === 0) {

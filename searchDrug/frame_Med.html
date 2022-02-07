@@ -269,11 +269,13 @@
 
         }
         window.addEventListener("load", preventFormSubmit, true);
+
+
         // 顯示表格內容
-        function searchGoogleSheet(e) { // 查詢按鈕
-            google.script.run.withSuccessHandler(createTitle).searchTitle();
-            var searchText = $(e).parent().next().next().next().next().text();
-            google.script.run.withSuccessHandler(createContent).search(searchText);
+        function searchGoogleSheet(e) { // 試算表上第一欄的查詢按鈕
+            google.script.run.withSuccessHandler(createTitle).searchTitle();  // 先建立左側標題欄，執行google script上的searchTitle()，把結果 (dataArray)當參數傳回下方createTitle()  
+            var searchText = $(e).parent().next().next().next().next().text(); // 抓查詢按鈕右邊4個欄位的內容(處置代碼)
+            google.script.run.withSuccessHandler(createContent).search(searchText);// 把處置代碼丟進google script的search()，再把結果(dataArray)當參數傳回下方createContent()
         }
         // 查詢按鈕點下去後，抓google試算表第一行標題
         function createTitle(dataArray) {
@@ -351,7 +353,7 @@
 </head>
 
 <body>
-    <!-- jq mobile 測試 -->
+    <!--以下為 jquery mobile  -->
     <div data-role="page" id="pageone" data-theme="a" style="padding: 5px;">
         <div data-role="header">
             <h1><b>藥品查詢系統_專業版</b></h1>

@@ -1,66 +1,82 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script>
-            function a(){
-                var x = 1
-                document.getElementById('123').innerHTML= +(document.getElementById('123').innerHTML)+x
+
+<head>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        function a() {
+            var x = 1
+            document.getElementById('123').innerHTML = +(document.getElementById('123').innerHTML) + x
+        }
+        function b(e) {
+            var y  = ""
+            for (var i = 1; i < 10; i++) {
+                for (var j = 1; j < 10; j++) {
+                    var x = i + "x" + j + "=" + i * j + "<br>"
+                    y += x
+                }
             }
+        console.log(e.value)
+        }
 
-        </script>
-    </head>
-    <body>
-        <button onclick="a()" >點我</button>
-        <div id="123">
-            <button>xxx</button>
+
+        $(document).ready(function(){
+
+            $('button').click(function(){
+                console.log(this)
+                // $(this).parent().css({'background-color':'red','color':'blue'})
+                // $(this).next().css({'background-color':'red','color':'blue'})
+                $(this).next().css({'background-color':'red','color':'blue'})
+                // $(this).siblings().css({'background-color':'red','color':'blue'})
+                
+
+            })
+            $('p').click(function(){
+                console.log(this)
+            })
+            
+        //     $('#789').click(function(){
+        //         $('#789_div').next().next().css({'background-color':'red','color':'blue'})
+        // })
+    })
+
+    </script>
+</head>
+
+<body>
+    <div>
+
+        <button id="789" value="789">點我1</button>
+        <i class="bi bi-alarm"></i>
+        <i class="fa fa-trash"></i>
+        <div id="789_div">
+            <p>我是p1</p>
         </div>
-        <p>腦中風為一種急症。主要是因腦部的血流受阻無法供應腦部氧氣的需求，而發生腦功能障礙。</p>
-        <p>腦中風是造成全球人口死亡或失能的主要原因，若無即時接受有效治療，通常會遺留下不同程度的神經功能障礙。</p>
-        <p>後遺症也是我國成人失能的主因之一，造成病患與照顧者沈重的負擔，也嚴重影響生活品質。</p>
-        <h4><i class="fa fa-caret-right"><b>&nbsp;腦中風的類型有三種 :</b></i></h4>
-        <ol>
-            <li>缺血性腦中風(腦梗塞)
-                <ul>
-                    <li>腦血管本身因病變或血栓而狹窄；導致腦組織壞死，成為腦血栓症及腦栓塞。</li>
-                </ul>
-            </li>
-            <li>出血性腦中風
-                <ul>
-                    <li>因腦血管破裂造成血液流入組織，形成血塊壓迫到腦組織。常見有腦組織內出血與蜘蛛膜下腔出血。</li>
-                </ul>
-            </li>
-            <li>暫時性腦缺血發作(小中風)
-                <ul>
-                    <li>因暫時腦部缺血引起中風症狀，一般在24小時內可恢復，且不會留下後遺症。</li>
-                </ul>
-            </li>
-        </ol>
-        <h4><i class="fa fa-caret-right"><b>&nbsp;腦中風可能出現的症狀為:</b></i></h4>
-        <ol>
-            <li>突然一眼或兩眼視力模糊</li>
-            <li>突然半側臉部或肢體麻木、無力</li>
-            <li>突然說話與反應遲緩</li>
-            <li>突然耳鳴暈眩，平衡感喪失，無故跌倒</li>
-            <li>突然不明原因劇烈頭痛</li>
-        </ol>
+
+        <button  value="456">點我2</button>
+
+        <div>
+            <p>我是p2</p>
+        </div>
+    
+        <button  value="123">點我3</button>
+    </div>
+    <div>
+
+        456456
+    </div>
+
+    
+   l<input type="radio" name="1" value="10" id="" onclick="b(this)">
+   l<input type="radio" name="1" value="20" id="" onclick="b(this)">
+
+    <div id="123">
+    </div>
 
 
-        
-        "
-        <p><b style='font-size:24px'>
-                <center>認識腦中風</center>
-            </b></p>
-        <p><b style='font-size:16px'>腦中風為一種急症，是造成全球人口死亡或失能的主要原因。<br> 主要是因腦部的血流受阻無法供應腦部氧氣的需求，而發生腦功能障礙；若無即時接受有效治療，通常會遺留下不同程度的神經功能障礙。<br> 
-後遺症也是成人失能的主因之一，造成病患與照顧者沈重的負擔，也嚴重影響生活品質。
-                <br></b></p>
-        <p><b style='font-size:22px'>腦中風的類型有三種：</b><br></p>
-        <p><b style='font-size:19px'>1.缺血性腦中風(腦梗塞)</b><br></p>腦血管本身因病變或血栓而狹窄；導致腦組織壞死，功能失調，成為腦血栓症及腦栓塞。<br>
-    　<p><b style='font-size:19px'>2.出血性腦中風</b><br></p> 因腦血管破裂造成血液流入組織，形成血塊壓迫到腦組織。常見有腦組織內出血與蜘蛛膜下腔出血。<br>
-    　<p><b style='font-size:19px'>3.暫時性腦缺血發作(小中風)</b><br></p>因暫時腦部缺血引起中風症狀，一般在24小時內可完全恢復，且不會留下後遺症。<br>
-</b></p>
-    　<p><b style='font-size:22px'>腦中風可能出現的症狀：</b><br></p>
+</body>
 
-"
-    </body>
 </html>
