@@ -314,7 +314,11 @@
                     }
                 }
             }
+            // 問題回報用，辨識現在要回報的是哪個藥
+            var name1 = $('#td_2').text()
+            $('#drugName').html(name1)
         }
+        
         // 判斷string 是否為網址
         function isURL(string) {
             let url;
