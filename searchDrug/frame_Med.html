@@ -298,7 +298,7 @@
                     for (var j = 0; j < dataArray[i].length; j++) {
                         if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
                             if (isURL(dataArray[i][j])) {   // 適用於仿單或其他連結
-                                document.getElementById("td_" + j).innerHTML = "<a href='" + dataArray[i][j] + "'>" + dataArray[i][j] + "</a>";
+                                document.getElementById("td_" + j).innerHTML = "<a href='" + dataArray[i][j] + "' target='_blank'>" + dataArray[i][j] + "</a>";
                             }
                             else if (j === 5) {   // 藥品圖片
                                 document.getElementById("td_" + j).innerHTML =
