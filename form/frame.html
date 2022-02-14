@@ -276,8 +276,8 @@
         function displayQuiz(e) {
             var x = document.querySelectorAll("tr" + "." + e.value)
             if ($(e).is(':checked')) {
-
-                $(x).closest('table').show()
+                
+                $(x).closest('table').show() // Return the first ancestor of x
                 $(x).siblings('tr').children('.quizTd2').addClass('qwe')
                 $(x).siblings('tr').children('.radioTd2').children('.option').children('.radioInput').addClass('asd')
 

@@ -70,12 +70,15 @@
         th.dtfc-fixed-left {
             background-color: #fafafa;
         }
+
         .ui-navbar li:last-child .ui-btn {
             margin: auto;
         }
+
         .ui-navbar li .ui-btn {
             border-right-width: 1px;
         }
+
         .ui-header .ui-title {
             margin: 0 1em;
         }
@@ -281,106 +284,51 @@
         window.addEventListener("load", preventFormSubmit, true);
         // 顯示表格內容
 
-        function createTable(dataArray) {
-            if (dataArray && dataArray !== undefined && dataArray.length != 0) {
+        function createTitle(dataArray) {
+            if (dataArray != undefined && dataArray.length != 0) {
+                var dataResult = "<table class='table table-sm table-striped' id='dtable'>" +
+                    "<thead style='white-space: normal'>"
+                for (var i = 0; i < dataArray.length; i++) {
+                    for (var j = 0; j < 5; j++) {
+                        dataResult += "<tr id='tr_" + j + "'>" + "<td>" + dataArray[i][j] + "</td>" + "<td id='td_" + j + "'>" + "</td>" + "</tr>"
+                    }
+                    for (var j = 5; j < 7; j++) {
+                        dataResult += "<tr id='tr_" + j + "'>" + "<td id='td_" + j + "' colspan='2'>" + "</td>" + "</tr>"
+                    }
+                }
+                dataResult += "</thead>" + "</table>"
+                document.getElementById('result').innerHTML = dataResult;
 
-                var result1 = "<table class='table table-sm table-striped' id='dtable' >" +
-                    "<thead style='white-space: normal'>" +
-
-                    "<tr>"
-                for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 0; j < 1; j++) {
-                        if (dataArray[i][j] == '') {
-                            result1 += '';
-                        }
-                        else {
-                            result1 += "<th scope='col' style='width:90px' >中文名</th>" + "<td >" + dataArray[i][j] + "</td>";
-                        }
-                    }
-                }
-                result1 +=
-                    "</tr>" +
-                    "<tr>" +
-                    "<th scope='col'  >英文名</th>"
-                for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 1; j < 2; j++) {
-                        result1 += "<td>" + dataArray[i][j] + "</td>";
-                    }
-                }
-                document.getElementById('drugName').innerHTML = result1;
-                result1 +=
-                    "</tr>" +
-                    "<tr>" +
-                    "<th scope='col'>主成分</th>"
-                for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 2; j < 3; j++) {
-                        result1 += "<td>" + dataArray[i][j] + "</td>";
-                    }
-                }
-                result1 +=
-                    "</tr>" +
-                    "<tr>"
-                for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 3; j < 4; j++) {
-                        if (dataArray[i][j] == '') {
-                            result1 += '';
-                        }
-                        else {
-                            result1 += "<th scope='col' style='width:90px' >適應症</th>" + "<td >" + dataArray[i][j] + "</td>";
-                        }
-                    }
-                }
-                result1 +=
-                    "</tr>" +
-                    "<tr>"
-                for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 4; j < 5; j++) {
-                        if (dataArray[i][j] == '') {
-                            result1 += '';
-                        }
-                        else {
-                            result1 += "<th scope='col' >警語</th>" + "<td >" + dataArray[i][j] + "</td>";
-                        }
-                    }
-                }
-                result1 +=
-                    "</tr>" +
-                    "<tr>"
-                for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 5; j < 6; j++) {
-                        if (isURL(dataArray[i][j])) {
-                            result1 += "";
-                        }
-                        else {
-                            result1 += "<td colspan='2'  ><img src='https://7110er.github.io/pharm.github.io/searchDrug/picture/" + dataArray[i][j] + ".jpg' style='max-width:100%'></td>";
-                        }
-                    }
-                }
-                result1 +=
-                    "</tr>" +
-                    "<tr>"
-                for (var i = 0; i < dataArray.length; i++) {
-                    for (var j = 6; j < 7; j++) {
-                        if (isURL(dataArray[i][j])) {
-                            result1 += "<td colspan='2'  ><img src='" + dataArray[i][j] + "'  style='max-width:100%'></td>"
-                        }
-                        else {
-                            result1 += "";
-                        }
-                    }
-                }
-                result1 +=
-                    "</tr>" +
-                    "</thead>" +
-                    "</table>";
-                var div = document.getElementById('result');
-                div.innerHTML = result1;
             }
-            else {
+        }
+        function createContent(dataArray) {
+            if (dataArray !== undefined && dataArray.length != 0) {
+                for (var i = 0; i < dataArray.length; i++) {
+                    for (var j = 0; j < dataArray[i].length; j++) {
+                        if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
+                            if (j === 5) {   // 藥品圖片
+                                document.getElementById("td_" + j).innerHTML =
+                                    "<img src='https://7110er.github.io/pharm.github.io/searchDrug/picture/" + dataArray[i][j] + ".jpg' style='max-width:100%'>";
+                            }
+                            else if (j === 6) {   // 藥品圖片
+                                document.getElementById("td_" + j).innerHTML =
+                                    "<img src='" + dataArray[i][j] + "' style='max-width:100%'>";
+                            }
 
-                var div = document.getElementById('result');
-                div.innerHTML = "沒有找到相關藥物，請重新輸入。";
+                            else {
+                                document.getElementById("td_" + j).innerHTML = dataArray[i][j];
+                            }
+                        }
+                        else { // 例如該藥物沒有警語，則警語那欄不顯示
+                            document.getElementById("tr_" + j).style.display = 'none';
+                        }
+                    }
+                }
             }
+            // 問題回報用，辨識現在要回報的是哪個藥
+            var name1 = $('#td_2').text()
+            $('#drugName').html(name1)
+
         }
         // 判斷string 是否為網址
         function isURL(string) {
@@ -397,8 +345,9 @@
         // 連結Google Script　並且顯示資料
 
         function searchGoogleSheet(divElement) {
+            google.script.run.withSuccessHandler(createTitle).searchTitle();
             var searchText = $(divElement).parent().next().next().next().text();
-            google.script.run.withSuccessHandler(createTable).search(searchText);
+            google.script.run.withSuccessHandler(createContent).search(searchText);
         }
         // 問題回報
         function getValue() {
