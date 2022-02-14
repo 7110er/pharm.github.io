@@ -276,7 +276,7 @@
         function displayQuiz(e) {
             var x = document.querySelectorAll("tr" + "." + e.value)
             if ($(e).is(':checked')) {
-                
+
                 $(x).closest('table').show() // Return the first ancestor of x
                 $(x).siblings('tr').children('.quizTd2').addClass('qwe')
                 $(x).siblings('tr').children('.radioTd2').children('.option').children('.radioInput').addClass('asd')
@@ -287,16 +287,6 @@
                 $(x).siblings('tr').children('.radioTd2').children('.option').children('.radioInput').removeClass('asd')
 
             }
-        }
-        function getSum() {
-            dataLength = document.querySelectorAll(".radioTd1").length;
-            var formResult = [];
-            let sum = 0;
-            for (var i = 0; i < dataLength; i++) {
-                formResult[i] = document.querySelector("#form_cooperate input[name='radio" + [i] + "']" + ":checked").value;
-                sum += +(formResult[i])
-            };
-            document.getElementById('sum').innerHTML = '總分 : ' + sum + ' 分';
         }
 
         // 送出表單
@@ -390,7 +380,7 @@
             alert('表單已送出')
 
         }
-        function submitForm_cooperate(){
+        function submitForm_cooperate() {
             var id = document.getElementById('id');
             var hisName = document.getElementById('hisName');
             var age = document.getElementById('age');
@@ -404,6 +394,9 @@
                     formResult[i] = '沒資料';
                 }
             };
+            if($('#span_sum').text()!=""){
+                formResult.push($("#span_sum").text())
+            }
             formResult.push($("input[name='cooperateBtn']:checked").val())
             var rowData = {
                 id: id.value,
@@ -414,6 +407,8 @@
             }
             google.script.run.addData_cooperate(rowData);
             document.getElementById('form_cooperate').reset();
+            document.getElementById('sum').innerHTML="";
+
             alert('表單已送出')
 
         }
@@ -537,6 +532,24 @@
                 }
             }
         }
+        $(document).ready(function(){
+
+            $("#form_cooperate").change(function () {
+                $('#form_cooperate input[type=radio]').each(function () {
+                    var dataLength = document.querySelectorAll(".radioTd1").length;
+                    var formResult = [];
+                    let sum = 0;
+                    for (var i = 0; i < dataLength; i++) {
+                        formResult[i] = document.querySelector("#form_cooperate input[name='radio" + [i] + "']" + ":checked").value;
+                        sum += +(formResult[i])
+                    };
+                    if ($(this).val() != '') {
+                        $('#sum').html("總分 : "+"<span id='span_sum'>"+ sum + "</span>"+" 分")
+                    }
+                })
+            })
+        })
+        
     </script>
 </head>
 
@@ -975,7 +988,6 @@
 
                 <div id="result_cooperate"></div>
                 <ul id="sum"></ul>
-                <button type="button" class="btn" onclick="getSum()">總分</button>
                 <button type="button" class="btn" onclick="submitForm_cooperate()">配合度送出</button>
                 <button type="button" class="reset">重置</button>
                 <label class='btn' for="cooperateBtn">機構&nbsp;<input id="cooperateBtn" name="cooperateBtn"

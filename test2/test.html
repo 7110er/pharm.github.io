@@ -31,6 +31,7 @@
             float: left;
             overflow: hidden;
             display: block;
+            z-index: 1;
         }
 
         .page {
@@ -64,21 +65,25 @@
         $(document).ready(function () {
             google.script.run.withSuccessHandler(showData).getData();
             function showData(dataArray) {
-                    for (var i = 0; i < 5; i++) {
-                    $('#'+'data-table_'+i).DataTable({
+
+                for (var i = 0; i < 7; i++) {
+
+                    $('#' + 'data-table_' + i).DataTable({
                         scrollX: true,
                         scrollCollapse: true,
                         paging: false,
                         data: dataArray[i],
                         columns: [
-                            { "title": "內容名稱" },
+                            { "title": "名稱" },
                             { "title": "連結" },
                             { "title": "說明" },
                             { "title": "說明" },
                         ],
-                    });
-                };
 
+                    });
+
+                };
+                
             }
 
             $('.btn').click(function () {
@@ -104,25 +109,38 @@
         <a href="javascript:void(0)" id="page2" class="btn">評鑑簡報</a>
         <a href="javascript:void(0)" id="page3" class="btn">醫院評鑑</a>
         <a href="javascript:void(0)" id="page4" class="btn">醫院QA</a>
+        <a href="javascript:void(0)" id="page5" class="btn">教學QA</a>
+        <a href="javascript:void(0)" id="page6" class="btn">教案</a>
 
     </div>
     <div id="_page0" class="page" style="display: block;">
         <table id="data-table_0" class="display compact table-hover table-striped  "
             style="width: 100%; overflow: auto;">
-            <!-- TABLE DATA IS ADDED BY THE showData() JAVASCRIPT FUNCTION ABOVE -->
         </table>
     </div>
     <div id="_page1" class="page">
-        <table id="data-table_1"></table>
+        <table id="data-table_1" class="display compact table-hover table-striped  "
+            style="width: 100%; overflow: auto;"></table>
     </div>
     <div id="_page2" class="page">
-        <table id="data-table_2"></table>
+        <table id="data-table_2" class="display compact table-hover table-striped  "
+            style="width: 100%; overflow: auto;"></table>
     </div>
     <div id="_page3" class="page">
-        <table id="data-table_3"></table>
+        <table id="data-table_3" class="display compact table-hover table-striped  "
+            style="width: 100%; overflow: auto;"></table>
     </div>
     <div id="_page4" class="page">
-        <table id="data-table_4"></table>
+        <table id="data-table_4" class="display compact table-hover table-striped  "
+            style="width: 100%; overflow: auto;"></table>
+    </div>
+    <div id="_page5" class="page">
+        <table id="data-table_5" class="display compact table-hover table-striped  "
+            style="width: 100%; overflow: auto;"></table>
+    </div>
+    <div id="_page6" class="page">
+        <table id="data-table_6" class="display compact table-hover table-striped  "
+            style="width: 100%; overflow: auto;"></table>
     </div>
 
 </body>
