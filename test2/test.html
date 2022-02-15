@@ -58,6 +58,14 @@
             border-color: rgb(1, 26, 93);
             float: left;
         }
+        .text-wrap {
+            white-space: normal;
+            word-wrap: break-word;
+        }
+        .width-200 {
+            width: 200px;
+        }
+
     </style>
 
     <script>
@@ -65,27 +73,33 @@
         $(document).ready(function () {
             google.script.run.withSuccessHandler(showData).getData();
             function showData(dataArray) {
-
                 for (var i = 0; i < 7; i++) {
-
                     $('#' + 'data-table_' + i).DataTable({
                         scrollX: true,
                         scrollCollapse: true,
                         paging: false,
                         data: dataArray[i],
+                        fixedColumns: {
+                            left: 1
+                        },
                         columns: [
                             { "title": "名稱" },
                             { "title": "連結" },
                             { "title": "說明" },
                             { "title": "說明" },
                         ],
-
+                        columnDefs: [
+                            {
+                                render: function (data, type, full, meta) {
+                                    return "<div class='text-wrap width-200'>" + data + "</div>";
+                                },
+                                targets: 1
+                            }
+                        ],
                     });
-
+                    $('#data-table').DataTable().columns.adjust().draw();
                 };
-                
             }
-
             $('.btn').click(function () {
                 var check = $(this).hasClass('active');
                 var then = "_" + this.id
