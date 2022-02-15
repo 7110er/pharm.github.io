@@ -282,8 +282,18 @@
 
         }
         window.addEventListener("load", preventFormSubmit, true);
+        // 連結Google Script　並且顯示資料
+        
+        function searchGoogleSheet(divElement) {
+            google.script.run.withSuccessHandler(createTitle).searchTitle();
+            setTimeout(searchContent,1000)
+            
+            function searchContent(){
+                var searchText = $(divElement).parent().next().next().next().text();
+                google.script.run.withSuccessHandler(createContent).search(searchText)
+            }
+        }
         // 顯示表格內容
-
         function createTitle(dataArray) {
             if (dataArray != undefined && dataArray.length != 0) {
                 var dataResult = "<table class='table table-sm table-striped' id='dtable'>" +
@@ -341,13 +351,6 @@
             }
 
             return url.protocol === "http:" || url.protocol === "https:";
-        }
-        // 連結Google Script　並且顯示資料
-
-        function searchGoogleSheet(divElement) {
-            google.script.run.withSuccessHandler(createTitle).searchTitle();
-            var searchText = $(divElement).parent().next().next().next().text();
-            google.script.run.withSuccessHandler(createContent).search(searchText);
         }
         // 問題回報
         function getValue() {
