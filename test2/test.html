@@ -12,6 +12,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- 連結jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- 連結jquery moblie -->
+
+    <link rel="stylesheet" href="https://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="https://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
 
     <!-- 連結Data table -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
@@ -58,17 +64,19 @@
             border-color: rgb(1, 26, 93);
             float: left;
         }
-        
+
         .text-wrap {
             white-space: normal;
             word-wrap: break-word;
         }
+
         .width-200 {
             width: 200px;
         }
-        table{
-           width: 100%;
-           overflow: auto;
+
+        table {
+            width: 100%;
+            overflow: auto;
         }
     </style>
 
@@ -86,14 +94,6 @@
                             { "title": "名稱" },
                             { "title": "連結" },
                             { "title": "說明" },
-                        ],
-                        columnDefs: [
-                            {
-                                render: function (data, type, full, meta) {
-                                    return "<div class='text-wrap width-200'>" + data + "</div>";
-                                },
-                                targets: 0
-                            }
                         ],
                     });
                     $('#' + 'data-table_' + i).DataTable().columns.adjust().draw();
@@ -113,41 +113,71 @@
                 }
             });
         })
+        function getVal(data) {
+            var text = $(data).parent().next().text()
+            var index = $(data).closest('table').attr('id')
+            var e = parseInt(index.slice(11))
+            google.script.run.withSuccessHandler(showData_2).x(text,e);
+        }
+        function showData_2(e) {
+            $('#content').html(e)
+        }
+
     </script>
 </head>
 
 <body>
-    <div class="homeBar" id="homeBar">
-        <!-- javascript:void(0)意思是點下去回傳0(false)不做事 -->
-        <a href="javascript:void(0)" id="page0" class="btn active">教學資源</a>
-        <a href="javascript:void(0)" id="page1" class="btn">評核表單</a>
-        <a href="javascript:void(0)" id="page2" class="btn">評鑑簡報</a>
-        <a href="javascript:void(0)" id="page3" class="btn">醫院評鑑</a>
-        <a href="javascript:void(0)" id="page4" class="btn">醫院QA</a>
-        <a href="javascript:void(0)" id="page5" class="btn">教學QA</a>
-        <a href="javascript:void(0)" id="page6" class="btn">教案</a>
 
-    </div>
-    <div id="_page0" class="page" style="display: block;">
-        <table id="data-table_0" ></table>
-    </div>
-    <div id="_page1" class="page" >
-        <table id="data-table_1" ></table>
-    </div>
-    <div id="_page2" class="page">
-        <table id="data-table_2" ></table>
-    </div>
-    <div id="_page3" class="page">
-        <table id="data-table_3" ></table>
-    </div>
-    <div id="_page4" class="page">
-        <table id="data-table_4" ></table>
-    </div>
-    <div id="_page5" class="page">
-        <table id="data-table_5" ></table>
-    </div>
-    <div id="_page6" class="page">
-        <table id="data-table_6" ></table>
+    <div data-role="page" id="pageone" style="padding: 5px;">
+        <div data-role="main">
+            <!--搜尋表單  -->
+            <div class="homeBar" id="homeBar">
+                <!-- javascript:void(0)意思是點下去回傳0(false)不做事 -->
+                <a href="javascript:void(0)" id="page0" class="btn active">教學資源</a>
+                <a href="javascript:void(0)" id="page1" class="btn">評核表單</a>
+                <a href="javascript:void(0)" id="page2" class="btn">評鑑簡報</a>
+                <a href="javascript:void(0)" id="page3" class="btn">醫院評鑑</a>
+                <a href="javascript:void(0)" id="page4" class="btn">醫院QA</a>
+                <a href="javascript:void(0)" id="page5" class="btn">教學QA</a>
+                <a href="javascript:void(0)" id="page6" class="btn">教案</a>
+
+            </div>
+            <div id="_page0" class="page" style="display: block;">
+                <table id="data-table_0"></table>
+            </div>
+            <div id="_page1" class="page">
+                <table id="data-table_1"></table>
+            </div>
+            <div id="_page2" class="page">
+                <table id="data-table_2"></table>
+            </div>
+            <div id="_page3" class="page">
+                <table id="data-table_3"></table>
+            </div>
+            <div id="_page4" class="page">
+                <table id="data-table_4"></table>
+            </div>
+            <div id="_page5" class="page">
+                <table id="data-table_5"></table>
+            </div>
+            <div id="_page6" class="page">
+                <table id="data-table_6"></table>
+            </div>
+
+            <div data-role="popup" id="myPopup" class="ui-content" data-dismissible="false">
+                <a href="#" data-rel="back"
+                    class="ui-btn ui-corner-all ui-shadow ui-btn ui-icon-delete ui-btn-icon-notext ui-btn-right">關閉</a>
+                <br>
+                <div id="content">
+
+                </div>
+            </div>
+
+        </div>
+        <div data-role="footer">
+            <h1><b>藥品查詢系統_民眾版</b></h1>
+        </div>
+
     </div>
 
 </body>
