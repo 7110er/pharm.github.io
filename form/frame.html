@@ -300,11 +300,13 @@
             var hisName = document.getElementById('hisName');
             var age = document.getElementById('age');
             var comment = document.getElementById('comment');
+            var applicant = document.getElementById('applicant');
             var rowData = {
                 id: id.value,
                 name: hisName.value,
                 age: age.value,
                 comment: comment.value,
+                applicant: applicant.value,
                 dataResult: array
             }
             google.script.run.addData_symptom(rowData);
@@ -316,6 +318,7 @@
             var hisName = document.getElementById('hisName');
             var age = document.getElementById('age');
             var comment = document.getElementById('comment');
+            var applicant = document.getElementById('applicant');
             var x = document.querySelectorAll('.qwe');
 
             var z = [];
@@ -337,6 +340,7 @@
                 name: hisName.value,
                 age: age.value,
                 comment: comment.value,
+                applicant: applicant.value,
                 dataResult: w,
             }
             google.script.run.addData_quiz(rowData);
@@ -349,6 +353,7 @@
             var hisName = document.getElementById('hisName');
             var age = document.getElementById('age');
             var comment = document.getElementById('comment');
+            var applicant = document.getElementById('applicant');
             var formResult = [];
             dataLength = document.querySelectorAll(".radioTd3").length;
             for (var i = 0; i < 18; i++) {
@@ -372,6 +377,7 @@
                 name: hisName.value,
                 age: age.value,
                 comment: comment.value,
+                applicant: applicant.value,
                 dataResult: formResult
             }
 
@@ -385,6 +391,7 @@
             var hisName = document.getElementById('hisName');
             var age = document.getElementById('age');
             var comment = document.getElementById('comment');
+            var applicant = document.getElementById('applicant');
             dataLength = document.querySelectorAll(".radioTd1").length;
             var formResult = [];
             for (var i = 0; i < dataLength; i++) {
@@ -394,7 +401,7 @@
                     formResult[i] = '沒資料';
                 }
             };
-            if($('#span_sum').text()!=""){
+            if ($('#span_sum').text() != "") {
                 formResult.push($("#span_sum").text())
             }
             formResult.push($("input[name='cooperateBtn']:checked").val())
@@ -403,11 +410,12 @@
                 name: hisName.value,
                 age: age.value,
                 comment: comment.value,
+                applicant: applicant.value,
                 dataResult: formResult
             }
             google.script.run.addData_cooperate(rowData);
             document.getElementById('form_cooperate').reset();
-            document.getElementById('sum').innerHTML="";
+            document.getElementById('sum').innerHTML = "";
 
             alert('表單已送出')
 
@@ -532,7 +540,7 @@
                 }
             }
         }
-        $(document).ready(function(){
+        $(document).ready(function () {
 
             $("#form_cooperate").change(function () {
                 $('#form_cooperate input[type=radio]').each(function () {
@@ -544,12 +552,12 @@
                         sum += +(formResult[i])
                     };
                     if ($(this).val() != '') {
-                        $('#sum').html("總分 : "+"<span id='span_sum'>"+ sum + "</span>"+" 分")
+                        $('#sum').html("總分 : " + "<span id='span_sum'>" + sum + "</span>" + " 分")
                     }
                 })
             })
         })
-        
+
     </script>
 </head>
 
@@ -576,6 +584,12 @@
                 onfocus="this.value=''">
             <label for="comment">備註欄 :&nbsp;</label><input id="comment" type="text" style="width: 15%;"
                 onfocus="this.value=''">
+            <label for="applicant">填寫者 :&nbsp;</label><select name="applicant" id="applicant">
+                <option value="C6">C6</option>
+                <option value="L6">L6</option>
+                <option value="R8">R8</option>
+                <option value="O5">O5</option>
+            </select>
         </form>
         <br>
         <div class="result">
