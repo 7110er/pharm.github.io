@@ -64,19 +64,16 @@
             border-color: rgb(1, 26, 93);
             float: left;
         }
-
-        .text-wrap {
+        tbody td  {
             white-space: normal;
             word-wrap: break-word;
         }
 
-        .width-200 {
-            width: 200px;
-        }
 
         table {
             width: 100%;
             overflow: auto;
+            
         }
     </style>
 
@@ -85,19 +82,21 @@
         $(document).ready(function () {
             google.script.run.withSuccessHandler(showData).getData();
             function showData(dataArray) {
-                for (var i = 0; i < 7; i++) {
+                for (var i = 0; i < 7; i++) { // 有幾個工作表i就要小於多少
                     $('#' + 'data-table_' + i).DataTable({
-                        scrollX: true,
-                        scrollCollapse: true,
+                        scrollY:false,
+                        scrollX: false,
+                        scrollCollapse: false,
                         data: dataArray[i],
                         columns: [
                             { "title": "名稱" },
                             { "title": "連結" },
                             { "title": "說明" },
-                        ],
+                        ], 
+
                     });
                     $('#' + 'data-table_' + i).DataTable().columns.adjust().draw();
-                    $('#' + 'data-table_' + i).addClass('display compact table-hover table-striped')
+                    $('#' + 'data-table_' + i).addClass('display wrap compact table-hover table-striped')
 
                 };
             }
@@ -115,12 +114,14 @@
         })
         function getVal(data) {
             var text = $(data).parent().next().text()
-            var index = $(data).closest('table').attr('id')
+            var index = $(data).closest('table').attr('id')  // 取得所在table的id名稱ex:data-table_1
             var e = parseInt(index.slice(11))
-            google.script.run.withSuccessHandler(showData_2).x(text,e);
+            // 宣告變數e將data-table_1轉為1(數字)，當google script上searchData的第二個參數，
+            // 讓他可以搜尋按鈕所在的工作表位置，否則所有按鈕都執行getVal這function卻不知道要去哪個工作表內找資料
+            google.script.run.withSuccessHandler(showData_2).searchData(text, e);
         }
-        function showData_2(e) {
-            $('#content').html(e)
+        function showData_2(a) {
+            $('#content').html(a)
         }
 
     </script>
@@ -140,6 +141,9 @@
                 <a href="javascript:void(0)" id="page4" class="btn">醫院QA</a>
                 <a href="javascript:void(0)" id="page5" class="btn">教學QA</a>
                 <a href="javascript:void(0)" id="page6" class="btn">教案</a>
+                <!-- 按鈕順序跟底下div id的順序要跟google試算表上工作表順序一模一樣!!!，不然會抓錯 -->
+                <!-- 按鈕順序跟底下div id的順序要跟google試算表上工作表順序一模一樣!!!，不然會抓錯 -->
+                <!-- 按鈕順序跟底下div id的順序要跟google試算表上工作表順序一模一樣!!!，不然會抓錯 -->
 
             </div>
             <div id="_page0" class="page" style="display: block;">
