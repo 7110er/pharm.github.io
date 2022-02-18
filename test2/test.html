@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 
 <head>
     <meta charset="UTF-8">
@@ -65,10 +65,18 @@
             float: left;
         }
 
+        /* .text-wrap {
+            white-space: normal;
+            word-wrap: break-word;
+        }
+
+        .width-200 {
+            width: 200px;
+        } */
+
         table {
             width: 100%;
             overflow: auto;
-            
         }
     </style>
 
@@ -77,17 +85,24 @@
         $(document).ready(function () {
             google.script.run.withSuccessHandler(showData).getData();
             function showData(dataArray) {
-                for (var i = 0; i < 7; i++) { // 有幾個工作表i就要小於多少
+                for (var i = 0; i < 7; i++) {// 有幾個工作表i就要小於多少
                     $('#' + 'data-table_' + i).DataTable({
-                        scrollY:false,
-                        scrollX: false,
-                        scrollCollapse: false,
+                        scrollX: true,
+                        scrollCollapse: true,
                         data: dataArray[i],
                         columns: [
                             { "title": "名稱" },
                             { "title": "連結" },
                             { "title": "說明" },
                         ],
+                    //     columnDefs: [
+                    //     {
+                    //         render: function (data, type, full, meta) {
+                    //             return "<div class='text-wrap width-200'>" + data + "</div>";
+                    //         },
+                    //         targets: [0,1,2]
+                    //     }
+                    // ],
 
                     });
                     $('#' + 'data-table_' + i).DataTable().columns.adjust().draw();
@@ -139,6 +154,7 @@
                 <!-- 按鈕順序跟底下div id的順序要跟google試算表上工作表順序一模一樣!!!，不然會抓錯 -->
                 <!-- 按鈕順序跟底下div id的順序要跟google試算表上工作表順序一模一樣!!!，不然會抓錯 -->
                 <!-- 按鈕順序跟底下div id的順序要跟google試算表上工作表順序一模一樣!!!，不然會抓錯 -->
+
 
             </div>
             <div id="_page0" class="page" style="display: block;">
