@@ -165,13 +165,13 @@
                 $(this).parent().trigger("reset");
                 $('#sum').html('');
             })
-            ICOPE();
-            cooperate();
-            quiz();
             $('.satis').click(function () {
                 $(this).addClass('active1');
                 $('.satis').not(this).removeClass('active1')
             })
+            ICOPE();
+            cooperate();
+            quiz();
         });
         // 避免表單空白
         function preventFormSubmit() {
