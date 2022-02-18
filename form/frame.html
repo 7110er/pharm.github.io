@@ -94,7 +94,8 @@
         #checkbox,
         #form_quiz,
         #form_ICOPE,
-        #form_cooperate {
+        #form_cooperate,
+        #satisfaction {
             display: none;
         }
 
@@ -167,6 +168,10 @@
             ICOPE();
             cooperate();
             quiz();
+            $('.satis').click(function () {
+                $(this).addClass('active1');
+                $('.satis').not(this).removeClass('active1')
+            })
         });
         // 避免表單空白
         function preventFormSubmit() {
@@ -420,6 +425,26 @@
             alert('表單已送出')
 
         }
+        function submitsatisfaction() {
+            var id = document.getElementById('id');
+            var hisName = document.getElementById('hisName');
+            var age = document.getElementById('age');
+            var comment = document.getElementById('comment');
+            var applicant = document.getElementById('applicant');
+            var formResult = $(".satis.active1").val();
+            var rowData = {
+                id: id.value,
+                name: hisName.value,
+                age: age.value,
+                comment: comment.value,
+                applicant: applicant.value,
+                dataResult: formResult
+            }
+            google.script.run.addData_satisfaction(rowData);
+            // document.getElementById('satisfaction').reset();
+            alert('表單已送出')
+
+        }
         //查詢病人資料
         function searchData() {
             var x = document.getElementById('searchId').value;
@@ -427,6 +452,7 @@
             google.script.run.withSuccessHandler(createData_cooperate).searchData_cooperate(x);
             google.script.run.withSuccessHandler(createData_symptom).searchData_symptom(x);
             google.script.run.withSuccessHandler(createData_quiz).searchData_quiz(x);
+            google.script.run.withSuccessHandler(createData_satisfaction).searchData_satisfaction(x);
         }
         function createData_cooperate(dataArray) {
             if (dataArray !== undefined && dataArray.length != 0) {
@@ -540,6 +566,35 @@
                 }
             }
         }
+        function createData_satisfaction(dataArray) {
+            if (dataArray !== undefined && dataArray.length != 0) {
+                var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate; width:auto'; >" +
+                    "<thead >"
+                for (var i = 1; i < dataArray.length; i++) {
+                    dataResult += "<tr>" + "<td id='td_satis_" + i + "' class='td'>" + "</td>"
+                    for (var j = 0; j < dataArray[i].length; j++) {
+                        dataResult += "<td>" + dataArray[i][j] + "</td>"
+                    }
+                    dataResult += "</tr>"
+                }
+                dataResult +=
+                    "</thead>" +
+                    "</table>";
+                document.getElementById('dataResult_satisfaction').innerHTML = dataResult;
+                for (var i = 0; i < 1; i++) {
+                    for (var j = 0; j < dataArray[i].length; j++) {
+                        var k = j + 1
+                        if (dataArray[i][j] != undefined && dataArray[i][j] != "") {
+                            document.getElementById("td_satis_" + k).innerHTML = dataArray[i][j];
+                        }
+                        else {
+                            document.getElementById("td_satis_" + k).classList.remove('td');
+                        }
+                    }
+                }
+            }
+
+        }
         $(document).ready(function () {
 
             $("#form_cooperate").change(function () {
@@ -557,7 +612,6 @@
                 })
             })
         })
-
     </script>
 </head>
 
@@ -988,7 +1042,7 @@
 
         <div class="result">
             <dl>
-                <button class='btn2' type="button">配合度結果</button>
+                <button class='btn2' type="button">服藥配合度</button>
             </dl>
             <div class="dataResult" style="background-color: aliceblue;color: rgb(29, 51, 87);font-weight: bold;">
                 <ul style="padding-inline: 20px;">
@@ -1017,6 +1071,30 @@
             </form>
         </div>
 
+        <div class="result">
+            <dl>
+                <button class='btn2' type="button">滿意度</button>
+            </dl>
+            <div class="dataResult" id="satisfaction">
+                <input type="button"
+                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);width:80px;height:25px;"
+                    class="satis" value="5">
+                <input type="button"
+                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);width:80px;height:25px;"
+                    class="satis" value="4">
+                <input type="button"
+                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);width:80px;height:25px;"
+                    class="satis" value="3">
+                <input type="button"
+                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);width:80px;height:25px;"
+                    class="satis" value="2">
+                <input type="button"
+                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);width:80px;height:25px;"
+                    class="satis" value="1">
+            </div>
+            <button type="button" class="btn" onclick="submitsatisfaction()">滿意度送出</button>
+            <button type="button" class="reset">重置</button>
+        </div>
         <br>
     </div>
     <div id="searchData" style="margin-top: 50px; display: none;" class="page">
@@ -1049,6 +1127,12 @@
                 <button class='btn2' type="button">配合度結果</button>
             </dl>
             <ul id="dataResult_cooperate" class="dataResult"></ul>
+        </div>
+        <div class="result">
+            <dl>
+                <button class='btn2' type="button">滿意度結果</button>
+            </dl>
+            <ul id="dataResult_satisfaction" class="dataResult"></ul>
         </div>
     </div>
 </body>
