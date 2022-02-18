@@ -143,12 +143,14 @@
 
         .satis {
             width: 200px;
-            height: 150px
+            height: 150px;
+            text-indent:-9000px;
         }
 
         .active1 {
             width: 300px;
             height: 250px;
+            text-indent:-9000px;
         }
     </style>
     <script>
@@ -182,7 +184,6 @@
             ICOPE();
             cooperate();
             quiz();
-            satisfaction();
         });
         // 避免表單空白
         function preventFormSubmit() {
@@ -302,14 +303,6 @@
                 $(x).siblings('tr').children('.quizTd2').removeClass('qwe')
                 $(x).siblings('tr').children('.radioTd2').children('.option').children('.radioInput').removeClass('asd')
 
-            }
-        }
-        function satisfaction() {
-            google.script.run.withSuccessHandler(get_satisfaction).search_satisfaction;
-            function get_satisfaction(dataArray){
-                if (dataArray !== undefined && dataArray.length != 0) {
-                    var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate';  >" +
-                        "<thead >"
             }
         }
         // 送出表單
