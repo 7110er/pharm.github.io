@@ -144,14 +144,25 @@
         .satis {
             width: 200px;
             height: 150px;
-            text-indent:-9000px;
+            text-indent: -9000px;
         }
 
         .active1 {
             width: 300px;
             height: 250px;
-            text-indent:-9000px;
+            text-indent: -9000px;
         }
+
+        .dataResult.satisfaction_title {
+            width: 100%;
+            float: left;
+            display: none;
+            margin: 0px;
+            padding: 0px;
+            list-style-type: none;
+            font-size: 15px;
+        }
+
     </style>
     <script>
         $(document).ready(function () {
@@ -179,7 +190,8 @@
             })
             $('.satis').click(function () {
                 $(this).addClass('active1');
-                $('.satis').not(this).removeClass('active1')
+                $(this).siblings().removeClass('active1')
+                console.log($(this).siblings())
             })
             ICOPE();
             cooperate();
@@ -442,19 +454,24 @@
             var age = document.getElementById('age');
             var comment = document.getElementById('comment');
             var applicant = document.getElementById('applicant');
-            var formResult = $(".satis.active1").val();
+            var formResult = document.querySelectorAll(".satis.active1")
+            var dataResult = []
+            for (var i = 0; i < formResult.length; i++) {
+                dataResult.push(formResult[i].value)
+            }
+            console.log(ar)
             var rowData = {
                 id: id.value,
                 name: hisName.value,
                 age: age.value,
                 comment: comment.value,
                 applicant: applicant.value,
-                dataResult: formResult
+                dataResult: dataResult
             }
             google.script.run.addData_satisfaction(rowData);
             // document.getElementById('satisfaction').reset();
             alert('表單已送出')
-
+            console.log(formResult)
         }
         //查詢病人資料
         function searchData() {
@@ -1086,6 +1103,49 @@
             <dl>
                 <button class='btn2' type="button">滿意度</button>
             </dl>
+            <div class="dataResult satisfaction_title">
+                <p>這次的訪談（衛教）對您是否有幫助？</p>
+            </div><br>
+            <div class="dataResult" id="satisfaction">
+                <input type="button"
+                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/LOGO/5.jpg);"
+                    class="satis" value="5">
+                <input type="button"
+                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);"
+                    class="satis" value="4">
+                <input type="button"
+                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);"
+                    class="satis" value="3">
+                <input type="button"
+                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);"
+                    class="satis" value="2">
+                <input type="button"
+                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);"
+                    class="satis" value="1">
+            </div><br>
+            <div class="dataResult satisfaction_title">
+            <p>這次使用的工具模式與流程，您是否滿意？（平板或單張）</p>
+            </div><br>
+            <div class="dataResult" id="satisfaction">
+                <input type="button"
+                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);"
+                    class="satis" value="5">
+                <input type="button"
+                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);"
+                    class="satis" value="4">
+                <input type="button"
+                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);"
+                    class="satis" value="3">
+                <input type="button"
+                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);"
+                    class="satis" value="2">
+                <input type="button"
+                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);"
+                    class="satis" value="1">
+            </div><br>
+            <div class="dataResult satisfaction_title">
+                <p>這次藥師的講解服務，您是否滿意？</p>
+            </div><br>
             <div class="dataResult" id="satisfaction">
                 <input type="button"
                     style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);"
@@ -1103,8 +1163,10 @@
                     style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);"
                     class="satis" value="1">
             </div>
-            <button type="button" class="btn" onclick="submitsatisfaction()">滿意度送出</button>
-            <button type="button" class="reset">重置</button>
+            <div class="dataResult">
+                <button type="button" class="btn" onclick="submitsatisfaction()">滿意度送出</button>
+                <button type="button" class="reset">重置</button>
+            </div>
         </div>
         <br>
     </div>
