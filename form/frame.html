@@ -140,6 +140,16 @@
             font-weight: bold;
             font-size: 14px;
         }
+
+        .satis {
+            width: 200px;
+            height: 150px
+        }
+
+        .active1 {
+            width: 300px;
+            height: 250px;
+        }
     </style>
     <script>
         $(document).ready(function () {
@@ -172,6 +182,7 @@
             ICOPE();
             cooperate();
             quiz();
+            satisfaction();
         });
         // 避免表單空白
         function preventFormSubmit() {
@@ -293,7 +304,14 @@
 
             }
         }
-
+        function satisfaction() {
+            google.script.run.withSuccessHandler(get_satisfaction).search_satisfaction;
+            function get_satisfaction(dataArray){
+                if (dataArray !== undefined && dataArray.length != 0) {
+                    var dataResult = "<table class='table table-sm table-striped' style='border-collapse: separate';  >" +
+                        "<thead >"
+            }
+        }
         // 送出表單
         function submitForm_symptom() {
             var array = []
@@ -1077,19 +1095,19 @@
             </dl>
             <div class="dataResult" id="satisfaction">
                 <input type="button"
-                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);width:80px;height:25px;"
+                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);"
                     class="satis" value="5">
                 <input type="button"
-                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);width:80px;height:25px;"
+                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);"
                     class="satis" value="4">
                 <input type="button"
-                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);width:80px;height:25px;"
+                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);"
                     class="satis" value="3">
                 <input type="button"
-                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);width:80px;height:25px;"
+                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);"
                     class="satis" value="2">
                 <input type="button"
-                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);width:80px;height:25px;"
+                    style="background-image:url(https://7110er.github.io/pharm.github.io/image/commonQA_img/1.jpg);"
                     class="satis" value="1">
             </div>
             <button type="button" class="btn" onclick="submitsatisfaction()">滿意度送出</button>
