@@ -143,8 +143,8 @@
 
         .satis {
 
-            width: 235px;
-            height: 300px;
+            width: 200px;
+            height: 250px;
             position: relative;
             text-indent: -9000px;
         }
@@ -153,7 +153,7 @@
             width: 240px;
             height: 300px;
             text-indent: -9000px;
-            border: solid 10px #3333cc;
+            border: solid 10px #cc3300;
         }
 
         .dataResult.satisfaction_title {
@@ -471,7 +471,7 @@
                 dataResult: dataResult
             }
             google.script.run.addData_satisfaction(rowData);
-            // document.getElementById('satisfaction').reset;
+            $('#satisfaction').removeClass('.active1');
             alert('表單已送出')
         }
         //查詢病人資料
