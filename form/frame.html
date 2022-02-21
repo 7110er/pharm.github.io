@@ -142,7 +142,7 @@
         }
 
         .satis {
-            
+
             width: 235px;
             height: 300px;
             position: relative;
@@ -461,7 +461,7 @@
             for (var i = 0; i < formResult.length; i++) {
                 dataResult.push(formResult[i].value)
             }
-            console.log(ar)
+
             var rowData = {
                 id: id.value,
                 name: hisName.value,
@@ -471,9 +471,8 @@
                 dataResult: dataResult
             }
             google.script.run.addData_satisfaction(rowData);
-            // document.getElementById('satisfaction').reset();
+            // document.getElementById('satisfaction').reset;
             alert('表單已送出')
-            console.log(formResult)
         }
         //查詢病人資料
         function searchData() {
