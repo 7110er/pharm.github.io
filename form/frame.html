@@ -54,8 +54,9 @@
             float: left;
 
         }
-
+        
         .btn:hover,
+        .reset:hover,
         .active {
             background-color: #eee;
             color: black;
@@ -189,6 +190,7 @@
             $('.reset').click(function () {
                 $(this).parent().trigger("reset");
                 $('#sum').html('');
+                $('.satis.active1').removeClass('active1')
             })
             $('.satis').click(function () {
                 $(this).addClass('active1');
@@ -471,10 +473,10 @@
                 dataResult: dataResult
             }
             google.script.run.addData_satisfaction(rowData);
-            $('#satisfaction').removeClass('.active1');
+            $('.satis.active1').removeClass('active1');
             alert('表單已送出')
         }
-        //查詢病人資料
+        // 查詢病人資料
         function searchData() {
             var x = document.getElementById('searchId').value;
             google.script.run.withSuccessHandler(createData_ICOPE).searchData_ICOPE(x);
@@ -624,6 +626,7 @@
             }
 
         }
+        // 隨時計算ARMS總分
         $(document).ready(function () {
 
             $("#form_cooperate").change(function () {
@@ -1166,6 +1169,7 @@
             </div>
             <div class="dataResult">
                 <button type="button" class="btn" onclick="submitsatisfaction()">滿意度送出</button>
+                <button type="button" class="reset">重置</button>
             </div>
         </div>
         <br>
