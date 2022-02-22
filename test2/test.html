@@ -96,14 +96,14 @@
                             { "title": "連結" },
                             { "title": "說明" },
                         ],
-                    //     columnDefs: [
-                    //     {
-                    //         render: function (data, type, full, meta) {
-                    //             return "<div class='text-wrap width-200'>" + data + "</div>";
-                    //         },
-                    //         targets: [0,1,2]
-                    //     }
-                    // ],
+                        //     columnDefs: [
+                        //     {
+                        //         render: function (data, type, full, meta) {
+                        //             return "<div class='text-wrap width-200'>" + data + "</div>";
+                        //         },
+                        //         targets: [0,1,2]
+                        //     }
+                        // ],
 
                     });
                     $('#' + 'data-table_' + i).DataTable().columns.adjust().draw();
@@ -131,8 +131,17 @@
             // 讓他可以搜尋按鈕所在的工作表位置，否則所有按鈕都執行getVal這function卻不知道要去哪個工作表內找資料
             google.script.run.withSuccessHandler(showData_2).searchData(text, e);
         }
-        function showData_2(a) {
-            $('#content').html(a)
+        function showData_2(array) {
+            if (array !== undefined && array.length != 0) {
+                var popResault = "<table class='table table-sm table-striped' style='border-collapse: separate';  >" + "<thead >"
+                for (var i = 0; i < array.length; i++) {
+                    if (array[i] !== undefined && array[i] !== '') {
+                        popResault += "<tr>" + "<td>" + array[i] + "</td>" + "</tr>"
+                    }
+                }
+                popResault += "</thead>" + "</table>"
+            };
+            $('#content').html(popResault)
         }
 
     </script>
