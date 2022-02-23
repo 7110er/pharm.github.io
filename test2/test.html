@@ -57,7 +57,7 @@
             text-align: center;
             color: rgb(29, 51, 87);
             padding: 10px;
-            margin: 0px 5px;
+            /* margin: 0px 5px; */
             background-color: #e0edff;
             border-radius: 10px;
             border-style: solid;
@@ -76,7 +76,7 @@
         } */
 
         table {
-            width: 100%;
+            /* width: 100%; */
             overflow: auto;
         }
     </style>
@@ -96,10 +96,15 @@
                             { "title": "連結" },
                             { "title": "說明" },
                         ],
+                        langauage:{
+                            "sProcessing": "處理中...",
+                            "sSearch": "搜尋：",
+                            "sLoadingRecords": "載入資料中...",
+                        },
                         columnDefs: [
                             {targets:[1],
-                            createdCell:function(td, cellData, rowData, row, col){
-                                $(td).css('width', '30%')
+                            createdCell: function (td, cellData, rowData, row, col){
+                                $(td).css('width', '50px')
                             }}
                         ],
 

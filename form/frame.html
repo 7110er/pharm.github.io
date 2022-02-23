@@ -220,9 +220,6 @@
             ICOPE();
             cooperate();
             quiz();
-            // page1();
-            // page2();
-            // page3();
         });
 
         function page1() {
@@ -510,6 +507,7 @@
             }
             google.script.run.addData_satisfaction(rowData);
             $('.satis.active1').removeClass('active1');
+            $('html,body').animate({ scrollTop: $('#page1').offset().top }, 800);
             alert('表單已送出')
         }
         // 查詢病人資料
@@ -1162,7 +1160,8 @@
                     class="satis" value="1"><br>
                 <button type="button" class="btn3" onclick="page2()">&#9660</button>
             </div>
-            <p>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</p>
+            <p>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;
+            </p>
             <div id="page2" class="dataResult sfp" style="font-weight: 900;font-size: 40px;">
                 <p>本次使用之工具模式與流程，您是否滿意？（平板或單張）</p>
                 <input type="button"
@@ -1184,7 +1183,8 @@
                 <button type="button" class="btn3" onclick="page3()">&#9660</button>
 
             </div>
-            <p>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</p>
+            <p>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;
+            </p>
             <div id="page3" class="dataResult sfp" style="font-weight: 900;font-size: 40px;">
                 <p>本次藥師講解服務，您是否滿意？</p>
                 <input type="button"
