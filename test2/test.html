@@ -66,17 +66,21 @@
             float: left;
         }
 
-        /* .text-wrap {
+        .text-wrap {
             white-space: normal;
             word-wrap: break-word;
         }
 
-        .width-200 {
-            width: 200px;
-        } */
+        .width-60 {
+            width: 120px;
+        }
 
+        /* th.sorting {
+            width: 60px;
+        }
+ */
         table {
-            /* width: 100%; */
+            width: 100%;
             overflow: auto;
         }
     </style>
@@ -96,16 +100,20 @@
                             { "title": "連結" },
                             { "title": "說明" },
                         ],
-                        langauage:{
+                        langauage: {
                             "sProcessing": "處理中...",
                             "sSearch": "搜尋：",
                             "sLoadingRecords": "載入資料中...",
                         },
                         columnDefs: [
-                            {targets:[1],
-                            createdCell: function (td, cellData, rowData, row, col){
-                                $(td).css('width', '50px')
-                            }}
+                            {
+                                render: function (data, type, full, meta) {
+                                    return "<div class='width-60'>" + data + "</div>";
+                                },
+                                targets: 1
+
+
+                            }
                         ],
 
                     });
