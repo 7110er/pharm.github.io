@@ -31,7 +31,7 @@
     <style>
         .homeBar {
             width: 100%;
-            height: 90px;
+            height: 85px;
             position: fixed;
             color: white;
             background-color: #012061;
@@ -96,14 +96,12 @@
                             { "title": "連結" },
                             { "title": "說明" },
                         ],
-                        //     columnDefs: [
-                        //     {
-                        //         render: function (data, type, full, meta) {
-                        //             return "<div class='text-wrap width-200'>" + data + "</div>";
-                        //         },
-                        //         targets: [0,1,2]
-                        //     }
-                        // ],
+                        columnDefs: [
+                            {targets:[1],
+                            createdCell:function(td, cellData, rowData, row, col){
+                                $(td).css('width', '30%')
+                            }}
+                        ],
 
                     });
                     $('#' + 'data-table_' + i).DataTable().columns.adjust().draw();
