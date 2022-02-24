@@ -79,6 +79,17 @@
             width: 100%;
             overflow: auto;
         }
+
+        #popTitle {
+            background-color: #012061;
+            font-size: large;
+            color: white;
+            text-align: center;
+        }
+
+        #popResult{
+            max-width: 200px;
+        }
     </style>
 
     <script>
@@ -137,15 +148,15 @@
         }
         function showData_2(array) {
             if (array !== undefined && array.length != 0) {
-                var popResault = "<table class='table table-sm table-striped' style='border-collapse: separate';  >" + "<thead >"
+                var popResult = "<table id='popResult' class='table table-sm table-striped' style='border-collapse: separate';  >" + "<thead>" + "<tr>" + "<td id=popTitle>" + "說明" + "</td>" +"</tr>"
                 for (var i = 0; i < array.length; i++) {
                     if (array[i] !== undefined && array[i] !== '') {
-                        popResault += "<tr>" + "<td>" + array[i] + "</td>" + "</tr>"
+                        popResult += "<tr>" + "<td>" + array[i] + "</td>" + "</tr>"
                     }
                 }
-                popResault += "<div style=margin:0px auto;>" + "</div>" + "</thead>" + "</table>"
+                popResult += "</thead>" + "</table>"
             };
-            $('#content').html(popResault)
+            $('#content').html(popResult)
         }
 
     </script>
