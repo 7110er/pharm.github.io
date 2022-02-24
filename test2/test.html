@@ -80,16 +80,6 @@
             overflow: auto;
         }
 
-        #popTitle {
-            background-color: #012061;
-            font-size: large;
-            color: white;
-            text-align: center;
-        }
-
-        #popResult{
-            max-width: 200px;
-        }
     </style>
 
     <script>
@@ -148,7 +138,7 @@
         }
         function showData_2(array) {
             if (array !== undefined && array.length != 0) {
-                var popResult = "<table id='popResult' class='table table-sm table-striped' style='border-collapse: separate';  >" + "<thead>" + "<tr>" + "<td id=popTitle>" + "說明" + "</td>" +"</tr>"
+                var popResult = "<table id='popResult' class='table table-sm table-striped' style='border-collapse: separate';  >" + "<thead>"
                 for (var i = 0; i < array.length; i++) {
                     if (array[i] !== undefined && array[i] !== '') {
                         popResult += "<tr>" + "<td>" + array[i] + "</td>" + "</tr>"
