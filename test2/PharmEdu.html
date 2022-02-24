@@ -5,21 +5,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="高順鴻">
     <title>藥師教學歷程</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- 連結jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- 連結jquery moblie -->
-
     <link rel="stylesheet" href="https://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css">
     <script src="https://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
-
     <!-- 連結Data table -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
@@ -28,22 +26,10 @@
         src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
     <script src="https://cdn.datatables.net/fixedcolumns/4.0.1/js/dataTables.fixedColumns.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <style>
-        .homeBar {
-            width: 100%;
-            height: 85px;
-            position: fixed;
-            color: white;
-            background-color: #012061;
-            float: left;
-            overflow: hidden;
-            display: block;
-            z-index: 1;
-        }
 
-        .page {
+    <style>
+        .page{
             display: none;
-            padding-top: 50px;
         }
 
         .active {
@@ -51,37 +37,7 @@
             color: black !important;
         }
 
-        .btn {
-            font-size: 15px;
-            font-weight: bold;
-            text-align: center;
-            color: rgb(29, 51, 87);
-            padding: 10px;
-            /* margin: 0px 5px; */
-            background-color: #e0edff;
-            border-radius: 10px;
-            border-style: solid;
-            border-width: 1px;
-            border-color: rgb(1, 26, 93);
-            float: left;
-        }
-
-        .text-wrap {
-            white-space: normal;
-            word-wrap: break-word;
-        }
-
-        .width-60 {
-            width: 120px;
-        }
-
-        table {
-            width: 100%;
-            overflow: auto;
-        }
-
     </style>
-
     <script>
 
         $(document).ready(function () {
@@ -127,6 +83,7 @@
                     $(".page:visible").not('#' + then).hide();
                 }
             });
+            closeSidebar();
         })
         function getVal(data) {
             var text = $(data).parent().next().text()
@@ -149,68 +106,70 @@
             $('#content').html(popResult)
         }
 
+        function openSidebar() {
+            document.getElementById("Sidebar").style.display = "block";
+        }
+
+        function closeSidebar() {
+            document.getElementById("Sidebar").style.display = "none";
+        }
+
+
+
     </script>
-    
-</head>
 
 <body>
-
-    <div data-role="page" id="pageone" style="padding: 5px;">
-        <div data-role="main">
-            <!--搜尋表單  -->
-            <div class="homeBar" id="homeBar">
-                <!-- javascript:void(0)意思是點下去回傳0(false)不做事 -->
-                <a href="javascript:void(0)" id="page0" class="btn active">教學資源</a>
-                <a href="javascript:void(0)" id="page1" class="btn">評核表單</a>
-                <a href="javascript:void(0)" id="page2" class="btn">評鑑簡報</a>
-                <a href="javascript:void(0)" id="page3" class="btn">醫院評鑑</a>
-                <a href="javascript:void(0)" id="page4" class="btn">醫院QA</a>
-                <a href="javascript:void(0)" id="page5" class="btn">教學QA</a>
-                <a href="javascript:void(0)" id="page6" class="btn">教案</a>
-                <!-- 按鈕順序跟底下div id的順序要跟google試算表上工作表順序一模一樣!!!，不然會抓錯 -->
-                <!-- 按鈕順序跟底下div id的順序要跟google試算表上工作表順序一模一樣!!!，不然會抓錯 -->
-                <!-- 按鈕順序跟底下div id的順序要跟google試算表上工作表順序一模一樣!!!，不然會抓錯 -->
-
-
-            </div>
-            <div id="_page0" class="page" style="display: block;">
-                <table id="data-table_0"></table>
-            </div>
-            <div id="_page1" class="page">
-                <table id="data-table_1"></table>
-            </div>
-            <div id="_page2" class="page">
-                <table id="data-table_2"></table>
-            </div>
-            <div id="_page3" class="page">
-                <table id="data-table_3"></table>
-            </div>
-            <div id="_page4" class="page">
-                <table id="data-table_4"></table>
-            </div>
-            <div id="_page5" class="page">
-                <table id="data-table_5"></table>
-            </div>
-            <div id="_page6" class="page">
-                <table id="data-table_6"></table>
-            </div>
-
-            <div data-role="popup" id="myPopup" class="ui-content" data-dismissible="false">
-                <a href="#" data-rel="back"
-                    class="ui-btn ui-corner-all ui-shadow ui-btn ui-icon-delete ui-btn-icon-notext ui-btn-right">關閉</a>
-                <br>
-                <div id="content">
-
-                </div>
-            </div>
-
+    <header class="w3-top w3-bar w3-theme">
+        <button class="w3-bar-item w3-button w3-xxxlarge w3-hover-theme" onclick="openSidebar()">&#9776;</button>
+        <h1 class="w3-bar-item" id="title">教學資源</h1>
+    </header>
+    <nav class="w3-sidebar w3-bar-block w3-card" id="Sidebar">
+        <div class="w3-container w3-theme-d2">
+            <span onclick="closeSidebar()" class="w3-button w3-display-topright w3-large">X</span>
         </div>
-        <div data-role="footer">
-            <h1><b>藥師教學歷程</b></h1>
+        <div id="homeBar" class="homeBar">
+            <a href="javascript:void(0)" id="page0" class="btn active">教學資源</a>
+            <a href="javascript:void(0)" id="page1" class="btn">評核表單</a>
+            <a href="javascript:void(0)" id="page2" class="btn">評鑑簡報</a>
+            <a href="javascript:void(0)" id="page3" class="btn">醫院評鑑</a>
+            <a href="javascript:void(0)" id="page4" class="btn">醫院QA</a>
+            <a href="javascript:void(0)" id="page5" class="btn">教學QA</a>
+            <a href="javascript:void(0)" id="page6" class="btn">教案</a>
         </div>
-
+    </nav>
+    <div class="w3-container" style="margin-top:90px">
+    </div>
+    <div id="_page0" class="page" style="display: block;">
+        <table id="data-table_0"></table>
+    </div>
+    <div id="_page1" class="page">
+        <table id="data-table_1"></table>
+    </div>
+    <div id="_page2" class="page">
+        <table id="data-table_2"></table>
+    </div>
+    <div id="_page3" class="page">
+        <table id="data-table_3"></table>
+    </div>
+    <div id="_page4" class="page">
+        <table id="data-table_4"></table>
+    </div>
+    <div id="_page5" class="page">
+        <table id="data-table_5"></table>
+    </div>
+    <div id="_page6" class="page">
+        <table id="data-table_6"></table>
     </div>
 
+    <div data-role="popup" id="myPopup" class="ui-content" data-dismissible="false">
+        <a href="#" data-rel="back"
+            class="ui-btn ui-corner-all ui-shadow ui-btn ui-icon-delete ui-btn-icon-notext ui-btn-right">關閉</a>
+        <br>
+        <div id="content">
+        </div>
+    </div>
+    <footer class="w3-container w3-bottom w3-theme w3-margin-top">
+        <h3>藥師教學歷程</h3>
+      </footer>
+      
 </body>
-
-</html>
