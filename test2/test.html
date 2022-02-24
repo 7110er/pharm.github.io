@@ -75,10 +75,6 @@
             width: 120px;
         }
 
-        /* th.sorting {
-            width: 60px;
-        }
- */
         table {
             width: 100%;
             overflow: auto;
@@ -96,13 +92,13 @@
                         scrollCollapse: true,
                         data: dataArray[i],
                         columns: [
+                            { "title": " " },
                             { "title": "名稱" },
                             { "title": "連結" },
-                            { "title": "說明" },
                         ],
                         langauage: {
                             "sProcessing": "處理中...",
-                            "sSearch": "搜尋：",
+                            "sSearch": "搜尋:",
                             "sLoadingRecords": "載入資料中...",
                         },
                         columnDefs: [
@@ -111,11 +107,8 @@
                                     return "<div class='width-60'>" + data + "</div>";
                                 },
                                 targets: 1
-
-
                             }
                         ],
-
                     });
                     $('#' + 'data-table_' + i).DataTable().columns.adjust().draw();
                     $('#' + 'data-table_' + i).addClass('display wrap compact table-hover table-striped')
@@ -150,7 +143,7 @@
                         popResault += "<tr>" + "<td>" + array[i] + "</td>" + "</tr>"
                     }
                 }
-                popResault += "</thead>" + "</table>"
+                popResault += "<div style=margin:0px auto;>" + "</div>" + "</thead>" + "</table>"
             };
             $('#content').html(popResault)
         }
