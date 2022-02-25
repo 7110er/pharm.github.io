@@ -37,9 +37,13 @@
             color: black !important;
         }
 
+        thead {
+             position: absolute !important;
+             top: -9999px !important;
+             left: -9999px !important;
+}
     </style>
     <script>
-
         $(document).ready(function () {
             google.script.run.withSuccessHandler(showData).getData();
             function showData(dataArray) {
@@ -49,8 +53,8 @@
                         scrollCollapse: true,
                         data: dataArray[i],
                         columns: [
-                            { "title": " " },
-                            { "title": "名稱" },
+                            { "title": ''},
+                            { "title": dataArray[i][0][0] },
                             { "title": "連結" },
                         ],
                         langauage: {
@@ -66,6 +70,8 @@
                                 targets: 1
                             }
                         ],
+                        // rowCallback: function( raw , data ){
+                        // }
                     });
                     $('#' + 'data-table_' + i).DataTable().columns.adjust().draw();
                     $('#' + 'data-table_' + i).addClass('display wrap compact table-hover table-striped')
