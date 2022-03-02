@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>藥師教學歷程</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- 連結jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- 連結jquery moblie -->
+    <link rel="stylesheet" href="https://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="https://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <!-- 連結Data table -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <link rel="https://cdn.datatables.net/fixedcolumns/4.0.1/css/fixedColumns.dataTables.min.css">
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/4.0.1/js/dataTables.fixedColumns.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    <style>
+        .page {
+            display: none;
+        }
+
+        .active {
+            background-color: #eee !important;
+            color: black !important;
+        }
+
+        /* thead {
+             position: absolute !important;
+             top: -9999px !important;
+             left: -9999px !important;
+} */
+
+        .width-60 {
+            width: 120px;
+        }
+
+        /* #data-table_0 tbody :first-child {
+            height:0pt !important;
+        } */
+    </style>
+    <script>
+        $(document).ready(function () {
+            google.script.run.withSuccessHandler(showData).getData();
+            function showData(dataArray) {
+                $('#data-table_0').DataTable({
+                    scrollX: true,
+                    scrollY: true,
+                    scrollCollapse: true,
+                    data: dataArray[0],
+                    columns: [
+                        { "title": '' },
+                        { "title": '內容名稱' },
+                        { "title": '連結' },
+                    ],
+                    langauage: {
+                        "sProcessing": "處理中...",
+                        "sSearch": "搜尋:",
+                        "sLoadingRecords": "載入資料中...",
+                    },
+                    columnDefs: [
+                        {
+                            render: function (data, type, full, meta) {
+                                return "<div class='width-60'>" + data + "</div>";
+                            },
+                            targets: 1
+                        },
+                    ],
+
+                });
+                $('#data-table_0').DataTable().columns.adjust().draw();
+                $('#data-table_0').addClass('display wrap compact table-hover table-striped');
+                ;
+                $('#data-table_1').DataTable({
+                    scrollX: true,
+                    scrollY: true,
+                    scrollCollapse: true,
+                    data: dataArray[1],
+                    columns: [
+                        { "title": '' },
+                        { "title": '內容名稱' },
+                        { "title": '連結' },
+                    ],
+                    langauage: {
+                        "sProcessing": "處理中...",
+                        "sSearch": "搜尋:",
+                        "sLoadingRecords": "載入資料中...",
+                    },
+                    columnDefs: [
+                        {
+                            render: function (data, type, full, meta) {
+                                return "<div class='width-60'>" + data + "</div>";
+                            },
+                            targets: 1
+                        },
+                    ],
+
+                });
+                $('#data-table_1').DataTable().columns.adjust().draw();
+                $('#data-table_1').addClass('display wrap compact table-hover table-striped');
+                $('#data-table_2').DataTable({
+                    scrollX: true,
+                    scrollY: true,
+                    scrollCollapse: true,
+                    data: dataArray[2],
+                    columns: [
+                        { "title": '' },
+                        { "title": '評鑑' },
+                        { "title": '簡報' },
+                    ],
+                    langauage: {
+                        "sProcessing": "處理中...",
+                        "sSearch": "搜尋:",
+                        "sLoadingRecords": "載入資料中...",
+                    },
+                    columnDefs: [
+                        {
+                            render: function (data, type, full, meta) {
+                                return "<div class='width-60'>" + data + "</div>";
+                            },
+                            targets: 1
+                        },
+                    ],
+
+                });
+                $('#data-table_2').DataTable().columns.adjust().draw();
+                $('#data-table_2').addClass('display wrap compact table-hover table-striped');
+                $('#data-table_3').DataTable({
+                    scrollX: true,
+                    scrollY: true,
+                    scrollCollapse: true,
+                    data: dataArray[3],
+                    columns: [
+                        { "title": '' },
+                        { "title": '條目' },
+                        { "title": '說明' },
+                    ],
+                    langauage: {
+                        "sProcessing": "處理中...",
+                        "sSearch": "搜尋:",
+                        "sLoadingRecords": "載入資料中...",
+                    },
+                    columnDefs: [
+                        {
+                            render: function (data, type, full, meta) {
+                                return "<div class='width-60'>" + data + "</div>";
+                            },
+                            targets: 1
+                        },
+                    ],
+
+                });
+                $('#data-table_3').DataTable().columns.adjust().draw();
+                $('#data-table_3').addClass('display wrap compact table-hover table-striped');
+                $('#data-table_4').DataTable({
+                    scrollX: true,
+                    scrollY: true,
+                    scrollCollapse: true,
+                    data: dataArray[4],
+                    columns: [
+                        { "title": '' },
+                        { "title": '問題' },
+                        { "title": '說明' },
+                    ],
+                    langauage: {
+                        "sProcessing": "處理中...",
+                        "sSearch": "搜尋:",
+                        "sLoadingRecords": "載入資料中...",
+                    },
+                    columnDefs: [
+                        {
+                            render: function (data, type, full, meta) {
+                                return "<div class='width-60'>" + data + "</div>";
+                            },
+                            targets: 1
+                        },
+                    ],
+
+                });
+                $('#data-table_4').DataTable().columns.adjust().draw();
+                $('#data-table_4').addClass('display wrap compact table-hover table-striped');
+                $('#data-table_5').DataTable({
+                    scrollX: true,
+                    scrollY: true,
+                    scrollCollapse: true,
+                    data: dataArray[5],
+                    columns: [
+                        { "title": '' },
+                        { "title": '問題' },
+                        { "title": '具體做法' },
+                    ],
+                    langauage: {
+                        "sProcessing": "處理中...",
+                        "sSearch": "搜尋:",
+                        "sLoadingRecords": "載入資料中...",
+                    },
+                    columnDefs: [
+                        {
+                            render: function (data, type, full, meta) {
+                                return "<div class='width-60'>" + data + "</div>";
+                            },
+                            targets: 1
+                        },
+                    ],
+
+                });
+                $('#data-table_5').DataTable().columns.adjust().draw();
+                $('#data-table_5').addClass('display wrap compact table-hover table-striped');
+                $('#data-table_6').DataTable({
+                    scrollX: true,
+                    scrollY: true,
+                    scrollCollapse: true,
+                    data: dataArray[6],
+                    columns: [
+                        { "title": '' },
+                        { "title": '藥師姓名' },
+                        { "title": '教案主題' },
+                    ],
+                    langauage: {
+                        "sProcessing": "處理中...",
+                        "sSearch": "搜尋:",
+                        "sLoadingRecords": "載入資料中...",
+                    },
+                    columnDefs: [
+                        {
+                            render: function (data, type, full, meta) {
+                                return "<div class='width-60'>" + data + "</div>";
+                            },
+                            targets: 1
+                        },
+                    ],
+
+                });
+                $('#data-table_6').DataTable().columns.adjust().draw();
+                $('#data-table_6').addClass('display wrap compact table-hover table-striped');
+
+            }
+
+            $('.btn').click(function () {
+                var check = $(this).hasClass('active');
+                var then = "_" + this.id
+                if (!check) {
+                    $(this).toggleClass('active');
+                    $('.homeBar a').not(this).removeClass('active');
+                    $('#' + then).toggle();
+                    $('table').DataTable().columns.adjust().draw();
+                    $(".page:visible").not('#' + then).hide();
+                };
+                $('#title').html(this.textContent);
+                closeSidebar();
+            });
+            closeSidebar();
+        })
+        function getVal(data) {
+            var text = $(data).parent().next().text()
+            var index = $(data).closest('table').attr('id')  // 取得所在table的id名稱ex:data-table_1
+            var e = parseInt(index.slice(11))
+            // 宣告變數e將data-table_1轉為1(數字)，當google script上searchData的第二個參數，
+            // 讓他可以搜尋按鈕所在的工作表位置，否則所有按鈕都執行getVal這function卻不知道要去哪個工作表內找資料
+            google.script.run.withSuccessHandler(showData_2).searchData(text, e);
+        }
+        function showData_2(array) {
+            if (array !== undefined && array.length != 0) {
+                var popResult = "<table id='popResult' class='table table-sm table-striped' style='border-collapse: separate';  >" + "<thead>"
+                for (var i = 0; i < array.length; i++) {
+                    if (array[i] !== undefined && array[i] !== '') {
+                        popResult += "<tr>" + "<td>" + array[i] + "</td>" + "</tr>"
+                    }
+                }
+                popResult += "</thead>" + "</table>"
+            };
+            $('#content').html(popResult)
+        }
+
+        function openSidebar() {
+            document.getElementById("Sidebar").style.display = "block";
+        }
+
+        function closeSidebar() {
+            document.getElementById("Sidebar").style.display = "none";
+        }
+
+
+
+    </script>
+
+<body>
+    <header class="w3-top w3-bar w3-theme">
+        <button class="w3-bar-item w3-button w3-xxxlarge w3-hover-theme" onclick="openSidebar()">&#9776;</button>
+        <h1 class="w3-bar-item" id="title">教學資源</h1>
+    </header>
+    <nav class="w3-sidebar w3-bar-block w3-card" id="Sidebar">
+        <div class="w3-container w3-theme-d2">
+            <span onclick="closeSidebar()" class="w3-button w3-display-topright w3-large">X</span>
+        </div>
+        <div id="homeBar" class="homeBar">
+            <a href="javascript:void(0)" id="page0" class="btn active w3-bar-item w3-button">教學資源</a>
+            <a href="javascript:void(0)" id="page1" class="btn w3-bar-item w3-button">評核表單</a>
+            <a href="javascript:void(0)" id="page2" class="btn w3-bar-item w3-button">評鑑簡報</a>
+            <a href="javascript:void(0)" id="page3" class="btn w3-bar-item w3-button">醫院評鑑</a>
+            <a href="javascript:void(0)" id="page4" class="btn w3-bar-item w3-button">醫院QA</a>
+            <a href="javascript:void(0)" id="page5" class="btn w3-bar-item w3-button">教學QA</a>
+            <a href="javascript:void(0)" id="page6" class="btn w3-bar-item w3-button">教案</a>
+        </div>
+    </nav>
+    <div class="w3-container" style="margin-top:90px">
+    </div>
+    <div id="_page0" class="page" style="display: block;">
+        <table id="data-table_0"></table>
+    </div>
+    <div id="_page1" class="page">
+        <table id="data-table_1"></table>
+    </div>
+    <div id="_page2" class="page">
+        <table id="data-table_2"></table>
+    </div>
+    <div id="_page3" class="page">
+        <table id="data-table_3"></table>
+    </div>
+    <div id="_page4" class="page">
+        <table id="data-table_4"></table>
+    </div>
+    <div id="_page5" class="page">
+        <table id="data-table_5"></table>
+    </div>
+    <div id="_page6" class="page">
+        <table id="data-table_6"></table>
+    </div>
+
+    <div data-role="popup" id="myPopup" class="ui-content" data-dismissible="false">
+        <a href="#" data-rel="back"
+            class="ui-btn ui-corner-all ui-shadow ui-btn ui-icon-delete ui-btn-icon-notext ui-btn-right">關閉</a>
+        <br>
+        <div id="content">
+        </div>
+    </div>
+    <footer class="w3-container w3-bottom w3-theme w3-margin-top">
+        <h3>藥師教學歷程</h3>
+    </footer>
+
+</body>

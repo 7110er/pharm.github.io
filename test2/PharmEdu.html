@@ -28,7 +28,7 @@
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
     <style>
-        .page{
+        .page {
             display: none;
         }
 
@@ -37,11 +37,19 @@
             color: black !important;
         }
 
-        thead {
+        /* thead {
              position: absolute !important;
              top: -9999px !important;
              left: -9999px !important;
-}
+} */
+
+        .width-60 {
+            width: 120px;
+        }
+
+        /* #data-table_0 tbody :first-child {
+            height:0pt !important;
+        } */
     </style>
     <script>
         $(document).ready(function () {
@@ -54,7 +62,7 @@
                         scrollCollapse: true,
                         data: dataArray[i],
                         columns: [
-                            { "title": ''},
+                            { "title": '' },
                             { "title": dataArray[i][0][1] },
                             { "title": dataArray[i][0][2] },
                         ],
@@ -69,16 +77,18 @@
                                     return "<div class='width-60'>" + data + "</div>";
                                 },
                                 targets: 1
-                            }
+                            },
                         ],
-                        // rowCallback: function( raw , data ){
-                        // }
+                        rowCallback: function(row, data, index) {
+                            $(row[0]).remove();
+                        }
+                        
                     });
                     $('#' + 'data-table_' + i).DataTable().columns.adjust().draw();
-                    $('#' + 'data-table_' + i).addClass('display wrap compact table-hover table-striped')
-
+                    $('#' + 'data-table_' + i).addClass('display wrap compact table-hover table-striped');
                 };
             }
+
             $('.btn').click(function () {
                 var check = $(this).hasClass('active');
                 var then = "_" + this.id
@@ -179,6 +189,6 @@
     </div>
     <footer class="w3-container w3-bottom w3-theme w3-margin-top">
         <h3>藥師教學歷程</h3>
-      </footer>
-      
+    </footer>
+
 </body>
