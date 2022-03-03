@@ -113,7 +113,7 @@
             google.script.run.withSuccessHandler(showData_2).searchData(text, e);
         }
         function showData_2(array) {
-            if (array !== undefined && array.length != 0) {
+            if (array !== undefined && array.length != 0 && array !=="") {
                 var popResult = "<table id='popResult' class='table table-sm table-striped' style='border-collapse: separate';  >" + "<thead>"
                 for (var i = 0; i < array.length; i++) {
                     if (array[i] !== undefined && array[i] !== '') {
@@ -139,7 +139,7 @@
 
 <body>
     <header class="w3-top w3-bar w3-theme">
-        <button class="w3-bar-item w3-button w3-xxxlarge w3-hover-theme" onclick="openSidebar()">&#9776;</button>
+        <button class="w3-bar-item w3-button w3-xxxsmall w3-hover-theme" onclick="openSidebar()">&#9776;</button>
         <h1 class="w3-bar-item" id="title">教學資源</h1>
     </header>
     <nav class="w3-sidebar w3-bar-block w3-card" id="Sidebar">
@@ -187,9 +187,9 @@
         <div id="content">
         </div>
     </div>
-    <div>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br></div>
+    <!-- <div>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br></div>
     <footer class="w3-container w3-bottom w3-theme w3-margin-top">
         <h3>藥師教學歷程</h3>
-    </footer>
+    </footer> -->
 
 </body>
