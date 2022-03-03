@@ -62,7 +62,7 @@
                         scrollCollapse: true,
                         data: dataArray[i],
                         columns: [
-                            { "title": '' },
+                            { "title": dataArray[i][0][0] },
                             { "title": dataArray[i][0][1] },
                             { "title": dataArray[i][0][2] },
                         ],
@@ -79,13 +79,12 @@
                                 targets: 1
                             },
                         ],
-                        rowCallback: function(row, data, index) {
-                            $(row[0]).remove();
-                        }
-                        
+
                     });
                     $('#' + 'data-table_' + i).DataTable().columns.adjust().draw();
                     $('#' + 'data-table_' + i).addClass('display wrap compact table-hover table-striped');
+                    var table = $('#' + 'data-table_' + i)
+                    $('#' + 'data-table_' + i).DataTable().row(table.children(2).children(1)).remove().draw();
                 };
             }
 
