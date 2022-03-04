@@ -55,39 +55,39 @@
         $(document).ready(function () {
             google.script.run.withSuccessHandler(showData).getData();
             function showData(dataArray) {
-                if (dataArray != "" && dataArray != undefined){
-                for (var i = 0; i < 7; i++) {// 有幾個工作表i就要小於多少
-                    $('#' + 'data-table_' + i).DataTable({
-                        scrollX: true,
-                        scrollY: "2000px",
-                        scrollCollapse: true,
-                        data: dataArray[i],
-                        columns: [
-                            { "title": dataArray[i][0][0] },
-                            { "title": dataArray[i][0][1] },
-                            { "title": dataArray[i][0][2] },
-                        ],
-                        langauage: {
-                            "sProcessing": "處理中...",
-                            "sSearch": "搜尋:",
-                            "sLoadingRecords": "載入資料中...",
-                        },
-                        columnDefs: [
-                            {
-                                render: function (data, type, full, meta) {
-                                    return "<div class='width-60'>" + data + "</div>";
+                if (dataArray != "" && dataArray != undefined) {
+                    for (var i = 0; i < 7; i++) {// 有幾個工作表i就要小於多少
+                        $('#' + 'data-table_' + i).DataTable({
+                            scrollX: true,
+                            scrollY: "2000px",
+                            scrollCollapse: true,
+                            data: dataArray[i],
+                            columns: [
+                                { "title": dataArray[i][0][0] },
+                                { "title": dataArray[i][0][1] },
+                                { "title": dataArray[i][0][2] },
+                            ],
+                            langauage: {
+                                URL: 'zh-HANT.json'
+                            }
+                            ,
+                            columnDefs: [
+                                {
+                                    render: function (data, type, full, meta) {
+                                        return "<div class='width-60'>" + data + "</div>";
+                                    },
+                                    targets: 1
                                 },
-                                targets: 1
-                            },
-                        ],
+                            ],
 
-                    });
-                    var table = $('#' + 'data-table_' + i)
-                    $(table).DataTable().columns.adjust().draw();
-                    $(table).addClass('display wrap compact table-hover table-striped');
-                    $(table).DataTable().row(table.children(2).children(1)).remove().draw();
-                };
-            }}
+                        });
+                        var table = $('#' + 'data-table_' + i)
+                        $(table).DataTable().columns.adjust().draw();
+                        $(table).addClass('display wrap compact table-hover table-striped');
+                        $(table).DataTable().row(table.children(2).children(1)).remove().draw();
+                    };
+                }
+            }
 
             $('.btn').click(function () {
                 var check = $(this).hasClass('active');
@@ -113,7 +113,7 @@
             google.script.run.withSuccessHandler(showData_2).searchData(text, e);
         }
         function showData_2(array) {
-            if (array !== undefined && array.length != 0 && array !=="") {
+            if (array !== undefined && array.length != 0 && array !== "") {
                 var popResult = "<table id='popResult' class='table table-sm table-striped' style='border-collapse: separate';  >" + "<thead>"
                 for (var i = 0; i < array.length; i++) {
                     if (array[i] !== undefined && array[i] !== '') {
