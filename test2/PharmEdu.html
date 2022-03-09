@@ -46,8 +46,7 @@
         $(document).ready(function () {
             google.script.run.withSuccessHandler(showData).getData();
             function showData(dataArray) {
-                if (dataArray != "" && dataArray != undefined) {
-                    for (var i = 0; i < 7; i++) {// 有幾個工作表i就要小於多少
+                    for (var i = 0; i < 14; i++) {// 有幾個工作表i就要小於多少
                         $('#' + 'data-table_' + i).DataTable({
                             scrollX: true,
                             scrollY: 800,
@@ -227,7 +226,7 @@
                         $(table).DataTable().row(table.children(2).children(1)).remove().draw();
                     };
                 }
-            }
+            
 
             $('.btn').click(function () {
                 var check = $(this).hasClass('active');
@@ -287,13 +286,20 @@
             <span onclick="closeSidebar()" class="w3-button w3-display-topright w3-large">X</span>
         </div>
         <div id="homeBar" class="homeBar">
-            <a href="javascript:void(0)" id="page0" class="btn active w3-bar-item w3-button">教學資源</a>
-            <a href="javascript:void(0)" id="page1" class="btn w3-bar-item w3-button">評核表單</a>
-            <a href="javascript:void(0)" id="page2" class="btn w3-bar-item w3-button">評鑑簡報</a>
-            <a href="javascript:void(0)" id="page3" class="btn w3-bar-item w3-button">醫院評鑑</a>
-            <a href="javascript:void(0)" id="page4" class="btn w3-bar-item w3-button">醫院QA</a>
-            <a href="javascript:void(0)" id="page5" class="btn w3-bar-item w3-button">教學QA</a>
-            <a href="javascript:void(0)" id="page6" class="btn w3-bar-item w3-button">教案</a>
+            <a href="javascript:void(0)" id="page0" class="btn active w3-bar-item w3-button">全人核心</a>
+            <a href="javascript:void(0)" id="page1" class="btn w3-bar-item w3-button">多元教材</a>
+            <a href="javascript:void(0)" id="page2" class="btn w3-bar-item w3-button">常見問題</a>
+            <a href="javascript:void(0)" id="page3" class="btn w3-bar-item w3-button">回饋建議</a>
+            <a href="javascript:void(0)" id="page4" class="btn w3-bar-item w3-button">成效分數</a>
+            <a href="javascript:void(0)" id="page5" class="btn w3-bar-item w3-button">學員分數</a>
+            <a href="javascript:void(0)" id="page6" class="btn w3-bar-item w3-button">教師分數</a>
+            <a href="javascript:void(0)" id="page7" class="btn w3-bar-item w3-button">輔導強化</a>
+            <a href="javascript:void(0)" id="page8" class="btn w3-bar-item w3-button">教學資源</a>
+            <a href="javascript:void(0)" id="page9" class="btn w3-bar-item w3-button">評核表單</a>
+            <a href="javascript:void(0)" id="page10" class="btn w3-bar-item w3-button">評鑑簡報</a>
+            <a href="javascript:void(0)" id="page11" class="btn w3-bar-item w3-button">醫院評鑑</a>
+            <a href="javascript:void(0)" id="page12" class="btn w3-bar-item w3-button">醫院QA</a>
+            <a href="javascript:void(0)" id="page13" class="btn w3-bar-item w3-button">教學QA</a>
         </div>
     </nav>
     <div class="w3-container" style="margin-top:90px">
@@ -319,6 +325,28 @@
     <div id="_page6" class="page">
         <table id="data-table_6"></table>
     </div>
+    <div id="_page7" class="page">
+        <table id="data-table_7"></table>
+    </div>
+    <div id="_page8" class="page">
+        <table id="data-table_8"></table>
+    </div>
+    <div id="_page9" class="page">
+        <table id="data-table_9"></table>
+    </div>
+    <div id="_page10" class="page">
+        <table id="data-table_10"></table>
+    </div>
+    <div id="_page11" class="page">
+        <table id="data-table_11"></table>
+    </div>
+    <div id="_page12" class="page">
+        <table id="data-table_12"></table>
+    </div>
+    <div id="_page13" class="page">
+        <table id="data-table_13"></table>
+    </div>
+
 
     <div data-role="popup" id="myPopup" class="ui-content" data-dismissible="false">
         <a href="#" data-rel="back"
