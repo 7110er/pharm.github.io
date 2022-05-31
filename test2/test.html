@@ -44,7 +44,14 @@
         .title {
             background-color: #009688;
             color: white;
+            width: 60px;
         }
+
+        /* .poptable {
+            width: 30px;
+            height: 40px;
+        } */
+
     </style>
     <script>
         $(document).ready(function () {
@@ -257,7 +264,7 @@
         }
         function showData_2(array) {
             if (array !== undefined && array.length != 0) {
-                var dataResult = "<table class='table table-sm table-striped' id='dtable'>" +
+                var dataResult = "<table class='table table-sm table-striped' width='100%' style='table-layout:fixed'>" +
                     "<thead style='white-space: normal'>"
                 for (var i = 0; i < 1; i++) {
                     for (var j = 0; j < array[i].length - 1; j++) {
@@ -358,7 +365,7 @@
         <a href="#" data-rel="back"
             class="ui-btn ui-corner-all ui-shadow ui-btn ui-icon-delete ui-btn-icon-notext ui-btn-right">關閉</a>
         <br>
-        <div id="content">
+        <div id="content" >
         </div>
     </div>
     <!-- <div>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br></div>
