@@ -51,7 +51,6 @@
             width: 30px;
             height: 40px;
         } */
-
     </style>
     <script>
         $(document).ready(function () {
@@ -268,8 +267,9 @@
                     "<thead style='white-space: normal'>"
                 for (var i = 0; i < 1; i++) {
                     for (var j = 0; j < array[i].length - 1; j++) {
+                        if(array[i + 1][j + 1] != undefined && array[i + 1][j + 1] !==""){
                         dataResult += "<tr>" + "<td class = 'title'>" + array[i][j] + "</td>" + "<td>" + array[i + 1][j + 1] + "</td>" + "</tr>"
-                    }
+                    }}
                 }
                 dataResult += "</thead>" + "</table>"
 
@@ -370,7 +370,7 @@
         <a href="#" data-rel="back"
             class="ui-btn ui-corner-all ui-shadow ui-btn ui-icon-delete ui-btn-icon-notext ui-btn-right">關閉</a>
         <br>
-        <div id="content" >
+        <div id="content">
         </div>
     </div>
     <!-- <div>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br></div>
