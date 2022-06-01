@@ -41,192 +41,202 @@
             width: 120px;
         }
 
+        .title {
+            background-color: #009688;
+            color: white;
+            width: fit-content;
+        }
+
+        /* .poptable {
+            width: 30px;
+            height: 40px;
+        } */
     </style>
     <script>
         $(document).ready(function () {
             google.script.run.withSuccessHandler(showData).getData();
             function showData(dataArray) {
-                    for (var i = 0; i < 14; i++) {// 有幾個工作表i就要小於多少
-                        $('#' + 'data-table_' + i).DataTable({
-                            scrollX: true,
-                            scrollY: 800,
-                            scrollCollapse: true,
-                            data: dataArray[i],
-                            columns: [
-                                { "title": dataArray[i][0][0] },
-                                { "title": dataArray[i][0][1] },
-                                { "title": dataArray[i][0][2] },
-                            ],
-                            "language": {
-                                "processing": "處理中...",
-                                "loadingRecords": "載入中...",
-                                "lengthMenu": "顯示 _MENU_ 項結果",
-                                "zeroRecords": "沒有符合的結果",
-                                "info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
-                                "infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
-                                "infoFiltered": "(從 _MAX_ 項結果中過濾)",
-                                "search": "<i class='fa fa-search'></i>&nbsp;關鍵字搜尋&nbsp;:&nbsp;",
-                                "paginate": {
-                                    "first": "第一頁",
-                                    "previous": "上一頁",
-                                    "next": "下一頁",
-                                    "last": "最後一頁"
+                for (var i = 0; i < 15; i++) {// 有幾個工作表i就要小於多少
+                    $('#' + 'data-table_' + i).DataTable({
+                        scrollX: true,
+                        scrollY: 800,
+                        scrollCollapse: true,
+                        data: dataArray[i],
+                        columns: [
+                            { "title": dataArray[i][0][0] },
+                            { "title": dataArray[i][0][1] },
+                            { "title": dataArray[i][0][2] },
+                        ],
+                        "language": {
+                            "processing": "處理中...",
+                            "loadingRecords": "載入中...",
+                            "lengthMenu": "顯示 _MENU_ 項結果",
+                            "zeroRecords": "沒有符合的結果",
+                            "info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+                            "infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+                            "infoFiltered": "(從 _MAX_ 項結果中過濾)",
+                            "search": "<i class='fa fa-search'></i>&nbsp;關鍵字搜尋&nbsp;:&nbsp;",
+                            "paginate": {
+                                "first": "第一頁",
+                                "previous": "上一頁",
+                                "next": "下一頁",
+                                "last": "最後一頁"
+                            },
+                            "aria": {
+                                "sortAscending": ": 升冪排列",
+                                "sortDescending": ": 降冪排列"
+                            },
+                            "emptyTable": "目前沒有資料",
+                            "datetime": {
+                                "previous": "上一頁",
+                                "next": "下一頁",
+                                "hours": "時",
+                                "minutes": "分",
+                                "seconds": "秒",
+                                "amPm": [
+                                    "上午",
+                                    "下午"
+                                ]
+                            },
+                            "searchBuilder": {
+                                "add": "新增條件",
+                                "condition": "條件",
+                                "deleteTitle": "刪除過濾條件",
+                                "button": {
+                                    "_": "複合查詢 (%d)",
+                                    "0": "複合查詢"
                                 },
-                                "aria": {
-                                    "sortAscending": ": 升冪排列",
-                                    "sortDescending": ": 降冪排列"
-                                },
-                                "emptyTable": "目前沒有資料",
-                                "datetime": {
-                                    "previous": "上一頁",
-                                    "next": "下一頁",
-                                    "hours": "時",
-                                    "minutes": "分",
-                                    "seconds": "秒",
-                                    "amPm": [
-                                        "上午",
-                                        "下午"
-                                    ]
-                                },
-                                "searchBuilder": {
-                                    "add": "新增條件",
-                                    "condition": "條件",
-                                    "deleteTitle": "刪除過濾條件",
-                                    "button": {
-                                        "_": "複合查詢 (%d)",
-                                        "0": "複合查詢"
+                                "clearAll": "清空",
+                                "conditions": {
+                                    "array": {
+                                        "contains": "含有",
+                                        "empty": "為空",
+                                        "equals": "等於",
+                                        "not": "不為",
+                                        "notEmpty": "不為空"
                                     },
-                                    "clearAll": "清空",
-                                    "conditions": {
-                                        "array": {
-                                            "contains": "含有",
-                                            "empty": "為空",
-                                            "equals": "等於",
-                                            "not": "不為",
-                                            "notEmpty": "不為空"
-                                        },
-                                        "date": {
-                                            "after": "大於",
-                                            "before": "小於",
-                                            "between": "在其中",
-                                            "empty": "為空",
-                                            "equals": "等於",
-                                            "not": "不為",
-                                            "notBetween": "不在其中",
-                                            "notEmpty": "不為空"
-                                        },
-                                        "number": {
-                                            "between": "在其中",
-                                            "empty": "為空",
-                                            "equals": "等於",
-                                            "gt": "大於",
-                                            "gte": "大於等於",
-                                            "lt": "小於",
-                                            "lte": "小於等於",
-                                            "not": "不為",
-                                            "notBetween": "不在其中",
-                                            "notEmpty": "不為空"
-                                        },
-                                        "string": {
-                                            "contains": "含有",
-                                            "empty": "為空",
-                                            "endsWith": "字尾為",
-                                            "equals": "等於",
-                                            "not": "不為",
-                                            "notEmpty": "不為空",
-                                            "startsWith": "字首為"
-                                        }
+                                    "date": {
+                                        "after": "大於",
+                                        "before": "小於",
+                                        "between": "在其中",
+                                        "empty": "為空",
+                                        "equals": "等於",
+                                        "not": "不為",
+                                        "notBetween": "不在其中",
+                                        "notEmpty": "不為空"
                                     },
-                                    "data": "欄位",
-                                    "leftTitle": "群組條件",
-                                    "logicAnd": "且",
-                                    "logicOr": "或",
-                                    "rightTitle": "取消群組",
-                                    "title": {
-                                        "_": "複合查詢 (%d)",
-                                        "0": "複合查詢"
+                                    "number": {
+                                        "between": "在其中",
+                                        "empty": "為空",
+                                        "equals": "等於",
+                                        "gt": "大於",
+                                        "gte": "大於等於",
+                                        "lt": "小於",
+                                        "lte": "小於等於",
+                                        "not": "不為",
+                                        "notBetween": "不在其中",
+                                        "notEmpty": "不為空"
                                     },
-                                    "value": "內容"
-                                },
-                                "editor": {
-                                    "close": "關閉",
-                                    "create": {
-                                        "button": "新增",
-                                        "title": "建立新項目",
-                                        "submit": "建立"
-                                    },
-                                    "edit": {
-                                        "button": "編輯",
-                                        "title": "編輯項目",
-                                        "submit": "更新"
-                                    },
-                                    "remove": {
-                                        "button": "刪除",
-                                        "title": "刪除",
-                                        "submit": "刪除",
-                                        "confirm": {
-                                            "_": "您確定要刪除 %d 筆資料嗎？",
-                                            "1": "您確定要刪除 %d 筆資料嗎？"
-                                        }
-                                    },
-                                    "multi": {
-                                        "restore": "回復修改",
-                                        "title": "每行有不同的價值",
-                                        "info": "您選擇了多個項目，每項目都有不同的價值。如果您想所有選擇的項目都用同一個價值，可以在這裏輸入一個價值。要不然它們會保留原本各自的價值",
-                                        "noMulti": "此列不容許同時編輯多個項目"
-                                    },
-                                    "error": {
-                                        "system": "系統發生錯誤(更多資訊)"
+                                    "string": {
+                                        "contains": "含有",
+                                        "empty": "為空",
+                                        "endsWith": "字尾為",
+                                        "equals": "等於",
+                                        "not": "不為",
+                                        "notEmpty": "不為空",
+                                        "startsWith": "字首為"
                                     }
                                 },
-                                "autoFill": {
-                                    "cancel": "取消"
+                                "data": "欄位",
+                                "leftTitle": "群組條件",
+                                "logicAnd": "且",
+                                "logicOr": "或",
+                                "rightTitle": "取消群組",
+                                "title": {
+                                    "_": "複合查詢 (%d)",
+                                    "0": "複合查詢"
                                 },
-                                "buttons": {
-                                    "copySuccess": {
-                                        "_": "複製了 %d 筆資料",
-                                        "1": "複製了 1 筆資料"
-                                    },
-                                    "copyTitle": "已經複製到剪貼簿",
-                                    "excel": "Excel",
-                                    "pdf": "PDF",
-                                    "print": "列印",
-                                    "copy": "複製"
+                                "value": "內容"
+                            },
+                            "editor": {
+                                "close": "關閉",
+                                "create": {
+                                    "button": "新增",
+                                    "title": "建立新項目",
+                                    "submit": "建立"
                                 },
-                                "searchPanes": {
-                                    "collapse": {
-                                        "_": "搜尋面版 (%d)",
-                                        "0": "搜尋面版"
-                                    },
-                                    "emptyPanes": "沒搜尋面版",
-                                    "loadMessage": "載入搜尋面版中...",
-                                    "clearMessage": "清空"
+                                "edit": {
+                                    "button": "編輯",
+                                    "title": "編輯項目",
+                                    "submit": "更新"
                                 },
-                                "select": {
-                                    "rows": {
-                                        "_": "%d 列已選擇",
-                                        "1": "%d 列已選擇"
+                                "remove": {
+                                    "button": "刪除",
+                                    "title": "刪除",
+                                    "submit": "刪除",
+                                    "confirm": {
+                                        "_": "您確定要刪除 %d 筆資料嗎？",
+                                        "1": "您確定要刪除 %d 筆資料嗎？"
                                     }
+                                },
+                                "multi": {
+                                    "restore": "回復修改",
+                                    "title": "每行有不同的價值",
+                                    "info": "您選擇了多個項目，每項目都有不同的價值。如果您想所有選擇的項目都用同一個價值，可以在這裏輸入一個價值。要不然它們會保留原本各自的價值",
+                                    "noMulti": "此列不容許同時編輯多個項目"
+                                },
+                                "error": {
+                                    "system": "系統發生錯誤(更多資訊)"
+                                }
+                            },
+                            "autoFill": {
+                                "cancel": "取消"
+                            },
+                            "buttons": {
+                                "copySuccess": {
+                                    "_": "複製了 %d 筆資料",
+                                    "1": "複製了 1 筆資料"
+                                },
+                                "copyTitle": "已經複製到剪貼簿",
+                                "excel": "Excel",
+                                "pdf": "PDF",
+                                "print": "列印",
+                                "copy": "複製"
+                            },
+                            "searchPanes": {
+                                "collapse": {
+                                    "_": "搜尋面版 (%d)",
+                                    "0": "搜尋面版"
+                                },
+                                "emptyPanes": "沒搜尋面版",
+                                "loadMessage": "載入搜尋面版中...",
+                                "clearMessage": "清空"
+                            },
+                            "select": {
+                                "rows": {
+                                    "_": "%d 列已選擇",
+                                    "1": "%d 列已選擇"
                                 }
                             }
-                            ,
-                            columnDefs: [
-                                {
-                                    render: function (data, type, full, meta) {
-                                        return "<div class='width-60'>" + data + "</div>";
-                                    },
-                                    targets: 1
+                        }
+                        ,
+                        columnDefs: [
+                            {
+                                render: function (data, type, full, meta) {
+                                    return "<div class='width-60'>" + data + "</div>";
                                 },
-                            ],
+                                targets: 1
+                            },
+                        ],
 
-                        });
-                        var table = $('#' + 'data-table_' + i)
-                        $(table).DataTable().columns.adjust().draw();
-                        $(table).addClass('display wrap compact table-hover table-striped');
-                        $(table).DataTable().row(table.children(2).children(1)).remove().draw();
-                    };
-                }
-            
+                    });
+                    var table = $('#' + 'data-table_' + i)
+                    $(table).DataTable().columns.adjust().draw();
+                    $(table).addClass('display wrap compact table-hover table-striped');
+                    $(table).DataTable().row(table.children(2).children(1)).remove().draw();
+                };
+            }
+
 
             $('.btn').click(function () {
                 var check = $(this).hasClass('active');
@@ -252,16 +262,19 @@
             google.script.run.withSuccessHandler(showData_2).searchData(text, e);
         }
         function showData_2(array) {
-            if (array !== undefined && array.length != 0 && array !== "") {
-                var popResult = "<table id='popResult' class='table table-sm table-striped' style='border-collapse: separate';  >" + "<thead>"
-                for (var i = 0; i < array.length; i++) {
-                    if (array[i] !== undefined && array[i] !== '') {
-                        popResult += "<tr>" + "<td>" + array[i] + "</td>" + "</tr>"
-                    }
+            if (array !== undefined && array.length != 0) {
+                var dataResult = "<table class='table table-sm table-striped' width='100%' style='table-layout:fixed'>" +
+                    "<thead style='white-space: normal'>"
+                for (var i = 0; i < 1; i++) {
+                    for (var j = 0; j < array[i].length - 1; j++) {
+                        if(array[i + 1][j + 1] != undefined && array[i + 1][j + 1] !==""){
+                        dataResult += "<tr>" + "<td class = 'title'>" + array[i][j] + "</td>" + "<td>" + array[i + 1][j + 1] + "</td>" + "</tr>"
+                    }}
                 }
-                popResult += "</thead>" + "</table>"
-            };
-            $('#content').html(popResult)
+                dataResult += "</thead>" + "</table>"
+
+                $('#content').html(dataResult)
+            }
         }
 
         function openSidebar() {
@@ -288,7 +301,7 @@
         <div id="homeBar" class="homeBar">
             <a href="javascript:void(0)" id="page0" class="btn active w3-bar-item w3-button">全人核心</a>
             <a href="javascript:void(0)" id="page1" class="btn w3-bar-item w3-button">多元教材</a>
-            <a href="javascript:void(0)" id="page2" class="btn w3-bar-item w3-button">常見問題</a>
+            <a href="javascript:void(0)" id="page2" class="btn w3-bar-item w3-button">諮詢問題</a>
             <a href="javascript:void(0)" id="page3" class="btn w3-bar-item w3-button">回饋建議</a>
             <a href="javascript:void(0)" id="page4" class="btn w3-bar-item w3-button">成效分數</a>
             <a href="javascript:void(0)" id="page5" class="btn w3-bar-item w3-button">學員分數</a>
@@ -296,10 +309,11 @@
             <a href="javascript:void(0)" id="page7" class="btn w3-bar-item w3-button">輔導強化</a>
             <a href="javascript:void(0)" id="page8" class="btn w3-bar-item w3-button">教學資源</a>
             <a href="javascript:void(0)" id="page9" class="btn w3-bar-item w3-button">評核表單</a>
-            <a href="javascript:void(0)" id="page10" class="btn w3-bar-item w3-button">評鑑簡報</a>
-            <a href="javascript:void(0)" id="page11" class="btn w3-bar-item w3-button">醫院評鑑</a>
-            <a href="javascript:void(0)" id="page12" class="btn w3-bar-item w3-button">醫院QA</a>
-            <a href="javascript:void(0)" id="page13" class="btn w3-bar-item w3-button">教學QA</a>
+            <a href="javascript:void(0)" id="page10" class="btn w3-bar-item w3-button">多元評量</a>
+            <a href="javascript:void(0)" id="page11" class="btn w3-bar-item w3-button">評鑑簡報</a>
+            <a href="javascript:void(0)" id="page12" class="btn w3-bar-item w3-button">醫院評鑑</a>
+            <a href="javascript:void(0)" id="page13" class="btn w3-bar-item w3-button">醫院QA</a>
+            <a href="javascript:void(0)" id="page14" class="btn w3-bar-item w3-button">教學QA</a>
         </div>
     </nav>
     <div class="w3-container" style="margin-top:90px">
@@ -346,6 +360,10 @@
     <div id="_page13" class="page">
         <table id="data-table_13"></table>
     </div>
+    <div id="_page14" class="page">
+        <table id="data-table_14"></table>
+    </div>
+
 
 
     <div data-role="popup" id="myPopup" class="ui-content" data-dismissible="false">
