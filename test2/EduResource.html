@@ -26,7 +26,6 @@
         src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
     <script src="https://cdn.datatables.net/fixedcolumns/4.0.1/js/dataTables.fixedColumns.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-
     <style>
         .page {
             display: none;
@@ -44,19 +43,28 @@
         .title {
             background-color: #009688;
             color: white;
-            width: 60px;
+            width: fit-content;
         }
 
-        /* .poptable {
-            width: 30px;
-            height: 40px;
-        } */
+        .title1 {
+            background-color: #EFEFEF;
+            color: black;
+            font-weight: bold;
+            width: fit-content;
+        }
     </style>
     <script>
         $(document).ready(function () {
+            google.script.run.withSuccessHandler(sheetName).getName();
+            function sheetName(dataArray) {
+                for (var i = 0; i < 20; i++) {
+                    $('#' + 'page' + i).html(dataArray[i])
+                }
+            }
+
             google.script.run.withSuccessHandler(showData).getData();
             function showData(dataArray) {
-                for (var i = 0; i < 15; i++) {// 有幾個工作表i就要小於多少
+                for (var i = 0; i < 9; i++) {// 有幾個工作表i就要小於多少
                     $('#' + 'data-table_' + i).DataTable({
                         scrollX: true,
                         scrollY: 800,
@@ -234,6 +242,7 @@
                     $(table).DataTable().columns.adjust().draw();
                     $(table).addClass('display wrap compact table-hover table-striped');
                     $(table).DataTable().row(table.children(2).children(1)).remove().draw();
+
                 };
             }
 
@@ -261,15 +270,21 @@
             // 讓他可以搜尋按鈕所在的工作表位置，否則所有按鈕都執行getVal這function卻不知道要去哪個工作表內找資料
             google.script.run.withSuccessHandler(showData_2).searchData(text, e);
         }
+        function getVal1(data) {
+            var text = $(data).parent().next().text()
+            google.script.run.withSuccessHandler(showData_2).searchData1(text);
+        }
+        
         function showData_2(array) {
             if (array !== undefined && array.length != 0) {
                 var dataResult = "<table class='table table-sm table-striped' width='100%' style='table-layout:fixed'>" +
                     "<thead style='white-space: normal'>"
                 for (var i = 0; i < 1; i++) {
                     for (var j = 0; j < array[i].length - 1; j++) {
-                        if(array[i + 1][j + 1] != undefined && array[i + 1][j + 1] !==""){
-                        dataResult += "<tr>" + "<td class = 'title'>" + array[i][j] + "</td>" + "<td>" + array[i + 1][j + 1] + "</td>" + "</tr>"
-                    }}
+                        if (array[i + 1][j + 1] != undefined && array[i + 1][j + 1] !== "") {
+                            dataResult += "<tr>" + "<td class = 'title'>" + array[i][j] + "</td>" + "<td>" + array[i + 1][j + 1] + "</td>" + "</tr>"
+                        }
+                    }
                 }
                 dataResult += "</thead>" + "</table>"
 
@@ -285,6 +300,46 @@
             document.getElementById("Sidebar").style.display = "none";
         }
 
+        $(document).ready(function () {
+            $('#bookdate').change(function () {//日期選擇自動填入試算表
+                var date = document.getElementById('bookdate');
+                var rowData = date.value;
+                google.script.run.addDate(rowData);
+                google.script.run.withSuccessHandler(Showdata_1).getData1();//創造表格
+                function Showdata_1(dataArray) {
+                    if (dataArray !== undefined && dataArray.length != 0) {
+                        var dataResult = "<table class='table table-sm table-striped' width='100%' '>" +
+                            "<thead style='white-space: nowrap'>"
+                        for (var i = 0; i < 1; i++) {
+                            for (var j = 0; j < 1; j++) {
+                                dataResult += "<tr class='title'>" + "<td>" + dataArray[i][j] + "</td>"
+                            }
+                            for (var j = 1; j < 16; j++) {
+                                dataResult += "<td>" + dataArray[i][j] + "</td>"
+                            }
+                            for (var j = 16; j < 17; j++) {
+                                dataResult += "<td>" + dataArray[i][j] + "</td>" + "</tr>"
+                            }
+                        }
+                        for (var i = 1; i < 14; i++) {
+                            for (var j = 0; j < 1; j++) {
+                                dataResult += "<tr>" + "<td class='title1'>" + dataArray[i][j] + "</td>"
+                            }
+                            for (var j = 1; j < 16; j++) {
+                                dataResult += "<td>" + dataArray[i][j] + "</td>"
+                            }
+                            for (var j = 16; j < 17; j++) {
+                                dataResult += "<td>" + dataArray[i][j] + "</td>" + "</tr>"
+                            }
+                        }
+                        dataResult += "</thead>" + "</table>"
+
+                        $('#timetable').html(dataResult)
+
+                    }
+                }
+            })
+        })
 
 
     </script>
@@ -299,21 +354,16 @@
             <span onclick="closeSidebar()" class="w3-button w3-display-topright w3-large">X</span>
         </div>
         <div id="homeBar" class="homeBar">
-            <a href="javascript:void(0)" id="page0" class="btn active w3-bar-item w3-button">全人核心</a>
-            <a href="javascript:void(0)" id="page1" class="btn w3-bar-item w3-button">多元教材</a>
-            <a href="javascript:void(0)" id="page2" class="btn w3-bar-item w3-button">諮詢問題</a>
-            <a href="javascript:void(0)" id="page3" class="btn w3-bar-item w3-button">回饋建議</a>
-            <a href="javascript:void(0)" id="page4" class="btn w3-bar-item w3-button">成效分數</a>
-            <a href="javascript:void(0)" id="page5" class="btn w3-bar-item w3-button">學員分數</a>
-            <a href="javascript:void(0)" id="page6" class="btn w3-bar-item w3-button">教師分數</a>
-            <a href="javascript:void(0)" id="page7" class="btn w3-bar-item w3-button">輔導強化</a>
-            <a href="javascript:void(0)" id="page8" class="btn w3-bar-item w3-button">教學資源</a>
-            <a href="javascript:void(0)" id="page9" class="btn w3-bar-item w3-button">評核表單</a>
-            <a href="javascript:void(0)" id="page10" class="btn w3-bar-item w3-button">多元評量</a>
-            <a href="javascript:void(0)" id="page11" class="btn w3-bar-item w3-button">評鑑簡報</a>
-            <a href="javascript:void(0)" id="page12" class="btn w3-bar-item w3-button">醫院評鑑</a>
-            <a href="javascript:void(0)" id="page13" class="btn w3-bar-item w3-button">醫院QA</a>
-            <a href="javascript:void(0)" id="page14" class="btn w3-bar-item w3-button">教學QA</a>
+            <a href="javascript:void(0)" id="page0" class="btn active w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page1" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page2" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page3" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page4" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page5" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page6" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page7" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page8" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page9" class="btn w3-bar-item w3-button"></a>
         </div>
     </nav>
     <div class="w3-container" style="margin-top:90px">
@@ -346,22 +396,11 @@
         <table id="data-table_8"></table>
     </div>
     <div id="_page9" class="page">
-        <table id="data-table_9"></table>
-    </div>
-    <div id="_page10" class="page">
-        <table id="data-table_10"></table>
-    </div>
-    <div id="_page11" class="page">
-        <table id="data-table_11"></table>
-    </div>
-    <div id="_page12" class="page">
-        <table id="data-table_12"></table>
-    </div>
-    <div id="_page13" class="page">
-        <table id="data-table_13"></table>
-    </div>
-    <div id="_page14" class="page">
-        <table id="data-table_14"></table>
+        <div>
+            <label for="bookdate">日期:</label>
+            <input type="date" id="bookdate">
+            <div style="overflow: auto;" id="timetable"></div>
+        </div>
     </div>
 
 

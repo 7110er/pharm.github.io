@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>藥師教學歷程</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- 連結jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- 連結jquery moblie -->
+    <link rel="stylesheet" href="https://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="https://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <!-- 連結Data table -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <link rel="https://cdn.datatables.net/fixedcolumns/4.0.1/css/fixedColumns.dataTables.min.css">
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/4.0.1/js/dataTables.fixedColumns.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <style>
+        .page {
+            display: none;
+        }
+
+        .active {
+            background-color: #eee !important;
+            color: black !important;
+        }
+
+        .width-60 {
+            width: 120px;
+        }
+
+        .title {
+            background-color: #009688;
+            color: white;
+            width: fit-content;
+        }
+
+        .title1 {
+            background-color: #EFEFEF;
+            color: black;
+            font-weight: bold;
+            width: fit-content;
+        }
+
+        /* .poptable {
+            width: 30px;
+            height: 40px;
+        } */
+    </style>
+    <script>
+        $(document).ready(function () {
+            google.script.run.withSuccessHandler(sheetName).getName();
+            function sheetName(dataArray) {
+                for (var i = 0; i < 15; i++) {
+                    $('#' + 'page' + i).html(dataArray[i])
+                }
+            }
+
+            google.script.run.withSuccessHandler(showData).getData();
+            function showData(dataArray) {
+                for (var i = 0; i < 15; i++) {// 有幾個工作表i就要小於多少
+                    $('#' + 'data-table_' + i).DataTable({
+                        scrollX: true,
+                        scrollY: 800,
+                        scrollCollapse: true,
+                        data: dataArray[i],
+                        columns: [
+                            { "title": dataArray[i][0][0] },
+                            { "title": dataArray[i][0][1] },
+                            { "title": dataArray[i][0][2] },
+                        ],
+                        "language": {
+                            "processing": "處理中...",
+                            "loadingRecords": "載入中...",
+                            "lengthMenu": "顯示 _MENU_ 項結果",
+                            "zeroRecords": "沒有符合的結果",
+                            "info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+                            "infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+                            "infoFiltered": "(從 _MAX_ 項結果中過濾)",
+                            "search": "<i class='fa fa-search'></i>&nbsp;關鍵字搜尋&nbsp;:&nbsp;",
+                            "paginate": {
+                                "first": "第一頁",
+                                "previous": "上一頁",
+                                "next": "下一頁",
+                                "last": "最後一頁"
+                            },
+                            "aria": {
+                                "sortAscending": ": 升冪排列",
+                                "sortDescending": ": 降冪排列"
+                            },
+                            "emptyTable": "目前沒有資料",
+                            "datetime": {
+                                "previous": "上一頁",
+                                "next": "下一頁",
+                                "hours": "時",
+                                "minutes": "分",
+                                "seconds": "秒",
+                                "amPm": [
+                                    "上午",
+                                    "下午"
+                                ]
+                            },
+                            "searchBuilder": {
+                                "add": "新增條件",
+                                "condition": "條件",
+                                "deleteTitle": "刪除過濾條件",
+                                "button": {
+                                    "_": "複合查詢 (%d)",
+                                    "0": "複合查詢"
+                                },
+                                "clearAll": "清空",
+                                "conditions": {
+                                    "array": {
+                                        "contains": "含有",
+                                        "empty": "為空",
+                                        "equals": "等於",
+                                        "not": "不為",
+                                        "notEmpty": "不為空"
+                                    },
+                                    "date": {
+                                        "after": "大於",
+                                        "before": "小於",
+                                        "between": "在其中",
+                                        "empty": "為空",
+                                        "equals": "等於",
+                                        "not": "不為",
+                                        "notBetween": "不在其中",
+                                        "notEmpty": "不為空"
+                                    },
+                                    "number": {
+                                        "between": "在其中",
+                                        "empty": "為空",
+                                        "equals": "等於",
+                                        "gt": "大於",
+                                        "gte": "大於等於",
+                                        "lt": "小於",
+                                        "lte": "小於等於",
+                                        "not": "不為",
+                                        "notBetween": "不在其中",
+                                        "notEmpty": "不為空"
+                                    },
+                                    "string": {
+                                        "contains": "含有",
+                                        "empty": "為空",
+                                        "endsWith": "字尾為",
+                                        "equals": "等於",
+                                        "not": "不為",
+                                        "notEmpty": "不為空",
+                                        "startsWith": "字首為"
+                                    }
+                                },
+                                "data": "欄位",
+                                "leftTitle": "群組條件",
+                                "logicAnd": "且",
+                                "logicOr": "或",
+                                "rightTitle": "取消群組",
+                                "title": {
+                                    "_": "複合查詢 (%d)",
+                                    "0": "複合查詢"
+                                },
+                                "value": "內容"
+                            },
+                            "editor": {
+                                "close": "關閉",
+                                "create": {
+                                    "button": "新增",
+                                    "title": "建立新項目",
+                                    "submit": "建立"
+                                },
+                                "edit": {
+                                    "button": "編輯",
+                                    "title": "編輯項目",
+                                    "submit": "更新"
+                                },
+                                "remove": {
+                                    "button": "刪除",
+                                    "title": "刪除",
+                                    "submit": "刪除",
+                                    "confirm": {
+                                        "_": "您確定要刪除 %d 筆資料嗎？",
+                                        "1": "您確定要刪除 %d 筆資料嗎？"
+                                    }
+                                },
+                                "multi": {
+                                    "restore": "回復修改",
+                                    "title": "每行有不同的價值",
+                                    "info": "您選擇了多個項目，每項目都有不同的價值。如果您想所有選擇的項目都用同一個價值，可以在這裏輸入一個價值。要不然它們會保留原本各自的價值",
+                                    "noMulti": "此列不容許同時編輯多個項目"
+                                },
+                                "error": {
+                                    "system": "系統發生錯誤(更多資訊)"
+                                }
+                            },
+                            "autoFill": {
+                                "cancel": "取消"
+                            },
+                            "buttons": {
+                                "copySuccess": {
+                                    "_": "複製了 %d 筆資料",
+                                    "1": "複製了 1 筆資料"
+                                },
+                                "copyTitle": "已經複製到剪貼簿",
+                                "excel": "Excel",
+                                "pdf": "PDF",
+                                "print": "列印",
+                                "copy": "複製"
+                            },
+                            "searchPanes": {
+                                "collapse": {
+                                    "_": "搜尋面版 (%d)",
+                                    "0": "搜尋面版"
+                                },
+                                "emptyPanes": "沒搜尋面版",
+                                "loadMessage": "載入搜尋面版中...",
+                                "clearMessage": "清空"
+                            },
+                            "select": {
+                                "rows": {
+                                    "_": "%d 列已選擇",
+                                    "1": "%d 列已選擇"
+                                }
+                            }
+                        }
+                        ,
+                        columnDefs: [
+                            {
+                                render: function (data, type, full, meta) {
+                                    return "<div class='width-60'>" + data + "</div>";
+                                },
+                                targets: 1
+                            },
+                        ],
+
+                    });
+                    var table = $('#' + 'data-table_' + i)
+                    $(table).DataTable().columns.adjust().draw();
+                    $(table).addClass('display wrap compact table-hover table-striped');
+                    $(table).DataTable().row(table.children(2).children(1)).remove().draw();
+
+                };
+            }
+
+
+            $('.btn').click(function () {
+                var check = $(this).hasClass('active');
+                var then = "_" + this.id
+                if (!check) {
+                    $(this).toggleClass('active');
+                    $('.homeBar a').not(this).removeClass('active');
+                    $('#' + then).toggle();
+                    $('table').DataTable().columns.adjust().draw();
+                    $(".page:visible").not('#' + then).hide();
+                };
+                $('#title').html(this.textContent);
+                closeSidebar();
+            });
+            closeSidebar();
+        })
+        function getVal(data) {
+            var text = $(data).parent().next().text()
+            var index = $(data).closest('table').attr('id')  // 取得所在table的id名稱ex:data-table_1
+            var e = parseInt(index.slice(11))
+            // 宣告變數e將data-table_1轉為1(數字)，當google script上searchData的第二個參數，
+            // 讓他可以搜尋按鈕所在的工作表位置，否則所有按鈕都執行getVal這function卻不知道要去哪個工作表內找資料
+            google.script.run.withSuccessHandler(showData_2).searchData(text, e);
+        }
+        function showData_2(array) {
+            if (array !== undefined && array.length != 0) {
+                var dataResult = "<table class='table table-sm table-striped' width='100%' style='table-layout:fixed'>" +
+                    "<thead style='white-space: normal'>"
+                for (var i = 0; i < 1; i++) {
+                    for (var j = 0; j < array[i].length - 1; j++) {
+                        if (array[i + 1][j + 1] != undefined && array[i + 1][j + 1] !== "") {
+                            dataResult += "<tr>" + "<td class = 'title'>" + array[i][j] + "</td>" + "<td>" + array[i + 1][j + 1] + "</td>" + "</tr>"
+                        }
+                    }
+                }
+                dataResult += "</thead>" + "</table>"
+
+                $('#content').html(dataResult)
+            }
+        }
+
+        function openSidebar() {
+            document.getElementById("Sidebar").style.display = "block";
+        }
+
+        function closeSidebar() {
+            document.getElementById("Sidebar").style.display = "none";
+        }
+
+        $(document).ready(function () {
+            $('#bookdate').change(function () {//日期選擇自動填入試算表
+                var date = document.getElementById('bookdate');
+                var rowData = date.value;
+                google.script.run.addDate(rowData);
+                google.script.run.withSuccessHandler(Showdata_1).getData1();//創造表格
+                function Showdata_1(dataArray) {
+                    if (dataArray !== undefined && dataArray.length != 0) {
+                        var dataResult = "<table class='table table-sm table-striped' width='100%' '>" +
+                            "<thead style='white-space: nowrap'>"
+                        for (var i = 0; i < 2; i++) {
+                            for (var j = 0; j < 1; j++) {
+                                dataResult += "<tr class='title'>" + "<td>" + dataArray[i][j] + "</td>"
+                            }
+                            for (var j = 1; j < 7; j++) {
+                                dataResult += "<td>" + dataArray[i][j] + "</td>"
+                            }
+                            for (var j = 7; j < 8; j++) {
+                                dataResult += "<td>" + dataArray[i][j] + "</td>" + "</tr>"
+                            }
+                        }
+                        for (var i = 2; i < 15; i++) {
+                            for (var j = 0; j < 1; j++) {
+                                dataResult += "<tr>" + "<td class='title1'>" + dataArray[i][j] + "</td>"
+                            }
+                            for (var j = 1; j < 7; j++) {
+                                dataResult += "<td>" + dataArray[i][j] + "</td>"
+                            }
+                            for (var j = 7; j < 8; j++) {
+                                dataResult += "<td>" + dataArray[i][j] + "</td>" + "</tr>"
+                            }
+                        }
+
+                    }
+                    dataResult += "</thead>" + "</table>"
+
+                    $('#timetable').html(dataResult)
+                }
+            })
+        })
+
+
+    </script>
+
+<body>
+    <header class="w3-top w3-bar w3-theme">
+        <button class="w3-bar-item w3-button w3-xxxsmall w3-hover-theme" onclick="openSidebar()">&#9776;</button>
+        <h1 class="w3-bar-item" id="title">教學資源</h1>
+    </header>
+    <nav class="w3-sidebar w3-bar-block w3-card" id="Sidebar">
+        <div class="w3-container w3-theme-d2">
+            <span onclick="closeSidebar()" class="w3-button w3-display-topright w3-large">X</span>
+        </div>
+        <div id="homeBar" class="homeBar">
+            <a href="javascript:void(0)" id="page0" class="btn active w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page1" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page2" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page3" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page4" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page5" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page6" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page7" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page8" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page9" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page10" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page11" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page12" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page13" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page14" class="btn w3-bar-item w3-button"></a>
+        </div>
+    </nav>
+    <div class="w3-container" style="margin-top:90px">
+    </div>
+    <div id="_page0" class="page" style="display: block;">
+        <table id="data-table_0"></table>
+    </div>
+    <div id="_page1" class="page">
+        <table id="data-table_1"></table>
+    </div>
+    <div id="_page2" class="page">
+        <table id="data-table_2"></table>
+    </div>
+    <div id="_page3" class="page">
+        <table id="data-table_3"></table>
+    </div>
+    <div id="_page4" class="page">
+        <table id="data-table_4"></table>
+    </div>
+    <div id="_page5" class="page">
+        <table id="data-table_5"></table>
+    </div>
+    <div id="_page6" class="page">
+        <table id="data-table_6"></table>
+    </div>
+    <div id="_page7" class="page">
+        <table id="data-table_7"></table>
+    </div>
+    <div id="_page8" class="page">
+        <table id="data-table_8"></table>
+    </div>
+    <div id="_page9" class="page">
+        <table id="data-table_9"></table>
+    </div>
+    <div id="_page10" class="page">
+        <table id="data-table_10"></table>
+    </div>
+    <div id="_page11" class="page">
+        <table id="data-table_11"></table>
+    </div>
+    <div id="_page12" class="page">
+        <table id="data-table_12"></table>
+    </div>
+    <div id="_page13" class="page">
+        <table id="data-table_13"></table>
+    </div>
+    <div id="_page14" class="page">
+        <table id="data-table_14"></table>
+        <div>
+            <label for="bookdate">日期:</label>
+            <input type="date" id="bookdate">
+            <div style="overflow: auto;" id="timetable"></div>
+        </div>
+    </div>
+
+
+
+    <div data-role="popup" id="myPopup" class="ui-content" data-dismissible="false">
+        <a href="#" data-rel="back"
+            class="ui-btn ui-corner-all ui-shadow ui-btn ui-icon-delete ui-btn-icon-notext ui-btn-right">關閉</a>
+        <br>
+        <div id="content">
+        </div>
+    </div>
+    <!-- <div>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br></div>
+    <footer class="w3-container w3-bottom w3-theme w3-margin-top">
+        <h3>藥師教學歷程</h3>
+    </footer> -->
+
+</body>
