@@ -50,14 +50,14 @@
         $(document).ready(function () {
             google.script.run.withSuccessHandler(sheetName).getName();
             function sheetName(dataArray) {
-                for (var i = 0; i < 9; i++) {
+                for (var i = 0; i < 10; i++) {
                     $('#' + 'page' + i).html(dataArray[i])
                 }
             }
 
             google.script.run.withSuccessHandler(showData).getData();
             function showData(dataArray) {
-                for (var i = 0; i < 9; i++) {// 有幾個工作表i就要小於多少
+                for (var i = 0; i < 10; i++) {// 有幾個工作表i就要小於多少
                     $('#' + 'data-table_' + i).DataTable({
                         scrollX: true,
                         scrollY: 800,
@@ -310,6 +310,8 @@
             <a href="javascript:void(0)" id="page6" class="btn w3-bar-item w3-button"></a>
             <a href="javascript:void(0)" id="page7" class="btn w3-bar-item w3-button"></a>
             <a href="javascript:void(0)" id="page8" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page9" class="btn w3-bar-item w3-button"></a>
+
         </div>
     </nav>
     <div class="w3-container" style="margin-top:90px">
@@ -340,6 +342,9 @@
     </div>
     <div id="_page8" class="page">
         <table id="data-table_8" class="display compact table-hover table-striped " style="width: 100%; overflow: auto;"></table>
+    </div>
+    <div id="_page9" class="page">
+        <table id="data-table_9" class="display compact table-hover table-striped " style="width: 100%; overflow: auto;"></table>
     </div>
 
 
