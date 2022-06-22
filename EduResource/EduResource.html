@@ -247,7 +247,6 @@
                 };
             }
 
-
             $('.btn').click(function () {
                 var check = $(this).hasClass('active');
                 var then = "_" + this.id
@@ -262,46 +261,23 @@
                 closeSidebar();
             });
             closeSidebar();
-        })
-        function getVal(data) {
-            var text = $(data).parent().next().text()
-            var index = $(data).closest('table').attr('id')  // 取得所在table的id名稱ex:data-table_1
-            var e = parseInt(index.slice(11))
-            // 宣告變數e將data-table_1轉為1(數字)，當google script上searchData的第二個參數，
-            // 讓他可以搜尋按鈕所在的工作表位置，否則所有按鈕都執行getVal這function卻不知道要去哪個工作表內找資料
-            google.script.run.withSuccessHandler(showData_2).searchData(text, e);
-        }
-        function getVal1(data) {
-            var text = $(data).parent().next().text()
-            google.script.run.withSuccessHandler(showData_2).searchData1(text);
-        }
 
-        function showData_2(array) {
-            if (array !== undefined && array.length != 0) {
-                var dataResult = "<table class='table table-sm table-striped' width='100%' style='table-layout:fixed'>" +
-                    "<thead style='white-space: normal'>"
-                for (var i = 0; i < 1; i++) {
-                    for (var j = 0; j < array[i].length - 1; j++) {
-                        if (array[i + 1][j + 1] != undefined && array[i + 1][j + 1] !== "") {
-                            dataResult += "<tr>" + "<td class = 'title'>" + array[i][j] + "</td>" + "<td>" + array[i + 1][j + 1] + "</td>" + "</tr>"
+            google.script.run.withSuccessHandler(showData_3).getData2();
+            function showData_3(dataArray) {
+                if (dataArray !== undefined && dataArray.length != 0) {
+                    var dataResult = '<select name="PGY_value" id="PGY_value">'
+                    for (var i = 0; i < 1; i++) {
+                        for (var j = 0; j < dataArray[i].length; j++) {
+                            if (dataArray[i][j] !== undefined && dataArray[i][j] !== '') {
+                                dataResult += '<option value=' + "'" + dataArray[i][j] + "'" + " class='PGY_V'" + '>' + dataArray[i][j] + '</option>'
+                            }
                         }
                     }
+                    dataResult += '</select>'
+                    $('#PGY_name').html(dataResult)
                 }
-                dataResult += "</thead>" + "</table>"
+            };
 
-                $('#content').html(dataResult)
-            }
-        }
-
-        function openSidebar() {
-            document.getElementById("Sidebar").style.display = "block";
-        }
-
-        function closeSidebar() {
-            document.getElementById("Sidebar").style.display = "none";
-        }
-
-        $(document).ready(function () {
             $('#bookdate').change(function () {//日期選擇自動填入試算表
                 var date = document.getElementById('bookdate');
                 var rowData = date.value;
@@ -340,26 +316,42 @@
                     }
                 }
             })
-        })
 
-        $(document).ready(function () {
-            google.script.run.withSuccessHandler(showData_3).getData2();
-            function showData_3(dataArray) {
-                if (dataArray !== undefined && dataArray.length != 0) {
-                    var dataResult = '<select name="PGY_value" id="PGY_value">'
-                    for (var i = 0; i < 1; i++) {
-                        for (var j = 0; j < dataArray[i].length; j++) {
-                            if (dataArray[i][j] !== undefined && dataArray[i][j] !== '') {
-                                dataResult += '<option value=' + "'" + dataArray[i][j] + "'" + " class='PGY_V'" + '>' + dataArray[i][j] + '</option>'
-                            }
+        })
+        function getVal(data) {
+            var text = $(data).parent().next().text()
+            var index = $(data).closest('table').attr('id')  // 取得所在table的id名稱ex:data-table_1
+            var e = parseInt(index.slice(11))
+            // 宣告變數e將data-table_1轉為1(數字)，當google script上searchData的第二個參數，
+            // 讓他可以搜尋按鈕所在的工作表位置，否則所有按鈕都執行getVal這function卻不知道要去哪個工作表內找資料
+            google.script.run.withSuccessHandler(showData_2).searchData(text, e);
+        }
+        function getVal1(data) {
+            var text = $(data).parent().next().text()
+            google.script.run.withSuccessHandler(showData_2).searchData1(text);
+        }
+        function showData_2(array) {
+            if (array !== undefined && array.length != 0) {
+                var dataResult = "<table class='table table-sm table-striped' width='100%' style='table-layout:fixed'>" +
+                    "<thead style='white-space: normal'>"
+                for (var i = 0; i < 1; i++) {
+                    for (var j = 0; j < array[i].length - 1; j++) {
+                        if (array[i + 1][j + 1] != undefined && array[i + 1][j + 1] !== "") {
+                            dataResult += "<tr>" + "<td class = 'title'>" + array[i][j] + "</td>" + "<td>" + array[i + 1][j + 1] + "</td>" + "</tr>"
                         }
                     }
-                    dataResult += '</select>'
-                    $('#PGY_name').html(dataResult)
                 }
-            };
-        })
+                dataResult += "</thead>" + "</table>"
 
+                $('#content').html(dataResult)
+            }
+        }
+        function openSidebar() {
+            document.getElementById("Sidebar").style.display = "block";
+        }
+        function closeSidebar() {
+            document.getElementById("Sidebar").style.display = "none";
+        }
         function submitPGY() {
             var PGY = document.getElementById('PGY_value');
             var month = document.getElementById('calendar');
@@ -471,9 +463,5 @@
         <div id="content">
         </div>
     </div>
-    <!-- <div>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br></div>
-    <footer class="w3-container w3-bottom w3-theme w3-margin-top">
-        <h3>藥師教學歷程</h3>
-    </footer> -->
 
 </body>

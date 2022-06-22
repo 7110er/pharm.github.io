@@ -47,16 +47,25 @@
             /* width: fit-content; */
         }
 
-        /* .poptable {
-            width: 30px;
-            height: 40px;
-        } */
+        .title1 {
+            background-color: #EFEFEF;
+            color: black;
+            font-weight: bold;
+            /* width: fit-content; */
+        }
     </style>
     <script>
         $(document).ready(function () {
+            google.script.run.withSuccessHandler(sheetName).getName();
+            function sheetName(dataArray) {
+                for (var i = 0; i < 20; i++) {
+                    $('#' + 'page' + i).html(dataArray[i])
+                }
+            }
+
             google.script.run.withSuccessHandler(showData).getData();
             function showData(dataArray) {
-                for (var i = 0; i < 15; i++) {// 有幾個工作表i就要小於多少
+                for (var i = 0; i < 9; i++) {// 有幾個工作表i就要小於多少
                     $('#' + 'data-table_' + i).DataTable({
                         scrollX: true,
                         scrollY: 800,
@@ -234,9 +243,9 @@
                     $(table).DataTable().columns.adjust().draw();
                     $(table).addClass('display wrap compact table-hover table-striped');
                     $(table).DataTable().row(table.children(2).children(1)).remove().draw();
+
                 };
             }
-
 
             $('.btn').click(function () {
                 var check = $(this).hasClass('active');
@@ -252,6 +261,62 @@
                 closeSidebar();
             });
             closeSidebar();
+
+            google.script.run.withSuccessHandler(showData_3).getData2();
+            function showData_3(dataArray) {
+                if (dataArray !== undefined && dataArray.length != 0) {
+                    var dataResult = '<select name="PGY_value" id="PGY_value">'
+                    for (var i = 0; i < 1; i++) {
+                        for (var j = 0; j < dataArray[i].length; j++) {
+                            if (dataArray[i][j] !== undefined && dataArray[i][j] !== '') {
+                                dataResult += '<option value=' + "'" + dataArray[i][j] + "'" + " class='PGY_V'" + '>' + dataArray[i][j] + '</option>'
+                            }
+                        }
+                    }
+                    dataResult += '</select>'
+                    $('#PGY_name').html(dataResult)
+                }
+            };
+
+            $('#bookdate').change(function () {//日期選擇自動填入試算表
+                var date = document.getElementById('bookdate');
+                var rowData = date.value;
+                google.script.run.addDate(rowData);
+                google.script.run.withSuccessHandler(Showdata_1).getData1();//創造表格
+                function Showdata_1(dataArray) {
+                    if (dataArray !== undefined && dataArray.length != 0) {
+                        var dataResult = "<table class='table table-sm table-striped' width='100%' data-dismissible='false' >" +
+                            "<thead style='white-space: nowrap'>"
+                        for (var i = 0; i < 1; i++) {
+                            for (var j = 0; j < 1; j++) {
+                                dataResult += "<tr class='title'>" + "<td>" + dataArray[i][j] + "</td>"
+                            }
+                            for (var j = 1; j < 16; j++) {
+                                dataResult += "<td>" + dataArray[i][j] + "</td>"
+                            }
+                            for (var j = 16; j < 17; j++) {
+                                dataResult += "<td>" + dataArray[i][j] + "</td>" + "</tr>"
+                            }
+                        }
+                        for (var i = 1; i < 14; i++) {
+                            for (var j = 0; j < 1; j++) {
+                                dataResult += "<tr>" + "<td class='title1'>" + dataArray[i][j] + "</td>"
+                            }
+                            for (var j = 1; j < 16; j++) {
+                                dataResult += "<td>" + dataArray[i][j] + "</td>"
+                            }
+                            for (var j = 16; j < 17; j++) {
+                                dataResult += "<td>" + dataArray[i][j] + "</td>" + "</tr>"
+                            }
+                        }
+                        dataResult += "</thead>" + "</table>"
+
+                        $('#timetable').html(dataResult)
+
+                    }
+                }
+            })
+
         })
         function getVal(data) {
             var text = $(data).parent().next().text()
@@ -261,109 +326,237 @@
             // 讓他可以搜尋按鈕所在的工作表位置，否則所有按鈕都執行getVal這function卻不知道要去哪個工作表內找資料
             google.script.run.withSuccessHandler(showData_2).searchData(text, e);
         }
+        function getVal1(data) {
+            var text = $(data).parent().next().text()
+            google.script.run.withSuccessHandler(showData_2).searchData1(text);
+        }
         function showData_2(array) {
             if (array !== undefined && array.length != 0) {
                 var dataResult = "<table class='table table-sm table-striped' width='100%' style='table-layout:fixed'>" +
                     "<thead style='white-space: normal'>"
                 for (var i = 0; i < 1; i++) {
                     for (var j = 0; j < array[i].length - 1; j++) {
-                        if(array[i + 1][j + 1] != undefined && array[i + 1][j + 1] !==""){
-                        dataResult += "<tr>" + "<td class = 'title'>" + array[i][j] + "</td>" + "<td>" + array[i + 1][j + 1] + "</td>" + "</tr>"
-                    }}
+                        if (array[i + 1][j + 1] != undefined && array[i + 1][j + 1] !== "") {
+                            dataResult += "<tr>" + "<td class = 'title'>" + array[i][j] + "</td>" + "<td>" + array[i + 1][j + 1] + "</td>" + "</tr>"
+                        }
+                    }
                 }
                 dataResult += "</thead>" + "</table>"
 
                 $('#content').html(dataResult)
             }
         }
-
         function openSidebar() {
             document.getElementById("Sidebar").style.display = "block";
         }
-
         function closeSidebar() {
             document.getElementById("Sidebar").style.display = "none";
         }
+        function submitPGY() {
+            var PGY = document.getElementById('PGY_value');
+            var month = document.getElementById('calendar');
+            var rowData = {
+                PGY: PGY.value,
+                month: month.value
+            };
+            google.script.run.addPGY(rowData);
+            google.script.run.withSuccessHandler(showdata_4).getData3();
+            function showdata_4(dataArray) {
+                if (dataArray !== undefined && dataArray.length != 0) {
+                    var dataResult = "<table class='table table-sm table-striped' width='100%' data-dismissible='false' >" +
+                        "<thead style='white-space: nowrap'>"
+                    for (var i = 0; i < 1; i++) {
+                        for (var j = 0; j < dataArray[i].length; j++) {
+                            dataResult += "<tr>" + "<td class='title'>" + dataArray[i][j] + "</td>" + "<td>" + dataArray[i + 1][j] + "</td>" + "</tr>"
+                        }
+                    }
+                    dataResult += "</thead>" + "</table>"
 
+                    $('#month').html(dataResult)
+                }
 
+            }
+        }
+        function subpub() {
+            var date = document.getElementById('date1');
+            var group = document.getElementById('group');
+            var category = document.getElementById('category');
+            var publisher = document.getElementById('publisher');
+            var subject = document.getElementById('subject');
+            var img = document.getElementById('img');
+            var link1 = document.getElementById('link1');
+            var link2 = document.getElementById('link2');
+            var link3 = document.getElementById('link3');
+            var rowData = {
+                date: date.value,
+                group: group.value,
+                category: category.value,
+                publisher: publisher.value,
+                subject: subject.value,
+                img: img.value,
+                link1: link1.value,
+                link2: link2.value,
+                link3: link3.value,
+            };
+            google.script.run.addPub(rowData);
+            alert('公告已送出')
+        }
 
+        function LoadFile(event) {
+            var file = event.target.files[0];
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                // console.log(e.target.result);
+                var fileData = e.target.result.substr(e.target.result.indexOf(",") + 1);
+                var mimeTypeStart = e.target.result.indexOf("data:") + 5;
+                var mimeTypeEnd = e.target.result.indexOf(";");
+                var mimeType = e.target.result.substr(mimeTypeStart, mimeTypeEnd - mimeTypeStart);
+                var fileName = file.name;
+                document.getElementById("fileData").value = fileData;
+                document.getElementById("mimeType").value = mimeType;
+                document.getElementById("fileName").value = fileName;
+            };
+            reader.readAsDataURL(file);
+        }
     </script>
 
 <body>
     <header class="w3-top w3-bar w3-theme">
         <button class="w3-bar-item w3-button w3-xxxsmall w3-hover-theme" onclick="openSidebar()">&#9776;</button>
-        <h1 class="w3-bar-item" id="title">全人核心</h1>
+        <h1 class="w3-bar-item" id="title">教學資源</h1>
     </header>
     <nav class="w3-sidebar w3-bar-block w3-card" id="Sidebar">
         <div class="w3-container w3-theme-d2">
             <span onclick="closeSidebar()" class="w3-button w3-display-topright w3-large">X</span>
         </div>
         <div id="homeBar" class="homeBar">
-            <a href="javascript:void(0)" id="page0" class="btn active w3-bar-item w3-button">全人核心</a>
-            <a href="javascript:void(0)" id="page1" class="btn w3-bar-item w3-button">多元教材</a>
-            <a href="javascript:void(0)" id="page2" class="btn w3-bar-item w3-button">諮詢問題</a>
-            <a href="javascript:void(0)" id="page3" class="btn w3-bar-item w3-button">回饋建議</a>
-            <a href="javascript:void(0)" id="page4" class="btn w3-bar-item w3-button">成效分數</a>
-            <a href="javascript:void(0)" id="page5" class="btn w3-bar-item w3-button">學員分數</a>
-            <a href="javascript:void(0)" id="page6" class="btn w3-bar-item w3-button">教師分數</a>
-            <a href="javascript:void(0)" id="page7" class="btn w3-bar-item w3-button">輔導強化</a>
-            <a href="javascript:void(0)" id="page8" class="btn w3-bar-item w3-button">教學資源</a>
-            <a href="javascript:void(0)" id="page9" class="btn w3-bar-item w3-button">評核表單</a>
-            <a href="javascript:void(0)" id="page10" class="btn w3-bar-item w3-button">多元評量</a>
-            <a href="javascript:void(0)" id="page11" class="btn w3-bar-item w3-button">評鑑簡報</a>
-            <a href="javascript:void(0)" id="page12" class="btn w3-bar-item w3-button">醫院評鑑</a>
-            <a href="javascript:void(0)" id="page13" class="btn w3-bar-item w3-button">醫院QA</a>
-            <a href="javascript:void(0)" id="page14" class="btn w3-bar-item w3-button">教學QA</a>
+            <a href="javascript:void(0)" id="page0" class="btn active w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page1" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page2" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page3" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page4" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page5" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page6" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page7" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page8" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page9" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page10" class="btn w3-bar-item w3-button"></a>
+            <a href="javascript:void(0)" id="page11" class="btn w3-bar-item w3-button"></a>
         </div>
     </nav>
     <div class="w3-container" style="margin-top:90px">
     </div>
     <div id="_page0" class="page" style="display: block;">
-        <table id="data-table_0"></table>
+        <table id="data-table_0" class="display compact table-hover table-striped "
+            style="width: 100%; overflow: auto;"></table>
     </div>
     <div id="_page1" class="page">
-        <table id="data-table_1"></table>
+        <table id="data-table_1" class="display compact table-hover table-striped "
+            style="width: 100%; overflow: auto;"></table>
     </div>
     <div id="_page2" class="page">
-        <table id="data-table_2"></table>
+        <table id="data-table_2" class="display compact table-hover table-striped "
+            style="width: 100%; overflow: auto;"></table>
     </div>
     <div id="_page3" class="page">
-        <table id="data-table_3"></table>
+        <table id="data-table_3" class="display compact table-hover table-striped "
+            style="width: 100%; overflow: auto;"></table>
     </div>
     <div id="_page4" class="page">
-        <table id="data-table_4"></table>
+        <table id="data-table_4" class="display compact table-hover table-striped "
+            style="width: 100%; overflow: auto;"></table>
     </div>
     <div id="_page5" class="page">
-        <table id="data-table_5"></table>
+        <table id="data-table_5" class="display compact table-hover table-striped "
+            style="width: 100%; overflow: auto;"></table>
     </div>
     <div id="_page6" class="page">
-        <table id="data-table_6"></table>
+        <table id="data-table_6" class="display compact table-hover table-striped "
+            style="width: 100%; overflow: auto;"></table>
     </div>
     <div id="_page7" class="page">
-        <table id="data-table_7"></table>
+        <table id="data-table_7" class="display compact table-hover table-striped "
+            style="width: 100%; overflow: auto;"></table>
     </div>
     <div id="_page8" class="page">
-        <table id="data-table_8"></table>
+        <table id="data-table_8" class="display compact table-hover table-striped "
+            style="width: 100%; overflow: auto;"></table>
     </div>
     <div id="_page9" class="page">
-        <table id="data-table_9"></table>
+        <div>
+            <label for="PGY_value">姓名:</label>
+            <div id="PGY_name"></div>
+            <label for="calendar">月份:</label>
+            <input type="month" id="calendar" name="calendar">
+            <button type="button" onclick="submitPGY()">送出</button>
+            <div style="overflow: auto;" id="month"></div>
+        </div>
     </div>
     <div id="_page10" class="page">
-        <table id="data-table_10"></table>
+        <div>
+            <label for="bookdate">日期:</label>
+            <input type="date" id="bookdate">
+            <div style="overflow: auto;" id="timetable"></div>
+        </div>
     </div>
     <div id="_page11" class="page">
-        <table id="data-table_11"></table>
-    </div>
-    <div id="_page12" class="page">
-        <table id="data-table_12"></table>
-    </div>
-    <div id="_page13" class="page">
-        <table id="data-table_13"></table>
-    </div>
-    <div id="_page14" class="page">
-        <table id="data-table_14"></table>
-    </div>
+        <form action="/action_page.php" method="post">
+            <label for="date1">日期</label>
+            <input type="date" id="date1" name="date1">
 
+            <label for="group">組別</label>
+            <select id="group" name="group">
+                <option value="門診組">門診組</option>
+                <option value="急診組">急診組</option>
+                <option value="住院組">住院組</option>
+                <option value="藥庫組">藥庫組</option>
+                <option value="中藥組">中藥組</option>
+                <option value="特調組">特調組</option>
+                <option value="行政組">行政組</option>
+                <option value="臨床組">臨床組</option>
+                <option value="教學組">教學組</option>
+                <option value="主任">主任</option>
+            </select>
+
+            <label for="category">公告類別</label>
+            <select id="category" name="category">
+                <option value="藥品調劑">藥品調劑</option>
+                <option value="藥品管理">藥品管理</option>
+                <option value="臨床藥事服務">臨床藥事服務</option>
+                <option value="藥品諮詢">藥品諮詢</option>
+            </select>
+
+            <label for="publisher">發布者</label>
+            <input type="text" id="publisher" placeholder="請填姓名" name="publisher">
+
+            <label for="subject">公告內容</label>
+            <textarea id="subject" name="subject" placeholder="此處填寫..." style="height:200px"></textarea>
+
+            <label for="file">圖片上傳(按住ctrl可選擇多圖)</label>
+            <?var url =getURL();?>
+            <form method="post " action="<?= url ?>">
+                <input name="file" type="file" accept="image/gif, image/jpeg, image/png" id="img" multiple
+                    onchange="LoadFile(event)">
+                <input type="hidden" id="fileData" name="fileData">
+                <input type="hidden" id="mimeType" name="mimeType">
+                <input type="hidden" id="fileName" name="fileName">
+
+                <!-- 上傳後的訊息 -->
+                <h3>上傳結果:<span>
+                        <?= message ?>
+                    </span></h3>
+            </form>
+
+            <label for="link">連結上傳1</label>
+            <input type="text" name="link" placeholder="放入連結" id="link1">
+            <label for="link">連結上傳2</label>
+            <input type="text" name="link" placeholder="放入連結" id="link2">
+            <label for="link">連結上傳3</label>
+            <input type="text" name="link" placeholder="放入連結" id="link3">
+
+            <input type="submit" value="發布" onclick="subpub()">
+        </form>
+    </div>
 
 
     <div data-role="popup" id="myPopup" class="ui-content" data-dismissible="false">
@@ -373,9 +566,5 @@
         <div id="content">
         </div>
     </div>
-    <!-- <div>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br></div>
-    <footer class="w3-container w3-bottom w3-theme w3-margin-top">
-        <h3>藥師教學歷程</h3>
-    </footer> -->
 
 </body>
